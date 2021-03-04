@@ -1,8 +1,12 @@
 {
   "name": "food-waste",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Food waste project",
   "main": "index.js",
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.8"
+  },
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
@@ -17,7 +21,7 @@
     "test:dev:models": "npm run test:dev -- --grep=model",
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "LUDEROSA",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
