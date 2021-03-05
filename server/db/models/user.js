@@ -7,20 +7,30 @@ const axios = require('axios');
 const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
-  username: {
+  user_id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+  },
+  first_name: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false
   },
-  githubId: {
-    type: Sequelize.INTEGER
+  github_id: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  },
+  facebook_id: {
+    type: Sequelize.INTEGER,
+    allowNull: true
   }
 })
 
-module.exports = User
+module.exports = User;
 
 /**
  * instanceMethods
