@@ -9,8 +9,10 @@ module.exports = router;
 router.get('/:id/restaurants', async (req, res, next) => {
   try {
     const id = req.params.id;
+
     const restaurant = await Restaurant.findByPk(id);
     const quiz = await Quiz.findAll();
+
 
     const dataReturn = {
       restaurant,
@@ -20,6 +22,11 @@ router.get('/:id/restaurants', async (req, res, next) => {
     // res.send("testing this path to see if it exists!")
     res.send(dataReturn);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8d9c50eb9dccb5fdb6a4c31bc98413b68bee2b63
   } catch (err) {
     next(err);
   }
