@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: {Restaurant, Path, Quiz},
+  models: {Restaurant, Path, Quiz, User},
 } = require("../db");
 
 
@@ -11,11 +11,14 @@ router.get('/:id/restaurants', async (req, res, next) => {
     const id = req.params.id;
 
     const restaurant = await Restaurant.findByPk(id);
-    const quiz = await Quiz.findAll();
+    // console.log(restaurant)
+    // const quiz = await Quiz.findByPk(restaurant.restaurant_id);
+    const user = await User.findByPk(id);
 
     const dataReturn = {
       restaurant,
       quiz,
+      user,
     };
 
     // res.send("testing this path to see if it exists!")
@@ -27,15 +30,3 @@ router.get('/:id/restaurants', async (req, res, next) => {
 });
 
 
-
-// router.get('/:id/restaurants', async (req, res, next) => {
-//   try {
-//     const id = req.params.id;
-//     const restaurant = await Restaurant.findbyPk(id);
-//     const quiz = await Quiz.findbyPk(id);
-
-
-//   } catch (err) {
-//     next(err);
-//   }
-// });

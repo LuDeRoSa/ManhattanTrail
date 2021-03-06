@@ -21,7 +21,12 @@ const Quiz = db.define('quiz', {
     },
     choice_c: {
         type: Sequelize.TEXT,
+    },
+    restaurant_id: {
+        type: Sequelize.INTEGER,
+        foreignKey: true
     }
+
   })
-  
+
   module.exports = Quiz;
