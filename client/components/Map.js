@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-// import {
-//   GoogleMap,
-//   withScriptjs,
-//   withGoogleMap,
-//   Marker,
-//   InfoWindow,
-// } from "react-google-maps";
+import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import { setRest } from '../store/restaurants';
+import { setRests } from '../store/rest';
 //dummy data
 const points = [
   { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
@@ -28,7 +21,7 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
-    this.props.setRest();
+    this.props.setRests();
     console.log(this.props);
   }
 
@@ -40,6 +33,7 @@ class _Map extends React.Component {
 
   render() {
     const { setMarker } = this;
+    console.log(this.props);
     return (
       <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
@@ -65,7 +59,7 @@ const mapState = (state) => {
 };
 const mapDispatch = (dispatch) => {
   return {
-    setRest: () => dispatch(setRest()),
+    setRests: () => dispatch(setRests()),
   };
 };
 
