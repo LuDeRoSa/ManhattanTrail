@@ -15,6 +15,13 @@ Restaurant.belongsTo(Path);
 User.hasMany(User_Responses);
 User_Responses.belongsTo(User);
 
+// Restaurant.hasMany(Quiz);
+// Quiz.belongsTo(Restaurant);
+
+// Restaurant.hasMany(Quiz, {as: "rest_id"});
+// Quiz.belongsTo(Restaurant, {foreignKey: "rest_id"});
+
+
 // User_Responses.hasMany(Scores);
 // Scores.belongsTo(User_Responses);
 
