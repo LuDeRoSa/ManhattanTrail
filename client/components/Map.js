@@ -9,6 +9,7 @@ const points = [
   { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
   { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
 ];
+let index = 0;
 
 class _Map extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class _Map extends React.Component {
     this.state = {
       marker: [],
       restaurants: [],
-      center: [],
+      center: { lat: 40.7127281, lng: -74.0060152 },
     };
     this.setMarker = this.setMarker.bind(this);
   }
@@ -30,6 +31,12 @@ class _Map extends React.Component {
     this.setState({
       marker: arr,
     });
+  }
+  setCenter(center) {
+    this.setState({
+      center: { ...center },
+    });
+    index++;
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -65,12 +72,12 @@ class _Map extends React.Component {
           bootstrapURLKeys={{
             key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
           }}
-          defaultZoom={13}
-          defaultCenter={{ lat: 40.7127281, lng: -74.0060152 }}
+          zoom={13}
+          center={this.state.center}
           options={this.createMapOptions}
         ></GoogleMapReact>
         <div>
-          <button onClick={() => this.setMarker()}>Next</button>
+          <button onClick={() => this.setCenter(points[index])}>Next</button>
         </div>
       </div>
     );
