@@ -47,7 +47,7 @@ class _Map extends React.Component {
         {
           stylers: [
             { saturation: 0 },
-            { gamma: 0.8 },
+            { gamma: 1 },
             { lightness: 4 },
             { visibility: 'on' },
           ],
@@ -65,7 +65,7 @@ class _Map extends React.Component {
           bootstrapURLKeys={{
             key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
           }}
-          defaultZoom={10}
+          defaultZoom={13}
           defaultCenter={{ lat: 40.7127281, lng: -74.0060152 }}
           options={this.createMapOptions}
         ></GoogleMapReact>
