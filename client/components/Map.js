@@ -16,6 +16,7 @@ class _Map extends React.Component {
     this.state = {
       marker: [],
       restaurants: [],
+      center: [],
     };
     this.setMarker = this.setMarker.bind(this);
   }
@@ -30,6 +31,30 @@ class _Map extends React.Component {
       marker: arr,
     });
   }
+  createMapOptions(maps) {
+    //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
+    return {
+      panControl: false,
+      mapTypeControl: false,
+      scrollwheel: false,
+      zoomControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      scaleControl: false,
+      gestureHandling: 'none',
+      styles: [
+        {
+          stylers: [
+            { saturation: 0 },
+            { gamma: 0.8 },
+            { lightness: 4 },
+            { visibility: 'on' },
+          ],
+        },
+      ],
+    };
+  }
 
   render() {
     const { setMarker } = this;
@@ -42,6 +67,7 @@ class _Map extends React.Component {
           }}
           defaultZoom={10}
           defaultCenter={{ lat: 40.7127281, lng: -74.0060152 }}
+          options={this.createMapOptions}
         ></GoogleMapReact>
         <div>
           <button onClick={() => this.setMarker()}>Next</button>
