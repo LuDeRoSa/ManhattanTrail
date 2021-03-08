@@ -23,7 +23,7 @@ router.get('/:id', async (req, res, next) => {
         id: userId
       }
     })
-    res.send(user)
+    res.send(user[0])
   } catch (err) {
     next(err)
   }
