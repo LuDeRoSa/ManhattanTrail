@@ -15,6 +15,20 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+router.get('/:id', async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findAll({
+      where: {
+        id: userId
+      }
+    })
+    res.send(user[0])
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 router.put("/:user_id/:game_id/:question_id"), async(req, res, next) => {
   try{

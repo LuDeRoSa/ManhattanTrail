@@ -1,55 +1,99 @@
-import React, { useState } from "react";
-import {
-  GoogleMap,
-  withScriptjs,
-  withGoogleMap,
-  Marker,
-  InfoWindow,
-} from "react-google-maps";
+import React from 'react';
 
+import GoogleMapReact from 'google-map-react';
+import { connect } from 'react-redux';
+import { setRests } from '../store/rest';
 //dummy data
 const points = [
-  { id: 1, title: "The Smith", lat: 40.741895, lng: -73.989308 },
-  { id: 2, title: "The Hillstone", lat: 40.7580445, lng: -73.9699967 },
-  { id: 3, title: "Boqueria", lat: 40.77152, lng: -73.9561132 },
+  { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
+  { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
+  { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
 ];
+let index = 0;
 
-function Map() {
-  const [marker, setMarker] = useState(null);
-  return (
-    <div>
-      <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 40.7127281, lng: -74.0060152 }}
-      >
-        {/* //this is the initial marker, attached an onClick that displays the rest
-        of the Marker(path) */}
-        <Marker
-          position={{ lat: 40.7127281, lng: -74.0060152 }}
-          onClick={() => {
-            setMarker(
-              points.map((point) => (
-                <Marker
-                  key={point.id}
-                  position={{ lat: point.lat, lng: point.lng }}
-                />
-              ))
-            );
+class _Map extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      marker: [],
+      restaurants: [],
+      center: { lat: 40.7127281, lng: -74.0060152 },
+    };
+    this.setMarker = this.setMarker.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.setRests();
+    console.log(this.props);
+  }
+
+  setMarker(arr) {
+    this.setState({
+      marker: arr,
+    });
+  }
+  setCenter(center) {
+    this.setState({
+      center: { ...center },
+    });
+    index++;
+  }
+  createMapOptions(maps) {
+    //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
+    return {
+      panControl: false,
+      mapTypeControl: false,
+      scrollwheel: false,
+      zoomControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      scaleControl: false,
+      gestureHandling: 'none',
+      styles: [
+        {
+          stylers: [
+            { saturation: 0 },
+            { gamma: 1 },
+            { lightness: 4 },
+            { visibility: 'on' },
+          ],
+        },
+      ],
+    };
+  }
+
+  render() {
+    const { setMarker } = this;
+    console.log(this.props);
+    return (
+      <div style={{ height: '100%', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
           }}
-        />
-        {/* conditionally renders the marker once its clicked  */}
-        {marker &&
-          points.map((point) => (
-            <Marker
-              key={point.id}
-              position={{ lat: point.lat, lng: point.lng }}
-            />
-          ))}
-      </GoogleMap>
-    </div>
-  );
+          zoom={13}
+          center={this.state.center}
+          options={this.createMapOptions}
+        ></GoogleMapReact>
+        <div>
+          <button onClick={() => this.setCenter(points[index])}>Next</button>
+        </div>
+      </div>
+    );
+  }
 }
 
-const MapWrapped = withScriptjs(withGoogleMap(Map));
+//changed the map package, converted it into a class. must fix the route to grab the right data.
+//working on that next, pushing this for now so Samir and i can work on the same repo.
 
-export default MapWrapped;
+const mapState = (state) => {
+  return state;
+};
+const mapDispatch = (dispatch) => {
+  return {
+    setRests: () => dispatch(setRests()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(_Map);
