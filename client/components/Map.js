@@ -20,12 +20,17 @@ class _Map extends React.Component {
       marker: [],
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
+      showMarker: false,
     };
     this.setMarker = this.setMarker.bind(this);
   }
 
   componentDidMount() {
     this.props.setRests();
+
+    this.setState({
+      showMarker: true,
+    });
   }
 
   setMarker(arr) {
@@ -70,6 +75,8 @@ class _Map extends React.Component {
   render() {
     const { setMarker } = this;
 
+    console.log(this.props);
+
     return (
       <div style={{ height: "100%", width: "100%" }}>
         <GoogleMapReact
@@ -80,13 +87,9 @@ class _Map extends React.Component {
           center={this.state.center}
           options={this.createMapOptions}
         >
-          <Marker
-            lat={40.7127281}
-            lng={-74.0060152}
-            name="My Marker"
-            color="blue"
-            points={points}
-          />
+          {this.state.showMarker && (
+            <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
+          )}
         </GoogleMapReact>
 
         <div>
@@ -96,6 +99,11 @@ class _Map extends React.Component {
     );
   }
 }
+
+// one restaurant
+// as he clicks, the nxt marker shows
+// requires to zoom,
+//
 
 //changed the map package, converted it into a class. must fix the route to grab the right data.
 //working on that next, pushing this for now so Samir and i can work on the same repo.
