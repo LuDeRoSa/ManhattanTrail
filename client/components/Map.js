@@ -27,7 +27,6 @@ class _Map extends React.Component {
 
   componentDidMount() {
     this.props.setRests();
-
     this.setState({
       showMarker: true,
     });
@@ -103,10 +102,12 @@ class _Map extends React.Component {
 // one restaurant
 // as he clicks, the nxt marker shows
 // requires to zoom,
-//
 
 //changed the map package, converted it into a class. must fix the route to grab the right data.
 //working on that next, pushing this for now so Samir and i can work on the same repo.
+//
+
+// Games Model associatons User /  Scores / Path
 
 const mapState = (state) => {
   return state;
