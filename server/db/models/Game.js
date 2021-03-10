@@ -4,7 +4,7 @@ const db = require('../db');
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,
-    defaultValue: 0,
+    defaultValue: 1,
   },
   status: {
     type: Sequelize.INTEGER,

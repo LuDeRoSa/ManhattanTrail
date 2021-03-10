@@ -217,5 +217,6 @@ module.exports = {
     Restaurant,
     Scores,
     User_Responses,
+    Game,
   },
 };
