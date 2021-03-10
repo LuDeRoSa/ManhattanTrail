@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
       //create game
       game = await Game.create({
         pathId: req.body.pathId || 1,
+        userId: user.id,
       });
     }
     res.send(game);

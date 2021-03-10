@@ -13,7 +13,6 @@ const _setGame = (game) => ({ type: SET_GAME, game });
  */
 export const setGame = (userId) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log('store reducer sees userid,', userId);
   const game = (
     await axios.get('/api/game', {
       headers: {
@@ -21,7 +20,6 @@ export const setGame = (userId) => async (dispatch) => {
       },
     })
   ).data;
-  console.log(game);
   return dispatch(_setGame(game));
 };
 /**

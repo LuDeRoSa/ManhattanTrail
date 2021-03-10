@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import game, { setGame } from '../store/game';
+import { setGame } from '../store/game';
 /**
  * COMPONENT
  */
