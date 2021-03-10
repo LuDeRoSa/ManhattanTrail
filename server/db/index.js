@@ -1,19 +1,28 @@
 //this is the access point for all things database related!
 
-const db = require("./db");
-const Path = require("./models/path");
-const Quiz = require("./models/quiz");
-const Restaurant = require("./models/restaurant");
-const Scores = require("./models/scores");
-const User_Responses = require("./models/user_responses");
-const User = require("./models/User");
+const db = require('./db');
+const Path = require('./models/path');
+const Quiz = require('./models/quiz');
+const Restaurant = require('./models/restaurant');
+const Scores = require('./models/scores');
+const User_Responses = require('./models/user_responses');
+const User = require('./models/User');
+const Game = require('./models/Game');
 
 //associations could go here!
-Path.hasMany(Restaurant);
-Restaurant.belongsTo(Path);
+Path.belongsTo(Restaurant);
+Restaurant.hasMany(Path);
 
 User.hasMany(User_Responses);
 User_Responses.belongsTo(User);
+
+User.hasMany(Game);
+Game.belongsTo(User);
+
+Game.hasOne(Scores);
+Scores.belongsTo(Game);
+
+Path.hasMany(Game);
 
 // User_Responses.hasMany(Scores);
 // Scores.belongsTo(User_Responses);
@@ -26,140 +35,140 @@ const syncAndSeed = async () => {
   //   User.create({user_id: 2, first_name: 'Murphy', password: '123'})
   // ])
 
-  //hardcoding first path:
-  const paths = await Promise.all([
-    Path.create({ path_id: 1, restaurant_id: 1, restaurant_order: 1 }),
-    Path.create({ path_id: 1, restaurant_id: 2, restaurant_order: 2 }),
-    Path.create({ path_id: 1, restaurant_id: 3, restaurant_order: 3 }),
-    Path.create({ path_id: 1, restaurant_id: 4, restaurant_order: 4 }),
-    Path.create({ path_id: 1, restaurant_id: 5, restaurant_order: 5 }),
-  ]);
-
   //hardcoding first five restaurants:
   const restaurants = await Promise.all([
     Restaurant.create({
       restaurant_id: 1,
-      restaurant_name: "Restaurant One",
+      restaurant_name: 'Restaurant One',
       restaurant_latitude: 73.3,
       restaurant_longitude: 44.4,
     }),
     Restaurant.create({
       restaurant_id: 2,
-      restaurant_name: "Restaurant Two",
+      restaurant_name: 'Restaurant Two',
       restaurant_latitude: 74.3,
       restaurant_longitude: 45.4,
     }),
     Restaurant.create({
       restaurant_id: 3,
-      restaurant_name: "Restaurant Three",
+      restaurant_name: 'Restaurant Three',
       restaurant_latitude: 76.3,
       restaurant_longitude: 46.2,
     }),
     Restaurant.create({
       restaurant_id: 4,
-      restaurant_name: "Restaurant Four",
+      restaurant_name: 'Restaurant Four',
       restaurant_latitude: 77.3,
       restaurant_longitude: 47.3,
     }),
     Restaurant.create({
       restaurant_id: 5,
-      restaurant_name: "Restaurant Five",
+      restaurant_name: 'Restaurant Five',
       restaurant_latitude: 78.3,
       restaurant_longitude: 48.5,
     }),
+  ]);
+
+  //hardcoding first path:
+  const paths = await Promise.all([
+    Path.create({ path_id: 1, restaurantId: 1, stage: 1 }),
+    Path.create({ path_id: 1, restaurantId: 2, stage: 2 }),
+    Path.create({ path_id: 1, restaurantId: 3, stage: 3 }),
+    Path.create({ path_id: 1, restaurantId: 4, stage: 4 }),
+    Path.create({ path_id: 1, restaurantId: 5, stage: 5 }),
   ]);
 
   //quiz questions:
   const questions = await Promise.all([
     Quiz.create({
       question_id: 1,
-      question: "What is the most expensive spice in the world by weight?",
-      choice_a: "Cinnamon",
-      choice_b: "Vanilla",
-      choice_c: "Cardamom",
-      choice_correct_answer: "Saffron",
+      question: 'What is the most expensive spice in the world by weight?',
+      choice_a: 'Cinnamon',
+      choice_b: 'Vanilla',
+      choice_c: 'Cardamom',
+      choice_correct_answer: 'Saffron',
     }),
     Quiz.create({
       question_id: 2,
       question: "What Mexican food has a name meaning 'Little Donkey'?",
-      choice_a: "Enchiladas",
-      choice_b: "Tamale",
-      choice_c: "Tostada",
-      choice_correct_answer: "Burrito",
+      choice_a: 'Enchiladas',
+      choice_b: 'Tamale',
+      choice_c: 'Tostada',
+      choice_correct_answer: 'Burrito',
     }),
     Quiz.create({
       question_id: 3,
-      question: "What is the most stolen food in the world?",
-      choice_a: "Chocolate",
-      choice_b: "Truffle",
-      choice_c: "Pasta",
-      choice_correct_answer: "Cheese",
+      question: 'What is the most stolen food in the world?',
+      choice_a: 'Chocolate',
+      choice_b: 'Truffle',
+      choice_c: 'Pasta',
+      choice_correct_answer: 'Cheese',
     }),
     Quiz.create({
       question_id: 4,
       question: "What vitamin is the only one that you won't find in an egg?",
-      choice_a: "Vitamin A",
-      choice_b: "Vitamin K",
-      choice_c: "Vitamin V12",
-      choice_correct_answer: "Vitamin C",
+      choice_a: 'Vitamin A',
+      choice_b: 'Vitamin K',
+      choice_c: 'Vitamin V12',
+      choice_correct_answer: 'Vitamin C',
     }),
     Quiz.create({
       question_id: 5,
-      question: "What is the only edible food that never goes bad?",
-      choice_a: "Cheese",
-      choice_b: "Chocolate",
-      choice_c: "Beef Jerky",
-      choice_correct_answer: "Honey",
+      question: 'What is the only edible food that never goes bad?',
+      choice_a: 'Cheese',
+      choice_b: 'Chocolate',
+      choice_c: 'Beef Jerky',
+      choice_correct_answer: 'Honey',
     }),
     Quiz.create({
       question_id: 6,
-      question: "What is the only edible food that never goes bad?",
-      choice_a: "Cheese",
-      choice_b: "Chocolate",
-      choice_c: "Beef Jerky",
-      choice_correct_answer: "Honey",
+      question: 'What is the only edible food that never goes bad?',
+      choice_a: 'Cheese',
+      choice_b: 'Chocolate',
+      choice_c: 'Beef Jerky',
+      choice_correct_answer: 'Honey',
     }),
     Quiz.create({
       question_id: 7,
-      question: "What fruit inspired the paisley fabric pattern?",
-      choice_a: "Dragonfruit",
-      choice_b: "Papaya",
-      choice_c: "Pineapple",
-      choice_correct_answer: "Mango",
+      question: 'What fruit inspired the paisley fabric pattern?',
+      choice_a: 'Dragonfruit',
+      choice_b: 'Papaya',
+      choice_c: 'Pineapple',
+      choice_correct_answer: 'Mango',
     }),
     Quiz.create({
       question_id: 8,
-      question: "What fruit was named after pine cones?",
-      choice_a: "Cucumber",
-      choice_b: "Dragonfruit",
-      choice_c: "Durian",
-      choice_correct_answer: "Pineapple",
+      question: 'What fruit was named after pine cones?',
+      choice_a: 'Cucumber',
+      choice_b: 'Dragonfruit',
+      choice_c: 'Durian',
+      choice_correct_answer: 'Pineapple',
     }),
     Quiz.create({
       question_id: 9,
-      question: "What country wastes the most food?",
-      choice_a: "China",
-      choice_b: "Russia",
-      choice_c: "India",
-      choice_correct_answer: "United States",
+      question: 'What country wastes the most food?',
+      choice_a: 'China',
+      choice_b: 'Russia',
+      choice_c: 'India',
+      choice_correct_answer: 'United States',
     }),
     Quiz.create({
       question_id: 10,
       question:
         "What's the healthiest fast food chain in the US? (according to Health Magazine)",
-      choice_a: "Subway",
-      choice_b: "Chipotle",
-      choice_c: "Taco Bell",
-      choice_correct_answer: "Panera Bread",
+      choice_a: 'Subway',
+      choice_b: 'Chipotle',
+      choice_c: 'Taco Bell',
+      choice_correct_answer: 'Panera Bread',
     }),
     Quiz.create({
       question_id: 11,
       question:
-        "What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?",
-      choice_a: "Saffron",
-      choice_b: "Turmeric",
-      choice_c: "Nutmeg",
-      choice_correct_answer: "Paprika",
+        'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
+      choice_a: 'Saffron',
+      choice_b: 'Turmeric',
+      choice_c: 'Nutmeg',
+      choice_correct_answer: 'Paprika',
     }),
   ]);
 
