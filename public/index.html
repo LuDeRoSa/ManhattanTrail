@@ -6,11 +6,24 @@
     <title>Oregon Food Trail Game</title>
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script src="/client/games/CakeGame.js"></script>
+    <script src="/client/games/Boot.js"></script>
+    <script src="/client/games/MainMenu.js"></script>
+    <script src="/client/games/Preloader.js"></script>
   </head>
   <body>
     <div id="app"></div>
     <script>
       window.githubURL = "<%= githubURL %>";
+      (function() {
+          let game = new Phaser.Game(640, 960, Phaser.AUTO, 'game');
+          game.state.add('Boot', Cake.Boot);
+          game.state.add('Preloader', Cake.Preloader);
+          game.state.add('MainMenu', Cake.MainMenu);
+          game.state.add('Game', Cake.CakeGame);
+          game.state.start('Boot');
+      })();
     </script>
   </body>
 </html>
