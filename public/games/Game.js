@@ -21,6 +21,10 @@ Cake.Game.prototype = {
     
         this._player = this.add.sprite(0, 560, 'player');
         this._player.scale.setTo(.2,.2);
+        this.physics.arcade.enable(this._player)
+        this._player.body.velocity.x = 0;
+        this._player.body.allowGravity = false;
+
     
         this._spawnCakeTimer = 0;
         Cake._health = 10;
@@ -31,6 +35,7 @@ Cake.Game.prototype = {
         this._cakeGroup = this.add.group();
         Cake.item.spawnCake(this);
 
+        this._cursors = this.input.keyboard.createCursorKeys();
         
         Cake.player.updateMovement(this);
         
@@ -46,8 +51,26 @@ Cake.Game.prototype = {
             cake.angle += cake.rotateMe;
         });
         if(!Cake._health) {
-            this.add.sprite((Cake.GAME_WIDTH-594)/2, (Cake.GAME_HEIGHT-271)/2, 'game-over');
+            this.add.sprite((Cake.GAME_WIDTH-500)/2, (Cake.GAME_HEIGHT-500)/2, 'game-over').scale.setTo(.4,.4);
             this.game.paused = true;
+        }
+
+        //  Reset the players velocity (movement)
+        this._player.body.velocity.x = 0;
+        if (this._cursors.left.isDown)
+        {
+            //  Move to the left
+            this._player.body.velocity.x = -150;
+        }
+        else if (this._cursors.right.isDown)
+        {
+            //  Move to the right
+            this._player.body.velocity.x = 150;
+        }
+        else
+        {
+            //  Stand still
+            this._player.body.velocity.x = 0;
         }
     }
 };
@@ -104,29 +127,3 @@ Cake.item = {
         Cake._health -= 2;
     }
 };
-
-Cake.player = {
-    updateMovement: function(game) {
-
-        let player = game.add.sprite(0, Cake.GAME_HEIGHT-390, 'player');
-        player.scale.setTo(0.20,0.20);
-
-
-
-        // candy.inputEnabled = true;
-
-        // this._cursors = this.input.keyboard.createCursorKeys();
-        // Cake.player.updateMovement(this._cursors);
-
-        
-        // if (cursors.left.isDown) {
-        //      this.setVelocityX(-360);
-        // }
-        // else if (cursors.right.isDown) {
-        //       this.setVelocityX(360);
-        // }
-        // else {
-        //       this.setVelocityX(0);
-        // }
-    }
-}
