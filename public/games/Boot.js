@@ -1,4 +1,3 @@
-// import Phaser from 'phaser'
 //global object for game
 let Cake = {};
 

@@ -1,6 +1,5 @@
-// import Phaser from 'phaser'
 
-CakeGame.Game = function(game) {
+Cake.Game = function(game) {
     this._player = null;
     this._cakeGroup = null;
     this._spawnCakeTimer = 0;
@@ -10,7 +9,7 @@ CakeGame.Game = function(game) {
     Cake._health = 0;
 };
 
-CakeGame.Game.prototype = {
+Cake.Game.prototype = {
     //initialization
     create: function() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -51,7 +50,7 @@ CakeGame.Game.prototype = {
     }
 };
 
-CakeGame.item = {
+Cake.item = {
 
     //adds new cake to the game
     spawnCake: function(game) {

@@ -1,20 +1,19 @@
-// import Phaser from 'phaser'
 
 Cake.Preloader = function(game){
-    Cake.GAME_WIDTH = 640;
-    Cake.GAME_HEIGHT = 960;
+    Cake.GAME_WIDTH = 1200;
+    Cake.GAME_HEIGHT = 950;
 };
+
 Cake.Preloader.prototype = {
-    preload: function() {
-        this.stage.backgroundColor = '#B4D9E7';
-        this.preloadBar = this.add.sprite((Cake.GAME_WIDTH-311)/2,
-            (Cake.GAME_HEIGHT-27)/2, 'preloaderBar');
-        this.load.setPreloadSprite(this.preloadBar);
+    preload: function() {
+        this.stage.backgroundColor = '#FF5349';
+        this.preloadBar = this.add.sprite(0,
+            (Cake.GAME_HEIGHT-700)/2, 'preloaderBar');
+        this.load.setPreloadSprite(this.preloadBar);
  
-        
         this.load.image('background', '../img/background.jpg');
         this.load.image('player', '../img/player.png');
-        this.load.image('cooke', '../img/cookie.png');
+        this.load.image('cookie', '../img/cookie.png');
         this.load.image('cupcake', '../img/cupcake.png');
         this.load.image('cake', '../img/cake.png');
         this.load.image('trashcan', '../img/trashcan.png');

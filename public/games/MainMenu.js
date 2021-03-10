@@ -1,11 +1,10 @@
-// import Phaser from 'phaser'
 
 Cake.MainMenu = function(game) {};
 Cake.MainMenu.prototype = {
     create: function() {
         this.add.sprite(0, 0, 'background');
-        this.add.sprite(0, Cake.GAME_HEIGHT-400, 'player').scale.setTo(0.20,0.20);
-        this.add.button(Cake.GAME_WIDTH/2+50, Cake.GAME_HEIGHT-900,
+        this.add.sprite(0, Cake.GAME_HEIGHT-390, 'player').scale.setTo(0.20,0.20);
+        this.add.button(Cake.GAME_WIDTH/2-230, Cake.GAME_HEIGHT-900,
             'start-button', this.startGame, this);
     },
 
