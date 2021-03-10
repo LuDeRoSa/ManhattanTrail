@@ -40,32 +40,32 @@ const syncAndSeed = async () => {
     Restaurant.create({
       restaurant_id: 1,
       restaurant_name: 'Restaurant One',
-      restaurant_latitude: 73.3,
-      restaurant_longitude: 44.4,
+      restaurant_longitude: -73.989308,
+      restaurant_latitude: 40.741895,
     }),
     Restaurant.create({
       restaurant_id: 2,
       restaurant_name: 'Restaurant Two',
-      restaurant_latitude: 74.3,
-      restaurant_longitude: 45.4,
+      restaurant_longitude: -73.9699967,
+      restaurant_latitude: 40.7580445,
     }),
     Restaurant.create({
       restaurant_id: 3,
       restaurant_name: 'Restaurant Three',
-      restaurant_latitude: 76.3,
-      restaurant_longitude: 46.2,
+      restaurant_longitude: -73.9561132,
+      restaurant_latitude: 40.77152,
     }),
     Restaurant.create({
       restaurant_id: 4,
       restaurant_name: 'Restaurant Four',
-      restaurant_latitude: 77.3,
-      restaurant_longitude: 47.3,
+      restaurant_longitude: -77.3,
+      restaurant_latitude: 47.3,
     }),
     Restaurant.create({
       restaurant_id: 5,
       restaurant_name: 'Restaurant Five',
-      restaurant_latitude: 78.3,
-      restaurant_longitude: 48.5,
+      restaurant_longitude: -78.3,
+      restaurant_latitude: 48.5,
     }),
   ]);
 

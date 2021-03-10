@@ -36,25 +36,26 @@ class _Map extends React.Component {
     });
   }
 
-  setCenter(center) {
+  setCenter(index) {
+    const center = this.props.rest.rests[0][index];
+    console.log('new center', center);
     this.setState({
-      center: { ...center },
+      center: {
+        lat: center.restaurant_latitude,
+        lng: center.restaurant_longitude,
+      },
     });
-    this.props.state.game.gameStage++;
+    this.props.game.gameStage++;
   }
-
-  //   [1, 2, 3, 4]
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
     return {
       panControl: false,
       mapTypeControl: false,
-      scrollwheel: false,
-      zoomControl: false,
+      // zoomControl: false,
       streetViewControl: false,
-      rotateControl: false,
       fullscreenControl: false,
-      scaleControl: false,
+      // scaleControl: false,
       gestureHandling: 'none',
       styles: [
         {
@@ -71,9 +72,7 @@ class _Map extends React.Component {
 
   render() {
     const { setMarker } = this;
-
     console.log(this.props);
-
     return (
       <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
@@ -90,11 +89,7 @@ class _Map extends React.Component {
         </GoogleMapReact>
 
         <div>
-          <button
-            onClick={() =>
-              this.setCenter(points[this.state.game.gameStage - 1])
-            }
-          >
+          <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
             Next
           </button>
         </div>
@@ -114,7 +109,10 @@ class _Map extends React.Component {
 // Games Model associatons User /  Scores / Path
 
 const mapState = (state) => {
-  return state;
+  return {
+    rest: state.rest,
+    game: state.game,
+  };
 };
 const mapDispatch = (dispatch) => {
   return {
