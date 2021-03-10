@@ -23,7 +23,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            <Redirect to="/landing" />
           </Switch>
         ) : (
           <Switch>

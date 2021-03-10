@@ -11,7 +11,11 @@ export const LandingPage = (props) => {
   return (
     <div>
       <h3>Welcome , {username}</h3>
-      <h2>In the future, category options might be here</h2>
+      <h4>In the future, category options might be here</h4>
+      <h4>
+        Some information could be displayed here whether a user currently has a
+        game in progress
+      </h4>
       <Link to="/home">Begin Game</Link>
     </div>
   );
