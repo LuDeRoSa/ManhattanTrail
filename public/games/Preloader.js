@@ -1,5 +1,5 @@
 
-Cake.Preloader = function(game){
+Cake.Preloader = function(game) {
     Cake.GAME_WIDTH = 1200;
     Cake.GAME_HEIGHT = 950;
 };
@@ -7,7 +7,7 @@ Cake.Preloader = function(game){
 Cake.Preloader.prototype = {
     preload: function() {
         this.stage.backgroundColor = '#FF5349';
-        this.preloadBar = this.add.sprite(0,
+        this.preloadBar = this.add.sprite(75,
             (Cake.GAME_HEIGHT-700)/2, 'preloaderBar');
         this.load.setPreloadSprite(this.preloadBar);
  
@@ -18,8 +18,8 @@ Cake.Preloader.prototype = {
         this.load.image('cake', '../img/cake.png');
         this.load.image('trashcan', '../img/trashcan.png');
         this.load.image('fishbone', '../img/fishbone.png');
-        // this.load.image('game-over', 'img/gameover.png');
-        // this.load.image('score-bg', 'img/score-bg.png');
+        this.load.image('game-over', '../img/game-over.png');
+        this.load.image('score-sign', '../img/score-sign.png');
  
         this.load.image('start-button', '../img/start-button.png');
     },

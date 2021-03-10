@@ -4,6 +4,7 @@ Cake.Game = function(game) {
     this._cakeGroup = null;
     this._spawnCakeTimer = 0;
     this._fontStyle = null;
+    this._cursors = null;
     Cake._scoreText = null;
     Cake._score = 0;
     Cake._health = 0;
@@ -16,13 +17,10 @@ Cake.Game.prototype = {
         this.physics.arcade.gravity.y = 200;
     
         this.add.sprite(0, 0, 'background');
-        this.add.sprite(-30, Cake.GAME_HEIGHT-160, 'floor');
-        this.add.sprite(10, 5, 'score-bg');
-        // this.add.button(Cake.GAME_WIDTH-96-10, 5, 'button-pause', this.managePause, this);
+        this.add.sprite(55, 5, 'score-sign').scale.setTo(.25,.25);
     
-        this._player = this.add.sprite(5, 760, 'monster-idle');
-        this._player.animations.add('idle', [0,1,2,3,4,5,6,7,8,9,10,11,12], 10, true);
-        this._player.animations.play('idle');
+        this._player = this.add.sprite(0, 560, 'player');
+        this._player.scale.setTo(.2,.2);
     
         this._spawnCakeTimer = 0;
         Cake._health = 10;
@@ -32,6 +30,10 @@ Cake.Game.prototype = {
     
         this._cakeGroup = this.add.group();
         Cake.item.spawnCake(this);
+
+        
+        Cake.player.updateMovement(this);
+        
     },
     //manages the main game loop for updates on every frame of the game
     update: function() {
@@ -56,15 +58,20 @@ Cake.item = {
     spawnCake: function(game) {
         //randomized x-coord to drop the cake from (b/w zero and Canvas width)
         let dropPos = Math.floor(Math.random()*Cake.GAME_WIDTH);
-        //array for y-coordinates to drop the food from based on type of food
+
+        //array of random y-coordinates to drop the food from 
         let dropOffset = [-27,-36,-38,-48];
+
         //one of five objects to be dropped (randomly chosen)
         let cakeType = Math.floor(Math.random()*5);
+        
         //add food to game
-        let cake = game.add.sprite(dropPos, dropOffset[cakeType], 'cake');
+        let cakeOptions = ['cake','cookie','cupcake', 'trashcan', 'fishbone'];
+        let cake = game.add.sprite(dropPos, dropOffset[cakeType], cakeOptions[cakeType]);
+        cake.scale.setTo(.15,.15);
 
         //making the cake an "anim" animation, with framerate = 10, and played on loop (so food keeps dropping)
-        cake.animations.add('anim', [cakeType], 10, true);
+        cake.animations.add('anim', [cakeType], 10, true)
 
         //start animation
         cake.animations.play('anim');
@@ -82,9 +89,44 @@ Cake.item = {
         game._cakeGroup.add(cake);
     },
 
+    // clickCake: function(cake){
+	// 	// kill the candy when it's clicked
+	// 	candy.kill();
+	// 	// add points to the score
+	// 	Candy._score += 1;
+	// 	// update score text
+	// 	Candy._scoreText.setText(Candy._score);
+	// },
+
     //removes cake
     removeCake: function(cake) {
         cake.kill();
         Cake._health -= 2;
     }
 };
+
+Cake.player = {
+    updateMovement: function(game) {
+
+        let player = game.add.sprite(0, Cake.GAME_HEIGHT-390, 'player');
+        player.scale.setTo(0.20,0.20);
+
+
+
+        // candy.inputEnabled = true;
+
+        // this._cursors = this.input.keyboard.createCursorKeys();
+        // Cake.player.updateMovement(this._cursors);
+
+        
+        // if (cursors.left.isDown) {
+        //      this.setVelocityX(-360);
+        // }
+        // else if (cursors.right.isDown) {
+        //       this.setVelocityX(360);
+        // }
+        // else {
+        //       this.setVelocityX(0);
+        // }
+    }
+}
