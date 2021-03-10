@@ -38,7 +38,6 @@ class _Map extends React.Component {
 
   setCenter(index) {
     const center = this.props.rest.rests[0][index];
-    console.log('new center', center);
     this.setState({
       center: {
         lat: center.restaurant_latitude,
