@@ -2,7 +2,7 @@ import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import rest, { setRests } from '../store/rest';
+import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
