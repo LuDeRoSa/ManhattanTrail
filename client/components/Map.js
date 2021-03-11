@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import rest, { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
+import { setGame } from '../store/game';
 
 //dummy data
 const points = [
@@ -25,6 +26,9 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.game.status === 'no-game') {
+      this.props.setGame(this.props.userId);
+    }
     this.props.setRests();
     this.setState({
       showMarker: true,
@@ -112,15 +116,15 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
+    userId: state.auth.id,
     rest: state.rest,
     game: state.game,
   };
 };
-const mapDispatch = (dispatch) => {
-  return {
-    setRests: () => dispatch(setRests()),
-    nextStage: () => dispatch(nextStage()),
-  };
+const mapDispatch = {
+  setRests,
+  nextStage,
+  setGame,
 };
 
 export default connect(mapState, mapDispatch)(_Map);
