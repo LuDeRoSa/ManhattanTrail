@@ -73,7 +73,6 @@ class _Map extends React.Component {
 
   render() {
     const { setMarker } = this;
-    console.log(this.props);
     return (
       <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
@@ -93,6 +92,8 @@ class _Map extends React.Component {
           <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
             Next
           </button>
+          {this.props.game.status}
+          {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </div>
     );

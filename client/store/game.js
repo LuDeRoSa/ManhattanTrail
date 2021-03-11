@@ -61,7 +61,8 @@ export default function (state = initState, action) {
     case NEXT_STAGE:
       return {
         ...state,
-        gameStage: state.gameStage++,
+        gameStage: action.game.stage,
+        status: action.game.status,
       };
     default:
       return state;
