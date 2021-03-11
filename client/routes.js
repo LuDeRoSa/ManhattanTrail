@@ -6,6 +6,7 @@ import Home from './components/Home';
 import { me } from './store';
 import LandingPage from './components/LandingPage';
 import GameOver from './components/GameOver';
+import PastGames from './components/PastGames';
 
 /**
  * COMPONENT
@@ -25,6 +26,7 @@ class Routes extends Component {
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
             <Route path="/gameover" component={GameOver} />
+            <Route path="/pastgames" component={PastGames} />
             <Redirect to="/landing" />
           </Switch>
         ) : (

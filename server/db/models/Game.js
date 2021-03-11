@@ -23,7 +23,7 @@ Game.addHook('beforeValidate', async (game, options) => {
   if (game.stage > gamelength) {
     game.status = 'finished';
     game.stage = gamelength;
-    await game.save(); //do we need this?
+    await game.save();
   }
 });
 
