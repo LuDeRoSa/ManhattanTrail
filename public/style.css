@@ -13,6 +13,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
 }
 
 form div {
