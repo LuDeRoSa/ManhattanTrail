@@ -1,5 +1,7 @@
 import axios from 'axios';
-const TOKEN = 'token';
+// const TOKEN = 'token';
+import history from '../history';
+// import getToken from './index';
 const getToken = () => window.localStorage.getItem('token');
 /**
  * ACTION TYPES
@@ -39,6 +41,9 @@ export const nextStage = () => async (dispatch) => {
       }
     )
   ).data;
+  if (game.status === 'finished') {
+    history.push('/gameover');
+  }
   return dispatch(_nextStage(game));
 };
 

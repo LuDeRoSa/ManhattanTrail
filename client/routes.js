@@ -5,6 +5,7 @@ import { Login, Signup } from './components/Auth-Form';
 import Home from './components/Home';
 import { me } from './store';
 import LandingPage from './components/LandingPage';
+import GameOver from './components/GameOver';
 
 /**
  * COMPONENT
@@ -23,6 +24,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
+            <Route path="/gameover" component={GameOver} />
             <Redirect to="/landing" />
           </Switch>
         ) : (
@@ -30,6 +32,7 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Redirect to="/login" />
           </Switch>
         )}
       </div>
