@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <title>Oregon Food Trail Game</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script defer src="/bundle.js"></script>
+    <!-- <script src="/Users/luisazhou/Programming/Fullstack/FoodWasteGame/client/games/phaser-2.0.7.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.7/phaser.min.js"></script>
+    
+    <script src="/cakegame/Boot.js"></script>
+    <script src="/cakegame/Game.js"></script>
+    <script src="/cakegame/MainMenu.js"></script>
+    <script src="/cakegame/Preloader.js"></script>
+  </head>
+  <body>
+    <script>
+    //   <iframe src="gamebuild/index.html" name="cakegame"    
+    //           width="800" height="600" frameborder="0" scrolling="no">   
+    //     </iframe>
+      
+      (function() {
+          // initialize framework 
+          let game = new Phaser.Game(1200, 950, Phaser.AUTO, 'game');
+          // add game states
+          game.state.add('Boot', Cake.Boot);
+          game.state.add('Preloader', Cake.Preloader);
+          game.state.add('MainMenu', Cake.MainMenu);
+          game.state.add('Game', Cake.Game);
+          game.state.start('Boot');
+      })();
+
+    </script>
+  </body>
+</html>
