@@ -26,21 +26,10 @@ const User_Responses = db.define('user_responses', {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
     },
-    question_one_points: {
-        type: Sequelize.INTEGER,
-    },
-    question_two_points: {
-        type: Sequelize.INTEGER,
-    },
-    question_three_points: {
-        type: Sequelize.INTEGER,
-    },
-    question_four_points: {
-        type: Sequelize.INTEGER,
-    },
-    question_five_points: {
+    question_points: {
         type: Sequelize.INTEGER,
     }
+
   })
-  
+
   module.exports = User_Responses;

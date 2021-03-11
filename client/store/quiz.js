@@ -8,28 +8,34 @@ const SET_QUIZ = 'SET_QUIZ'
 /**
  * ACTION CREATORS
  */
-const setQuiz = (quiz) => {
+export const setQuiz = (quiz) => {
  return {
    type: SET_QUIZ,
    quiz
  }
 }
 
+/* AXIOS CALL */
+export const pullQuiz = () => {
+  return axios.get("/api/quiz/")
+}
+
 /**
  * THUNK CREATORS
  */
 
-export const fetchQuiz = () => async (dispatch) => {
-  const quizReturn = (await axios.get(`/api/quiz/`)).data;
-  console.log("this is the axios call return!!!!!!!",quizReturn);
-  return dispatch(setQuiz(quizReturn));
+export const fetchQuiz = () =>  {
+  return function(dispatch){
+    return pullQuiz().then(result => dispatch(setQuiz(result.data)))
+  }
+
 };
 
 
 /**
  * REDUCER
  */
-export default function (state = {}, action) {
+export default function (state = [], action) {
   switch (action.type) {
     case SET_QUIZ:
       return action.quiz;
