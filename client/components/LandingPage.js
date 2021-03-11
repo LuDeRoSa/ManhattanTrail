@@ -2,6 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setGame } from '../store/game';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+
+const styles = {
+  root: {},
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+};
 /**
  * COMPONENT
  */
@@ -17,19 +31,32 @@ export class LandingPage extends React.Component {
     const { username } = this.props;
     const { game } = this.props;
     return (
-      <div>
+      <Container style={styles.container}>
         <h3>Welcome , {username}</h3>
         <h4>In the future, category options might be here</h4>
         <h4>
           Some information could be displayed here whether a user currently has
           a game in progress
         </h4>
+        <ButtonGroup>
+          <Button disabled>Italian</Button>
+          <Button disabled>Chinese</Button>
+          <Button disabled>Indian</Button>
+        </ButtonGroup>
         <p>Path: {game.pathId}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p>
 
-        <Link to="/home">Begin Game</Link>
-      </div>
+        <Button
+          variant="outlined"
+          startIcon={<SportsEsportsIcon />}
+          color="inherit"
+          component={Link}
+          to="/home"
+        >
+          Begin Game
+        </Button>
+      </Container>
     );
   }
 }

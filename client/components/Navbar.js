@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: '1rem',
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   title: {
     flexGrow: 1,
   },
@@ -34,13 +31,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
         <div className={classes.root}>
           <AppBar position="static">
             <Toolbar>
-              <EmojiFoodBeverageIcon
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
-              />
-
               <Typography variant="h4" className={classes.title}>
                 Manhattan Trail
               </Typography>
