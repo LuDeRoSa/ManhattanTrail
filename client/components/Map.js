@@ -1,18 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import GoogleMapReact from "google-map-react";
-import { connect } from "react-redux";
-import rest, { setRests } from "../store/rest";
-import Marker from "./Marker";
+import GoogleMapReact from 'google-map-react';
+import { connect } from 'react-redux';
+import rest, { setRests } from '../store/rest';
+import Marker from './Marker';
 
 //dummy data
 const points = [
-  { id: 1, title: "The Smith", lat: 40.741895, lng: -73.989308 },
-  { id: 2, title: "The Hillstone", lat: 40.7580445, lng: -73.9699967 },
-  { id: 3, title: "Boqueria", lat: 40.77152, lng: -73.9561132 },
+  { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
+  { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
+  { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
 ];
-let index = 0;
-
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -38,33 +36,33 @@ class _Map extends React.Component {
     });
   }
 
-  setCenter(center) {
+  setCenter(index) {
+    const center = this.props.rest.rests[0][index];
     this.setState({
-      center: { ...center },
+      center: {
+        lat: center.restaurant_latitude,
+        lng: center.restaurant_longitude,
+      },
     });
-    index++;
+    this.props.game.gameStage++;
   }
-
-  //   [1, 2, 3, 4]
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
     return {
       panControl: false,
       mapTypeControl: false,
-      scrollwheel: false,
-      zoomControl: false,
+      // zoomControl: false,
       streetViewControl: false,
-      rotateControl: false,
       fullscreenControl: false,
-      scaleControl: false,
-      gestureHandling: "none",
+      // scaleControl: false,
+      gestureHandling: 'none',
       styles: [
         {
           stylers: [
             { saturation: 0 },
             { gamma: 1 },
             { lightness: 4 },
-            { visibility: "on" },
+            { visibility: 'on' },
           ],
         },
       ],
@@ -73,14 +71,12 @@ class _Map extends React.Component {
 
   render() {
     const { setMarker } = this;
-
     console.log(this.props);
-
     return (
-      <div style={{ height: "100%", width: "100%" }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI",
+            key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
           }}
           zoom={13}
           center={this.state.center}
@@ -92,7 +88,9 @@ class _Map extends React.Component {
         </GoogleMapReact>
 
         <div>
-          <button onClick={() => this.setCenter(points[index])}>Next</button>
+          <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
+            Next
+          </button>
         </div>
       </div>
     );
@@ -110,7 +108,10 @@ class _Map extends React.Component {
 // Games Model associatons User /  Scores / Path
 
 const mapState = (state) => {
-  return state;
+  return {
+    rest: state.rest,
+    game: state.game,
+  };
 };
 const mapDispatch = (dispatch) => {
   return {
