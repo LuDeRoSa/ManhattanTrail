@@ -26,3 +26,20 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+router.put('/next', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    let game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+    });
+    game.stage++;
+    await game.save();
+    res.send(game);
+  } catch (err) {
+    next(err);
+  }
+});

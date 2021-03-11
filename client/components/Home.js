@@ -14,6 +14,7 @@ export const Home = (props) => {
       <div style={{ width: '50vw', height: '50vh' }}>
         <Map />
       </div>
+      {/* <div>This will be the game container</div> */}
     </div>
   );
 };
@@ -24,6 +25,8 @@ export const Home = (props) => {
 const mapState = (state) => {
   return {
     username: state.auth.username,
+    rest: state.rest,
+    game: state.game,
   };
 };
 

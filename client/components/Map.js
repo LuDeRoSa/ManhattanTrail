@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import rest, { setRests } from '../store/rest';
 import Marker from './Marker';
+import { nextStage } from '../store/game';
 
 //dummy data
 const points = [
@@ -37,6 +38,8 @@ class _Map extends React.Component {
   }
 
   setCenter(index) {
+    //call mapped dispatch to tell back end about new
+    this.props.nextStage();
     const center = this.props.rest.rests[0][index];
     this.setState({
       center: {
@@ -44,7 +47,6 @@ class _Map extends React.Component {
         lng: center.restaurant_longitude,
       },
     });
-    this.props.game.gameStage++;
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -116,6 +118,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     setRests: () => dispatch(setRests()),
+    nextStage: () => dispatch(nextStage()),
   };
 };
 
