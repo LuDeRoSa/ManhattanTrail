@@ -7,12 +7,12 @@ import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
-//dummy data
-const points = [
-  { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
-  { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
-  { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
-];
+// //dummy data
+// const points = [
+//   { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
+//   { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
+//   { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
+// ];
 class _Map extends React.Component {
   constructor(props) {
     super(props);
