@@ -28,7 +28,6 @@ class PastGames extends React.Component {
         width: 130,
       },
     };
-    console.log(this.props);
     let { pastgames } = this.props;
     return (
       <Container>
