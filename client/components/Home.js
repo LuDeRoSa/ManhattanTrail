@@ -18,7 +18,9 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome , {username}</h3>
+      <center>
+        <h3>Welcome , {username}</h3>
+      </center>
       <Container style={styles.container}>
         <Grid
           container

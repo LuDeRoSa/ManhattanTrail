@@ -55,6 +55,9 @@ class _Map extends React.Component {
       streetViewControl: false,
       fullscreenControl: false,
       gestureHandling: 'none',
+      // draggableCursor: 'url(maps.gstatic.com/mapfiles/openhand_8_8.cur)',
+      draggableCursor: 'default',
+
       styles: [
         {
           stylers: [
@@ -82,7 +85,12 @@ class _Map extends React.Component {
             options={this.createMapOptions}
           >
             {this.state.showMarker && (
-              <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
+              <Marker
+                lat={this.state.center.lat}
+                lng={this.state.center.lng}
+                color={'black'}
+                name={'samir test'}
+              />
             )}
           </GoogleMapReact>
         </div>

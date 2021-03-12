@@ -59,13 +59,13 @@ const syncAndSeed = async () => {
       restaurant_id: 4,
       restaurant_name: 'Restaurant Four',
       restaurant_longitude: -77.3,
-      restaurant_latitude: 47.3,
+      restaurant_latitude: 40.78,
     }),
     Restaurant.create({
       restaurant_id: 5,
       restaurant_name: 'Restaurant Five',
       restaurant_longitude: -78.3,
-      restaurant_latitude: 48.5,
+      restaurant_latitude: 40.5,
     }),
   ]);
 
@@ -74,8 +74,8 @@ const syncAndSeed = async () => {
     Path.create({ path_id: 1, restaurantId: 1, stage: 1 }),
     Path.create({ path_id: 1, restaurantId: 2, stage: 2 }),
     Path.create({ path_id: 1, restaurantId: 3, stage: 3 }),
-    Path.create({ path_id: 1, restaurantId: 4, stage: 4 }),
-    Path.create({ path_id: 1, restaurantId: 5, stage: 5 }),
+    Path.create({ path_id: 2, restaurantId: 4, stage: 1 }),
+    Path.create({ path_id: 2, restaurantId: 5, stage: 2 }),
   ]);
 
   //quiz questions:
