@@ -11,8 +11,7 @@ const _setRests = (rests) => ({ type: SET_RESTS, rests });
  * THUNK CREATORS
  */
 export const setRests = () => async (dispatch) => {
-  const rests = (await axios.get('/api/path/1/restaurants')).data;
-  console.log(rests);
+  const rests = (await axios.get('/api/restaurant')).data; //CORRECT THIS API ROUTE
   return dispatch(_setRests(rests));
 };
 /**

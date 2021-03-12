@@ -16,9 +16,6 @@ const User_Responses = db.define('user_responses', {
     restaurant_id: {
         type: Sequelize.INTEGER,
     },
-    restaurant_id: {
-        type: Sequelize.INTEGER,
-    },
     question_id: {
         type: Sequelize.INTEGER,
     },
