@@ -29,14 +29,14 @@ class Routes extends Component {
             <Route path="/quiz" component={Quiz} />
             <Route path="/gameover" component={GameOver} />
             <Route path="/pastgames" component={PastGames} />
-            {/* <Redirect to="/landing" /> */}
+            <Redirect to="/landing" />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            {/* <Redirect to="/login" /> */}
+            <Redirect to="/login" />
           </Switch>
         )}
       </div>

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const router = require('express').Router();
 const {
-  models: { Quiz, User, Scores },
+  models: { Restaurant, Path, Quiz, User, Game, Scores },
 } = require('../db');
 
 module.exports = router;
@@ -38,20 +38,28 @@ router.get('/', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-
     console.log('the req.body! ', req.body);
     const points = req.body.points;
     //need to update the scores model!
 
     const user = await User.findByToken(req.headers.authorization);
     console.log(user);
+    let game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+    });
+    console.log('this is the game data associated to user', game);
+    console.log('we should edit the scores model of this id', game.scoreId);
+    const score = Scores.findByPk(game.scoreId);
+    console.log('this is the score found', score);
+    score.total_score = points;
+    await score.save();
 
-
-
-
-    res.sendStatus(200);
+    //or eager load game with the score and send that.
+    res.send(score);
   } catch (err) {
     next(err);
   }
 });
-

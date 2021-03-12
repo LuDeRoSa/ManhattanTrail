@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from './Map';
-
+import Quiz from './Quiz';
 import Container from '@material-ui/core/Container';
 
 const styles = {
@@ -23,7 +23,9 @@ export const Home = (props) => {
         <div className="map" style={{ width: '50%', height: '50vh' }}>
           <Map />
         </div>
-        <div>This will be the game container</div>
+        <div>
+          <Quiz />
+        </div>
       </Container>
     </div>
   );
