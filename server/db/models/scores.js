@@ -7,10 +7,11 @@ const Scores = db.define('scores', {
   //   primaryKey: true,
   // },
   //commented out because sequelize relationships will assign a gameId anyway
-  // user_id: {
-  //   type: Sequelize.INTEGER,
-  // },
+  user_id: {
+    type: Sequelize.INTEGER,
+  },
   //commented out because Game already has information about userId
+  //we commented this back so we can update user score from the quiz
   total_score: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
