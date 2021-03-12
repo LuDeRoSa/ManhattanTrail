@@ -58,7 +58,7 @@ class Quiz extends React.Component {
     const { handleQuestionChange } = this;
 
     return (
-      <div className="app">
+      <div className="quiz">
         <form onSubmit={this.handleSubmit}>
           {
             this.props.quiz.length !== 0

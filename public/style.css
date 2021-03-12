@@ -36,3 +36,10 @@ form div {
     z-index: 1;
   } */
 }
+
+.quiz {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+}
