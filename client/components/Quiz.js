@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import {fetchQuiz} from "../store/quiz";
+import {fetchQuiz, updateQuiz} from "../store/quiz";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -32,14 +32,33 @@ export class Quiz extends React.Component {
   handleQuestionChange(ev){
     //before you set state, determine whether answer is true or false. and then pass in the value and an additional boolean value such as true or false
     let quizArray = this.props.quiz;
-    let currentQuestion = ev.target.name;
-    console.log("quiz Array", quizArray);
+    // let currentQuestion = ev.target.name;
+    // console.log("quiz Array", quizArray);
+
+    let value = {}
+
     for (let i = 0; i < quizArray.length; i++){
-      let current
-    }
+      let currentQObj = quizArray[i];
+      // console.log("current Q obj in the for loop",currentQObj)
+      for (let keys in currentQObj){
+        if (currentQObj[keys] === ev.target.value) {
+          // console.log("in the if stmt!")
+          if (currentQObj["choice_correct_answer"] === ev.target.value) {
+            value["isCorrect"] = true;
+          }else{
+            value["isCorrect"] = false;
+          }
+        }
+      }
+
+    }//end for loop
+
+    // console.log("value object",value);
 
     this.setState({
-      [ev.target.name]: ev.target.value
+      [ev.target.name]: {
+        [ev.target.value]: value
+      }
     });
 
   }
@@ -47,9 +66,7 @@ export class Quiz extends React.Component {
   handleSubmit(event){
     event.preventDefault();
     console.log("in the handleSubmit!!!")
-    //when we make a post - we'll need another axios call
-    //which means we'll need another dispatch
-    //and that's where the handle submit will come in
+    this.props.updateQuiz(this.state);
   }
 
 
@@ -113,7 +130,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getQuiz: () => dispatch(fetchQuiz())
+    getQuiz: () => dispatch(fetchQuiz()),
+    updateQuiz: (questionObj) => dispatch(updateQuiz(questionObj))
   };
 };
 

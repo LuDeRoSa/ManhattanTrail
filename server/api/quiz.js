@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const router = require('express').Router();
 const {
-  models: {Quiz}
+  models: {Quiz, User}
 } = require("../db");
 
 
@@ -43,14 +43,26 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   try {
-    //await - wait for the hook - hook will do its thing-- and send it back ot us
-    //post is the bridge to our database
-    const id = req.params.id;
-    // const quiz
-    console.log(req.body);
+    const user = await User.findByToken(req.headers.authorization);
+    console.log("the req.body! ",req.body);
+    const currentUserId = req.body.userId;
+    let {quizObj} = req.body
+    let result = checkAnswers(quizObj)
+    console.log("result", result)
 
   } catch (err) {
     next(err);
   }
 });
 
+function checkAnswers(quizObj){
+  let count = 0;
+  for (let questions in quizObj){
+    let currentQuestion = questions;
+    let currentAnswer = quizObj[currentQuestion];
+    // let correctFlag =
+
+
+  }
+  return count;
+}

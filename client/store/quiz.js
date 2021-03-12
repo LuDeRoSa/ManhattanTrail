@@ -1,4 +1,5 @@
 import axios from 'axios'
+const getToken = () => window.localStorage.getItem('token');
 
 /**
  * ACTION TYPES
@@ -15,7 +16,7 @@ export const setQuiz = (quiz) => {
  }
 }
 
-export const updateQuiz = (quiz) => {
+export const _updateQuiz = (quiz) => {
   return {
     type: UPDATE_QUIZ
   }
@@ -26,6 +27,7 @@ export const updateQuiz = (quiz) => {
 export const pullQuiz = () => {
   return axios.get("/api/quiz/")
 }
+
 
 /**
  * THUNK CREATORS
@@ -38,6 +40,19 @@ export const fetchQuiz = () =>  {
 
 };
 
+export const updateQuiz = (quizObj) => async (dispatch) => {
+  const token = getToken();
+  const result = (
+    await axios.post('/api/quiz/:id',
+    {quizObj},
+    {
+      headers: {
+        authorization: token,
+      },
+    })
+  ).data;
+  return dispatch(_updateQuiz(result));
+};
 
 /**
  * REDUCER
