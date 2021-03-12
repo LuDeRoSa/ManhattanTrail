@@ -13,7 +13,7 @@ import {
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#fefccb',
+      default: '#F5F5F5',
     },
   },
 });
