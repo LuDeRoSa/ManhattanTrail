@@ -77,20 +77,21 @@ class _Map extends React.Component {
   render() {
     const { setMarker } = this;
     return (
-      <div style={{ height: '100%', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
-          }}
-          zoom={13}
-          center={this.state.center}
-          options={this.createMapOptions}
-        >
-          {this.state.showMarker && (
-            <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
-          )}
-        </GoogleMapReact>
-
+      <React.Fragment>
+        <div style={{ height: '90%', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
+            }}
+            zoom={13}
+            center={this.state.center}
+            options={this.createMapOptions}
+          >
+            {this.state.showMarker && (
+              <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
+            )}
+          </GoogleMapReact>
+        </div>
         <div>
           <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
             Next
@@ -98,7 +99,7 @@ class _Map extends React.Component {
           {this.props.game.status}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
