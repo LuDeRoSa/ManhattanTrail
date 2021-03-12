@@ -5,12 +5,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import rest from './rest';
 import game from './game';
+import pastgames from './pastgames';
 
-const reducer = combineReducers({ auth, rest, game });
+const reducer = combineReducers({ auth, rest, game, pastgames });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 const store = createStore(reducer, middleware);
+
+// export const getToken = () => window.localStorage.getItem('token');
 
 export default store;
 export * from './auth';

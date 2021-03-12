@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Restaurant, Path, Quiz, User, Game },
+  models: { Restaurant, Path, Quiz, User, Game, Scores },
 } = require('../db');
 
 module.exports = router;
@@ -20,6 +20,9 @@ router.get('/', async (req, res, next) => {
         pathId: req.body.pathId || 1, //category definition can happen here
         userId: user.id,
       });
+      const score = Scores.create({
+        gameId: game.id,
+      });
     }
     res.send(game);
   } catch (err) {
@@ -38,6 +41,22 @@ router.put('/next', async (req, res, next) => {
     });
     game.stage++;
     await game.save();
+    res.send(game);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/pastgames', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    const game = await Game.findAll({
+      where: {
+        userId: user.id,
+        status: 'finished',
+      },
+      include: Scores,
+    });
     res.send(game);
   } catch (err) {
     next(err);

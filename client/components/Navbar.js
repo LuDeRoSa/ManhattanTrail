@@ -3,29 +3,76 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
-    <h1>Oregon Food Trail Game</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/landing">Game</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import EmojiFoodBeverageIcon from '@material-ui/icons/EmojiFoodBeverage';
+import HomeIcon from '@material-ui/icons/Home';
+import TimelineIcon from '@material-ui/icons/Timeline';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    marginBottom: '1rem',
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
+
+const Navbar = ({ handleClick, isLoggedIn }) => {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <nav>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h4" className={classes.title}>
+                Manhattan Trail
+              </Typography>
+              {isLoggedIn ? (
+                <div>
+                  <Button
+                    startIcon={<HomeIcon />}
+                    color="inherit"
+                    component={Link}
+                    to="/landing"
+                  >
+                    Game
+                  </Button>
+                  <Button
+                    startIcon={<TimelineIcon />}
+                    color="inherit"
+                    component={Link}
+                    to="/pastgames"
+                  >
+                    Past Games
+                  </Button>
+                  <a href="#" onClick={handleClick} tabIndex="-1">
+                    <Button color="inherit">Logout</Button>
+                  </a>
+                </div>
+              ) : (
+                <div>
+                  <Button color="inherit" component={Link} to="/login">
+                    Login
+                  </Button>
+                  <Button color="inherit" component={Link} to="/signup">
+                    Sign Up
+                  </Button>
+                </div>
+              )}
+            </Toolbar>
+          </AppBar>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-);
+      </nav>
+    </div>
+  );
+};
 
 /**
  * CONTAINER

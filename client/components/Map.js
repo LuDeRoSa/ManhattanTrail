@@ -2,16 +2,17 @@ import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import rest, { setRests } from '../store/rest';
+import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
+import { setGame } from '../store/game';
 
-//dummy data
-const points = [
-  { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
-  { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
-  { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
-];
+// //dummy data
+// const points = [
+//   { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
+//   { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
+//   { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
+// ];
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,9 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.game.status === 'no-game') {
+      this.props.setGame(this.props.userId);
+    }
     this.props.setRests();
     this.setState({
       showMarker: true,
@@ -112,15 +116,15 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
+    userId: state.auth.id,
     rest: state.rest,
     game: state.game,
   };
 };
-const mapDispatch = (dispatch) => {
-  return {
-    setRests: () => dispatch(setRests()),
-    nextStage: () => dispatch(nextStage()),
-  };
+const mapDispatch = {
+  setRests,
+  nextStage,
+  setGame,
 };
 
 export default connect(mapState, mapDispatch)(_Map);

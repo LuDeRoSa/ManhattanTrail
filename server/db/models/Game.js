@@ -22,7 +22,8 @@ Game.addHook('beforeValidate', async (game, options) => {
   const gamelength = path.length;
   if (game.stage > gamelength) {
     game.status = 'finished';
-    // await game.save(); //do we need this?
+    game.stage = gamelength;
+    await game.save();
   }
 });
 
