@@ -4,7 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const SET_QUIZ = 'SET_QUIZ'
-
+const UPDATE_QUIZ = "UPDATE_QUIZ"
 /**
  * ACTION CREATORS
  */
@@ -14,6 +14,13 @@ export const setQuiz = (quiz) => {
    quiz
  }
 }
+
+export const updateQuiz = (quiz) => {
+  return {
+    type: UPDATE_QUIZ
+  }
+}
+
 
 /* AXIOS CALL */
 export const pullQuiz = () => {

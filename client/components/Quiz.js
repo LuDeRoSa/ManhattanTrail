@@ -13,10 +13,12 @@ export class Quiz extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      choiceA: "",
-      choiceB: "",
-      choiceC: "",
-      choiceCorrect: ""
+        userId: this.props.auth.id,
+        question1: "",
+        question2: "",
+        question3: "",
+        question4: "",
+        question5: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -28,49 +30,60 @@ export class Quiz extends React.Component {
   }
 
   handleQuestionChange(ev){
-    const change = {};
-    change[ev.target.name] = ev.target.value;
-    this.setState(change);
-    console.log("in q change hook",this.state)
+    //before you set state, determine whether answer is true or false. and then pass in the value and an additional boolean value such as true or false
+    let quizArray = this.props.quiz;
+    let currentQuestion = ev.target.name;
+    console.log("quiz Array", quizArray);
+    for (let i = 0; i < quizArray.length; i++){
+      let current
+    }
+
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+
   }
 
   handleSubmit(event){
     event.preventDefault();
     console.log("in the handleSubmit!!!")
+    //when we make a post - we'll need another axios call
+    //which means we'll need another dispatch
+    //and that's where the handle submit will come in
   }
 
 
   render(){
-
+    console.log("in q change hook",this.state)
     const {handleQuestionChange}=this;
     console.log("in the map!", this.props.quiz)
+    const userId = this.props.auth.id;
+    console.log("state auth", userId)
 
     return (
       <div className="app">
         <form onSubmit={this.handleSubmit}>
-
         {
-
         this.props.quiz.length !== 0 ?
 
          this.props.quiz.map( (currentQuestionObj, index) => {
 
            return (
-             <div>
+             <div key={index}>
                 <label>{currentQuestionObj.question}
 
-               <select value={this.state.value} onChange={handleQuestionChange}>
+               <select name={"question"+(index+1)} value={this.state.value} onChange={handleQuestionChange}>
 
                <option >Pick a choice!</option>
 
-               <option value="choiceA">{currentQuestionObj.choice_a}</option>
+               <option value={currentQuestionObj.choice_a}>{currentQuestionObj.choice_a}</option>
 
 
-               <option value="choiceB" >{currentQuestionObj.choice_b}</option>
+               <option value={currentQuestionObj.choice_b} >{currentQuestionObj.choice_b}</option>
 
-              <option value="choiceC" >{currentQuestionObj.choice_c}</option>
+              <option value={currentQuestionObj.choice_c} >{currentQuestionObj.choice_c}</option>
 
-              <option value="choiceCorrect">{currentQuestionObj.choice_correct_answer}</option>
+              <option value={currentQuestionObj.choice_correct_answer}>{currentQuestionObj.choice_correct_answer}</option>
 
               </select>
                </label>
@@ -85,82 +98,6 @@ export class Quiz extends React.Component {
          </form>
          </div>
 
-
-
-
-
-
-    //   <div className="app">
-    //     {
-    //     this.props.quiz.length !== 0 ?
-    //      this.props.quiz.map( (currentQuestionObj, index) => {
-
-    //        return (
-    //          <div>
-    //            <form key={index} onSubmit={this.handleSubmit}>
-
-    //             <label>{currentQuestionObj.question}
-
-    //               <select value={this.state.value} onChange={handleQuestionChange}>
-
-    //               <option >Pick a choice!</option>
-
-    //               <option value="choiceA">{currentQuestionObj.choice_a}</option>
-
-
-    //               <option value="choiceB" >{currentQuestionObj.choice_b}</option>
-
-
-    //               <option value="choiceC" >{currentQuestionObj.choice_c}</option>
-
-
-    //               <option value="choiceCorrect">{currentQuestionObj.choice_correct_answer}</option>
-
-    //               </select>
-    //               </label>
-    //               <input type="submit" value="Submit" />
-    //           </form>
-    //           <br/>
-    //         </div>
-    //        )
-    //      }) : ""
-
-
-
-
-
-
-    // return (
-    //   <div className="app">
-    //     {
-    //     this.props.quiz.length !== 0 ?
-    //      this.props.quiz.map( (currentQuestionObj, index) => {
-    //        console.log("in the map!", currentQuestionObj);
-    //        return (
-    //          <div>
-    //            <form onSubmit={this.handleSubmit}>
-
-    //             <p key={index}>{currentQuestionObj.question}</p>
-
-    //               <input type="radio" id="choiceA" name="choiceA" value={this.state.value} onChange={handleQuestionChange}/>
-    //               <label>{currentQuestionObj.choice_a}</label>
-
-    //               <input type="radio" id="choiceB" name="choiceA" value={currentQuestionObj.choice_b} />
-    //               <label >{currentQuestionObj.choice_b}</label>
-
-    //               <input type="radio" id="choiceC" name="choiceA" value={currentQuestionObj.choice_c} />
-    //               <label >{currentQuestionObj.choice_c}</label>
-
-    //               <input type="radio" id="choice_correct_answer" name="choiceA" value={currentQuestionObj.choice_correct_answer} />
-    //               <label >{currentQuestionObj.choice_correct_answer}</label>
-    //               <input type="submit" value="Submit" />
-    //           </form>
-    //           <br/>
-    //         </div>
-    //        )
-    //      }) : ""
-     //   }
-
       );
   }//end render method
 
@@ -169,7 +106,8 @@ export class Quiz extends React.Component {
 
 const mapState = (state) => {
   return {
-    quiz: state.quiz
+    quiz: state.quiz,
+    auth: state.auth
   };
 };
 
