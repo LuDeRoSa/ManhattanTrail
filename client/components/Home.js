@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from './Map';
+import PhaserGame from './PhaserGame';
 /**
  * COMPONENT
  */
@@ -13,6 +14,7 @@ export const Home = (props) => {
       <h3>Welcome , {username}</h3>
       <div style={{ width: '50vw', height: '50vh' }}>
         <Map />
+        <PhaserGame />
       </div>
     </div>
   );

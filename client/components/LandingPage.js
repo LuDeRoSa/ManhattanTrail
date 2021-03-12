@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setGame } from '../store/game';
+
+import PhaserGame from './PhaserGame'
 /**
  * COMPONENT
  */
@@ -29,6 +31,7 @@ export class LandingPage extends React.Component {
         <p>Status: {game.status}</p>
 
         <Link to="/home">Begin Game</Link>
+        
       </div>
     );
   }
