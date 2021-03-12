@@ -23,10 +23,13 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
-    this.props.setRests();
-    this.setState({
-      showMarker: true,
-    });
+    this.props.setRests(this.props.game.pathId);
+
+    if (this.props.rests) {
+      this.setState({
+        showMarker: true,
+      });
+    }
   }
 
   setMarker(arr) {
@@ -38,7 +41,7 @@ class _Map extends React.Component {
   setCenter(index) {
     //call mapped dispatch to tell back end about new
     this.props.nextStage();
-    const center = this.props.rest.rests[0][index];
+    const center = this.props.rests[index];
     this.setState({
       center: {
         lat: center.restaurant_latitude,
@@ -109,7 +112,7 @@ class _Map extends React.Component {
 const mapState = (state) => {
   return {
     userId: state.auth.id,
-    rest: state.rest,
+    rests: state.rest.rests,
     game: state.game,
   };
 };

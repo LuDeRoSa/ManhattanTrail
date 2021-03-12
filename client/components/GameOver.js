@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setGame } from '../store/game';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import TimelineIcon from '@material-ui/icons/Timeline';
 
 const styles = {
   root: {},
@@ -37,9 +37,24 @@ class GameOver extends React.Component {
 
         <div>Put score here</div>
         <ButtonGroup>
-          <Button disabled>Play new Game</Button>
-          <Button disabled>See scoreboard</Button>
+          <Button
+            startIcon={<SportsEsportsIcon />}
+            color="inherit"
+            component={Link}
+            to="/landing"
+          >
+            Play new Game
+          </Button>
+          <Button
+            startIcon={<TimelineIcon />}
+            color="inherit"
+            component={Link}
+            to="/pastgames"
+          >
+            Past Games
+          </Button>
           <Button disabled>See past games</Button>
+          <Button disabled>See scoreboard</Button>
           <Button disabled>Share with friends</Button>
         </ButtonGroup>
 
