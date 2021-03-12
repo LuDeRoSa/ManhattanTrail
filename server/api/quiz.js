@@ -49,16 +49,25 @@ router.post('/addScores', async (req, res, next) => {
         userId: user.id,
         status: 'ingame',
       },
+      include: Scores,
     });
     console.log('this is the game data associated to user', game);
-    console.log('we should edit the scores model of this id', game.scoreId);
-    const score = Scores.findByPk(game.scoreId);
-    console.log('this is the score found', score);
-    score.total_score = points;
-    await score.save();
+
+    let scoreMatch = await Scores.findOne({
+      where: {
+        gameId: game.id
+      }
+    })
+
+
+    console.log('we should edit the scores model of this id', scoreMatch);
+    // const score = await Scores.findByPk(game.scoreId);
+    console.log('this is the score found', scoreMatch);
+    scoreMatch.total_score = points;
+    await scoreMatch.save();
 
     //or eager load game with the score and send that.
-    res.send(score);
+    res.send(scoreMatch);
   } catch (err) {
     next(err);
   }
