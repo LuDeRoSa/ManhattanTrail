@@ -57,10 +57,9 @@ class _Map extends React.Component {
     return {
       panControl: false,
       mapTypeControl: false,
-      // zoomControl: false,
+      zoomControl: false,
       streetViewControl: false,
       fullscreenControl: false,
-      // scaleControl: false,
       gestureHandling: 'none',
       styles: [
         {

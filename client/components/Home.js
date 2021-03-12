@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Map from './Map';
 import Quiz from './Quiz';
 import Container from '@material-ui/core/Container';
-
+import Grid from '@material-ui/core/Grid';
 const styles = {
   container: {
     display: 'flex',
@@ -20,12 +20,20 @@ export const Home = (props) => {
     <div>
       <h3>Welcome , {username}</h3>
       <Container style={styles.container}>
-        <div className="map" style={{ width: '50%', height: '50vh' }}>
-          <Map />
-        </div>
-        <div>
-          <Quiz />
-        </div>
+        <Grid
+          container
+          spacing={0}
+          direction="row"
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
+            <Map />
+          </Grid>
+          <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Quiz />
+          </Grid>
+        </Grid>
       </Container>
     </div>
   );

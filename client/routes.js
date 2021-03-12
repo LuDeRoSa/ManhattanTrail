@@ -26,7 +26,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
-            <Route path="/quiz" component={Quiz} />
+            {/* <Route path="/quiz" component={Quiz} /> */}
             <Route path="/gameover" component={GameOver} />
             <Route path="/pastgames" component={PastGames} />
             <Redirect to="/landing" />
