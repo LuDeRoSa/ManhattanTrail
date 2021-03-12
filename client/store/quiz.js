@@ -41,11 +41,15 @@ export const updateQuiz = (points) => async (dispatch) => {
   console.log('the updateQuiz thunk received these points', points);
   const token = getToken();
   const result = (
-    await axios.post('/api/quiz/addScores', points, {
-      headers: {
-        authorization: token,
-      },
-    })
+    await axios.post(
+      '/api/quiz/addScores',
+      { points },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
   ).data;
   return dispatch(_updateQuiz(result));
 };
