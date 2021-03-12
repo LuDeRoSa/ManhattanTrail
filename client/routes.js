@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/Auth-Form';
 import Home from './components/Home';
 import { me } from './store';
+import Quiz from './components/Quiz';
 import LandingPage from './components/LandingPage';
 import GameOver from './components/GameOver';
 import PastGames from './components/PastGames';
@@ -25,6 +26,7 @@ class Routes extends Component {
           <Switch>
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
+            <Route path="/quiz" component={Quiz} />
             <Route path="/gameover" component={GameOver} />
             <Route path="/pastgames" component={PastGames} />
             <Redirect to="/landing" />

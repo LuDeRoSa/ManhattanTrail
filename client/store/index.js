@@ -4,10 +4,11 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import rest from './rest';
+import quiz from './quiz';
 import game from './game';
 import pastgames from './pastgames';
 
-const reducer = combineReducers({ auth, rest, game, pastgames });
+const reducer = combineReducers({ auth, rest, game, pastgames, quiz });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
