@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const router = require('express').Router();
 const {
-  models: { Quiz, User },
+  models: { Quiz, User, Scores },
 } = require('../db');
 
 module.exports = router;
@@ -38,28 +38,20 @@ router.get('/', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.headers.authorization);
+
     console.log('the req.body! ', req.body);
-    // let result = checkAnswers(req.body);
-    // console.log('result', result);
+    const points = req.body.points;
+    //need to update the scores model!
+
+    const user = await User.findByToken(req.headers.authorization);
+    console.log(user);
+
+
+
+
     res.sendStatus(200);
   } catch (err) {
     next(err);
   }
 });
 
-// function checkAnswers(quizObj) {
-//   let count = 0;
-//   Object.keys(quizObj)
-//     .filter((key) => key !== 'userId')
-//     .forEach((key) => {
-//       console.log(quizObj[key]);
-
-//     });
-//   for (let questions in quizObj) {
-//     let currentQuestion = questions;
-//     let currentAnswer = quizObj[currentQuestion];
-//     // let correctFlag =
-//   }
-//   return count;
-// }
