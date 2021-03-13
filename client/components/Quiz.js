@@ -1,6 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchQuiz, updateQuiz } from "../store/quiz";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+// import Button from "@material-ui/core/Button";
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -94,34 +99,34 @@ class Quiz extends React.Component {
               ? this.props.quiz.map((currentQuestionObj, index) => {
                   return (
                     <div key={index}>
-                      <label>
+                      <InputLabel id="quiz-form">
                         {currentQuestionObj.question}
 
-                        <select
+                        <Select
                           name={"question" + (index + 1)}
                           value={this.state.value}
                           onChange={handleQuestionChange}
                         >
-                          <option>Pick a choice!</option>
+                          <MenuItem value="">Pick a choice!</MenuItem>
 
-                          <option value={currentQuestionObj.choice_a}>
+                          <MenuItem value={currentQuestionObj.choice_a}>
                             {currentQuestionObj.choice_a}
-                          </option>
+                          </MenuItem>
 
-                          <option value={currentQuestionObj.choice_b}>
+                          <MenuItem value={currentQuestionObj.choice_b}>
                             {currentQuestionObj.choice_b}
-                          </option>
+                          </MenuItem>
 
-                          <option value={currentQuestionObj.choice_c}>
+                          <MenuItem value={currentQuestionObj.choice_c}>
                             {currentQuestionObj.choice_c}
-                          </option>
+                          </MenuItem>
 
-                          <option
+                          <MenuItem
                             value={currentQuestionObj.choice_correct_answer}
                           >
                             {currentQuestionObj.choice_correct_answer}
-                          </option>
-                        </select>
+                          </MenuItem>
+                        </Select>
                         <br />
                         {this.state.showResult && (
                           <span
@@ -132,12 +137,13 @@ class Quiz extends React.Component {
                             }
                           ></span>
                         )}
-                      </label>
+                      </InputLabel>
                     </div>
                   );
                 })
               : "" //close map
           }
+          <br />
           <input type="submit" value="Submit" />
         </form>
       </div>
