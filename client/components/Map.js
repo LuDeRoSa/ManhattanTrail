@@ -11,12 +11,11 @@ class _Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      marker: [],
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
-      showMarker: false,
     };
-    this.setMarker = this.setMarker.bind(this);
+    this.setCenter = this.setCenter.bind(this);
+    this.stepStage = this.stepStage.bind(this);
   }
 
   componentDidMount() {
@@ -25,29 +24,38 @@ class _Map extends React.Component {
     }
     this.props.setRests(this.props.game.pathId);
 
-    if (this.props.rests) {
-      this.setState({
-        showMarker: true,
-      });
+    if (this.props.rests.length > 0) {
+      this.setCenter();
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.rests !== this.props.rests) {
+      // console.log('component did update is triggering');
+      if (this.props.rests.length > 0) {
+        this.setCenter();
+      }
     }
   }
 
-  setMarker(arr) {
-    this.setState({
-      marker: arr,
-    });
-  }
-
-  setCenter(index) {
-    //call mapped dispatch to tell back end about new
-    this.props.nextStage();
-    const center = this.props.rests[index];
+  setCenter() {
+    const index = this.props.game.gameStage - 1;
+    console.log(this.props.rests);
+    let center = this.props.rests[index];
+    if (!center) {
+      console.log('cancelling setCenter');
+      return null;
+    }
     this.setState({
       center: {
         lat: center.restaurant_latitude,
         lng: center.restaurant_longitude,
       },
     });
+  }
+  stepStage() {
+    this.props.nextStage();
+    console.log(this.props.game.gameStage);
+    this.setCenter();
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -58,9 +66,7 @@ class _Map extends React.Component {
       streetViewControl: false,
       fullscreenControl: false,
       gestureHandling: 'none',
-      // draggableCursor: 'url(maps.gstatic.com/mapfiles/openhand_8_8.cur)',
       draggableCursor: 'default',
-
       styles: [
         {
           stylers: [
@@ -75,7 +81,6 @@ class _Map extends React.Component {
   }
 
   render() {
-    const { setMarker } = this;
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
@@ -87,20 +92,34 @@ class _Map extends React.Component {
             center={this.state.center}
             options={this.createMapOptions}
           >
-            {this.state.showMarker && (
+            {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
-                lat={this.state.center.lat}
-                lng={this.state.center.lng}
-                color={'black'}
-                name={'samir test'}
+                lat={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_latitude
+                }
+                lng={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_longitude
+                }
+                color={'red'}
               />
             )}
+
+            {this.props.rests
+              .filter((r, idx) => idx < this.props.game.gameStage - 1)
+              .map((r) => (
+                <Marker
+                  key={r.id}
+                  lat={r.restaurant_latitude}
+                  lng={r.restaurant_longitude}
+                  color={'black'}
+                />
+              ))}
           </GoogleMapReact>
         </div>
         <div>
-          <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
-            Next
-          </button>
+          <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
