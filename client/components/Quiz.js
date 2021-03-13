@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz, updateQuiz } from '../store/quiz';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -28,16 +23,12 @@ class Quiz extends React.Component {
   }
 
   handleQuestionChange(ev) {
-    //before you set state, determine whether answer is true or false. and then pass in the value and an additional boolean value such as true or false
     let quizArray = this.props.quiz;
-    // let currentQuestion = ev.target.name;
-    // console.log("quiz Array", quizArray);
 
     let value = {};
 
     for (let i = 0; i < quizArray.length; i++) {
       let currentQObj = quizArray[i];
-      // console.log("current Q obj in the for loop",currentQObj)
       for (let keys in currentQObj) {
         if (currentQObj[keys] === ev.target.value) {
           if (currentQObj['choice_correct_answer'] === ev.target.value) {
@@ -51,8 +42,6 @@ class Quiz extends React.Component {
       }
     } //end for loop
 
-    // console.log("value object",value);
-
     this.setState({
       [ev.target.name]: {
         [ev.target.value]: value,
@@ -62,16 +51,14 @@ class Quiz extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('the following points will be sent', this.state.points);
     this.props.updateQuiz(this.state.points);
   }
 
   render() {
     const { handleQuestionChange } = this;
-    const userId = this.props.auth.id;
 
     return (
-      <div className="app">
+      <div className="quiz">
         <form onSubmit={this.handleSubmit}>
           {
             this.props.quiz.length !== 0
@@ -130,12 +117,5 @@ const mapDispatch = {
   fetchQuiz,
   updateQuiz,
 };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     getQuiz: () => dispatch(fetchQuiz()),
-//     updateQuiz: (questionObj) => dispatch(updateQuiz(questionObj)),
-//   };
-// };
 
 export default connect(mapState, mapDispatch)(Quiz);
