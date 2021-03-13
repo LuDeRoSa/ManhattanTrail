@@ -6,13 +6,13 @@ class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.auth.id,
       question1: '',
       question2: '',
       question3: '',
       question4: '',
       question5: '',
       points: 0,
+      right_wrong: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -36,7 +36,10 @@ class Quiz extends React.Component {
             this.setState((state) => {
               return { points: state.points + 1 };
             });
+            value['isCorrect'] = true;
             console.log(this.state.points);
+          }else{
+            value["isCorrect"] = false;
           }
         }
       }
@@ -50,13 +53,40 @@ class Quiz extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+
+
+    //loop thru state - check is correct flag --- if correct --- populate check mark else populate "x"
+    let currentState = this.state;
+    let right_wrong = []
+
+    for (let keys in currentState){
+      let currentKey = currentState[keys];
+      console.log("currentKey", currentKey)
+
+      if (typeof(currentKey) === "object"){
+        // console.log("in the if stmt")
+        for (let answers in currentKey){
+          let isCorrectObj = currentKey[answers];
+          let bool = isCorrectObj["isCorrect"];
+            right_wrong.push(bool)
+        }
+      }
+      console.log(right_wrong)
+    }//close for loop
+
+    this.setState({
+      ...this.state,
+      right_wrong: right_wrong
+    })
+
+
     this.props.updateQuiz(this.state.points);
+    event.preventDefault();
   }
 
   render() {
     const { handleQuestionChange } = this;
-
+    console.log("THE STATE", this.state);
     return (
       <div className="quiz">
         <form onSubmit={this.handleSubmit}>
@@ -92,7 +122,10 @@ class Quiz extends React.Component {
                           >
                             {currentQuestionObj.choice_correct_answer}
                           </option>
+
                         </select>
+                        <br/>
+                        <span className={this.state.right_wrong[index]? "correct" : "wrong"}>CORRECT OR NOT?</span>
                       </label>
                     </div>
                   );
