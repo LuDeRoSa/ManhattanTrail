@@ -1,18 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchQuiz, updateQuiz } from '../store/quiz';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchQuiz, updateQuiz } from "../store/quiz";
 
 class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question1: '',
-      question2: '',
-      question3: '',
-      question4: '',
-      question5: '',
+      question1: "",
+      question2: "",
+      question3: "",
+      question4: "",
+      question5: "",
       points: 0,
-      right_wrong: []
+      right_wrong: [],
+      showResult: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -31,14 +32,14 @@ class Quiz extends React.Component {
       let currentQObj = quizArray[i];
       for (let keys in currentQObj) {
         if (currentQObj[keys] === ev.target.value) {
-          if (currentQObj['choice_correct_answer'] === ev.target.value) {
-            console.log('points will be added to the state.points');
+          if (currentQObj["choice_correct_answer"] === ev.target.value) {
+            console.log("points will be added to the state.points");
             this.setState((state) => {
               return { points: state.points + 1 };
             });
-            value['isCorrect'] = true;
+            value["isCorrect"] = true;
             console.log(this.state.points);
-          }else{
+          } else {
             value["isCorrect"] = false;
           }
         }
@@ -53,32 +54,30 @@ class Quiz extends React.Component {
   }
 
   handleSubmit(event) {
-
-
     //loop thru state - check is correct flag --- if correct --- populate check mark else populate "x"
     let currentState = this.state;
-    let right_wrong = []
+    let right_wrong = [];
 
-    for (let keys in currentState){
+    for (let keys in currentState) {
       let currentKey = currentState[keys];
-      console.log("currentKey", currentKey)
+      console.log("currentKey", currentKey);
 
-      if (typeof(currentKey) === "object"){
+      if (typeof currentKey === "object") {
         // console.log("in the if stmt")
-        for (let answers in currentKey){
+        for (let answers in currentKey) {
           let isCorrectObj = currentKey[answers];
           let bool = isCorrectObj["isCorrect"];
-            right_wrong.push(bool)
+          right_wrong.push(bool);
         }
       }
-      console.log(right_wrong)
-    }//close for loop
+      console.log(right_wrong);
+    } //close for loop
 
     this.setState({
       ...this.state,
-      right_wrong: right_wrong
-    })
-
+      right_wrong: right_wrong,
+      showResult: true,
+    });
 
     this.props.updateQuiz(this.state.points);
     event.preventDefault();
@@ -99,7 +98,7 @@ class Quiz extends React.Component {
                         {currentQuestionObj.question}
 
                         <select
-                          name={'question' + (index + 1)}
+                          name={"question" + (index + 1)}
                           value={this.state.value}
                           onChange={handleQuestionChange}
                         >
@@ -122,15 +121,22 @@ class Quiz extends React.Component {
                           >
                             {currentQuestionObj.choice_correct_answer}
                           </option>
-
                         </select>
-                        <br/>
-                        <span className={this.state.right_wrong[index]? "correct" : "wrong"}>CORRECT OR NOT?</span>
+                        <br />
+                        {this.state.showResult && (
+                          <span
+                            className={
+                              this.state.right_wrong[index]
+                                ? "correct"
+                                : "wrong"
+                            }
+                          ></span>
+                        )}
                       </label>
                     </div>
                   );
                 })
-              : '' //close map
+              : "" //close map
           }
           <input type="submit" value="Submit" />
         </form>
