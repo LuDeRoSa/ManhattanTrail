@@ -1,18 +1,24 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchQuiz, updateQuiz } from '../store/quiz';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchQuiz, updateQuiz } from "../store/quiz";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+// import Button from "@material-ui/core/Button";
 
 class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.auth.id,
-      question1: '',
-      question2: '',
-      question3: '',
-      question4: '',
-      question5: '',
+      question1: "",
+      question2: "",
+      question3: "",
+      question4: "",
+      question5: "",
       points: 0,
+      right_wrong: [],
+      showResult: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -31,12 +37,15 @@ class Quiz extends React.Component {
       let currentQObj = quizArray[i];
       for (let keys in currentQObj) {
         if (currentQObj[keys] === ev.target.value) {
-          if (currentQObj['choice_correct_answer'] === ev.target.value) {
-            console.log('points will be added to the state.points');
+          if (currentQObj["choice_correct_answer"] === ev.target.value) {
+            console.log("points will be added to the state.points");
             this.setState((state) => {
               return { points: state.points + 1 };
             });
+            value["isCorrect"] = true;
             console.log(this.state.points);
+          } else {
+            value["isCorrect"] = false;
           }
         }
       }
@@ -50,13 +59,38 @@ class Quiz extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    //loop thru state - check is correct flag --- if correct --- populate check mark else populate "x"
+    let currentState = this.state;
+    let right_wrong = [];
+
+    for (let keys in currentState) {
+      let currentKey = currentState[keys];
+      console.log("currentKey", currentKey);
+
+      if (typeof currentKey === "object") {
+        // console.log("in the if stmt")
+        for (let answers in currentKey) {
+          let isCorrectObj = currentKey[answers];
+          let bool = isCorrectObj["isCorrect"];
+          right_wrong.push(bool);
+        }
+      }
+      console.log(right_wrong);
+    } //close for loop
+
+    this.setState({
+      ...this.state,
+      right_wrong: right_wrong,
+      showResult: true,
+    });
+
     this.props.updateQuiz(this.state.points);
+    event.preventDefault();
   }
 
   render() {
     const { handleQuestionChange } = this;
-
+    console.log("THE STATE", this.state);
     return (
       <div className="quiz">
         <form onSubmit={this.handleSubmit}>
@@ -65,40 +99,51 @@ class Quiz extends React.Component {
               ? this.props.quiz.map((currentQuestionObj, index) => {
                   return (
                     <div key={index}>
-                      <label>
+                      <InputLabel id="quiz-form">
                         {currentQuestionObj.question}
 
-                        <select
-                          name={'question' + (index + 1)}
+                        <Select
+                          name={"question" + (index + 1)}
                           value={this.state.value}
                           onChange={handleQuestionChange}
                         >
-                          <option>Pick a choice!</option>
+                          <MenuItem value="">Pick a choice!</MenuItem>
 
-                          <option value={currentQuestionObj.choice_a}>
+                          <MenuItem value={currentQuestionObj.choice_a}>
                             {currentQuestionObj.choice_a}
-                          </option>
+                          </MenuItem>
 
-                          <option value={currentQuestionObj.choice_b}>
+                          <MenuItem value={currentQuestionObj.choice_b}>
                             {currentQuestionObj.choice_b}
-                          </option>
+                          </MenuItem>
 
-                          <option value={currentQuestionObj.choice_c}>
+                          <MenuItem value={currentQuestionObj.choice_c}>
                             {currentQuestionObj.choice_c}
-                          </option>
+                          </MenuItem>
 
-                          <option
+                          <MenuItem
                             value={currentQuestionObj.choice_correct_answer}
                           >
                             {currentQuestionObj.choice_correct_answer}
-                          </option>
-                        </select>
-                      </label>
+                          </MenuItem>
+                        </Select>
+                        <br />
+                        {this.state.showResult && (
+                          <span
+                            className={
+                              this.state.right_wrong[index]
+                                ? "correct"
+                                : "wrong"
+                            }
+                          ></span>
+                        )}
+                      </InputLabel>
                     </div>
                   );
                 })
-              : '' //close map
+              : "" //close map
           }
+          <br />
           <input type="submit" value="Submit" />
         </form>
       </div>

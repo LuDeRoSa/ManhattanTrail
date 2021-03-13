@@ -38,12 +38,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-    console.log('the req.body! ', req.body);
+    // console.log('the req.body! ', req.body);
     const points = req.body.points;
     //need to update the scores model!
 
     const user = await User.findByToken(req.headers.authorization);
-    console.log(user);
+    // console.log(user);
     let game = await Game.findOne({
       where: {
         userId: user.id,
@@ -51,7 +51,7 @@ router.post('/addScores', async (req, res, next) => {
       },
       include: Scores,
     });
-    console.log('this is the game data associated to user', game);
+    // console.log('this is the game data associated to user', game);
 
     let scoreMatch = await Scores.findOne({
       where: {
@@ -60,9 +60,9 @@ router.post('/addScores', async (req, res, next) => {
     })
 
 
-    console.log('we should edit the scores model of this id', scoreMatch);
-    // const score = await Scores.findByPk(game.scoreId);
-    console.log('this is the score found', scoreMatch);
+    // console.log('we should edit the scores model of this id', scoreMatch);
+    // // const score = await Scores.findByPk(game.scoreId);
+    // console.log('this is the score found', scoreMatch);
     scoreMatch.total_score = points;
     await scoreMatch.save();
 
