@@ -94,6 +94,7 @@ class _Map extends React.Component {
           >
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
+                key={'main'}
                 lat={
                   this.props.rests[this.props.game.gameStage - 1]
                     .restaurant_latitude
