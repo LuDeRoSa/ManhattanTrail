@@ -33,11 +33,7 @@ class PhaserGame extends Component {
         //Phaser.Types.Input.Keyboard.CursorKeys,
         _cake: null,
     
-        initialize: true,
-
-        spawncake: function() {
-            console.log('spawncake');
-        },        
+        initialize: true,    
 
         game: {
           width: 1200/2,
@@ -98,20 +94,8 @@ class PhaserGame extends Component {
     
                 this._cakeGroup = this.add.group();
                 console.log('this', this)
-                this.spawnCake();
-                // //not using multi-touch
-                // this.input.maxPointers = 1;
+                // this.spawnCake();
     
-                // //everything shown on screen no matter the dimension
-                // // this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-                // this.scale.pageAlignHorizontally = true;
-                // this.scale.pageAlignVertically = true;
-    
-                // //activates scaling
-                // this.scale.setScreenSize(true);
-    
-                // // //executes the preloader state
-                // // this.state.start('Preloader');
             },
             update: function() {
                 this._spawnCakeTimer += this.time.elapsed;
@@ -121,26 +105,21 @@ class PhaserGame extends Component {
 
                 if(this._spawnCakeTimer > 1000) {
                     this._spawnCakeTimer = 0;
-                    this.spawnCake(cakeOptions);
+                    // this.spawnCake(cakeOptions);
                 }
-              
-            },
-            
-          },
-        },
-        }
-      };
+            }, //end bracket for update function
+          }, //end bracket for scene
+        }, //end bracket for game
+      }; //end bracket for state
 
-  
-    
- 
+     
   render() {
     const { initialize, game } = this.state
     console.log('phaser')
     return (
       <IonPhaser game={game} initialize={initialize} />
     )
-  }
+  } //end bracket for render
 }
  
 export default PhaserGame;
