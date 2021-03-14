@@ -2,60 +2,71 @@ import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import rest, { setRests } from '../store/rest';
+import { setRests } from '../store/rest';
 import Marker from './Marker';
+import { nextStage } from '../store/game';
+import { setGame } from '../store/game';
 
-//dummy data
-const points = [
-  { id: 1, title: 'The Smith', lat: 40.741895, lng: -73.989308 },
-  { id: 2, title: 'The Hillstone', lat: 40.7580445, lng: -73.9699967 },
-  { id: 3, title: 'Boqueria', lat: 40.77152, lng: -73.9561132 },
-];
 class _Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      marker: [],
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
-      showMarker: false,
     };
-    this.setMarker = this.setMarker.bind(this);
+    this.setCenter = this.setCenter.bind(this);
+    this.stepStage = this.stepStage.bind(this);
   }
 
   componentDidMount() {
-    this.props.setRests();
-    this.setState({
-      showMarker: true,
-    });
+    if (this.props.game.status === 'no-game') {
+      this.props.setGame(this.props.userId);
+    }
+    this.props.setRests(this.props.game.pathId);
+
+    if (this.props.rests.length > 0) {
+      this.setCenter();
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.rests !== this.props.rests) {
+      // console.log('component did update is triggering');
+      if (this.props.rests.length > 0) {
+        this.setCenter();
+      }
+    }
   }
 
-  setMarker(arr) {
-    this.setState({
-      marker: arr,
-    });
-  }
-
-  setCenter(index) {
-    const center = this.props.rest.rests[0][index];
+  setCenter() {
+    const index = this.props.game.gameStage - 1;
+    console.log(this.props.rests);
+    let center = this.props.rests[index];
+    if (!center) {
+      console.log('cancelling setCenter');
+      return null;
+    }
     this.setState({
       center: {
         lat: center.restaurant_latitude,
         lng: center.restaurant_longitude,
       },
     });
-    this.props.game.gameStage++;
+  }
+  stepStage() {
+    this.props.nextStage();
+    console.log(this.props.game.gameStage);
+    this.setCenter();
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
     return {
       panControl: false,
       mapTypeControl: false,
-      // zoomControl: false,
+      zoomControl: false,
       streetViewControl: false,
       fullscreenControl: false,
-      // scaleControl: false,
       gestureHandling: 'none',
+      draggableCursor: 'default',
       styles: [
         {
           stylers: [
@@ -70,53 +81,65 @@ class _Map extends React.Component {
   }
 
   render() {
-    const { setMarker } = this;
-    console.log(this.props);
     return (
-      <div style={{ height: '100%', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
-          }}
-          zoom={13}
-          center={this.state.center}
-          options={this.createMapOptions}
-        >
-          {this.state.showMarker && (
-            <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
-          )}
-        </GoogleMapReact>
+      <React.Fragment>
+        <div style={{ height: '90%', width: '100%' }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
+            }}
+            zoom={13}
+            center={this.state.center}
+            options={this.createMapOptions}
+          >
+            {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
+              <Marker
+                key={'main'}
+                lat={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_latitude
+                }
+                lng={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_longitude
+                }
+                color={'red'}
+              />
+            )}
 
-        <div>
-          <button onClick={() => this.setCenter(this.props.game.gameStage - 1)}>
-            Next
-          </button>
+            {this.props.rests
+              .filter((r, idx) => idx < this.props.game.gameStage - 1)
+              .map((r) => (
+                <Marker
+                  key={r.id}
+                  lat={r.restaurant_latitude}
+                  lng={r.restaurant_longitude}
+                  color={'black'}
+                />
+              ))}
+          </GoogleMapReact>
         </div>
-      </div>
+        <div>
+          <button onClick={this.stepStage}>Next</button>
+          {this.props.game.status}
+          {this.props.game.status === 'finished' && 'gameover'}
+        </div>
+      </React.Fragment>
     );
   }
 }
 
-// one restaurant
-// as he clicks, the nxt marker shows
-// requires to zoom,
-
-//changed the map package, converted it into a class. must fix the route to grab the right data.
-//working on that next, pushing this for now so Samir and i can work on the same repo.
-//
-
-// Games Model associatons User /  Scores / Path
-
 const mapState = (state) => {
   return {
-    rest: state.rest,
+    userId: state.auth.id,
+    rests: state.rest.rests,
     game: state.game,
   };
 };
-const mapDispatch = (dispatch) => {
-  return {
-    setRests: () => dispatch(setRests()),
-  };
+const mapDispatch = {
+  setRests,
+  nextStage,
+  setGame,
 };
 
 export default connect(mapState, mapDispatch)(_Map);

@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setGame } from '../store/game';
-
-
-import PhaserGame from './PhaserGame'
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import TimelineIcon from '@material-ui/icons/Timeline';
 
 const styles = {
   root: {},
@@ -19,48 +16,54 @@ const styles = {
     alignItems: 'center',
   },
 };
-
 /**
  * COMPONENT
  */
-class LandingPage extends React.Component {
+class GameOver extends React.Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.props.setGame(this.props.userId);
-    //this can be altered to send information about desired path or category later on in a button onclick instead
-  }
+  componentDidMount() {}
   render() {
     const { username } = this.props;
     const { game } = this.props;
     return (
       <Container style={styles.container}>
-        <h3>Welcome , {username}</h3>
-        <h4>In the future, category options might be here</h4>
+        <h3>Game Over, {username}!</h3>
         <h4>
-          Some information could be displayed here whether a user currently has
-          a game in progress
+          This is the game over screen. Info about the game, score, team message
+          will be here
         </h4>
+
+        <div>Put score here</div>
         <ButtonGroup>
-          <Button disabled>Italian</Button>
-          <Button disabled>Chinese</Button>
-          <Button disabled>Indian</Button>
+          <Button
+            startIcon={<SportsEsportsIcon />}
+            color="inherit"
+            component={Link}
+            to="/landing"
+          >
+            Play new Game
+          </Button>
+          <Button
+            startIcon={<TimelineIcon />}
+            color="inherit"
+            component={Link}
+            to="/pastgames"
+          >
+            Past Games
+          </Button>
+          <Button disabled>See past games</Button>
+          <Button disabled>See scoreboard</Button>
+          <Button disabled>Share with friends</Button>
         </ButtonGroup>
+
         <p>Path: {game.pathId}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p>
-
-
-        <Button
-          variant="outlined"
-          startIcon={<SportsEsportsIcon />}
-          color="inherit"
-          component={Link}
-          to="/home"
-        >
-          {game.gameStage > 1 ? 'Resume' : 'Begin'} Game
-        </Button>
+        <div>
+          Put team message here, maybe nice pics of the team's headshots
+        </div>
       </Container>
     );
   }
@@ -76,8 +79,6 @@ const mapState = (state) => {
     game: state.game,
   };
 };
-const mapDispatch = {
-  setGame,
-};
+const mapDispatch = {};
 
-export default connect(mapState, mapDispatch)(LandingPage);
+export default connect(mapState, mapDispatch)(GameOver);

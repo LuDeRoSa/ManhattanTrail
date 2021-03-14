@@ -13,6 +13,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
 }
 
 form div {
@@ -34,4 +35,19 @@ form div {
   /* &;hover {
     z-index: 1;
   } */
+}
+
+.quiz {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+}
+
+.correct{
+  border: solid black 5px;
+}
+
+.wrong {
+  border: solid red 5px;
 }

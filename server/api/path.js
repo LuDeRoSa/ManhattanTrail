@@ -7,21 +7,15 @@ module.exports = router;
 
 router.get('/:id/restaurants', async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const path_id = req.params.id;
 
-    const restaurant = await Restaurant.findByPk(id);
-    // console.log(restaurant)
-    // const quiz = await Quiz.findByPk(restaurant.restaurant_id);
-    // const user = await User.findByPk(id);
-
-    const dataReturn = {
-      restaurant,
-      // quiz,
-      // user,
-    };
-
-    // res.send("testing this path to see if it exists!")
-    res.send(dataReturn);
+    const path = await Path.findAll({
+      where: { path_id },
+      include: Restaurant,
+      order: [['stage', 'ASC']],
+    });
+    const rests = path.map((p) => p.restaurant);
+    res.send(rests);
   } catch (err) {
     next(err);
   }
