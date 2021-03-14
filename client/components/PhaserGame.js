@@ -38,9 +38,8 @@ Game methods
      cake.setScale(.08,.08);
      cake.setGravity(0, 200); // enable the cake for the physics engine (so it falls naturally from screen when gravity is set)
      
-     //rotate cake
+     //set anchor point of cake for rotation
      cake.setOrigin(0.5,0.5);
-     cake.angle += (Math.random()*4)-2;
      game._cakeGroup.add(cake);
 
      // when cake leaves the screen, remove it
@@ -90,7 +89,7 @@ class PhaserGame extends Component {
           physics: {
             default: 'arcade',
             arcade: {
-                gravity: { y: 300 },
+                gravity: { y: 200 },
                 debug: false
             }
           },
@@ -114,20 +113,15 @@ class PhaserGame extends Component {
                 this.add.sprite(0, 0, 'background').setOrigin(0).setScale(.5,.5);
                 this.add.sprite(10, 10, 'score-sign').setOrigin(0).setScale(.25/2,.25/2);
                 // player setup
-                // this._player = this.add.sprite(3, 320, 'player').setOrigin(0).setScale(.2/3,.2/3);
                 this._player = this.physics.add.sprite(3, 320, 'player').setOrigin(0).setScale(.2/3,.2/3);
                 this._player.body.setAllowGravity(false)
                 this._player.body.setCollideWorldBounds(true);
                 this._player.setVelocityX(0);
                 this._player.setImmovable(true);
                 // enabling keys to navigate player
-                this._cursors = this.input.keyboard.createCursorKeys();  // Phaser.Types.Input.Keyboard.CursorKeys,
-                // create timer
-                // record the start time
+                this._cursors = this.input.keyboard.createCursorKeys();  
+                // create timer & record the start time
                 this.start = getTime();
-               // let text = this.add.text(32, 32, 'Countdown: ' + formatTime(this.initialTime));
-                // Each 1000 ms call onEvent
-               // this.timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
                 this._spawnCakeTimer = 0;
                 this.health = 6;
                 this._fontStyle = { font: "36px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
@@ -136,15 +130,14 @@ class PhaserGame extends Component {
                 this.score = 0;
                 this.totalElapsedTime = 0;
                 this._cakeGroup = this.add.group();
-                console.log('this', this)
                 // add food to game
                 let cakeOptions = ['cake','cookie','cupcake', 'trashcan', 'fishbone'];
                 spawnCake(this, cakeOptions );
             },
             update: function() {
+                //counting total time elapsed
                 this.totalElapsedTime += getDelta(this);
                 this.timeText.setText("Time: " + Math.floor(this.totalElapsedTime/10000) + "s");
-                
 
                 if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
                     this.add.sprite(300, 200, 'game-over').setScale(.4,.4);
@@ -158,11 +151,6 @@ class PhaserGame extends Component {
                         resetTime(this);
  
                 }
-
-                this._cakeGroup.forEach(function(cake){
-                    cake.angle += (Math.random()*4)-2;
-                });
-    
 
                 this.physics.add.overlap(this._player, this._cakeGroup, collisionHandler, null, this);
 
