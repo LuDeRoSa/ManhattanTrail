@@ -1,13 +1,10 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Quiz = db.define("quiz", {
-  // question_id: {
+const Answer = db.define("answer", {
+  // answer_id: {
   //   type: Sequelize.INTEGER,
   //   primaryKey: true,
-  // },
-  // question: {
-  //   type: Sequelize.TEXT,
   // },
   // choice_correct_answer: {
   //   type: Sequelize.TEXT,
@@ -25,6 +22,13 @@ const Quiz = db.define("quiz", {
   //   type: Sequelize.INTEGER,
   //   foreignKey: true,
   // },
+  answer: {
+    type: Sequelize.TEXT,
+  },
+  isCorrect: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
-module.exports = Quiz;
+module.exports = Answer;

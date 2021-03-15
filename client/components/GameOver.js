@@ -1,19 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import TimelineIcon from '@material-ui/icons/Timeline';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
+import TimelineIcon from "@material-ui/icons/Timeline";
 
 const styles = {
   root: {},
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 };
 /**

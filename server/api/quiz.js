@@ -1,20 +1,25 @@
-const Sequelize = require('sequelize');
-const router = require('express').Router();
+const Sequelize = require("sequelize");
+const router = require("express").Router();
 const {
   models: { Restaurant, Path, Quiz, User, Game, Scores },
-} = require('../db');
+} = require("../db");
 
 module.exports = router;
 
 //generate 5 random questions and return it
-router.get('/', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const randomQuestions = await Quiz.findAll({
-      limit: 5,
-      order: Sequelize.literal('random()'),
+    const quiz = await Quiz.findOne({
+      where: {
+        restaurantId: req.params.id,
+      },
+      include: {
+        all: true,
+        nested: true,
+      },
     });
-
-    res.send(randomQuestions);
+    res.send(quiz);
+    console.log(quiz);
   } catch (err) {
     next(err);
   }
@@ -36,7 +41,7 @@ router.get('/', async (req, res, next) => {
 //NEED TO PARSE THRU THIS OBJECT
 //AND THEN UPDATE THE USER SCORE
 
-router.post('/addScores', async (req, res, next) => {
+router.post("/addScores", async (req, res, next) => {
   try {
     // console.log('the req.body! ', req.body);
     const points = req.body.points;
@@ -47,7 +52,7 @@ router.post('/addScores', async (req, res, next) => {
     let game = await Game.findOne({
       where: {
         userId: user.id,
-        status: 'ingame',
+        status: "ingame",
       },
       include: Scores,
     });
@@ -55,10 +60,9 @@ router.post('/addScores', async (req, res, next) => {
 
     let scoreMatch = await Scores.findOne({
       where: {
-        gameId: game.id
-      }
-    })
-
+        gameId: game.id,
+      },
+    });
 
     // console.log('we should edit the scores model of this id', scoreMatch);
     // // const score = await Scores.findByPk(game.scoreId);

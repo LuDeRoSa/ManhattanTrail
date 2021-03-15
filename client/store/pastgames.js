@@ -1,10 +1,10 @@
-import axios from 'axios';
-const getToken = () => window.localStorage.getItem('token');
+import axios from "axios";
+const getToken = () => window.localStorage.getItem("token");
 
 /**
  * ACTION TYPES
  */
-const SET_PAST_GAMES = 'SET_PAST_GAMES';
+const SET_PAST_GAMES = "SET_PAST_GAMES";
 /**
  * ACTION CREATORS
  */
@@ -15,7 +15,7 @@ const _setPastGames = (pastgames) => ({ type: SET_PAST_GAMES, pastgames });
 export const fetchPastGames = () => async (dispatch) => {
   const token = getToken();
   const pastgames = (
-    await axios.get('/api/game/pastgames', {
+    await axios.get("/api/game/pastgames", {
       headers: {
         authorization: token,
       },

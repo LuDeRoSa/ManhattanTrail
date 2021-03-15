@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import GoogleMapReact from 'google-map-react';
-import { connect } from 'react-redux';
-import { setRests } from '../store/rest';
-import Marker from './Marker';
-import { nextStage } from '../store/game';
-import { setGame } from '../store/game';
+import GoogleMapReact from "google-map-react";
+import { connect } from "react-redux";
+import { setRests } from "../store/rest";
+import Marker from "./Marker";
+import { nextStage } from "../store/game";
+import { setGame } from "../store/game";
+import InfoWindow from "./InfoWindow";
 
 class _Map extends React.Component {
   constructor(props) {
@@ -13,13 +14,14 @@ class _Map extends React.Component {
     this.state = {
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
+      show: false,
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.game.status === 'no-game') {
+    if (this.props.game.status === "no-game") {
       this.props.setGame(this.props.userId);
     }
     this.props.setRests(this.props.game.pathId);
@@ -42,7 +44,7 @@ class _Map extends React.Component {
     console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
-      console.log('cancelling setCenter');
+      console.log("cancelling setCenter");
       return null;
     }
     this.setState({
@@ -54,7 +56,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    console.log(this.props.game.gameStage);
+    // console.log(this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -65,36 +67,42 @@ class _Map extends React.Component {
       zoomControl: false,
       streetViewControl: false,
       fullscreenControl: false,
-      gestureHandling: 'none',
-      draggableCursor: 'default',
+      gestureHandling: "none",
+      draggableCursor: "default",
       styles: [
         {
           stylers: [
             { saturation: 0 },
             { gamma: 1 },
             { lightness: 4 },
-            { visibility: 'on' },
+            { visibility: "on" },
           ],
         },
       ],
     };
   }
 
+  _onChildClick() {
+    this.setState({ show: !this.state.show });
+  }
+
   render() {
     return (
       <React.Fragment>
-        <div style={{ height: '90%', width: '100%' }}>
+        <div style={{ height: "90%", width: "100%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
+              key: "AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI",
             }}
             zoom={13}
             center={this.state.center}
             options={this.createMapOptions}
+            onChildClick={() => this._onChildClick()}
           >
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
-                key={'main'}
+                key={"main"}
+                // name={this.props.rests[0].restaurant_name}
                 lat={
                   this.props.rests[this.props.game.gameStage - 1]
                     .restaurant_latitude
@@ -103,18 +111,19 @@ class _Map extends React.Component {
                   this.props.rests[this.props.game.gameStage - 1]
                     .restaurant_longitude
                 }
-                color={'red'}
+                color={"red"}
+                show={this.state.show}
               />
             )}
-
             {this.props.rests
               .filter((r, idx) => idx < this.props.game.gameStage - 1)
               .map((r) => (
                 <Marker
                   key={r.id}
+                  name={r.restaurant_name}
                   lat={r.restaurant_latitude}
                   lng={r.restaurant_longitude}
-                  color={'black'}
+                  color={"black"}
                 />
               ))}
           </GoogleMapReact>
@@ -122,7 +131,7 @@ class _Map extends React.Component {
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
-          {this.props.game.status === 'finished' && 'gameover'}
+          {this.props.game.status === "finished" && "gameover"}
         </div>
       </React.Fragment>
     );
