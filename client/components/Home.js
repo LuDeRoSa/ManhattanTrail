@@ -2,6 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from './Map';
+
+import PhaserGame from './PhaserGame';
+/**
+ * COMPONENT
+ */
 import Quiz from './Quiz';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +23,7 @@ export const Home = (props) => {
 
   return (
     <div>
+
       <center>
         <h3>Welcome , {username}</h3>
       </center>
@@ -31,12 +37,14 @@ export const Home = (props) => {
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
+            <PhaserGame />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Quiz />
           </Grid>
         </Grid>
       </Container>
+
     </div>
   );
 };
