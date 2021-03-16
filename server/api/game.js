@@ -73,6 +73,7 @@ router.get('/leadership', async (req, res, next) => {
         status: 'finished',
       },
       include: Scores,
+      order: [[{ model: Scores }, 'total_score', 'DESC']],
     });
     res.send(leadership);
   } catch (err) {
