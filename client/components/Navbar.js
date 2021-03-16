@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import PublicIcon from '@material-ui/icons/Public';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,14 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     to="/pastgames"
                   >
                     Past Games
+                  </Button>
+                  <Button
+                    startIcon={<PublicIcon />}
+                    color="inherit"
+                    component={Link}
+                    to="/leadership"
+                  >
+                    Leadership
                   </Button>
                   <a href="#" onClick={handleClick} tabIndex="-1">
                     <Button color="inherit">Logout</Button>

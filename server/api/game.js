@@ -62,3 +62,18 @@ router.get('/pastgames', async (req, res, next) => {
     next(err);
   }
 });
+
+//this is an opportunity to use socket.io for live updates
+router.get('/leadership', async (req, res, next) => {
+  try {
+    const leadership = await Game.findAll({
+      where: {
+        status: 'finished',
+      },
+      include: Scores,
+    });
+    res.send(leadership);
+  } catch (err) {
+    next(err);
+  }
+});
