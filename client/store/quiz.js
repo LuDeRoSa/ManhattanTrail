@@ -4,18 +4,18 @@ const getToken = () => window.localStorage.getItem("token");
 /**
  * ACTION TYPES
  */
-const SET_QUIZ = "SET_QUIZ";
+// const SET_QUIZ = "SET_QUIZ";
 const UPDATE_QUIZ = "UPDATE_QUIZ";
 const FETCH_QUIZ = "FETCH_QUIZ";
 /**
  * ACTION CREATORS
  */
-export const setQuiz = (quiz) => {
-  return {
-    type: SET_QUIZ,
-    quiz,
-  };
-};
+// export const setQuiz = (quiz) => {
+//   return {
+//     type: SET_QUIZ,
+//     quiz,
+//   };
+// };
 
 export const _updateQuiz = (quiz) => {
   return {
@@ -25,16 +25,17 @@ export const _updateQuiz = (quiz) => {
 
 /* AXIOS CALL */
 
-export const _fetchQuiz = (id) => {
+export const _fetchQuiz = (quiz) => {
   return {
     type: FETCH_QUIZ,
+    quiz,
   };
 };
 
 export const fetchQuiz = (id) => async (dispatch) => {
   const quiz = (await axios.get(`/api/quiz/${id}`)).data;
+  // console.log(quiz);
   return dispatch(_fetchQuiz(quiz));
-  console.log(quiz);
 };
 
 // export const pullQuiz = () => {
@@ -73,8 +74,8 @@ export const updateQuiz = (points) => async (dispatch) => {
  */
 export default function (state = [], action) {
   switch (action.type) {
-    case SET_QUIZ:
-      return action.quiz;
+    // case SET_QUIZ:
+    //   return action.quiz;
     case FETCH_QUIZ:
       return action.quiz;
     default:
