@@ -16,21 +16,26 @@ import { Menu } from '@material-ui/core';
 // conditional logic - once a user has submitted, they can't change their mind. - gray out the question box so they can't change it - CLASS NAME CHANGING STUFF HERE
 // OR CONDITIONALLY RENDER THINGS.
 //
-export const SingleQuestion = (props) => {
-  console.log("the props inside the single quetsion component!",props); //props.question.question
-   const {question} = props;
-   console.log("this is the questioon obj destrcutured!!!", question)
+class SingleQuestion extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  const handleChange = () => {
+  handleChange(ev){
     console.log("random test");
   }
+
+  render(){
+    console.log("the props inside the single quetsion component!",this.props); //props.question.question
+    const {question} = this.props;
+    console.log("this is the questioon obj destrcutured!!!", question)
 
   return (
     <div>
 
       <label>{question.question}
 
-      <select name={"question"} value={question.question} onChange={handleChange}>
+      <select name={"question"} value={question.question} onChange={this.handleChange}>
 
       <option >Pick a choice!</option>
       {
@@ -46,8 +51,10 @@ export const SingleQuestion = (props) => {
     </label>
 
     </div>
-  );
-};
+    );
+  }//close render
+
+}//close class
 
 const mapState = (state) => {
   return {
