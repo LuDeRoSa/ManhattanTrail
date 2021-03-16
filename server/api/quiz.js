@@ -18,6 +18,7 @@ router.get("/:id", async (req, res, next) => {
         nested: true,
       },
     });
+    //magic - eager loading of every nested model
     res.send(quiz);
     console.log(quiz);
   } catch (err) {

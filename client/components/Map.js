@@ -41,7 +41,7 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    console.log(this.props.rests);
+    // console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log("cancelling setCenter");

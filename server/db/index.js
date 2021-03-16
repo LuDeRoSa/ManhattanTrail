@@ -114,6 +114,21 @@ const syncAndSeed = async () => {
       questionId: 1,
     }),
     Answer.create({
+      answer: "Cinnamon",
+      isCorrect: false,
+      questionId: 1,
+    }),
+    Answer.create({
+      answer: "Vanilla",
+      isCorrect: false,
+      questionId: 1,
+    }),
+    Answer.create({
+      answer: "Cardamom",
+      isCorrect: false,
+      questionId: 1,
+    }),
+    Answer.create({
       answer: "Burrito",
       isCorrect: true,
       questionId: 2,
