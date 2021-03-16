@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import PublicIcon from '@material-ui/icons/Public';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +38,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               {isLoggedIn ? (
                 <div>
                   <Button
-                    startIcon={<HomeIcon />}
+                    startIcon={<SportsEsportsIcon />}
                     color="inherit"
                     component={Link}
                     to="/landing"

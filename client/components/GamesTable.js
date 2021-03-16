@@ -30,7 +30,7 @@ export default function GamesTable(props) {
           <Table stickyHeader style={styles.Table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">User Id</TableCell>
+                <TableCell align="left">Username</TableCell>
                 <TableCell align="left">Game ID</TableCell>
                 <TableCell align="left">Date</TableCell>
                 <TableCell align="left">Path taken</TableCell>
@@ -40,7 +40,7 @@ export default function GamesTable(props) {
             <TableBody>
               {data.map((game) => (
                 <TableRow key={game.id}>
-                  <TableCell align="left">{game.userId}</TableCell>
+                  <TableCell align="left">{game.user.username}</TableCell>
                   <TableCell align="left">{game.id}</TableCell>
                   <TableCell align="left">{game.updatedAt}</TableCell>
                   <TableCell component="th" scope="row">

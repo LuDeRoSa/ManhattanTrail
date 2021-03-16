@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import TimelineIcon from '@material-ui/icons/Timeline';
+import PublicIcon from '@material-ui/icons/Public';
 
 const styles = {
   root: {},
@@ -53,8 +54,14 @@ class GameOver extends React.Component {
           >
             Past Games
           </Button>
-          <Button disabled>See past games</Button>
-          <Button disabled>See scoreboard</Button>
+          <Button
+            startIcon={<PublicIcon />}
+            color="inherit"
+            component={Link}
+            to="/leadership"
+          >
+            Leadership Board
+          </Button>
           <Button disabled>Share with friends</Button>
         </ButtonGroup>
 

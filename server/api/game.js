@@ -51,14 +51,14 @@ router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     //TODO: fetch user name in place of userId
-    const game = await Game.findAll({
+    const pastgames = await Game.findAll({
       where: {
         userId: user.id,
         status: 'finished',
       },
-      include: Scores,
+      include: [Scores, User],
     });
-    res.send(game);
+    res.send(pastgames);
   } catch (err) {
     next(err);
   }
@@ -72,7 +72,7 @@ router.get('/leadership', async (req, res, next) => {
       where: {
         status: 'finished',
       },
-      include: Scores,
+      include: [Scores, User],
       order: [[{ model: Scores }, 'total_score', 'DESC']],
       limit: 10,
     });
