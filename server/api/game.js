@@ -74,6 +74,7 @@ router.get('/leadership', async (req, res, next) => {
       },
       include: Scores,
       order: [[{ model: Scores }, 'total_score', 'DESC']],
+      limit: 10,
     });
     res.send(leadership);
   } catch (err) {
