@@ -14,9 +14,50 @@ router.get('/:id/restaurants', async (req, res, next) => {
       include: Restaurant,
       order: [['stage', 'ASC']],
     });
-    const rests = path.map((p) => p.restaurant);
+
+    let rests = [];
+    for (let i = 0; i < path.length; i++) {
+      rests[i] = path[i].restaurant;
+      rests[i].dataValues.game_type = path[i].game_type;
+    }
     res.send(rests);
   } catch (err) {
     next(err);
   }
 });
+
+router.get("/:id/:stageId", async (req, res, next) => {
+  try {
+    const path = await Path.findOne({
+      where: {
+        path_id: req.params.id,
+        stage: req.params.stageId
+      }
+    });
+    res.send(path);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//updating game type per stage in the path
+router.put('/:id/:stageId', async (req, res, next) => {
+  try {
+    const path = await Path.findOne({
+      where: {
+        path_id: req.params.id,
+        stage: req.params.stageId
+      }
+    });
+    console.log(req.body)
+    path.game_type = req.body.game_type;
+    await path.save();
+    res.sendStatus(201);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+

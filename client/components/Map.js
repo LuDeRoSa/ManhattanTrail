@@ -2,7 +2,7 @@ import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import { setRests } from '../store/rest';
+import { setRests, setGameTypes } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
@@ -22,6 +22,7 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
+    this.props.setGameTypes(this.props.game.pathId);
     this.props.setRests(this.props.game.pathId);
 
     if (this.props.rests.length > 0) {
@@ -30,7 +31,6 @@ class _Map extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
-      // console.log('component did update is triggering');
       if (this.props.rests.length > 0) {
         this.setCenter();
       }
@@ -84,6 +84,10 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
+        {this.props.rests
+              .map((r) => (
+                r.game_type
+              ))}
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -138,6 +142,7 @@ const mapState = (state) => {
 };
 const mapDispatch = {
   setRests,
+  setGameTypes,
   nextStage,
   setGame,
 };

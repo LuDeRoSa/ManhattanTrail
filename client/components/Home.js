@@ -37,7 +37,7 @@ export const Home = (props) => {
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
-            <PhaserGame />
+            {/* <PhaserGame /> */}
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Quiz />
