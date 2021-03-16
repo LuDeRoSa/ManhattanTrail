@@ -36,6 +36,7 @@ class Quiz extends React.Component {
 
     return (
       <div>
+        <h2>QUIZ</h2>
           {
            this.props.quiz.questions && this.props.quiz.questions.length > 0 &&
 

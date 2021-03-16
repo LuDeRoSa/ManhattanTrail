@@ -21,31 +21,30 @@ export const SingleQuestion = (props) => {
    const {question} = props;
    console.log("this is the questioon obj destrcutured!!!", question)
 
+  const handleChange = () => {
+    console.log("random test");
+  }
 
   return (
     <div>
-      <p>Quiz</p>
 
-        <p>{question.question}</p>
-        {/* <InputLabel id="quiz-form">{question.question} */}
+      <label>{question.question}
 
+      <select name={"question"} value={question.question} onChange={handleChange}>
+
+      <option >Pick a choice!</option>
       {
         question.answers.map((answerObj, index) => (
 
-          <p key={index}>{answerObj.answer}</p>
+              <option key={index}value={answerObj.answer}>{answerObj.answer}</option>
 
-          // <Select
-          //   name={"question" + (index+1)}
-          //   value={this.props.question.question}
-          // >
-
-          // <MenuItem value={answerObj.answer}>{answerObj.answer}</MenuItem>
-
-        ))
-
+          ))
       }
 
-      {/* </InputLabel> */}
+      </select>
+
+    </label>
+
     </div>
   );
 };
