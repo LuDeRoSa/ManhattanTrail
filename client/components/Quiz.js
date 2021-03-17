@@ -1,14 +1,14 @@
-import React from "react";
-import { connect } from "react-redux";
-import { fetchQuiz, updateQuiz } from "../store/quiz";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import React from 'react';
+import { connect } from 'react-redux';
+import { fetchQuiz, updateQuiz } from '../store/quiz';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 // import Button from "@material-ui/core/Button";
-import globalScope from "./GlobalScore";
-import GlobalScore from "./GlobalScore";
-import SingleQuestion from "./SingleQuestion";
+import globalScope from './GlobalScore';
+import GlobalScore from './GlobalScore';
+import SingleQuestion from './SingleQuestion';
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -38,8 +38,8 @@ class Quiz extends React.Component {
         <h2>QUIZ</h2>
         {this.props.quiz.questions &&
           this.props.quiz.questions.length > 0 &&
-          this.props.quiz.questions.map((question, index) => (
-            <SingleQuestion key={index} question={question} />
+          this.props.quiz.questions.map((question) => (
+            <SingleQuestion key={question.id} question={question} />
           ))}
       </div>
     );

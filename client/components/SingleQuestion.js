@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { updateQuiz } from "../store/quiz.js";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField"; //another form , used for blank boxes
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Menu } from "@material-ui/core";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateQuiz } from '../store/quiz.js';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField'; //another form , used for blank boxes
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Menu } from '@material-ui/core';
+import { QuestionAnswerSharp } from '@material-ui/icons';
 
 /// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
@@ -34,14 +35,14 @@ class SingleQuestion extends React.Component {
 
     for (let i = 0; i < answersArray.length; i++) {
       let currentObj = answersArray[i];
-      console.log("curernt obj", currentObj);
+      console.log('curernt obj', currentObj);
       if (userResponse === currentObj.answer) {
         if (currentObj.isCorrect === true) {
           this.setState((state) => {
             return { points: state.points + 1 };
           });
         } else {
-          console.log("this was the wrong answer");
+          console.log('this was the wrong answer');
         }
       }
     }
@@ -58,11 +59,13 @@ class SingleQuestion extends React.Component {
   }
 
   render() {
-    console.log("THE STATE", this.state);
-    console.log("this is the props we are getting", this.props);
+    // console.log("THE STATE", this.state);
+    // console.log("this is the props we are getting", this.props);
     const { question } = this.props;
-    console.log("this is the questioon obj destrcutured!!!", question);
-
+    // console.log("this is the questioon obj destrcutured!!!", question);
+    if (!question.answers.length > 0) {
+      return <div></div>;
+    }
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -70,21 +73,21 @@ class SingleQuestion extends React.Component {
             {question.question}
 
             <Select
-              name={"question"}
+              defaultValue={''}
               value={question.question}
               onChange={this.handleChange}
             >
-              <MenuItem
-                value={"Pick a choice!"}
+              {/* <MenuItem
+                value={'Pick a choice!'}
                 disabled={this.state.played === true}
               >
                 Pick a choice!
-              </MenuItem>
+              </MenuItem> */}
               {question.answers.map((answerObj, index) => (
                 <MenuItem
                   value={answerObj.answer}
                   disabled={this.state.played === true}
-                  key={index}
+                  key={answerObj.id}
                   value={answerObj.answer}
                 >
                   {answerObj.answer}
