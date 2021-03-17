@@ -1,15 +1,15 @@
 //this is the access point for all things database related!
 
-const db = require("./db");
-const Path = require("./models/path");
-const Quiz = require("./models/quiz");
-const Restaurant = require("./models/restaurant");
-const Scores = require("./models/scores");
-const User_Responses = require("./models/user_responses");
-const User = require("./models/User");
-const Game = require("./models/Game");
-const Question = require("./models/Question");
-const Answer = require("./models/Answer");
+const db = require('./db');
+const Path = require('./models/path');
+const Quiz = require('./models/quiz');
+const Restaurant = require('./models/restaurant');
+const Scores = require('./models/scores');
+const User_Responses = require('./models/user_responses');
+const User = require('./models/User');
+const Game = require('./models/Game');
+const Question = require('./models/Question');
+const Answer = require('./models/Answer');
 
 //associations could go here!
 Path.belongsTo(Restaurant);
@@ -50,31 +50,31 @@ const syncAndSeed = async () => {
   const restaurants = await Promise.all([
     Restaurant.create({
       restaurant_id: 1,
-      restaurant_name: "Restaurant One",
+      restaurant_name: 'Restaurant One',
       restaurant_longitude: -73.989308,
       restaurant_latitude: 40.741895,
     }),
     Restaurant.create({
       restaurant_id: 2,
-      restaurant_name: "Restaurant Two",
+      restaurant_name: 'Restaurant Two',
       restaurant_longitude: -73.9699967,
       restaurant_latitude: 40.7580445,
     }),
     Restaurant.create({
       restaurant_id: 3,
-      restaurant_name: "Restaurant Three",
+      restaurant_name: 'Restaurant Three',
       restaurant_longitude: -73.9561132,
       restaurant_latitude: 40.77152,
     }),
     Restaurant.create({
       restaurant_id: 4,
-      restaurant_name: "Restaurant Four",
+      restaurant_name: 'Restaurant Four',
       restaurant_longitude: -73.3,
       restaurant_latitude: 40.78,
     }),
     Restaurant.create({
       restaurant_id: 5,
-      restaurant_name: "Restaurant Five",
+      restaurant_name: 'Restaurant Five',
       restaurant_longitude: -73.3,
       restaurant_latitude: 40.5,
     }),
@@ -97,16 +97,27 @@ const syncAndSeed = async () => {
     }),
   ]);
   const questions = await Promise.all([
-    Question.create({
-      question: "What is the most expensive spice in the world by weight?",
-      quizId: 1,
-    }),
+    Question.create(
+      {
+        question: 'What is the most expensive spice in the world by weight?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Saffron',
+            isCorrect: true,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
     Question.create({
       question: "What Mexican food has a name meaning 'Little Donkey'?",
       quizId: 1,
     }),
     Question.create({
-      question: "What is the most stolen food in the world?",
+      question: 'What is the most stolen food in the world?',
       quizId: 1,
     }),
     Question.create({
@@ -114,23 +125,23 @@ const syncAndSeed = async () => {
       quizId: 1,
     }),
     Question.create({
-      question: "What is the only edible food that never goes bad?",
+      question: 'What is the only edible food that never goes bad?',
       quizId: 1,
     }),
     Question.create({
-      question: "What is the only edible food that never goes bad?",
+      question: 'What is the only edible food that never goes bad?',
       quizId: 1,
     }),
     Question.create({
-      question: "What fruit inspired the paisley fabric pattern?",
+      question: 'What fruit inspired the paisley fabric pattern?',
       quizId: 1,
     }),
     Question.create({
-      question: "What fruit was named after pine cones?",
+      question: 'What fruit was named after pine cones?',
       quizId: 1,
     }),
     Question.create({
-      question: "What country wastes the most food?",
+      question: 'What country wastes the most food?',
       quizId: 1,
     }),
     Question.create({
@@ -140,50 +151,50 @@ const syncAndSeed = async () => {
     }),
     Question.create({
       question:
-        "What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?",
+        'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
       quizId: 1,
     }),
   ]);
 
   const answers = await Promise.all([
+    // Answer.create({
+    //   answer: "Saffron",
+    //   isCorrect: true,
+    //   questionId: 1,
+    // }),
     Answer.create({
-      answer: "Saffron",
-      isCorrect: true,
-      questionId: 1,
-    }),
-    Answer.create({
-      answer: "Cinnamon",
+      answer: 'Cinnamon',
       isCorrect: false,
       questionId: 1,
     }),
     Answer.create({
-      answer: "Vanilla",
+      answer: 'Vanilla',
       isCorrect: false,
       questionId: 1,
     }),
     Answer.create({
-      answer: "Cardamom",
+      answer: 'Cardamom',
       isCorrect: false,
       questionId: 1,
     }),
 
     Answer.create({
-      answer: "Burrito",
+      answer: 'Burrito',
       isCorrect: true,
       questionId: 2,
     }),
     Answer.create({
-      answer: "Enchiladas",
+      answer: 'Enchiladas',
       isCorrect: false,
       questionId: 2,
     }),
     Answer.create({
-      answer: "Tostada",
+      answer: 'Tostada',
       isCorrect: false,
       questionId: 2,
     }),
     Answer.create({
-      answer: "Tamale",
+      answer: 'Tamale',
       isCorrect: false,
       questionId: 2,
     }),
