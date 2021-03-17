@@ -49,8 +49,8 @@ router.put('/:id/:stageId', async (req, res, next) => {
         stage: req.params.stageId
       }
     });
-    console.log(req.body)
     path.game_type = req.body.game_type;
+    console.log(path)
     await path.save();
     res.sendStatus(201);
   } catch (err) {

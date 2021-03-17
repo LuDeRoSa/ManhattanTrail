@@ -1,4 +1,5 @@
 import axios from 'axios';
+const getToken = () => window.localStorage.getItem('token');
 
 /*
 * NUMBER OF STOPS IN A PATH
@@ -32,15 +33,55 @@ export const setRests = (pathId) => async (dispatch) => {
 };
 
 export const setGameTypes = (pathId) => async (dispatch) => {
+  const token = getToken();
+
+
+  let game_type = generateGameType();
+
+  let rest = (
+    await axios.put(
+      `/api/path/1/1`,
+      {game_type},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+  ).data;
+  //NEXT TO-DO: do for-loop for puts for length of game
+  //UPDATE put route to include variables: `/api/path/1/1`,
+
+  console.log('game-type',rest);
+
+  return dispatch(_setGameTypes(rest));
   
   // for (let i = 1; i < NUM_RESTS+1; i++) {
-    let game_type = generateGameType();
-    let rest = await axios.put(`/api/path/${pathId}/1`, game_type);
-    console.log('game-type',{rest});
-    dispatch(_setGameTypes(rest));
 
+    
+   
   // 
 };
+
+export const nextStage = () => async (dispatch) => {
+  const token = getToken();
+  const game = (
+    await axios.put(
+      '/api/game/next',
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+  ).data;
+  if (game.status === 'finished') {
+    history.push('/gameover');
+  }
+  return dispatch(_nextStage(game));
+};
+
 /**
  * REDUCER
  */
