@@ -25,7 +25,6 @@ class Quiz extends React.Component {
     //responsive to restaurant id  - COME BACK
   }
 
-
   render() {
     // console.log("the rest id??!!",this.props.restaurantId)
     // console.log("this.prop.rests", this.props.rests)
@@ -37,16 +36,11 @@ class Quiz extends React.Component {
     return (
       <div>
         <h2>QUIZ</h2>
-          {
-           this.props.quiz.questions && this.props.quiz.questions.length > 0 &&
-
-           this.props.quiz.questions.map((question, index) => (
-
+        {this.props.quiz.questions &&
+          this.props.quiz.questions.length > 0 &&
+          this.props.quiz.questions.map((question, index) => (
             <SingleQuestion key={index} question={question} />
-
-            ))
-          }
-
+          ))}
       </div>
     );
   }
@@ -62,8 +56,6 @@ const mapState = (state) => {
     restaurantId: state.rest.rests[state.game.gameStage - 1] || 0,
   };
 };
-
-
 
 const mapDispatch = {
   fetchQuiz,

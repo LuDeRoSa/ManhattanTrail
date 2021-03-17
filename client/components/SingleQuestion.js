@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updateQuiz } from "../store/quiz.js";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField"; //another form , used for blank boxes
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Menu } from '@material-ui/core';
+import { Menu } from "@material-ui/core";
 
 /// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
@@ -18,83 +19,90 @@ class SingleQuestion extends React.Component {
     super(props);
     this.state = {
       points: 0,
-      played: false
-    }
+      played: false,
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(ev){
+  handleChange(ev) {
     console.log(ev.target.value);
     let questionObj = this.props.question;
     // console.log("question Object", questionObj);
     let userResponse = ev.target.value;
     let answersArray = questionObj.answers;
 
-    for (let i = 0; i < answersArray.length; i++){
+    for (let i = 0; i < answersArray.length; i++) {
       let currentObj = answersArray[i];
-      console.log("curernt obj", currentObj)
-      if (userResponse === currentObj.answer){
-        if (currentObj.isCorrect === true){
+      console.log("curernt obj", currentObj);
+      if (userResponse === currentObj.answer) {
+        if (currentObj.isCorrect === true) {
           this.setState((state) => {
-            return { points: state.points + 1};
+            return { points: state.points + 1 };
           });
-        }else{
-          console.log("this was the wrong answer")
+        } else {
+          console.log("this was the wrong answer");
         }
       }
     }
-
   }
 
-  handleSubmit(ev){
+  /// send the changes to our database/backend
+  handleSubmit(ev) {
     ev.preventDefault();
     this.setState((state) => {
-      return { played: true};
+      return { played: true };
     });
-    console.log("the following points", this.state.points)
-
+    this.props.updateQuiz(this.state.points);
+    // console.log("the following points", this.state.points);
   }
 
-  render(){
-    console.log("THE STATE", this.state)
-    console.log("this is the props we are getting", this.props)
-    const {question} = this.props;
-    console.log("this is the questioon obj destrcutured!!!", question)
+  render() {
+    console.log("THE STATE", this.state);
+    console.log("this is the props we are getting", this.props);
+    const { question } = this.props;
+    console.log("this is the questioon obj destrcutured!!!", question);
 
-  return (
-    <div>
-      <form onSubmit = {this.handleSubmit} >
-      <InputLabel>{question.question}
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <InputLabel>
+            {question.question}
 
-      <Select name={"question"} value={question.question} onChange={this.handleChange}>
+            <Select
+              name={"question"}
+              value={question.question}
+              onChange={this.handleChange}
+            >
+              <MenuItem
+                value={"Pick a choice!"}
+                disabled={this.state.played === true}
+              >
+                Pick a choice!
+              </MenuItem>
+              {question.answers.map((answerObj, index) => (
+                <MenuItem
+                  value={answerObj.answer}
+                  disabled={this.state.played === true}
+                  key={index}
+                  value={answerObj.answer}
+                >
+                  {answerObj.answer}
+                </MenuItem>
+              ))}
+            </Select>
+          </InputLabel>
 
-      <MenuItem value={"Pick a choice!"} disabled={this.state.played === true}>Pick a choice!</MenuItem>
-      {
-        question.answers.map((answerObj, index) => (
-
-          <MenuItem value={answerObj.answer} disabled={this.state.played === true} key={index}value={answerObj.answer}>{answerObj.answer}</MenuItem>
-
-          ))
-      }
-
-      </Select>
-
-    </InputLabel>
-
-    {
-      this.state.played === true ? (
-        <input className="submit-btn" type="submit" value="Submit" />
-      ) : <input className="" type="submit" value="Submit" />
-    }
-
-
-    </form>
-    </div>
+          {this.state.played === true ? (
+            <input className="submit-btn" type="submit" value="Submit" />
+          ) : (
+            <input className="" type="submit" value="Submit" />
+          )}
+        </form>
+      </div>
     );
-  }//close render
-
-}//close class
+  } //close render
+} //close class
 
 const mapState = (state) => {
   return {
@@ -102,6 +110,9 @@ const mapState = (state) => {
   };
 };
 
-
-
-export default connect(mapState)(SingleQuestion);
+const mapDispatch = (dispatch) => {
+  return {
+    updateQuiz: (points) => dispatch(updateQuiz(points)),
+  };
+};
+export default connect(mapState, mapDispatch)(SingleQuestion);

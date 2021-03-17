@@ -105,6 +105,44 @@ const syncAndSeed = async () => {
       question: "What Mexican food has a name meaning 'Little Donkey'?",
       quizId: 1,
     }),
+    Question.create({
+      question: "What is the most stolen food in the world?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What vitamin is the only one that you won't find in an egg?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What is the only edible food that never goes bad?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What is the only edible food that never goes bad?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What fruit inspired the paisley fabric pattern?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What fruit was named after pine cones?",
+      quizId: 1,
+    }),
+    Question.create({
+      question: "What country wastes the most food?",
+      quizId: 1,
+    }),
+    Question.create({
+      question:
+        "What's the healthiest fast food chain in the US? (according to Health Magazine)",
+      quizId: 1,
+    }),
+    Question.create({
+      question:
+        "What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?",
+      quizId: 1,
+    }),
   ]);
 
   const answers = await Promise.all([
@@ -128,16 +166,31 @@ const syncAndSeed = async () => {
       isCorrect: false,
       questionId: 1,
     }),
+
     Answer.create({
       answer: "Burrito",
       isCorrect: true,
       questionId: 2,
     }),
+    Answer.create({
+      answer: "Enchiladas",
+      isCorrect: false,
+      questionId: 2,
+    }),
+    Answer.create({
+      answer: "Tostada",
+      isCorrect: false,
+      questionId: 2,
+    }),
+    Answer.create({
+      answer: "Tamale",
+      isCorrect: false,
+      questionId: 2,
+    }),
   ]);
 };
 
-//quiz questions:
-// const questions = await Promise.all([
+// const Question = await Promise.all([
 //   Quiz.create({
 //     question_id: 1,
 //     question: 'What is the most expensive spice in the world by weight?',
@@ -230,8 +283,8 @@ const syncAndSeed = async () => {
 //   }),
 // ]);
 
-//quiz questions:
-// const questions = await Promise.all([
+//quiz Question:
+// const Question = await Promise.all([
 //   Quiz.create({
 //     question_id: 1,
 //     question: 'What is the most expensive spice in the world by weight?',
@@ -324,8 +377,8 @@ const syncAndSeed = async () => {
 //   }),
 // ]);
 
-// quiz questions:
-// const questions = await Promise.all([
+// quiz Question:
+// const Question = await Promise.all([
 //   Quiz.create({
 //     question: "What is the most expensive spice in the world by weight?",
 //   }),
@@ -358,7 +411,7 @@ const syncAndSeed = async () => {
 //   },
 // };
 
-//  quiz questions:
+//  quiz Question:
 
 /**
  * hooks
