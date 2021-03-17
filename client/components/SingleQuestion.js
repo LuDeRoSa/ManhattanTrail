@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField"; //another form , used for blank boxes
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Menu } from '@material-ui/core';
-///in this component we will tkae care of the form
-//we'd stil need a handle submit
-//and a handle change
-//and choices!!!!
+
 /// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
 //that will just send a score of 1 or 0 to the question
@@ -19,37 +16,80 @@ import { Menu } from '@material-ui/core';
 class SingleQuestion extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      points: 0,
+      played: false
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(ev){
-    console.log("random test");
+    console.log(ev.target.value);
+    let questionObj = this.props.question;
+    // console.log("question Object", questionObj);
+    let userResponse = ev.target.value;
+    let answersArray = questionObj.answers;
+
+    for (let i = 0; i < answersArray.length; i++){
+      let currentObj = answersArray[i];
+      console.log("curernt obj", currentObj)
+      if (userResponse === currentObj.answer){
+        if (currentObj.isCorrect === true){
+          this.setState((state) => {
+            return { points: state.points + 1};
+          });
+        }else{
+          console.log("this was the wrong answer")
+        }
+      }
+    }
+
+  }
+
+  handleSubmit(ev){
+    ev.preventDefault();
+    this.setState((state) => {
+      return { played: true};
+    });
+    console.log("the following points", this.state.points)
+
   }
 
   render(){
-    console.log("the props inside the single quetsion component!",this.props); //props.question.question
+    console.log("THE STATE", this.state)
+    console.log("this is the props we are getting", this.props)
     const {question} = this.props;
     console.log("this is the questioon obj destrcutured!!!", question)
 
   return (
     <div>
+      <form onSubmit = {this.handleSubmit} >
+      <InputLabel>{question.question}
 
-      <label>{question.question}
+      <Select name={"question"} value={question.question} onChange={this.handleChange}>
 
-      <select name={"question"} value={question.question} onChange={this.handleChange}>
-
-      <option >Pick a choice!</option>
+      <MenuItem value={"Pick a choice!"} disabled={this.state.played === true}>Pick a choice!</MenuItem>
       {
         question.answers.map((answerObj, index) => (
 
-              <option key={index}value={answerObj.answer}>{answerObj.answer}</option>
+          <MenuItem value={answerObj.answer} disabled={this.state.played === true} key={index}value={answerObj.answer}>{answerObj.answer}</MenuItem>
 
           ))
       }
 
-      </select>
+      </Select>
 
-    </label>
+    </InputLabel>
 
+    {
+      this.state.played === true ? (
+        <input className="submit-btn" type="submit" value="Submit" />
+      ) : <input className="" type="submit" value="Submit" />
+    }
+
+
+    </form>
     </div>
     );
   }//close render

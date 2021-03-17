@@ -27,16 +27,16 @@ class Quiz extends React.Component {
 
 
   render() {
-    console.log("the rest id??!!",this.props.restaurantId)
-    console.log("this.prop.rests", this.props.rests)
-    console.log("the quiz state on the props!!!",this.props.quiz.questions);
+    // console.log("the rest id??!!",this.props.restaurantId)
+    // console.log("this.prop.rests", this.props.rests)
+    // console.log("the quiz state on the props!!!",this.props.quiz.questions);
     //after the component mounts, the quiz object gets called {id:, question:}
     //pass in the singleQuestion component here with the prop
     //the prop will be the entire question object
 
     return (
       <div>
-        <>QUIZ</>
+        <h2>QUIZ</h2>
           {
            this.props.quiz.questions && this.props.quiz.questions.length > 0 &&
 

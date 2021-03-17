@@ -63,3 +63,8 @@ form div {
   top: 15px !important;
   width: 150px !important;
 }
+
+.submit-btn {
+  background-color: gray;
+  border: solid gray 5px;
+}
