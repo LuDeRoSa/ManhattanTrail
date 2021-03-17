@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { updateQuiz } from '../store/quiz.js';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField'; //another form , used for blank boxes
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Menu } from '@material-ui/core';
-import { QuestionAnswerSharp } from '@material-ui/icons';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateQuiz } from "../store/quiz.js";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField"; //another form , used for blank boxes
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Menu } from "@material-ui/core";
 
 /// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
@@ -21,10 +20,14 @@ class SingleQuestion extends React.Component {
     this.state = {
       points: 0,
       played: false,
+      right_wrong: [],
+      question: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  //<SingleQuestion keys={} question={} points=0 played='false'
 
   handleChange(ev) {
     console.log(ev.target.value);
@@ -32,20 +35,25 @@ class SingleQuestion extends React.Component {
     // console.log("question Object", questionObj);
     let userResponse = ev.target.value;
     let answersArray = questionObj.answers;
+    let right_wrong = [];
 
     for (let i = 0; i < answersArray.length; i++) {
       let currentObj = answersArray[i];
-      console.log('curernt obj', currentObj);
+      console.log("curernt obj", currentObj);
       if (userResponse === currentObj.answer) {
         if (currentObj.isCorrect === true) {
           this.setState((state) => {
             return { points: state.points + 1 };
+            right_wrong.push(true);
           });
         } else {
-          console.log('this was the wrong answer');
+          console.log("this was the wrong answer");
         }
       }
     }
+    this.setState({
+      right_wrong: right_wrong,
+    });
   }
 
   /// send the changes to our database/backend
@@ -63,32 +71,32 @@ class SingleQuestion extends React.Component {
     // console.log("this is the props we are getting", this.props);
     const { question } = this.props;
     // console.log("this is the questioon obj destrcutured!!!", question);
-    if (!question.answers.length > 0) {
-      return <div></div>;
-    }
+    // console.log("this is right", this.state.right_wrong);
+
+    // console.log(question.question);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <InputLabel>
             {question.question}
-
             <Select
-              defaultValue={''}
-              value={question.question}
+              name={"question"}
+              value={this.state.question}
               onChange={this.handleChange}
             >
-              {/* <MenuItem
-                value={'Pick a choice!'}
+              <MenuItem
+                value="Pick a choice!"
                 disabled={this.state.played === true}
               >
                 Pick a choice!
-              </MenuItem> */}
+              </MenuItem>
               {question.answers.map((answerObj, index) => (
                 <MenuItem
+                  // name="pick a choice"
                   value={answerObj.answer}
                   disabled={this.state.played === true}
-                  key={answerObj.id}
-                  value={answerObj.answer}
+                  key={index}
+                  // value={answerObj.answer}
                 >
                   {answerObj.answer}
                 </MenuItem>

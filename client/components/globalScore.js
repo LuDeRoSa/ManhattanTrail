@@ -12,3 +12,7 @@ class GlobalScore extends Component {
 }
 
 export default connect((state) => state)(GlobalScore);
+
+//add miniscore inside quiz
+
+// i should be able grab from the state.points,
