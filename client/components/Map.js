@@ -140,7 +140,6 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
-    userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
   };

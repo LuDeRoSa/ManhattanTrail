@@ -81,7 +81,7 @@ class SingleQuestion extends React.Component {
 
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.auth.id,
+    state,
   };
 };
 
