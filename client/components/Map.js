@@ -7,6 +7,9 @@ import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
+import Quiz from './Quiz';
+import PhaserGame from './PhaserGame'
+
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -54,7 +57,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    console.log(this.props.game.gameStage);
+    console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -92,6 +95,7 @@ class _Map extends React.Component {
               .map((r) => (
                 r.restaurant_name
               ))}
+              
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -100,6 +104,7 @@ class _Map extends React.Component {
             center={this.state.center}
             options={this.createMapOptions}
           >
+          
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
@@ -130,6 +135,8 @@ class _Map extends React.Component {
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
+          {this.props.game.gameStage}
+          {/* {!this.props.rests ? 0 : this.props.rests[this.props.game.gameStage].game_type} */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>

@@ -30,29 +30,23 @@ const _setGameTypes = (gameType) => ({ type: SET_GAME_TYPES, gameType }); //TBD
 
 export const setGameTypes = (pathId) => async (dispatch) => {
   const token = getToken();
-
-  // for (let i = 1; i <= NUM_RESTS; i++) {
-  //    let game_type = generateGameType();
-  //     await axios.put(
-  //     `/api/path/${pathId}/${i}`,
-  //     {game_type},
-  //     {headers: { authorization: token } }
-  //     )
-  // }
+  let promises = [];
 
   for (let i = 1; i <= NUM_RESTS; i++) {
      let game_type = generateGameType();
      console.log('game-type',game_type)
-       await axios.put(
+       await promises.push(axios.put(
         `/api/path/${pathId}/${i}`,
         {game_type},
         {headers: { authorization: token } }
-        )
+        ))
   }
+  Promise.all(promises).then(function (results) {
+      results.forEach(result => {
+          dispatch(_setGameTypes(result))
+      })
+  })
 
-            // dispatch(_setGameTypes(results));
-
-  //  return dispatch(_setGameTypes(rest));
 };
 
 export const setRests = (pathId) => async (dispatch) => {

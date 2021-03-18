@@ -20,7 +20,6 @@ const styles = {
 
 export const Home = (props) => {
   const { username } = props;
-
   return (
     <div>
 
@@ -40,7 +39,7 @@ export const Home = (props) => {
             {/* <PhaserGame /> */}
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Quiz />
+            {/* <Quiz /> */}
           </Grid>
         </Grid>
       </Container>
