@@ -23,6 +23,7 @@ class SingleQuestion extends React.Component {
       right_wrong: [],
       question: '',
       clickCount: 0,
+      value: ``,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,10 +33,13 @@ class SingleQuestion extends React.Component {
 
   handleChange(ev) {
     this.setState({
+      value: ev.target.value,
+    });
+    this.setState({
       clickCount: (this.state.clickCount += 1),
     });
 
-    console.log(ev.target.value);
+    // console.log(ev.target.value);
     let questionObj = this.props.question;
     // console.log("question Object", questionObj);
     let userResponse = ev.target.value;
@@ -44,7 +48,7 @@ class SingleQuestion extends React.Component {
 
     for (let i = 0; i < answersArray.length; i++) {
       let currentObj = answersArray[i];
-      console.log('curernt obj', currentObj);
+      // console.log('curernt obj', currentObj);
       if (userResponse === currentObj.answer) {
         if (currentObj.isCorrect === true) {
           // if the user, selected more than once, must stop incrementing
@@ -55,7 +59,7 @@ class SingleQuestion extends React.Component {
             });
           }
         } else {
-          console.log('this was the wrong answer');
+          // console.log('this was the wrong answer');
         }
       }
     }
@@ -75,23 +79,14 @@ class SingleQuestion extends React.Component {
   }
 
   render() {
-    // console.log("THE STATE", this.state);
-    // console.log("this is the props we are getting", this.props);
     const { question } = this.props;
-    // console.log("this is the questioon obj destrcutured!!!", question);
-    // console.log("this is right", this.state.right_wrong);
 
-    // console.log(question.question);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <InputLabel>
             {question.question}
-            <Select
-              name={'question'}
-              value={this.state.question}
-              onChange={this.handleChange}
-            >
+            <Select value={this.state.value} onChange={this.handleChange}>
               <MenuItem
                 value="Pick a choice!"
                 disabled={this.state.played === true}

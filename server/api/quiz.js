@@ -20,7 +20,6 @@ router.get('/:id', async (req, res, next) => {
     });
     //magic - eager loading of every nested model
     res.send(quiz);
-    console.log(quiz);
   } catch (err) {
     next(err);
   }
@@ -44,12 +43,11 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-    console.log('the req.body! ', req.body);
+    // console.log('the req.body! ', req.body);
     const points = req.body.points;
     //need to update the scores model!
 
     const user = await User.findByToken(req.headers.authorization);
-    console.log(user);
     let game = await Game.findOne({
       where: {
         userId: user.id,
