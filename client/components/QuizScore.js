@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class GlobalScore extends Component {
+class QuizScore extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -11,8 +11,4 @@ class GlobalScore extends Component {
   }
 }
 
-export default connect((state) => state)(GlobalScore);
-
-//add miniscore inside quiz
-
-// i should be able grab from the state.points,
+export default connect((state) => state)(QuizScore);

@@ -6,6 +6,7 @@ import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
+import InfoWindow from './InfoWindow';
 
 class _Map extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class _Map extends React.Component {
     this.state = {
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
+      show: false,
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
@@ -39,7 +41,7 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    console.log(this.props.rests);
+    // console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -54,7 +56,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    console.log(this.props.game.gameStage);
+    // console.log(this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -80,6 +82,10 @@ class _Map extends React.Component {
     };
   }
 
+  _onChildClick() {
+    this.setState({ show: !this.state.show });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -91,10 +97,12 @@ class _Map extends React.Component {
             zoom={13}
             center={this.state.center}
             options={this.createMapOptions}
+            onChildClick={() => this._onChildClick()}
           >
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
+                // name={this.props.rests[0].restaurant_name}
                 lat={
                   this.props.rests[this.props.game.gameStage - 1]
                     .restaurant_latitude
@@ -104,14 +112,15 @@ class _Map extends React.Component {
                     .restaurant_longitude
                 }
                 color={'red'}
+                show={this.state.show}
               />
             )}
-
             {this.props.rests
               .filter((r, idx) => idx < this.props.game.gameStage - 1)
               .map((r) => (
                 <Marker
                   key={r.id}
+                  name={r.restaurant_name}
                   lat={r.restaurant_latitude}
                   lng={r.restaurant_longitude}
                   color={'black'}
@@ -131,7 +140,6 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
-    userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
   };

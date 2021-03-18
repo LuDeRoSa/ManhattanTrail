@@ -81,7 +81,6 @@ class GameOver extends React.Component {
  */
 const mapState = (state) => {
   return {
-    userId: state.auth.id,
     username: state.auth.username,
     game: state.game,
   };
