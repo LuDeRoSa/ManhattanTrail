@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { updateQuiz } from "../store/quiz.js";
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField"; //another form , used for blank boxes
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Menu } from "@material-ui/core";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateQuiz } from '../store/quiz.js';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField'; //another form , used for blank boxes
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Menu } from '@material-ui/core';
 
 /// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
@@ -21,7 +21,7 @@ class SingleQuestion extends React.Component {
       points: 0,
       played: false,
       right_wrong: [],
-      question: "",
+      question: '',
       clickCount: 0,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -44,7 +44,7 @@ class SingleQuestion extends React.Component {
 
     for (let i = 0; i < answersArray.length; i++) {
       let currentObj = answersArray[i];
-      console.log("curernt obj", currentObj);
+      console.log('curernt obj', currentObj);
       if (userResponse === currentObj.answer) {
         if (currentObj.isCorrect === true) {
           // if the user, selected more than once, must stop incrementing
@@ -55,7 +55,7 @@ class SingleQuestion extends React.Component {
             });
           }
         } else {
-          console.log("this was the wrong answer");
+          console.log('this was the wrong answer');
         }
       }
     }
@@ -88,7 +88,7 @@ class SingleQuestion extends React.Component {
           <InputLabel>
             {question.question}
             <Select
-              name={"question"}
+              name={'question'}
               value={this.state.question}
               onChange={this.handleChange}
             >

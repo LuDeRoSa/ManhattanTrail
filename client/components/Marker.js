@@ -1,5 +1,5 @@
-import React from "react";
-import InfoWindow from "./InfoWindow";
+import React from 'react';
+import InfoWindow from './InfoWindow';
 
 const Marker = (props) => {
   const { color, name } = props;
