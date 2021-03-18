@@ -86,20 +86,19 @@ class SingleQuestion extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <InputLabel>
             {question.question}
-            <Select value={this.state.value} onChange={this.handleChange}>
-              <MenuItem
-                value="Pick a choice!"
-                disabled={this.state.played === true}
-              >
+            <Select
+              value={this.state.value}
+              onChange={this.handleChange}
+              disabled={this.state.played}
+            >
+              <MenuItem value="Pick a choice!" disabled={this.state.played}>
                 Pick a choice!
               </MenuItem>
               {question.answers.map((answerObj, index) => (
                 <MenuItem
                   name={answerObj.answer}
                   value={answerObj.answer}
-                  disabled={this.state.played === true}
                   key={index}
-                  // value={answerObj.answer}
                 >
                   {answerObj.answer}
                 </MenuItem>
@@ -107,11 +106,7 @@ class SingleQuestion extends React.Component {
             </Select>
           </InputLabel>
 
-          {this.state.played === true ? (
-            <input className="submit-btn" type="submit" value="Submit" />
-          ) : (
-            <input className="" type="submit" value="Submit" />
-          )}
+          <input type="submit" value="Submit" disabled={this.state.played} />
         </form>
       </div>
     );
