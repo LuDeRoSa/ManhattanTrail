@@ -45,7 +45,7 @@ form div {
 }
 
 .correct {
-  border: solid black 5px;
+  border: solid green 5px;
 }
 
 .wrong {

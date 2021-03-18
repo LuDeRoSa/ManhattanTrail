@@ -1,88 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { updateQuiz } from '../store/quiz.js';
 import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField'; //another form , used for blank boxes
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Menu } from '@material-ui/core';
 
-/// so basically we had everything before in terms of the select and the dropdown
 //handle submit inside the single question
 //that will just send a score of 1 or 0 to the question
 // handle change for whatever the user clicks
-// conditional logic - once a user has submitted, they can't change their mind. - gray out the question box so they can't change it - CLASS NAME CHANGING STUFF HERE
-// OR CONDITIONALLY RENDER THINGS.
-//
+// conditional logic - once a user has submitted, they can't change their mind. - disable the components
+
 class SingleQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       points: 0,
       played: false,
-      right_wrong: [],
-      question: '',
-      clickCount: 0,
       value: ``,
+      status: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  //<SingleQuestion keys={} question={} points=0 played='false'
-
   handleChange(ev) {
     this.setState({
       value: ev.target.value,
-    });
-    this.setState({
-      clickCount: (this.state.clickCount += 1),
-    });
-
-    // console.log(ev.target.value);
-    let questionObj = this.props.question;
-    // console.log("question Object", questionObj);
-    let userResponse = ev.target.value;
-    let answersArray = questionObj.answers;
-    let right_wrong = [];
-
-    for (let i = 0; i < answersArray.length; i++) {
-      let currentObj = answersArray[i];
-      // console.log('curernt obj', currentObj);
-      if (userResponse === currentObj.answer) {
-        if (currentObj.isCorrect === true) {
-          // if the user, selected more than once, must stop incrementing
-          if (this.state.clickCount === 1) {
-            this.setState((state) => {
-              return { points: state.points + 1 };
-              right_wrong.push(true);
-            });
-          }
-        } else {
-          // console.log('this was the wrong answer');
-        }
-      }
-    }
-    this.setState({
-      right_wrong: right_wrong,
     });
   }
 
   /// send the changes to our database/backend
   handleSubmit(ev) {
     ev.preventDefault();
-    this.setState((state) => {
-      return { played: true };
+    let userResponse = this.state.value;
+    const correctAnswer = this.props.question.answers.find(
+      (answer) => answer.isCorrect
+    ).answer;
+    const points = userResponse === correctAnswer ? 1 : 0;
+    this.setState({
+      played: true,
+      points,
+      status: points > 0 ? 'correct' : 'wrong',
     });
-    this.props.updateQuiz(this.state.points);
-    // console.log("the following points", this.state.points);
+    this.props.updateQuiz(points);
   }
 
   render() {
     const { question } = this.props;
-
     return (
-      <div>
+      <div className={this.state.status}>
         <form onSubmit={this.handleSubmit}>
           <InputLabel>
             {question.question}
