@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz, updateQuiz } from '../store/quiz';
-// import Button from "@material-ui/core/Button";
-import globalScope from './GlobalScore';
-import GlobalScore from './GlobalScore';
 import SingleQuestion from './SingleQuestion';
 
 class Quiz extends React.Component {
