@@ -87,14 +87,15 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-        {this.props.rests
+        {/* {this.props.rests
               .map((r) => (
                 r.game_type
               ))}
               {this.props.rests
-              .map((r) => (
-                r.restaurant_name
+              .filter((r, idx) => (
+                idx === (this.props.game.gameStage - 1)
               ))}
+              {this.props.rests ? this.props.rests[this.props.game.gameStage - 1].game_type : 'hihi'} */}
               
           <GoogleMapReact
             bootstrapURLKeys={{
@@ -136,7 +137,8 @@ class _Map extends React.Component {
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
           {this.props.game.gameStage}
-          {/* {!this.props.rests ? 0 : this.props.rests[this.props.game.gameStage].game_type} */}
+          
+          {/* this.props.rests[this.props.game.gameStage].game_type */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
