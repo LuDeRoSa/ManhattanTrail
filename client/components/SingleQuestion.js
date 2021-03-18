@@ -22,6 +22,7 @@ class SingleQuestion extends React.Component {
       played: false,
       right_wrong: [],
       question: "",
+      clickCount: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +31,10 @@ class SingleQuestion extends React.Component {
   //<SingleQuestion keys={} question={} points=0 played='false'
 
   handleChange(ev) {
+    this.setState({
+      clickCount: (this.state.clickCount += 1),
+    });
+
     console.log(ev.target.value);
     let questionObj = this.props.question;
     // console.log("question Object", questionObj);
@@ -42,10 +47,13 @@ class SingleQuestion extends React.Component {
       console.log("curernt obj", currentObj);
       if (userResponse === currentObj.answer) {
         if (currentObj.isCorrect === true) {
-          this.setState((state) => {
-            return { points: state.points + 1 };
-            right_wrong.push(true);
-          });
+          // if the user, selected more than once, must stop incrementing
+          if (this.state.clickCount === 1) {
+            this.setState((state) => {
+              return { points: state.points + 1 };
+              right_wrong.push(true);
+            });
+          }
         } else {
           console.log("this was the wrong answer");
         }
@@ -92,7 +100,7 @@ class SingleQuestion extends React.Component {
               </MenuItem>
               {question.answers.map((answerObj, index) => (
                 <MenuItem
-                  // name="pick a choice"
+                  name={answerObj.answer}
                   value={answerObj.answer}
                   disabled={this.state.played === true}
                   key={index}
