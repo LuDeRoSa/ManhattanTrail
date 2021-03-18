@@ -88,6 +88,10 @@ class _Map extends React.Component {
               .map((r) => (
                 r.game_type
               ))}
+              {this.props.rests
+              .map((r) => (
+                r.restaurant_name
+              ))}
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',

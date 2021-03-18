@@ -27,40 +27,37 @@ const _setGameTypes = (gameType) => ({ type: SET_GAME_TYPES, gameType }); //TBD
 /**
  * THUNK CREATORS
  */
-export const setRests = (pathId) => async (dispatch) => {
-  const rests = (await axios.get(`/api/path/${pathId}/restaurants`)).data;
-  return dispatch(_setRests(rests));
-};
 
 export const setGameTypes = (pathId) => async (dispatch) => {
   const token = getToken();
 
+  // for (let i = 1; i <= NUM_RESTS; i++) {
+  //    let game_type = generateGameType();
+  //     await axios.put(
+  //     `/api/path/${pathId}/${i}`,
+  //     {game_type},
+  //     {headers: { authorization: token } }
+  //     )
+  // }
 
-  let game_type = generateGameType();
+  for (let i = 1; i <= NUM_RESTS; i++) {
+     let game_type = generateGameType();
+     console.log('game-type',game_type)
+       await axios.put(
+        `/api/path/${pathId}/${i}`,
+        {game_type},
+        {headers: { authorization: token } }
+        )
+  }
 
-  let rest = (
-    await axios.put(
-      `/api/path/1/1`,
-      {game_type},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-    )
-  ).data;
-  //NEXT TO-DO: do for-loop for puts for length of game
-  //UPDATE put route to include variables: `/api/path/1/1`,
+            // dispatch(_setGameTypes(results));
 
-  console.log('game-type',rest);
+  //  return dispatch(_setGameTypes(rest));
+};
 
-  return dispatch(_setGameTypes(rest));
-  
-  // for (let i = 1; i < NUM_RESTS+1; i++) {
-
-    
-   
-  // 
+export const setRests = (pathId) => async (dispatch) => {
+  const rests = (await axios.get(`/api/path/${pathId}/restaurants`)).data;
+  return dispatch(_setRests(rests));
 };
 
 export const nextStage = () => async (dispatch) => {

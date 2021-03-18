@@ -50,7 +50,6 @@ router.put('/:id/:stageId', async (req, res, next) => {
       }
     });
     path.game_type = req.body.game_type;
-    console.log(path)
     await path.save();
     res.sendStatus(201);
   } catch (err) {
