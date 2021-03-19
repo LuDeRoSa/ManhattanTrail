@@ -50,14 +50,33 @@ router.put('/next', async (req, res, next) => {
 router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    const game = await Game.findAll({
+    //TODO: fetch user name in place of userId
+    const pastgames = await Game.findAll({
       where: {
         userId: user.id,
         status: 'finished',
       },
-      include: Scores,
+      include: [Scores, User],
     });
-    res.send(game);
+    res.send(pastgames);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//this is an opportunity to use socket.io for live updates
+router.get('/leadership', async (req, res, next) => {
+  try {
+    //TODO: fetch user name in place of userId
+    const leadership = await Game.findAll({
+      where: {
+        status: 'finished',
+      },
+      include: [Scores, User],
+      order: [[{ model: Scores }, 'total_score', 'DESC']],
+      limit: 10,
+    });
+    res.send(leadership);
   } catch (err) {
     next(err);
   }

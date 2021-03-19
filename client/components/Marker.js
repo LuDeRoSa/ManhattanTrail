@@ -1,4 +1,5 @@
 import React from 'react';
+import InfoWindow from './InfoWindow';
 
 const Marker = (props) => {
   const { color, name } = props;
@@ -10,7 +11,15 @@ const Marker = (props) => {
         // cursor: 'pointer'
       }}
       title={name}
-    />
+    >
+      <InfoWindow
+        show={props.show}
+        lat={props.lat}
+        lng={props.lng}
+        // id={props.id}
+        name={props.name}
+      />
+    </div>
   );
 };
 
