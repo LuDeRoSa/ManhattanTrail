@@ -22,7 +22,6 @@ export const Home = (props) => {
   const { username } = props;
   return (
     <div>
-
       <center>
         <h3>Welcome , {username}</h3>
       </center>
@@ -40,10 +39,17 @@ export const Home = (props) => {
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             {/* <Quiz /> */}
+
+            {/* The following is to be tested. It's a homemade switch statement for rendering based on the game_type */}
+            {/* {
+              {
+                quiz: <Quiz />,
+                cake: <PhaserGame />,
+              }[this.props.rests.game_type]
+            } */}
           </Grid>
         </Grid>
       </Container>
-
     </div>
   );
 };
