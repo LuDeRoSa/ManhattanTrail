@@ -38,10 +38,10 @@ module.exports = app;
 //   })
 // );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-app.use('/facebook', passport.authenticate('facebook'));
+// app.use('/facebook', passport.authenticate('facebook'));
 
 // logging middleware
 app.use(morgan('dev'));
