@@ -8,6 +8,8 @@ const Scores = require('./models/scores');
 const User_Responses = require('./models/user_responses');
 const User = require('./models/User');
 const Game = require('./models/Game');
+const Question = require('./models/Question');
+const Answer = require('./models/Answer');
 
 //associations could go here!
 Path.belongsTo(Restaurant);
@@ -21,6 +23,15 @@ Game.belongsTo(User);
 
 Game.hasOne(Scores);
 Scores.belongsTo(Game);
+
+Question.hasMany(Answer);
+Answer.belongsTo(Question);
+
+Quiz.hasMany(Question);
+Question.belongsTo(Quiz);
+
+Restaurant.hasOne(Quiz);
+Quiz.belongsTo(Restaurant);
 
 Path.hasMany(Game);
 
@@ -80,115 +91,294 @@ const syncAndSeed = async () => {
     Path.create({ path_id: 2, restaurantId: 5, stage: 2 }),
   ]);
 
-  //quiz questions:
-  const questions = await Promise.all([
+  const quizzes = await Promise.all([
     Quiz.create({
-      question_id: 1,
-      question: 'What is the most expensive spice in the world by weight?',
-      choice_a: 'Cinnamon',
-      choice_b: 'Vanilla',
-      choice_c: 'Cardamom',
-      choice_correct_answer: 'Saffron',
-    }),
-    Quiz.create({
-      question_id: 2,
-      question: "What Mexican food has a name meaning 'Little Donkey'?",
-      choice_a: 'Enchiladas',
-      choice_b: 'Tamale',
-      choice_c: 'Tostada',
-      choice_correct_answer: 'Burrito',
-    }),
-    Quiz.create({
-      question_id: 3,
-      question: 'What is the most stolen food in the world?',
-      choice_a: 'Chocolate',
-      choice_b: 'Truffle',
-      choice_c: 'Pasta',
-      choice_correct_answer: 'Cheese',
-    }),
-    Quiz.create({
-      question_id: 4,
-      question: "What vitamin is the only one that you won't find in an egg?",
-      choice_a: 'Vitamin A',
-      choice_b: 'Vitamin K',
-      choice_c: 'Vitamin V12',
-      choice_correct_answer: 'Vitamin C',
-    }),
-    Quiz.create({
-      question_id: 5,
-      question: 'What is the only edible food that never goes bad?',
-      choice_a: 'Cheese',
-      choice_b: 'Chocolate',
-      choice_c: 'Beef Jerky',
-      choice_correct_answer: 'Honey',
-    }),
-    Quiz.create({
-      question_id: 6,
-      question: 'What is the only edible food that never goes bad?',
-      choice_a: 'Cheese',
-      choice_b: 'Chocolate',
-      choice_c: 'Beef Jerky',
-      choice_correct_answer: 'Honey',
-    }),
-    Quiz.create({
-      question_id: 7,
-      question: 'What fruit inspired the paisley fabric pattern?',
-      choice_a: 'Dragonfruit',
-      choice_b: 'Papaya',
-      choice_c: 'Pineapple',
-      choice_correct_answer: 'Mango',
-    }),
-    Quiz.create({
-      question_id: 8,
-      question: 'What fruit was named after pine cones?',
-      choice_a: 'Cucumber',
-      choice_b: 'Dragonfruit',
-      choice_c: 'Durian',
-      choice_correct_answer: 'Pineapple',
-    }),
-    Quiz.create({
-      question_id: 9,
-      question: 'What country wastes the most food?',
-      choice_a: 'China',
-      choice_b: 'Russia',
-      choice_c: 'India',
-      choice_correct_answer: 'United States',
-    }),
-    Quiz.create({
-      question_id: 10,
-      question:
-        "What's the healthiest fast food chain in the US? (according to Health Magazine)",
-      choice_a: 'Subway',
-      choice_b: 'Chipotle',
-      choice_c: 'Taco Bell',
-      choice_correct_answer: 'Panera Bread',
-    }),
-    Quiz.create({
-      question_id: 11,
-      question:
-        'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
-      choice_a: 'Saffron',
-      choice_b: 'Turmeric',
-      choice_c: 'Nutmeg',
-      choice_correct_answer: 'Paprika',
+      restaurantId: 1,
     }),
   ]);
 
-  // const [cody, murphy] = users;
+  const questions = await Promise.all([
+    Question.create(
+      {
+        question: 'What is the most expensive spice in the world by weight?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Saffron',
+            isCorrect: true,
+          },
+          {
+            answer: 'Vanilla',
+            isCorrect: false,
+          },
+          {
+            answer: 'Cinnamon',
+            isCorrect: false,
+          },
+          {
+            answer: 'Cardamom',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: "What Mexican food has a name meaning 'Little Donkey'?",
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Burrito',
+            isCorrect: true,
+          },
+          {
+            answer: 'Enchiladas',
+            isCorrect: false,
+          },
+          {
+            answer: 'Tostada',
+            isCorrect: false,
+          },
+          {
+            answer: 'Tamale',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'What is the most stolen food in the world?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Cheese',
+            isCorrect: true,
+          },
+          {
+            answer: 'Crackers',
+            isCorrect: false,
+          },
+          {
+            answer: 'Tomato',
+            isCorrect: false,
+          },
+          {
+            answer: 'Pasta',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: "What vitamin is the only one that you won't find in an egg?",
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Vitamin C',
+            isCorrect: true,
+          },
+          {
+            answer: 'Vitamin A',
+            isCorrect: false,
+          },
+          {
+            answer: 'Vitamin V12',
+            isCorrect: false,
+          },
+          {
+            answer: 'Vitamin K',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'What is the only edible food that never goes bad?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Honey',
+            isCorrect: true,
+          },
+          {
+            answer: 'Pork',
+            isCorrect: false,
+          },
+          {
+            answer: 'Beef',
+            isCorrect: false,
+          },
+          {
+            answer: 'Beef Jerky',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
 
-  // return {
-  //   users: {
-  //     cody,
-  //     murphy,
-  //   },
-  // };
+    Question.create(
+      {
+        question: 'What fruit inspired the paisley fabric pattern?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Mango',
+            isCorrect: true,
+          },
+          {
+            answer: 'Apple',
+            isCorrect: false,
+          },
+          {
+            answer: 'Banana',
+            isCorrect: false,
+          },
+          {
+            answer: 'Orange',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'What fruit was named after pine cones?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Pineapple',
+            isCorrect: true,
+          },
+          {
+            answer: 'Watermelon',
+            isCorrect: false,
+          },
+          {
+            answer: 'Pines',
+            isCorrect: false,
+          },
+          {
+            answer: 'Durian',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'What country wastes the most food?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'United States',
+            isCorrect: true,
+          },
+          {
+            answer: 'Italy',
+            isCorrect: false,
+          },
+          {
+            answer: 'Mexico',
+            isCorrect: false,
+          },
+          {
+            answer: 'Japan',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question:
+          "What's the healthiest fast food chain in the US? (according to Health Magazine)",
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Panera Bread',
+            isCorrect: true,
+          },
+          {
+            answer: 'Taco Bell',
+            isCorrect: false,
+          },
+          {
+            answer: 'Chipotle',
+            isCorrect: false,
+          },
+          {
+            answer: 'Subway',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question:
+          'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
+        quizId: 1,
+        answers: [
+          {
+            answer: 'Paprika',
+            isCorrect: true,
+          },
+          {
+            answer: 'Nutmeg',
+            isCorrect: false,
+          },
+          {
+            answer: 'Turmeric',
+            isCorrect: false,
+          },
+          {
+            answer: 'Saffron',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+  ]);
 };
-
 /**
  * hooks
  */
 
 // automatically calculates user score after each user_response update
+
 User_Responses.afterBulkUpdate((user_responses) => {
   user_responses.map(async (response) => {
     const question_one_points = response.question_one_points;
@@ -220,5 +410,7 @@ module.exports = {
     Scores,
     User_Responses,
     Game,
+    Question,
+    Answer,
   },
 };

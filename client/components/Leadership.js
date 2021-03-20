@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPastGames } from '../store/pastgames';
+import { fetchLeadership } from '../store/pastgames';
+
 import GamesTable from './GamesTable';
 
-class PastGames extends React.Component {
+class Leadership extends React.Component {
   componentDidMount() {
-    this.props.fetchPastGames();
+    this.props.fetchLeadership();
   }
   render() {
     const styles = {
@@ -20,10 +21,10 @@ class PastGames extends React.Component {
         width: 130,
       },
     };
-    let { pastgames } = this.props;
+    let { leadership } = this.props;
     return (
       <React.Fragment>
-        <GamesTable data={pastgames} />
+        <GamesTable data={leadership} />
       </React.Fragment>
     );
   }
@@ -31,12 +32,12 @@ class PastGames extends React.Component {
 
 const mapState = (state) => {
   return {
-    pastgames: state.pastgames.pastgames,
+    leadership: state.pastgames.leadership,
   };
 };
 
 const mapDispatch = {
-  fetchPastGames,
+  fetchLeadership,
 };
 
-export default connect(mapState, mapDispatch)(PastGames);
+export default connect(mapState, mapDispatch)(Leadership);

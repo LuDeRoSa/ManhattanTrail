@@ -6,6 +6,7 @@ import { setRests, setGameTypes } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
+import InfoWindow from './InfoWindow';
 
 import Quiz from './Quiz';
 import PhaserGame from './PhaserGame'
@@ -16,6 +17,7 @@ class _Map extends React.Component {
     this.state = {
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
+      show: false,
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
@@ -42,7 +44,7 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    console.log(this.props.rests);
+    //console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -57,7 +59,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    console.log('GAMESTAGE',this.props.game.gameStage);
+    //console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -87,16 +89,12 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-        {this.props.rests
+        {/* {this.props.rests
               .map((r) => (
                 r.game_type
-              ))}
-              {/* {this.props.rests[1].game_type} */}
-              {/* {this.props.rests
-              .filter((r, idx) => (
-                idx === (this.props.game.gameStage - 1)
               ))} */}
-              {this.props.rests.length > 0 ? this.props.rests[this.props.game.gameStage - 1].game_type : 'hihi'}
+              
+              
               
           <GoogleMapReact
             bootstrapURLKeys={{
