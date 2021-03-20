@@ -43,11 +43,6 @@ export const setGameTypes = (pathId) => async (dispatch) => {
       )
     );
   }
-  Promise.all(promises).then(function (results) {
-    results.forEach((result) => {
-      dispatch(_setGameTypes(result));
-    });
-  });
 };
 
 export const setRests = (pathId) => async (dispatch) => {
