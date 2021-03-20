@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Map from './Map';
 
-import { setRests, setGameTypes } from '../store/rest';
+import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
@@ -24,7 +24,6 @@ const styles = {
 
 export const Home = (props) => {
   const { username } = props;
-  console.log(props.rests);
   return (
     <div>
       <center>
@@ -74,7 +73,6 @@ const mapState = (state) => {
 };
 const mapDispatch = {
   setRests,
-  setGameTypes,
   nextStage,
   setGame,
 };
