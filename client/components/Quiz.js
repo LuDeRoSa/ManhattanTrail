@@ -22,11 +22,13 @@ class Quiz extends React.Component {
     return (
       <div>
         <h2>QUIZ</h2>
-        {this.props.quiz.questions &&
-          this.props.quiz.questions.length > 0 &&
-          this.props.quiz.questions.map((question) => (
-            <SingleQuestion key={question.id} question={question} />
-          ))}
+        <div id='quiz'>
+          {this.props.quiz.questions &&
+            this.props.quiz.questions.length > 0 &&
+            this.props.quiz.questions.map((question) => (
+              <SingleQuestion key={question.id} question={question} />
+            ))}
+        </div>
       </div>
     );
   }

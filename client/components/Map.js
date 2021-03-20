@@ -15,6 +15,7 @@ class _Map extends React.Component {
       restaurants: [],
       center: { lat: 40.7127281, lng: -74.0060152 },
       show: false,
+      startingPoint: { lat: 40.7127281, lng: -74.0060152 },
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
@@ -32,7 +33,6 @@ class _Map extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
-      // console.log('component did update is triggering');
       if (this.props.rests.length > 0) {
         this.setCenter();
       }
@@ -41,7 +41,6 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    // console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -56,7 +55,6 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    // console.log(this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -82,7 +80,7 @@ class _Map extends React.Component {
     };
   }
 
-  _onChildClick() {
+  onChildClick() {
     this.setState({ show: !this.state.show });
   }
 
@@ -94,44 +92,44 @@ class _Map extends React.Component {
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
             }}
-            zoom={13}
+            zoom={12}
             center={this.state.center}
             options={this.createMapOptions}
-            onChildClick={() => this._onChildClick()}
+            onChildClick={() => this.onChildClick()}
           >
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
-                // name={this.props.rests[0].restaurant_name}
-                lat={
-                  this.props.rests[this.props.game.gameStage - 1]
-                    .restaurant_latitude
-                }
-                lng={
-                  this.props.rests[this.props.game.gameStage - 1]
-                    .restaurant_longitude
-                }
-                color={'red'}
+                lat={this.state.startingPoint.lat}
+                lng={this.state.startingPoint.lng}
+                color={this.props.game.gameStage === 1 ? 'red' : 'black'}
                 show={this.state.show}
+                name='starting point'
               />
             )}
-            {this.props.rests
-              .filter((r, idx) => idx < this.props.game.gameStage - 1)
-              .map((r) => (
-                <Marker
-                  key={r.id}
-                  name={r.restaurant_name}
-                  lat={r.restaurant_latitude}
-                  lng={r.restaurant_longitude}
-                  color={'black'}
-                />
-              ))}
+
+            {this.props.rests.length > 0 &&
+              this.props.rests
+                .filter((r, idx) => idx < this.props.game.gameStage - 1)
+                .map((r, idx) => (
+                  <Marker
+                    key={r.id}
+                    name={r.restaurant_name}
+                    lat={r.restaurant_latitude}
+                    lng={r.restaurant_longitude}
+                    color={
+                      this.props.game.gameStage - 2 === idx ? 'red' : 'black'
+                    }
+                    show={this.state.show}
+                  />
+                ))}
           </GoogleMapReact>
         </div>
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
-          {this.props.game.status === 'finished' && 'gameover'}
+          {this.props.game.status === 'finished' &&
+            'g  https://us04web.zoom.us/j/76689801829?pwd=SDV3Nm1RZTZsWnZiVmErV3pVUHhDdz09ameover'}
         </div>
       </React.Fragment>
     );

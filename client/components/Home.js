@@ -23,7 +23,6 @@ export const Home = (props) => {
 
   return (
     <div>
-
       <center>
         <h3>Welcome , {username}</h3>
       </center>
@@ -31,20 +30,19 @@ export const Home = (props) => {
         <Grid
           container
           spacing={0}
-          direction="row"
-          alignItems="center"
-          justify="center"
+          direction='row'
+          alignItems='center'
+          justify='center'
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
-            <PhaserGame />
+            {/* <PhaserGame /> */}
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Quiz />
           </Grid>
         </Grid>
       </Container>
-
     </div>
   );
 };

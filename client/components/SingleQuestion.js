@@ -10,6 +10,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 // handle change for whatever the user clicks
 // conditional logic - once a user has submitted, they can't change their mind. - disable the components
 
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import { makeStyles, StylesProvider } from '@material-ui/core/styles';
+
 class SingleQuestion extends React.Component {
   constructor(props) {
     super(props);
@@ -49,15 +56,15 @@ class SingleQuestion extends React.Component {
     const { question } = this.props;
     return (
       <div className={this.state.status}>
-        <form onSubmit={this.handleSubmit}>
-          <InputLabel>
+        {/* <form id='quiz-form' onSubmit={this.handleSubmit}>
+          <InputLabel id='question'>
             {question.question}
             <Select
               value={this.state.value}
               onChange={this.handleChange}
               disabled={this.state.played}
             >
-              <MenuItem value="Pick a choice!" disabled={this.state.played}>
+              <MenuItem value='Pick a choice!' disabled={this.state.played}>
                 Pick a choice!
               </MenuItem>
               {question.answers.map((answerObj, index) => (
@@ -72,7 +79,44 @@ class SingleQuestion extends React.Component {
             </Select>
           </InputLabel>
 
-          <input type="submit" value="Submit" disabled={this.state.played} />
+          <input type='submit' value='Submit' disabled={this.state.played} />
+        </form> */}
+        <form id='quiz-form' onSubmit={this.handleSubmit}>
+          <FormControl
+            id='form-control'
+            component='fieldset'
+            // className={useStyles.formControl}
+          >
+            <FormLabel id='question' component='legend'>
+              {question.question}
+            </FormLabel>
+            <RadioGroup
+              value={this.state.value}
+              onChange={this.handleChange}
+              disabled={this.state.played}
+              // value='radioA'
+              inputprops={{ 'aria-label': 'Radio A' }}
+            >
+              {/* <FormControlLabel
+                value='Pick a choice!'
+                control={<Radio />}
+                disabled={this.state.played}
+              >
+                Pick a choice!
+              </FormControlLabel> */}
+              {question.answers.map((answerObj, index) => (
+                <FormControlLabel
+                  control={<Radio />}
+                  // name={answerObj.answer}
+                  value={answerObj.answer}
+                  key={index}
+                  label={answerObj.answer}
+                  id='form-label'
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+          <input type='submit' value='Submit' disabled={this.state.played} />
         </form>
       </div>
     );
