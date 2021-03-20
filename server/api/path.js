@@ -26,13 +26,13 @@ router.get('/:id/restaurants', async (req, res, next) => {
   }
 });
 
-router.get("/:id/:stageId", async (req, res, next) => {
+router.get('/:id/:stageId', async (req, res, next) => {
   try {
     const path = await Path.findOne({
       where: {
         path_id: req.params.id,
-        stage: req.params.stageId
-      }
+        stage: req.params.stageId,
+      },
     });
     res.send(path);
   } catch (err) {
@@ -40,23 +40,19 @@ router.get("/:id/:stageId", async (req, res, next) => {
   }
 });
 
-//updating game type per stage in the path
-router.put('/:id/:stageId', async (req, res, next) => {
-  try {
-    const path = await Path.findOne({
-      where: {
-        path_id: req.params.id,
-        stage: req.params.stageId
-      }
-    });
-    path.game_type = req.body.game_type;
-    await path.save();
-    res.sendStatus(201);
-  } catch (err) {
-    next(err);
-  }
-});
-
-
-
-
+// //updating game type per stage in the path
+// router.put('/:id/:stageId', async (req, res, next) => {
+//   try {
+//     const path = await Path.findOne({
+//       where: {
+//         path_id: req.params.id,
+//         stage: req.params.stageId,
+//       },
+//     });
+//     path.game_type = req.body.game_type;
+//     await path.save();
+//     res.sendStatus(201);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
