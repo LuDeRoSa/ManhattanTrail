@@ -28,6 +28,7 @@ export const Home = (props) => {
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
       : '';
+  //TODO: move game_type into store
   return (
     <div>
       <center>
