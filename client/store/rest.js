@@ -80,8 +80,6 @@ export default function (state = initState, action) {
   switch (action.type) {
     case SET_RESTS:
       return { ...state, rests: action.rests };
-    // case SET_GAME_TYPES:
-    //   return { ...state, game_type: action.game_type }; //i don't think i've done this the way Luisa intended yet
     default:
       return state;
   }
