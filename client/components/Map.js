@@ -8,9 +8,6 @@ import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import InfoWindow from './InfoWindow';
 
-import Quiz from './Quiz';
-import PhaserGame from './PhaserGame'
-
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +41,6 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    //console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -89,13 +85,11 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-        {/* {this.props.rests
+          {/* {this.props.rests
               .map((r) => (
                 r.game_type
               ))} */}
-              
-              
-              
+
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -104,7 +98,6 @@ class _Map extends React.Component {
             center={this.state.center}
             options={this.createMapOptions}
           >
-          
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
@@ -136,7 +129,7 @@ class _Map extends React.Component {
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
           {this.props.game.gameStage}
-          
+
           {/* this.props.rests[this.props.game.gameStage].game_type */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>

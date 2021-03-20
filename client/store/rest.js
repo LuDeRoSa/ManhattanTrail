@@ -23,7 +23,7 @@ const SET_GAME_TYPES = 'SET_GAME_TYPES';
  * ACTION CREATORS
  */
 const _setRests = (rests) => ({ type: SET_RESTS, rests });
-const _setGameTypes = (gameType) => ({ type: SET_GAME_TYPES, gameType });
+// const _setGameTypes = (gameType) => ({ type: SET_GAME_TYPES, gameType });
 /**
  * THUNK CREATORS
  */

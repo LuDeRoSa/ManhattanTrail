@@ -24,6 +24,7 @@ const styles = {
 
 export const Home = (props) => {
   const { username } = props;
+  console.log(props.rests);
   return (
     <div>
       <center>
@@ -39,20 +40,18 @@ export const Home = (props) => {
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
-            {/* <PhaserGame /> */}
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            {/* <Quiz /> */}
-
-            {/* The following is to be tested. It's a homemade switch statement for rendering based on the game_type */}
             {/* {props.rests.length > 0 ?  props.rests[props.game.gameStage - 1].game_type : 'hihi'} */}
-
             {
               {
-                'quiz': <Quiz />,
-                'cake': <PhaserGame />,
-              }[props.rests.length > 0 ? props.rests[props.game.gameStage - 1].game_type: ''] 
-
+                quiz: <Quiz />,
+                cake: <PhaserGame />,
+              }[
+                props.rests.length > 0
+                  ? props.rests[props.game.gameStage - 1].game_type
+                  : ''
+              ]
             }
           </Grid>
         </Grid>
