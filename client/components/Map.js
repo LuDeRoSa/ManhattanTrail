@@ -87,15 +87,16 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-        {/* {this.props.rests
+        {this.props.rests
               .map((r) => (
                 r.game_type
               ))}
-              {this.props.rests
+              {/* {this.props.rests[1].game_type} */}
+              {/* {this.props.rests
               .filter((r, idx) => (
                 idx === (this.props.game.gameStage - 1)
-              ))}
-              {this.props.rests ? this.props.rests[this.props.game.gameStage - 1].game_type : 'hihi'} */}
+              ))} */}
+              {this.props.rests.length > 0 ? this.props.rests[this.props.game.gameStage - 1].game_type : 'hihi'}
               
           <GoogleMapReact
             bootstrapURLKeys={{
