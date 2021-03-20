@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Map from './Map';
 
-import { setRests, setGameTypes } from '../store/rest';
+import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
@@ -24,7 +24,11 @@ const styles = {
 
 export const Home = (props) => {
   const { username } = props;
-  console.log(props.rests);
+  const game_type =
+    props.rests.length > 0
+      ? props.rests[props.game.gameStage - 1].game_type
+      : '';
+  //TODO: move game_type into store
   return (
     <div>
       <center>
@@ -42,16 +46,11 @@ export const Home = (props) => {
             <Map />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            {/* {props.rests.length > 0 ?  props.rests[props.game.gameStage - 1].game_type : 'hihi'} */}
             {
               {
                 quiz: <Quiz />,
                 cake: <PhaserGame />,
-              }[
-                props.rests.length > 0
-                  ? props.rests[props.game.gameStage - 1].game_type
-                  : ''
-              ]
+              }[game_type]
             }
           </Grid>
         </Grid>
@@ -74,7 +73,6 @@ const mapState = (state) => {
 };
 const mapDispatch = {
   setRests,
-  setGameTypes,
   nextStage,
   setGame,
 };
