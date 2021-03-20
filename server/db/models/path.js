@@ -8,6 +8,10 @@ const Path = db.define('path', {
   stage: {
     type: Sequelize.INTEGER,
   },
+  game_type: {
+    type: Sequelize.ENUM('quiz', 'cake'),
+    defaultValue: 'quiz',
+  },
 });
 
 module.exports = Path;

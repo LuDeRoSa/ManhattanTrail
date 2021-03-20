@@ -2,7 +2,7 @@ import React from 'react';
 
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import { setRests } from '../store/rest';
+import { setRests, setGameTypes } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
@@ -24,6 +24,7 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
+    this.props.setGameTypes(this.props.game.pathId);
     this.props.setRests(this.props.game.pathId);
 
     if (this.props.rests.length > 0) {
@@ -32,7 +33,6 @@ class _Map extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
-      // console.log('component did update is triggering');
       if (this.props.rests.length > 0) {
         this.setCenter();
       }
@@ -41,7 +41,6 @@ class _Map extends React.Component {
 
   setCenter() {
     const index = this.props.game.gameStage - 1;
-    // console.log(this.props.rests);
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -56,7 +55,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    // console.log(this.props.game.gameStage);
+    //console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -82,14 +81,15 @@ class _Map extends React.Component {
     };
   }
 
-  _onChildClick() {
-    this.setState({ show: !this.state.show });
-  }
-
   render() {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
+          {/* {this.props.rests
+              .map((r) => (
+                r.game_type
+              ))} */}
+
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -97,12 +97,10 @@ class _Map extends React.Component {
             zoom={13}
             center={this.state.center}
             options={this.createMapOptions}
-            onChildClick={() => this._onChildClick()}
           >
             {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
-                // name={this.props.rests[0].restaurant_name}
                 lat={
                   this.props.rests[this.props.game.gameStage - 1]
                     .restaurant_latitude
@@ -112,15 +110,14 @@ class _Map extends React.Component {
                     .restaurant_longitude
                 }
                 color={'red'}
-                show={this.state.show}
               />
             )}
+
             {this.props.rests
               .filter((r, idx) => idx < this.props.game.gameStage - 1)
               .map((r) => (
                 <Marker
                   key={r.id}
-                  name={r.restaurant_name}
                   lat={r.restaurant_latitude}
                   lng={r.restaurant_longitude}
                   color={'black'}
@@ -131,6 +128,9 @@ class _Map extends React.Component {
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
+          {this.props.game.gameStage}
+
+          {/* this.props.rests[this.props.game.gameStage].game_type */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
@@ -140,12 +140,14 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
+    userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
   };
 };
 const mapDispatch = {
   setRests,
+  setGameTypes,
   nextStage,
   setGame,
 };

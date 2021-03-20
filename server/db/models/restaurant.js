@@ -11,10 +11,6 @@ const Restaurant = db.define('restaurant', {
   restaurant_latitude: {
     type: Sequelize.FLOAT,
   },
-  game_type: {
-    type: Sequelize.ENUM('quiz', 'cake'),
-    defaultValue: 'quiz',
-  },
 });
 
 module.exports = Restaurant;

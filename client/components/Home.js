@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import Map from './Map';
 
+import { setRests, setGameTypes } from '../store/rest';
+import { nextStage } from '../store/game';
+import { setGame } from '../store/game';
+
 import PhaserGame from './PhaserGame';
 /**
  * COMPONENT
@@ -20,10 +24,9 @@ const styles = {
 
 export const Home = (props) => {
   const { username } = props;
-
+  console.log(props.rests);
   return (
     <div>
-
       <center>
         <h3>Welcome , {username}</h3>
       </center>
@@ -37,14 +40,22 @@ export const Home = (props) => {
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
-            <PhaserGame />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Quiz />
+            {/* {props.rests.length > 0 ?  props.rests[props.game.gameStage - 1].game_type : 'hihi'} */}
+            {
+              {
+                quiz: <Quiz />,
+                cake: <PhaserGame />,
+              }[
+                props.rests.length > 0
+                  ? props.rests[props.game.gameStage - 1].game_type
+                  : ''
+              ]
+            }
           </Grid>
         </Grid>
       </Container>
-
     </div>
   );
 };
@@ -52,12 +63,20 @@ export const Home = (props) => {
 /**
  * CONTAINER
  */
+
 const mapState = (state) => {
   return {
     username: state.auth.username,
-    rest: state.rest,
+    userId: state.auth.id,
+    rests: state.rest.rests,
     game: state.game,
   };
 };
+const mapDispatch = {
+  setRests,
+  setGameTypes,
+  nextStage,
+  setGame,
+};
 
-export default connect(mapState)(Home);
+export default connect(mapState, mapDispatch)(Home);
