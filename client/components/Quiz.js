@@ -19,6 +19,7 @@ class Quiz extends React.Component {
   }
 
   render() {
+    // console.log(this.props.quiz.questions)//array of objects
     return (
       <div>
         <h2>QUIZ</h2>
