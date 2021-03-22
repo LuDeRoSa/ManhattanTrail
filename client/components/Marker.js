@@ -17,13 +17,16 @@ const Marker = (props) => {
       }}
       title={name}
     >
-      <InfoWindow
-        show={props.show}
-        lat={props.lat}
-        lng={props.lng}
-        // id={props.id}
-        name={name}
-      />
+      {' '}
+      {color === 'red' && (
+        <InfoWindow
+          show={props.show}
+          lat={props.lat}
+          lng={props.lng}
+          // id={props.id}
+          name={name}
+        />
+      )}
     </div>
   );
 };

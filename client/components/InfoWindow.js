@@ -11,7 +11,7 @@ class InfoWindow extends Component {
       <div id='info' style={{ width: 100, height: 100 }}>
         {this.props.name}
         <br />
-        <IconButton onClick={() => console.log('favorite')}>
+        <IconButton onClick={() => console.log('favorited')}>
           <FavoriteOutlinedIcon style={{ fontSize: 20, color: 'red' }} />
         </IconButton>
       </div>
