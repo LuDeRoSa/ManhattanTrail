@@ -8,7 +8,14 @@ import PastGames from './PastGames';
 
 //TODO: send image on submit to backend route
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onChange = this.onChange.bind(this);
+  }
   componentDidMount() {}
+  onChange(ev) {
+    console.log(ev.target.files);
+  }
   render() {
     const { account } = this.props;
     return (
@@ -26,13 +33,15 @@ class Profile extends React.Component {
               );
             })}
         </ul>
+        <h2>Favorited Restaraunts</h2>
+        <div>{/* component table for favorites */}</div>
         <div className="edit-profile">
           <h3> Edit Account </h3>
           <input
             accept="image/*"
             id="contained-button-file"
-            multiple
             type="file"
+            onChange={this.onChange}
           />
         </div>
         <h2>Past Games</h2>
