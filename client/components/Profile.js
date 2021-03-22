@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PastGames from './PastGames';
 
-/**
- * COMPONENT
- */
 class Profile extends React.Component {
   componentDidMount() {}
   render() {
@@ -27,6 +24,12 @@ class Profile extends React.Component {
         </ul>
         <div className="edit-profile">
           <h3> Edit Account </h3>
+          <input
+            accept="image/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+          />
         </div>
         <h2>Past Games</h2>
         <PastGames />
