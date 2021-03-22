@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PastGames from './PastGames';
 
+//TODO: implement nicer image upload experience
+//https://www.npmjs.com/package/react-images-upload
+
+//TODO: send image on submit to backend route
 class Profile extends React.Component {
   componentDidMount() {}
   render() {
