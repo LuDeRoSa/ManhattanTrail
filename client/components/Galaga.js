@@ -33,7 +33,7 @@ class Galaga extends Component {
             frameHeight: 48,
           });
           this.load.image('burger', './img/burger.png');
-          this.load.image('bullet', './img/bullet.png');
+          this.load.image('bullet', './img/microbullet.png');
         },
         create: function () {
           // this.add.sprite(0, 0, 'background').setOrigin(0).setScale(0.5, 0.5);
@@ -84,7 +84,7 @@ class Galaga extends Component {
           this.bullets = this.physics.add.group({
             key: 'bullet',
             maxSize: 10,
-            setScale: { x: 0.05, y: 0.05 },
+            // setScale: { x: 0.05, y: 0.05 },
             active: false,
             visible: false,
           });
@@ -112,8 +112,8 @@ class Galaga extends Component {
             this.player.anims.play('turn');
           }
 
-          if (this.cursors.up.isDown) {
-            let bullet = this.bullets.getFirstDead(false);
+          if (this.input.keyboard.checkDown(this.cursors.up, 250)) {
+            let bullet = this.bullets.getFirstDead(true, 0, 0, 'bullet', false);
             if (bullet) {
               bullet.x = this.player.x;
               bullet.y = this.player.y;
