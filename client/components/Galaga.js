@@ -11,6 +11,8 @@ class Galaga extends Component {
     cursors: null,
     initialize: true,
     gameOver: false,
+    score: 0,
+    scoreText: '',
     game: {
       width: 1200 / 2,
       height: 950 / 2,
@@ -18,8 +20,7 @@ class Galaga extends Component {
       physics: {
         default: 'arcade',
         arcade: {
-          // gravity: { y: 200 },
-          debug: false,
+          debug: true,
         },
       },
       scene: {
@@ -33,7 +34,7 @@ class Galaga extends Component {
             frameHeight: 48,
           });
           this.load.image('burger', './img/burger.png');
-          this.load.image('bullet', './img/microbullet.png');
+          this.load.image('bullet', './img/bullet.png');
         },
         create: function () {
           // this.add.sprite(0, 0, 'background').setOrigin(0).setScale(0.5, 0.5);
@@ -77,25 +78,25 @@ class Galaga extends Component {
             setXY: { x: 50, y: 50, stepX: 100 },
             setScale: { x: 0.05, y: 0.05 },
           });
-          this.burgers.children.iterate((burger) => {
-            burger.body.setAllowGravity(false);
-          });
 
           this.bullets = this.physics.add.group({
             key: 'bullet',
             maxSize: 10,
-            // setScale: { x: 0.05, y: 0.05 },
             active: false,
             visible: false,
           });
 
-          this.physics.add.overlap(
-            this.player,
+          this.physics.add.collider(this.player, this.burgers, this.hitBurger);
+          this.physics.add.collider(
+            this.bullets,
             this.burgers,
-            this.hitBurger,
-            null,
-            this
+            this.collectBurger
           );
+
+          this.scoreText = this.add.text(16, 16, 'score: 0', {
+            fontSize: '32px',
+            fill: 'white',
+          });
         },
         update: function () {
           if (this.cursors.left.isDown) {
@@ -146,6 +147,13 @@ class Galaga extends Component {
           player.anims.play('turn');
           this.gameOver = true;
           //could call store here
+        },
+        collectBurger: function (bullet, burger) {
+          console.log('collectBurger');
+          burger.disableBody(true, true);
+          bullet.disableBody(true, true);
+          this.score += 1;
+          this.scoreText.setText('Score: ' + score);
         },
       },
     },
