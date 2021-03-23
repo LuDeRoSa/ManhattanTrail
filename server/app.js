@@ -4,46 +4,6 @@ const morgan = require('morgan');
 const app = express();
 module.exports = app;
 
-// const passport = require('passport');
-// const Strategy = require('passport-facebook').Strategy;
-
-// passport.use(
-//   new Strategy(
-//     {
-//       clientID: process.env.FB_CLIENT_ID,
-//       clientSecret: process.env.FB_CLIENT_SECRET,
-//       callbackURL: 'auth/facebook/callback',
-//     },
-//     function (accessToken, refreshToken, profile, cb) {
-//       // save the profile on the Database
-//       // Save the accessToken and refreshToken if you need to call facebook apis later on
-//       return cb(null, profile);
-//     }
-//   )
-// );
-
-// passport.serializeUser(function (user, cb) {
-//   cb(null, user);
-// });
-
-// passport.deserializeUser(function (obj, cb) {
-//   cb(null, obj);
-// });
-
-// app.use(
-//   require('express-session')({
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true,
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// app.use('/facebook', passport.authenticate('facebook'));
-
-// logging middleware
 app.use(morgan('dev'));
 
 // body parsing middleware

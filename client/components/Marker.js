@@ -3,8 +3,6 @@ import InfoWindow from './InfoWindow';
 
 const Marker = (props) => {
   const { color, name } = props;
-  // const [show, setShow] = useState(null);
-  // console.log('marker', name);
   function onClose() {
     React.useState({ show: true });
   }
@@ -13,7 +11,6 @@ const Marker = (props) => {
       className='marker'
       style={{
         backgroundColor: color,
-        // cursor: 'pointer'
       }}
       title={name}
     >
@@ -23,7 +20,6 @@ const Marker = (props) => {
           show={props.show}
           lat={props.lat}
           lng={props.lng}
-          // id={props.id}
           name={name}
         />
       )}

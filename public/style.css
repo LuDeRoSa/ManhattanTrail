@@ -46,40 +46,6 @@ form div {
   background-color: #3f51b5;
 }
 
-/* #quiz-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  padding: 1rem;
-  border: 1px solid gray;
-  border-radius: 1rem;
-  width: 200px;
-  height: 200px;
-  background-color: #3f51b5;
-  color: #fff;
-
-  height: 50%;
-} */
-
-/* #question {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  margin: 1rem;
-  padding: 1rem;
-   border: 1px solid gray; 
-  border-radius: 1rem;
-  width: 200px;
-  height: 2000px;
-  background-color: #3f51b5;
-  color: #fff;
-
-  height: 50%;
-} */
-
 #form-control {
   display: flex;
 }

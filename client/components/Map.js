@@ -80,7 +80,7 @@ class _Map extends React.Component {
       ],
     };
   }
-  
+
   onChildClick() {
     this.setState({ show: !this.state.show });
   }
@@ -89,11 +89,6 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-          {/* {this.props.rests
-              .map((r) => (
-                r.game_type
-              ))} */}
-
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -113,7 +108,6 @@ class _Map extends React.Component {
                 name='starting point'
               />
             )}
-
             {this.props.rests.length > 0 &&
               this.props.rests
                 .filter((r, idx) => idx < this.props.game.gameStage - 1)
@@ -129,18 +123,18 @@ class _Map extends React.Component {
                     show={this.state.show}
                   />
                 ))}
-                lat={
-                  this.props.rests[this.props.game.gameStage - 1]
-                    .restaurant_latitude
-                }
-                lng={
-                  this.props.rests[this.props.game.gameStage - 1]
-                    .restaurant_longitude
-                }
-                color={'red'}
-              />
-            )}
-
+            lat=
+            {
+              this.props.rests[this.props.game.gameStage - 1]
+                .restaurant_latitude
+            }
+            lng=
+            {
+              this.props.rests[this.props.game.gameStage - 1]
+                .restaurant_longitude
+            }
+            color={'red'}
+            /> )}
             {this.props.rests
               .filter((r, idx) => idx < this.props.game.gameStage - 1)
               .map((r) => (
@@ -157,8 +151,6 @@ class _Map extends React.Component {
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
           {this.props.game.gameStage}
-
-          {/* this.props.rests[this.props.game.gameStage].game_type */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
