@@ -83,6 +83,14 @@ class Galaga extends Component {
             },
             setScale: { x: 0.05, y: 0.05 },
           });
+          this.burgers.children.iterate((burger) => {
+            burger.setVelocityX(100);
+
+            burger.body.setCollideWorldBounds(true);
+            burger.body.setBounce(1);
+            // burger.body.onWorldBounds = true;
+            // burger.world.on('world')
+          });
 
           this.bullets = this.physics.add.group({
             key: 'bullet',
@@ -100,7 +108,7 @@ class Galaga extends Component {
             this.burgers,
             (player, burger) => {
               this.physics.pause();
-              player.setTint('red');
+              player.setTint(0xff0000);
               player.anims.play('turn');
               this.gameOver = true;
               //could call store here
@@ -123,6 +131,8 @@ class Galaga extends Component {
         },
         update: function () {
           if (this.gameOver) {
+            this.player.setVelocityX(0);
+            this.player.anims.play('turn');
             return;
           }
           if (this.cursors.left.isDown) {
@@ -135,7 +145,6 @@ class Galaga extends Component {
             this.player.anims.play('right', true);
           } else {
             this.player.setVelocityX(0);
-
             this.player.anims.play('turn');
           }
 
@@ -157,15 +166,15 @@ class Galaga extends Component {
               }
             }
           });
-
           this.burgers.children.iterate((burger) => {
-            burger.x++;
-            if (burger.x === 550) {
-              burger.x = 0;
-              // burger.y += 50;
-              burger.y += 200; //for debugging death
+            if (burger.body.checkWorldBounds()) {
+              burger.y += 50;
             }
           });
+
+          if (this.burgers.countActive(true) === 0) {
+            this.gameOver = true;
+          }
         },
       },
     },
