@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
 
+import PhaserGameScore from './PhaserGameScore';
+
 const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds
 
 /*
@@ -141,6 +143,7 @@ class PhaserGame extends Component {
 
                 if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
                     this.add.sprite(300, 200, 'game-over').setScale(.4,.4);
+                    <PhaserGameScore points = {this.score} />
                     this.scene.pause();
                  }
 
@@ -178,8 +181,7 @@ class PhaserGame extends Component {
       }; // end bracket for state
 
   render() {
-    const { initialize, game } = this.state
-    console.log('phaser')
+    const { initialize, game } = this.state;
     return (
       <IonPhaser game={game} initialize={initialize} />
     )
