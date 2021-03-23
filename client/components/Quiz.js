@@ -33,11 +33,20 @@ class Quiz extends React.Component {
   /// send the changes to our database/backend
   handleSubmit(ev) {
     ev.preventDefault();
-    this.setState({
-      currentQuestion: this.state.currentQuestion + 1,
-    });
+    if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
+      this.setState({
+        currentQuestion: this.state.currentQuestion + 1,
+      });
+      // } else {
+      // alert('you reached the end of quiz');
+      // this.setState({
+      //   played: true,
+      // });
+      // console.log(this.state.played);
+    }
+
     let userResponse = this.state.value;
-    console.log('userResponse', userResponse);
+    // console.log('userResponse', userResponse);
     const correctAnswer = this.props.quiz.questions[
       this.state.currentQuestion
     ].answers.find((answer) => answer.isCorrect).answer;
@@ -48,6 +57,7 @@ class Quiz extends React.Component {
       status: points > 0 ? 'correct' : 'wrong',
     });
     this.props.updateQuiz(points);
+    // console.log(this.state.played);
   }
 
   //1
@@ -77,14 +87,14 @@ class Quiz extends React.Component {
   //   }
   // }
 
-  onClick() {
-    this.setState({
-      currentQuestion: this.state.currentQuestion + 1,
-    });
-  }
+  // onClick() {
+  //   this.setState({
+  //     currentQuestion: this.state.currentQuestion + 1,
+  //   });
+  // }
 
   render() {
-    console.log(this.props.quiz.questions);
+    // console.log(this.props.quiz.questions);
     const { currentQuestion } = this.state;
     return (
       <div className={this.state.status}>
@@ -122,7 +132,12 @@ class Quiz extends React.Component {
                               id='form-label'
                             />
                           </RadioGroup>
-                          // <button key={index} onClick={() => this.onClick()}>
+
+                          // <button
+                          //   key={index}
+                          //   value={answerObj.answer}
+                          //   onClick={() => this.handleSubmit()}
+                          // >
                           //   {answerObj.answer}
                           // </button>
                         )
@@ -138,6 +153,19 @@ class Quiz extends React.Component {
             </FormControl>
             <input type='submit' value='Submit' />
           </form>
+
+          {/* <div id='points'>
+            {this.state.played === true && (
+              <div id='score'> Points: {this.state.points} </div>
+            )}
+          </div> */}
+
+          {/* <div>points: {this.state.points}</div> */}
+        </div>
+        <div id='points'>
+          {this.state.played === true && (
+            <div id='score'> Points: {this.state.points} </div>
+          )}
         </div>
       </div>
     );

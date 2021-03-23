@@ -151,7 +151,7 @@ class SingleQuestion extends React.Component {
   }
 
   render() {
-    console.log(this.props.questions.question);
+    // console.log(this.props.questions.question);
     return <div>{this.props.questions.question}</div>;
   }
 }
