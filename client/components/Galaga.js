@@ -3,22 +3,6 @@ import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 import { connect } from 'react-redux';
 
-function hitBurger(player, burgers) {
-  this.physics.pause();
-  player.setTint('red');
-  player.anims.play('turn');
-  this.gameOver = true;
-  //could call store here
-}
-// function collectBurger(bullet, burger) {
-//   console.log('collectBurger');
-//   burger.disableBody(true, true);
-//   // bullet.disableBody(true, true);
-//   // this.score += 1;
-//   // this.scoreText.setText('Score: ' + score);
-//   return true;
-// }
-
 class Galaga extends Component {
   state = {
     player: null,
@@ -36,7 +20,7 @@ class Galaga extends Component {
       physics: {
         default: 'arcade',
         arcade: {
-          debug: true,
+          debug: false,
         },
       },
       scene: {
@@ -114,7 +98,13 @@ class Galaga extends Component {
           this.physics.add.collider(
             this.player,
             this.burgers,
-            hitBurger,
+            (player, burger) => {
+              this.physics.pause();
+              player.setTint('red');
+              player.anims.play('turn');
+              this.gameOver = true;
+              //could call store here
+            },
             null,
             this
           );
@@ -124,7 +114,6 @@ class Galaga extends Component {
             (bullet, burger) => {
               burger.disableBody(true, true);
               bullet.disableBody(true, true);
-              // console.log(this);
               this.score += 1;
               this.scoreText.setText('Score: ' + this.score);
             },
@@ -133,6 +122,9 @@ class Galaga extends Component {
           );
         },
         update: function () {
+          if (this.gameOver) {
+            return;
+          }
           if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
 
@@ -170,7 +162,8 @@ class Galaga extends Component {
             burger.x++;
             if (burger.x === 550) {
               burger.x = 0;
-              burger.y += 50;
+              // burger.y += 50;
+              burger.y += 200; //for debugging death
             }
           });
         },
