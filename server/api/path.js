@@ -14,8 +14,28 @@ router.get('/:id/restaurants', async (req, res, next) => {
       include: Restaurant,
       order: [['stage', 'ASC']],
     });
-    const rests = path.map((p) => p.restaurant);
+
+    const rests = path.map((path) => {
+      let rest = path.restaurant;
+      rest.dataValues.game_type = path.game_type;
+      return rest;
+    });
+
     res.send(rests);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:id/:stageId', async (req, res, next) => {
+  try {
+    const path = await Path.findOne({
+      where: {
+        path_id: req.params.id,
+        stage: req.params.stageId,
+      },
+    });
+    res.send(path);
   } catch (err) {
     next(err);
   }

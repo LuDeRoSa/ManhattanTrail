@@ -55,6 +55,7 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
+    //console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -79,7 +80,7 @@ class _Map extends React.Component {
       ],
     };
   }
-
+  
   onChildClick() {
     this.setState({ show: !this.state.show });
   }
@@ -88,6 +89,11 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
+          {/* {this.props.rests
+              .map((r) => (
+                r.game_type
+              ))} */}
+
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -123,11 +129,36 @@ class _Map extends React.Component {
                     show={this.state.show}
                   />
                 ))}
+                lat={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_latitude
+                }
+                lng={
+                  this.props.rests[this.props.game.gameStage - 1]
+                    .restaurant_longitude
+                }
+                color={'red'}
+              />
+            )}
+
+            {this.props.rests
+              .filter((r, idx) => idx < this.props.game.gameStage - 1)
+              .map((r) => (
+                <Marker
+                  key={r.id}
+                  lat={r.restaurant_latitude}
+                  lng={r.restaurant_longitude}
+                  color={'black'}
+                />
+              ))}
           </GoogleMapReact>
         </div>
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
+          {this.props.game.gameStage}
+
+          {/* this.props.rests[this.props.game.gameStage].game_type */}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
@@ -137,6 +168,7 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
+    userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
   };
