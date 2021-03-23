@@ -3,6 +3,22 @@ import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 import { connect } from 'react-redux';
 
+function hitBurger(player, burgers) {
+  this.physics.pause();
+  player.setTint('red');
+  player.anims.play('turn');
+  this.gameOver = true;
+  //could call store here
+}
+// function collectBurger(bullet, burger) {
+//   console.log('collectBurger');
+//   burger.disableBody(true, true);
+//   // bullet.disableBody(true, true);
+//   // this.score += 1;
+//   // this.scoreText.setText('Score: ' + score);
+//   return true;
+// }
+
 class Galaga extends Component {
   state = {
     player: null,
@@ -75,7 +91,12 @@ class Galaga extends Component {
           this.burgers = this.physics.add.group({
             key: 'burger',
             repeat: 5,
-            setXY: { x: 50, y: 50, stepX: 100 },
+            setXY: {
+              x: 50,
+              y: 50,
+              stepX: 100,
+              // stepY: 50
+            },
             setScale: { x: 0.05, y: 0.05 },
           });
 
@@ -85,18 +106,31 @@ class Galaga extends Component {
             active: false,
             visible: false,
           });
-
-          this.physics.add.collider(this.player, this.burgers, this.hitBurger);
-          this.physics.add.collider(
-            this.bullets,
-            this.burgers,
-            this.collectBurger
-          );
-
-          this.scoreText = this.add.text(16, 16, 'score: 0', {
+          this.score = 0;
+          this.scoreText = this.add.text(16, 16, `score: ${this.score}`, {
             fontSize: '32px',
             fill: 'white',
           });
+          this.physics.add.collider(
+            this.player,
+            this.burgers,
+            hitBurger,
+            null,
+            this
+          );
+          this.physics.add.collider(
+            this.bullets,
+            this.burgers,
+            (bullet, burger) => {
+              burger.disableBody(true, true);
+              bullet.disableBody(true, true);
+              // console.log(this);
+              this.score += 1;
+              this.scoreText.setText('Score: ' + this.score);
+            },
+            null,
+            this
+          );
         },
         update: function () {
           if (this.cursors.left.isDown) {
@@ -139,21 +173,6 @@ class Galaga extends Component {
               burger.y += 50;
             }
           });
-        },
-
-        hitBurger: function (player, burgers) {
-          this.physics.pause();
-          player.setTint('red');
-          player.anims.play('turn');
-          this.gameOver = true;
-          //could call store here
-        },
-        collectBurger: function (bullet, burger) {
-          console.log('collectBurger');
-          burger.disableBody(true, true);
-          bullet.disableBody(true, true);
-          this.score += 1;
-          this.scoreText.setText('Score: ' + score);
         },
       },
     },
