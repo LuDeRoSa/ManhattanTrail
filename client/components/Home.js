@@ -7,7 +7,6 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
-import PhaserGame from './PhaserGame';
 /**
  * COMPONENT
  */
@@ -44,7 +43,6 @@ export const Home = (props) => {
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
-            {/* <PhaserGame /> */}
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             {
