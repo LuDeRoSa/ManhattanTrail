@@ -1,13 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ImageUpload from './ImageUpload';
 import PastGames from './PastGames';
 
-//TODO: implement nicer image upload experience
-//https://www.npmjs.com/package/react-images-upload
-
-//TODO: send image on submit to backend route
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -36,10 +31,6 @@ class Profile extends React.Component {
         </ul>
         <h2>Favorited Restaraunts</h2>
         <div>{/* component table for favorites */}</div>
-        <div className="edit-profile">
-          <h3> Edit Account </h3>
-          <ImageUpload />
-        </div>
         <h2>Past Games</h2>
         <PastGames />
       </div>
