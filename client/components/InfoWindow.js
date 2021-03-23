@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+import IconButton from '@material-ui/core/IconButton';
 
-const InfoWindow = (props) =>
-  props.show ? (
-    <div id="info" style={{ width: 100, height: 100 }}>
-      details to follow {props.name}
-    </div>
-  ) : null;
+class InfoWindow extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return this.props.show ? (
+      <div id='info' style={{ width: 100, height: 100 }}>
+        {this.props.name}
+        <br />
+        <IconButton onClick={() => console.log('favorited')}>
+          <FavoriteOutlinedIcon style={{ fontSize: 20, color: 'red' }} />
+        </IconButton>
+      </div>
+    ) : null;
+  }
+}
 
 export default InfoWindow;
