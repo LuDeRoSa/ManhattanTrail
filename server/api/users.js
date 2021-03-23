@@ -63,13 +63,19 @@ router.put('/:user_id/:game_id/:question_id'),
 
 const upload = require('../services/file-upload');
 const singleUpload = upload.single('image');
-router.post('/upload', function (req, res, next) {
-  singleUpload(req, res, (err) => {
+router.post('/upload', async function (req, res, next) {
+  console.log(req.body);
+  // const user = await User.findByToken(req.headers.authorization);
+  const user = await User.findOne();
+
+  singleUpload(req, res, async (err) => {
     if (err) {
       return res.status(422).send({
         errors: [{ title: 'Image Upload Error', detail: err.message }],
       });
     }
+    user.picture = req.file.location;
+    await user.save();
     return res.json({ imageURL: req.file.location });
   });
 });

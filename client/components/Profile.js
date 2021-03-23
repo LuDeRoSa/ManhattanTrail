@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ImageUpload from './ImageUpload';
 import PastGames from './PastGames';
 
 //TODO: implement nicer image upload experience
@@ -37,12 +38,7 @@ class Profile extends React.Component {
         <div>{/* component table for favorites */}</div>
         <div className="edit-profile">
           <h3> Edit Account </h3>
-          <input
-            accept="image/*"
-            id="contained-button-file"
-            type="file"
-            onChange={this.onChange}
-          />
+          <ImageUpload />
         </div>
         <h2>Past Games</h2>
         <PastGames />
