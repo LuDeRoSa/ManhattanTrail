@@ -1,7 +1,5 @@
 import axios from 'axios';
-// const TOKEN = 'token';
 import history from '../history';
-// import getToken from './index';
 const getToken = () => window.localStorage.getItem('token');
 /**
  * ACTION TYPES
