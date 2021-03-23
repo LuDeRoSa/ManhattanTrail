@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 
 class PhaserGameScore extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    // return <div>{this.props.points}</div>;
-    return <div>hihi</div>
-  }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    debugger;
+    return <div>hi you have this many points! {this.props.points}</div>;
+  }
 }
 
 export default connect((state) => state)(PhaserGameScore);

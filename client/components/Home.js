@@ -7,7 +7,6 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
-import PhaserGame from './PhaserGame';
 import PhaserGameStart from './PhaserGameStart';
 import PhaserGameScore from './PhaserGameScore';
 
@@ -36,7 +35,6 @@ export const Home = (props) => {
     <div>
       <center>
         <h3>Welcome , {username}</h3>
-        { <PhaserGameScore points = {0} />}
       </center>
       <Container style={styles.container}>
         <Grid

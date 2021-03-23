@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+
 import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
+import { updateQuiz } from '../store/quiz.js';
 
 import PhaserGameScore from './PhaserGameScore';
 
 const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds
+let gameDone = false;
 
 /*
 Timer methods
@@ -70,6 +74,7 @@ function removeCake(game, cake) {
 }
 
 class PhaserGame extends Component {
+
     state = {
         scoreText: null,
         timeText: null,
@@ -143,8 +148,10 @@ class PhaserGame extends Component {
 
                 if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
                     this.add.sprite(300, 200, 'game-over').setScale(.4,.4);
-                    <PhaserGameScore points = {this.score} />
+                    gameDone = true;
+                    console.log('GAMEDONE',gameDone)
                     this.scene.pause();
+                    
                  }
 
                 // add food to game
@@ -183,8 +190,19 @@ class PhaserGame extends Component {
   render() {
     const { initialize, game } = this.state;
     return (
-      <IonPhaser game={game} initialize={initialize} />
+        <div><IonPhaser game={game} initialize={initialize} />
+        {/* { gameDone ?
+            <PhaserGameScore points = {this.score} />
+            :
+            ''
+        } */}
+        {gameDone}
+        </div>
+      
+      
     )
   } //end bracket for render
 }
+
+
 export default PhaserGame;
