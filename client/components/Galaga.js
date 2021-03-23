@@ -85,9 +85,11 @@ class Galaga extends Component {
             key: 'bullet',
             maxSize: 10,
             setScale: { x: 0.05, y: 0.05 },
+            active: false,
+            visible: false,
           });
 
-          this.physics.add.collider(
+          this.physics.add.overlap(
             this.player,
             this.burgers,
             this.hitBurger,
@@ -110,6 +112,25 @@ class Galaga extends Component {
             this.player.anims.play('turn');
           }
 
+          if (this.cursors.up.isDown) {
+            let bullet = this.bullets.getFirstDead(false);
+            if (bullet) {
+              bullet.x = this.player.x;
+              bullet.y = this.player.y;
+              bullet.setActive(true);
+              bullet.setVisible(true);
+              bullet.setVelocityY(-300);
+            }
+          }
+
+          this.bullets.children.each((bullet) => {
+            if (bullet.active) {
+              if (bullet.y < 0) {
+                bullet.setActive(false);
+              }
+            }
+          });
+
           this.burgers.children.iterate((burger) => {
             burger.x++;
             if (burger.x === 550) {
@@ -118,6 +139,7 @@ class Galaga extends Component {
             }
           });
         },
+
         hitBurger: function (player, burgers) {
           this.physics.pause();
           player.setTint('red');
