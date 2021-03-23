@@ -128,8 +128,7 @@ class _Map extends React.Component {
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
-          {this.props.game.status === 'finished' &&
-            'g  https://us04web.zoom.us/j/76689801829?pwd=SDV3Nm1RZTZsWnZiVmErV3pVUHhDdz09ameover'}
+          {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
     );
