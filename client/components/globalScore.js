@@ -10,7 +10,7 @@ class GlobalScore extends Component {
   }
   async componentDidMount() {
     let userId = this.props.userid;
-    console.log("userId", userId);
+    // console.log("userId", userId);
     this.props.fetchScore(userId);
   }
 
@@ -18,8 +18,8 @@ class GlobalScore extends Component {
     // console.log("userid")
     let scoreResult = this.props.score;
     let scoreResultLen = Object.keys(scoreResult).length
-    console.log("scoreResult", scoreResult)
-    console.log("score result len", scoreResultLen)
+    // console.log("scoreResult", scoreResult)
+    // console.log("score result len", scoreResultLen)
     return (
       <div>
         {/* <p>testing this scores component</p> */}

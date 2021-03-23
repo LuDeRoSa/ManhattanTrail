@@ -28,19 +28,19 @@ class Routes extends Component {
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
             {/* <Route path="/quiz" component={Quiz} /> */}
-            <Route path="/globalscore" component={GlobalScore} />
+            {/* <Route path="/globalscore" component={GlobalScore} /> */}
             <Route path="/gameover" component={GameOver} />
             <Route path="/pastgames" component={PastGames} />
             <Route path="/leadership" component={Leadership} />
 
-            {/* <Redirect to="/landing" /> */}
+            <Redirect to="/landing" />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            {/* <Redirect to="/login" /> */}
+            <Redirect to="/login" />
           </Switch>
         )}
       </div>
