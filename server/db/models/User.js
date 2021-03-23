@@ -18,9 +18,6 @@ const User = db.define('user', {
   githubId: {
     type: Sequelize.INTEGER,
   },
-  picture: {
-    type: Sequelize.STRING,
-  },
 });
 
 module.exports = User;
