@@ -36,7 +36,7 @@ export const Home = (props) => {
     <div>
       <center>
         <h3>Welcome , {username}</h3>
-        <p> { <PhaserGameScore points = {0} />} </p>
+        { <PhaserGameScore points = {0} />}
       </center>
       <Container style={styles.container}>
         <Grid

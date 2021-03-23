@@ -1,10 +1,10 @@
-export const _updateCake = (cake) => {
+export const _updateScore = (cake) => {
     return {
-      type: UPDATE_CAKE,
+      type: UPDATE_SCORE,
     };
   };
 
-export const updateCake = (points) => async (dispatch) => {
+export const updateScore = (points) => async (dispatch) => {
     // console.log("the updateQuiz thunk received these points", points);
     const token = getToken();
     const result = (
@@ -18,5 +18,5 @@ export const updateCake = (points) => async (dispatch) => {
         }
       )
     ).data;
-    return dispatch(_updateQuiz(result));
+    return dispatch(_updateScore(result));
   };

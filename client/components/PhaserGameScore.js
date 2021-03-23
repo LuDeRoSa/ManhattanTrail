@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PhaserGameScore from './PhaserGameScore';
 
 class PhaserGameScore extends Component {
   constructor(props) {
@@ -9,7 +8,8 @@ class PhaserGameScore extends Component {
     this.state = {};
   }
   render() {
-    return <div>{this.props.points}</div>;
+    // return <div>{this.props.points}</div>;
+    return <div>hihi</div>
   }
 }
 
