@@ -10,7 +10,7 @@ import GameOver from './components/GameOver';
 import Profile from './components/Profile';
 // import PastGames from './components/PastGames';
 import Leadership from './components/Leadership';
-
+import GlobalScore from './components/GlobalScore';
 /**
  * COMPONENT
  */

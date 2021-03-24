@@ -12,6 +12,8 @@ import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+import GlobalScore from './GlobalScore';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
-
+  // console.log(isLoggedIn)
   return (
     <div>
       <nav>
@@ -60,9 +62,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   >
                     Leadership
                   </Button>
+
+                  <GlobalScore />
+
                   <a href="#" onClick={handleClick} tabIndex="-1">
                     <Button color="inherit">Logout</Button>
                   </a>
+
                 </div>
               ) : (
                 <div>

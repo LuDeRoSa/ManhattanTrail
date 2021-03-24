@@ -37,20 +37,34 @@ form div {
   } */
 }
 
-.quiz {
-  margin: 1rem;
-  padding: 1rem;
-  border: 1px solid gray;
+#quiz {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   border-radius: 1rem;
+  align-items: center;
+  background-color: #3f51b5;
 }
 
-.correct {
+#form-control {
+  display: flex;
+}
+
+#question {
+  color: white;
+}
+
+#answer {
+  color: white;
+}
+
+/* .correct {
   border: solid green 5px;
 }
 
 .wrong {
   border: solid red 5px;
-}
+} */
 
 #info {
   background-color: white;
@@ -67,4 +81,9 @@ form div {
 .submit-btn {
   background-color: gray;
   border: solid gray 5px;
+}
+
+.scores-box {
+  border: solid white 2px;
+  font-style: bold;
 }

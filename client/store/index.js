@@ -7,8 +7,9 @@ import rest from './rest';
 import quiz from './quiz';
 import game from './game';
 import pastgames from './pastgames';
+import score from './globalscore';
 
-const reducer = combineReducers({ auth, rest, game, pastgames, quiz });
+const reducer = combineReducers({ auth, rest, game, pastgames, quiz, score });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

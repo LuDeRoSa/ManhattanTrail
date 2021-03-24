@@ -7,7 +7,6 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
-import PhaserGame from './PhaserGame';
 /**
  * COMPONENT
  */
@@ -38,9 +37,9 @@ export const Home = (props) => {
         <Grid
           container
           spacing={0}
-          direction="row"
-          alignItems="center"
-          justify="center"
+          direction='row'
+          alignItems='center'
+          justify='center'
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
