@@ -123,7 +123,7 @@ class _Map extends React.Component {
                     show={this.state.show}
                   />
                 ))}
-            lat=
+            {/* lat=
             {
               this.props.rests[this.props.game.gameStage - 1]
                 .restaurant_latitude
@@ -144,7 +144,7 @@ class _Map extends React.Component {
                   lng={r.restaurant_longitude}
                   color={'black'}
                 />
-              ))}
+              ))} */}
           </GoogleMapReact>
         </div>
         <div>

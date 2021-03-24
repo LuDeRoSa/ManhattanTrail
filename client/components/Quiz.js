@@ -39,7 +39,6 @@ class Quiz extends React.Component {
     }
 
     let userResponse = this.state.value;
-    // console.log('userResponse', userResponse);
     const correctAnswer = this.props.quiz.questions[
       this.state.currentQuestion
     ].answers.find((answer) => answer.isCorrect).answer;
@@ -101,11 +100,6 @@ class Quiz extends React.Component {
             </FormControl>
             <input type='submit' value='Submit' />
           </form>
-        </div>
-        <div id='points'>
-          {this.state.played === true && (
-            <div id='score'> Points: {this.state.points} </div>
-          )}
         </div>
       </div>
     );
