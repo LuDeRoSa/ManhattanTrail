@@ -8,10 +8,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import HomeIcon from '@material-ui/icons/Home';
-import TimelineIcon from '@material-ui/icons/Timeline';
 import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import GlobalScore from './GlobalScore';
 
@@ -48,12 +47,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     Game
                   </Button>
                   <Button
-                    startIcon={<TimelineIcon />}
+                    startIcon={<AccountCircleIcon />}
                     color="inherit"
                     component={Link}
-                    to="/pastgames"
+                    to="/profile"
                   >
-                    Past Games
+                    Profile
                   </Button>
                   <Button
                     startIcon={<PublicIcon />}
