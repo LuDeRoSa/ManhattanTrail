@@ -3,6 +3,12 @@ import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 import { connect } from 'react-redux';
 
+//helpful docs https://gamedevacademy.org/how-to-make-a-mario-style-platformer-with-phaser-3/
+//if custom sprite are uploaded, then use these for flipping animations
+// https://www.html5gamedevs.com/topic/1582-horizontal-sprite-flip/
+// https://www.html5gamedevs.com/topic/5794-how-can-i-flip-animations-for-left-and-right-in-a-phaser-spritesheet/
+// https://www.html5gamedevs.com/topic/16158-how-do-i-horizontally-flip-an-animation-made-of-spritesheets/
+
 class Galaga extends Component {
   state = {
     player: null,
@@ -25,25 +31,38 @@ class Galaga extends Component {
       },
       scene: {
         init: function () {
+          //set background color
           this.cameras.main.setBackgroundColor('rgb(47, 52, 55)');
         },
         preload: function () {
-          this.load.image('preloaderBar', './img/loading-bar.png');
+          //load up images. these can all be stylistically replaced easily.
+          //Note: the images are loaded up directly at the size they're at unless
+          //scaled down manually later in create() code. Burger is manually scaled
+          //down this way.
           this.load.spritesheet('dude', './img/dude.png', {
             frameWidth: 32,
             frameHeight: 48,
+          });
+
+          // //https://rkuhlf-assets.itch.io/restaurant-pixel-art
+          // this.load.spritesheet('chef', './img/ChefSheet.png', {
+          //   frameWidth: 32,
+          //   frameHeight: 32,
+          // });
+
+          //food assets from https://frozentaurus.itch.io/food-assets
+          this.load.spritesheet('fruits', './img/fruits.png', {
+            frameWidth: 16,
+            frameHeight: 16,
           });
           this.load.image('burger', './img/burger.png');
           this.load.image('bullet', './img/bullet.png');
         },
         create: function () {
-          // this.add.sprite(0, 0, 'background').setOrigin(0).setScale(0.5, 0.5);
-
+          // load up a player at set location and limit him inside world bounds
           this.player = this.physics.add.sprite(100, 450, 'dude');
-
-          this.player.setBounce(0.2);
           this.player.setCollideWorldBounds(true);
-
+          //set up animation frames based on the spritesheet
           this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', {
@@ -53,13 +72,11 @@ class Galaga extends Component {
             frameRate: 10,
             repeat: -1,
           });
-
           this.anims.create({
             key: 'turn',
             frames: [{ key: 'dude', frame: 4 }],
             frameRate: 20,
           });
-
           this.anims.create({
             key: 'right',
             frames: this.anims.generateFrameNumbers('dude', {
@@ -70,31 +87,51 @@ class Galaga extends Component {
             repeat: -1,
           });
 
+          //cursor keys from keyboard are set up
           this.cursors = this.input.keyboard.createCursorKeys();
-
-          this.burgers = this.physics.add.group({
-            key: 'burger',
-            repeat: 5,
-            setXY: {
-              x: 50,
-              y: 50,
-              stepX: 100,
-              // stepY: 50
+          // this.fruits = this.physics.add.group({
+          //   key: 'fruits',
+          //   frame: 0,
+          //   setXY: {
+          //     x: 50,
+          //     y: 200,
+          //     stepX: 100,
+          //   },
+          //   setScale: { x: 2, y: 2 },
+          // });
+          this.burgers = this.physics.add.group([
+            {
+              key: 'burger',
+              repeat: 5,
+              setXY: {
+                x: 50,
+                y: 50,
+                stepX: 100,
+              },
+              setScale: { x: 0.05, y: 0.05 },
             },
-            setScale: { x: 0.05, y: 0.05 },
-          });
+            {
+              key: 'fruits',
+              frame: 1,
+              repeat: 5,
+              setXY: {
+                x: 50,
+                y: 100,
+                stepX: 100,
+              },
+              setScale: { x: 2, y: 2 },
+            },
+          ]);
           this.burgers.children.iterate((burger) => {
             burger.setVelocityX(100);
 
             burger.body.setCollideWorldBounds(true);
             burger.body.setBounce(1);
-            // burger.body.onWorldBounds = true;
-            // burger.world.on('world')
           });
 
           this.bullets = this.physics.add.group({
             key: 'bullet',
-            maxSize: 10,
+            maxSize: 50,
             active: false,
             visible: false,
           });
@@ -137,11 +174,9 @@ class Galaga extends Component {
           }
           if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
-
             this.player.anims.play('left', true);
           } else if (this.cursors.right.isDown) {
             this.player.setVelocityX(160);
-
             this.player.anims.play('right', true);
           } else {
             this.player.setVelocityX(0);
