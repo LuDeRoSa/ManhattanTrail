@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 class Galaga extends Component {
   state = {
     player: null,
-    burgers: null,
+    aliens: null,
     bullets: null,
     cursors: null,
     initialize: true,
@@ -89,17 +89,9 @@ class Galaga extends Component {
 
           //cursor keys from keyboard are set up
           this.cursors = this.input.keyboard.createCursorKeys();
-          // this.fruits = this.physics.add.group({
-          //   key: 'fruits',
-          //   frame: 0,
-          //   setXY: {
-          //     x: 50,
-          //     y: 200,
-          //     stepX: 100,
-          //   },
-          //   setScale: { x: 2, y: 2 },
-          // });
-          this.burgers = this.physics.add.group([
+
+          //adding groups: https://phaser.io/examples/v3/view/game-objects/render-texture/group-to-render-texture
+          this.aliens = this.physics.add.group([
             {
               key: 'burger',
               repeat: 5,
@@ -122,11 +114,11 @@ class Galaga extends Component {
               setScale: { x: 2, y: 2 },
             },
           ]);
-          this.burgers.children.iterate((burger) => {
-            burger.setVelocityX(100);
+          this.aliens.children.iterate((alien) => {
+            alien.setVelocityX(100);
 
-            burger.body.setCollideWorldBounds(true);
-            burger.body.setBounce(1);
+            alien.body.setCollideWorldBounds(true);
+            alien.body.setBounce(1);
           });
 
           this.bullets = this.physics.add.group({
@@ -142,8 +134,8 @@ class Galaga extends Component {
           });
           this.physics.add.collider(
             this.player,
-            this.burgers,
-            (player, burger) => {
+            this.aliens,
+            (player, alien) => {
               this.physics.pause();
               player.setTint(0xff0000);
               player.anims.play('turn');
@@ -155,9 +147,9 @@ class Galaga extends Component {
           );
           this.physics.add.collider(
             this.bullets,
-            this.burgers,
-            (bullet, burger) => {
-              burger.disableBody(true, true);
+            this.aliens,
+            (bullet, alien) => {
+              alien.disableBody(true, true);
               bullet.disableBody(true, true);
               this.score += 1;
               this.scoreText.setText('Score: ' + this.score);
@@ -201,13 +193,13 @@ class Galaga extends Component {
               }
             }
           });
-          this.burgers.children.iterate((burger) => {
-            if (burger.body.checkWorldBounds()) {
-              burger.y += 50;
+          this.aliens.children.iterate((alien) => {
+            if (alien.body.checkWorldBounds()) {
+              alien.y += 50;
             }
           });
 
-          if (this.burgers.countActive(true) === 0) {
+          if (this.aliens.countActive(true) === 0) {
             this.gameOver = true;
           }
         },
