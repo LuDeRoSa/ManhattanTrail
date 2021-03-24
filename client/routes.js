@@ -9,7 +9,7 @@ import LandingPage from './components/LandingPage';
 import GameOver from './components/GameOver';
 import PastGames from './components/PastGames';
 import Leadership from './components/Leadership';
-
+import GlobalScore from './components/GlobalScore';
 /**
  * COMPONENT
  */
@@ -28,6 +28,7 @@ class Routes extends Component {
             <Route path="/landing" component={LandingPage} />
             <Route path="/home" component={Home} />
             {/* <Route path="/quiz" component={Quiz} /> */}
+            {/* <Route path="/globalscore" component={GlobalScore} /> */}
             <Route path="/gameover" component={GameOver} />
             <Route path="/pastgames" component={PastGames} />
             <Route path="/leadership" component={Leadership} />
