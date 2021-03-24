@@ -8,6 +8,8 @@ import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
 import PhaserGame from './PhaserGame';
+import Galaga from './Galaga';
+
 /**
  * COMPONENT
  */
@@ -50,6 +52,7 @@ export const Home = (props) => {
               {
                 quiz: <Quiz />,
                 cake: <PhaserGame />,
+                galaga: <Galaga />,
               }[game_type]
             }
           </Grid>
