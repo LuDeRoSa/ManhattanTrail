@@ -59,6 +59,15 @@ class Galaga extends Component {
           this.load.image('bullet', './img/bullet.png');
         },
         create: function () {
+          //cursor keys from keyboard are set up
+          this.cursors = this.input.keyboard.createCursorKeys();
+          //instantiate score and place on screen
+          this.score = 0;
+          this.scoreText = this.add.text(16, 16, `score: ${this.score}`, {
+            fontSize: '32px',
+            fill: 'white',
+          });
+
           // load up a player at set location and limit him inside world bounds
           this.player = this.physics.add.sprite(100, 450, 'dude');
           this.player.setCollideWorldBounds(true);
@@ -87,9 +96,6 @@ class Galaga extends Component {
             repeat: -1,
           });
 
-          //cursor keys from keyboard are set up
-          this.cursors = this.input.keyboard.createCursorKeys();
-
           //adding groups: https://phaser.io/examples/v3/view/game-objects/render-texture/group-to-render-texture
           this.aliens = this.physics.add.group([
             {
@@ -114,24 +120,23 @@ class Galaga extends Component {
               setScale: { x: 2, y: 2 },
             },
           ]);
+
+          //set all aliens to bounce the walls at 100 x velocity
           this.aliens.children.iterate((alien) => {
             alien.setVelocityX(100);
-
             alien.body.setCollideWorldBounds(true);
             alien.body.setBounce(1);
           });
 
+          //instantiate bullets as inactive and invisible until player later shoots them
           this.bullets = this.physics.add.group({
             key: 'bullet',
             maxSize: 50,
             active: false,
             visible: false,
           });
-          this.score = 0;
-          this.scoreText = this.add.text(16, 16, `score: ${this.score}`, {
-            fontSize: '32px',
-            fill: 'white',
-          });
+
+          //physics colliders below between player/aliens and bullets/aliens
           this.physics.add.collider(
             this.player,
             this.aliens,
@@ -159,11 +164,14 @@ class Galaga extends Component {
           );
         },
         update: function () {
+          //check gameover variable. this will freeze the player and return
           if (this.gameOver) {
             this.player.setVelocityX(0);
             this.player.anims.play('turn');
             return;
           }
+
+          //respond to user pressing keyboard cursor keys left and right
           if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
             this.player.anims.play('left', true);
@@ -174,7 +182,7 @@ class Galaga extends Component {
             this.player.setVelocityX(0);
             this.player.anims.play('turn');
           }
-
+          //respond to user pressing up on keyboard with a 250ms delay
           if (this.input.keyboard.checkDown(this.cursors.up, 250)) {
             let bullet = this.bullets.getFirstDead(true, 0, 0, 'bullet', false);
             if (bullet) {
@@ -186,6 +194,7 @@ class Galaga extends Component {
             }
           }
 
+          //deactivate bullets that go beyond the top of screen
           this.bullets.children.each((bullet) => {
             if (bullet.active) {
               if (bullet.y < 0) {
@@ -193,12 +202,15 @@ class Galaga extends Component {
               }
             }
           });
+
+          //if aliens bounce on the walls, move them down towards the player
           this.aliens.children.iterate((alien) => {
             if (alien.body.checkWorldBounds()) {
               alien.y += 50;
             }
           });
 
+          //game ends when all aliens are inactive
           if (this.aliens.countActive(true) === 0) {
             this.gameOver = true;
           }
@@ -208,6 +220,7 @@ class Galaga extends Component {
   };
 
   render() {
+    //boilerplate rendering via IonPhaser
     const { initialize, game } = this.state;
     return <IonPhaser game={game} initialize={initialize} />;
   }
