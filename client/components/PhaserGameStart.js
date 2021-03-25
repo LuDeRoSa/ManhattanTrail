@@ -2,7 +2,7 @@ import React from 'react';
 // import { connect } from 'react-redux';
 import Galaga from './Galaga';
 
-import PhaserGame from './PhaserGame';
+import Cake from './Cake';
 
 class PhaserGameStart extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class PhaserGameStart extends React.Component {
               trashcans
             </p>
             {this.state.gameStarted ? (
-              <PhaserGame />
+              <Cake />
             ) : (
               <button onClick={this.handleClick}>Start Game</button>
             )}

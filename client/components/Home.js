@@ -8,9 +8,6 @@ import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 
 import PhaserGameStart from './PhaserGameStart';
-import PhaserGameScore from './PhaserGameScore';
-//import PhaserGame from './PhaserGame';
-import Galaga from './Galaga';
 
 /**
  * COMPONENT

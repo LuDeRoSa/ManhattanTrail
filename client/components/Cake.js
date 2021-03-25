@@ -74,7 +74,7 @@ function handleGameOver(game) {
   // dispatch the points and put it into the database
   store.dispatch({ type: 'UPDATE_MINI_SCORE', score: game.score });
 }
-class PhaserGame extends Component {
+class Cake extends Component {
   state = {
     scoreText: null,
     timeText: null,
@@ -230,4 +230,4 @@ const mapDispatch = {
   updateMiniGameScore,
 };
 
-export default connect(mapState, mapDispatch)(PhaserGame);
+export default connect(mapState, mapDispatch)(Cake);
