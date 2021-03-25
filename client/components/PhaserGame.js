@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import store from '../store/index.js';
 import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
-
+import PhaserGameScore from './PhaserGameScore';
 const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds
-
 /*
 Timer methods
  */
@@ -21,27 +21,22 @@ function resetTime(game) {
     // reset the start time
     game.start = getTime();
 }
-
 /*
 Game methods
  */
  function spawnCake(game, cakeOptions) {
     // randomized x-coord to drop the cake from (b/w zero and Canvas width)
     let dropPos = Math.floor(Math.random() * game.game.config.width);
-
     // array of random y-coordinates to drop the food from
     let dropOffset = [-9,-4,-6,-1];
-
      // one of five objects to be dropped (randomly chosen)
      let cakeType = Math.floor(Math.random() * cakeOptions.length);
      let cake = game.physics.add.sprite(dropPos, dropOffset[cakeType], cakeOptions[cakeType]);
      cake.setScale(.08,.08);
      cake.setGravity(0, 200); // enable the cake for the physics engine (so it falls naturally from screen when gravity is set)
-     
      //set anchor point of cake for rotation
      cake.setOrigin(0.5,0.5);
      game._cakeGroup.add(cake);
-
      // when cake leaves the screen, remove it
      game.physics.world.setBoundsCollision(true, true, true, true);
  }
@@ -66,7 +61,10 @@ function removeCake(game, cake) {
         game.health -= 2;
     }
 }
-
+function handleGameOver(game) {
+    // dispatch the points and put it into the database
+    store.dispatch({type: "UPDATE_SCORE", score: game.score});
+}
 class PhaserGame extends Component {
     state = {
         scoreText: null,
@@ -74,7 +72,6 @@ class PhaserGame extends Component {
         score: 0,
         totalElapsedTime: 0,
         health: 0,
-
         _player: null,
         _cakeGroup: null,
         _spawnCakeTimer: 0,
@@ -82,6 +79,7 @@ class PhaserGame extends Component {
         _cursors: null,
         _cake: null,
         initialize: true,
+        gameDone: false,
         game: {
           width: 1200/2,
           height: 950/2,
@@ -119,11 +117,12 @@ class PhaserGame extends Component {
                 this._player.setVelocityX(0);
                 this._player.setImmovable(true);
                 // enabling keys to navigate player
-                this._cursors = this.input.keyboard.createCursorKeys();  
+                this._cursors = this.input.keyboard.createCursorKeys();
                 // create timer & record the start time
                 this.start = getTime();
                 this._spawnCakeTimer = 0;
                 this.health = 6;
+                this.gameDone = false;
                 this._fontStyle = { font: "36px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
                 this.scoreText = this.add.text(38, 6, "0", this._fontStyle);
                 this.timeText = this.add.text(100, 6, "0", this._fontStyle);
@@ -138,51 +137,48 @@ class PhaserGame extends Component {
                 //counting total time elapsed
                 this.totalElapsedTime += getDelta(this);
                 this.timeText.setText("Time: " + Math.floor(this.totalElapsedTime/10000) + "s");
-
                 if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
                     this.add.sprite(300, 200, 'game-over').setScale(.4,.4);
+                    handleGameOver(this);
                     this.scene.pause();
                  }
-
                 // add food to game
                 let cakeOptions = ['cake','cookie','cupcake', 'trashcan', 'fishbone'];
-                if (getDelta(this) > 1000) {          
+                if (getDelta(this) > 1000) {
                         spawnCake(this, cakeOptions);
                         resetTime(this);
- 
                 }
-
                 this.physics.add.overlap(this._player, this._cakeGroup, collisionHandler, null, this);
-
                 // Reset the players velocity (movement)
                 // Navigate player based on cursor keys
                 this._player.setVelocityX(0);
                 if (this._cursors.left.isDown)
                 {
-                    //  Move to the left
+                    // Move to the left
                     this._player.setVelocityX(-300);
                 }
                 else if (this._cursors.right.isDown)
                 {
-                    //  Move to the right
+                    // Move to the right
                     this._player.setVelocityX(300);
                 }
                 else
                 {
-                    //  Stand still
+                    // Stand still
                     this._player.setVelocityX(0);
                 }
             }, // end bracket for update function
           }, // end bracket for scene
         }, // end bracket for game
       }; // end bracket for state
-
-  render() {
-    const { initialize, game } = this.state
-    console.log('phaser')
+    render() {
+    const { initialize, game } = this.state;
     return (
-      <IonPhaser game={game} initialize={initialize} />
+        <div>
+            <IonPhaser game={game} initialize={initialize} />
+            <PhaserGameScore points={this.score} />
+        </div>
     )
-  } //end bracket for render
+  }
 }
 export default PhaserGame;

@@ -67,7 +67,7 @@ router.post('/addScores', async (req, res, next) => {
     // // const score = await Scores.findByPk(game.scoreId);
     // console.log('this is the score found', scoreMatch);
     scoreMatch.total_score += points;
-    scoreMatch.user_id = user.id;
+    scoreMatch.id = user.id;
     await scoreMatch.save();
 
     //or eager load game with the score and send that.

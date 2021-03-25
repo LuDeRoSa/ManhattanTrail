@@ -6,8 +6,12 @@ import Map from './Map';
 import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-import PhaserGame from './PhaserGame';
+
+import PhaserGameStart from './PhaserGameStart';
+import PhaserGameScore from './PhaserGameScore';
+//import PhaserGame from './PhaserGame';
 import Galaga from './Galaga';
+
 
 
 /**
@@ -51,8 +55,9 @@ export const Home = (props) => {
             {
               {
                 quiz: <Quiz />,
-                cake: <PhaserGame />,
+                cake: <PhaserGameStart />,
                 galaga: <Galaga />,
+
               }[game_type]
             }
           </Grid>
