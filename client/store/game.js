@@ -1,6 +1,5 @@
 import axios from 'axios';
 import history from '../history';
-import { _updateQuiz } from './quiz';
 const getToken = () => window.localStorage.getItem('token');
 /**
  * ACTION TYPES
@@ -20,7 +19,7 @@ const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
 /**
  * THUNK CREATORS
  */
-export const setGame = (userId) => async (dispatch) => {
+export const setGame = () => async (dispatch) => {
   const token = getToken();
   const game = (
     await axios.get('/api/game', {
@@ -48,6 +47,11 @@ export const nextStage = () => async (dispatch) => {
     history.push('/gameover');
   }
   return dispatch(_nextStage(game));
+};
+
+// Update score for current mini game in store
+export const updateMiniScore = (score) => (dispatch) => {
+  return dispatch(_updateMiniScore(score));
 };
 
 // Update score for any mini-game
@@ -107,7 +111,11 @@ export default function (state = initState, action) {
         mini_status: 'finished',
       };
     case UPDATE_MINI_SCORE:
-      return { ...state, mini_score: action.score, mini_status: 'finished' };
+      return {
+        ...state,
+        mini_score: action.score + state.mini_score,
+        mini_status: 'finished',
+      };
     default:
       return state;
   }

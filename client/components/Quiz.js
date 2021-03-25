@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchQuiz, updateQuiz } from '../store/quiz';
+import { fetchQuiz } from '../store/quiz';
+import { updateMiniGameScore, updateMiniScore } from '../store/game';
 import SingleQuestion from './SingleQuestion';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -23,6 +24,7 @@ class Quiz extends React.Component {
       value: ``,
       status: '',
       currentQuestion: 0,
+      finished: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,11 +39,15 @@ class Quiz extends React.Component {
   /// send the changes to our database/backend
   handleSubmit(ev) {
     ev.preventDefault();
-    console.log(this.state.currentQuestion);
-    console.log(this.props.quiz.questions.length);
+    let finished = false;
     if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
       this.setState({
         currentQuestion: this.state.currentQuestion + 1,
+      });
+    } else {
+      finished = true;
+      this.setState({
+        finished: true,
       });
     }
 
@@ -55,7 +61,10 @@ class Quiz extends React.Component {
       points,
       status: points > 0 ? 'correct' : 'wrong',
     });
-    this.props.updateQuiz(points);
+    this.props.updateMiniScore(points);
+    if (finished) {
+      this.props.updateMiniGameScore(this.props.game.mini_score);
+    }
   }
 
   componentDidMount() {
@@ -69,6 +78,9 @@ class Quiz extends React.Component {
 
   render() {
     const { currentQuestion } = this.state;
+    if (this.state.finished) {
+      return <>Quiz Done!</>;
+    }
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
@@ -127,14 +139,14 @@ const mapState = (state) => {
     quiz: state.quiz,
     rests: state.rest.rests,
     restaurantId: state.rest.rests[state.game.gameStage - 1] || 0,
+    game: state.game,
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    fetchQuiz: (num) => dispatch(fetchQuiz(num)),
-    updateQuiz: (points) => dispatch(updateQuiz(points)),
-  };
+const mapDispatch = {
+  fetchQuiz,
+  updateMiniScore,
+  updateMiniGameScore,
 };
 
 export default connect(mapState, mapDispatch)(Quiz);
