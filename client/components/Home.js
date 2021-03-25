@@ -7,9 +7,6 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import PhaserGame from './PhaserGame';
-
-
-import PhaserGame from './PhaserGame';
 import Galaga from './Galaga';
 
 
