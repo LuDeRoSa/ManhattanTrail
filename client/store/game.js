@@ -1,24 +1,19 @@
 import axios from 'axios';
 import history from '../history';
-import {_updateQuiz} from "./quiz";
+import { _updateQuiz } from './quiz';
 const getToken = () => window.localStorage.getItem('token');
 /**
  * ACTION TYPES
  */
 const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
-const UPDATE_SCORE = "UPDATE_SCORE";
+const UPDATE_SCORE = 'UPDATE_SCORE';
 /**
  * ACTION CREATORS
  */
 const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game }); //double check what action data is
-export const updateScore = (score) => {
-  return {
-    type: UPDATE_SCORE,
-    score
-  };
-};
+const updateScore = (score) => ({ type: UPDATE_SCORE, score });
 /**
  * THUNK CREATORS
  */
@@ -51,22 +46,23 @@ export const nextStage = () => async (dispatch) => {
   }
   return dispatch(_nextStage(game));
 };
+
 // Update score for any mini-game
 export const updateMiniGameScore = (points) => async (dispatch) => {
-  console.log("the updateMiniGameScore thunk received these points", points);
-  // const token = getToken();
-  // const result = (
-  //     await axios.post(
-  //         "/api/quiz/addScores",
-  //         { points },
-  //         {
-  //           headers: {
-  //             authorization: token,
-  //           },
-  //         }
-  //     )
-  // ).data;
-  // return dispatch(updateScore(result));
+  console.log('the updateMiniGameScore thunk received these points', points);
+  const token = getToken();
+  const score = (
+    await axios.post(
+      '/api/game/addScores',
+      { points },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+  ).data;
+  return dispatch(updateScore(score));
 };
 /**
  * REDUCER
@@ -75,6 +71,7 @@ const initState = {
   pathId: 0,
   gameStage: 0,
   status: 'no-game',
+  score: 0,
 };
 export default function (state = initState, action) {
   switch (action.type) {
@@ -91,7 +88,7 @@ export default function (state = initState, action) {
         status: action.game.status,
       };
     case UPDATE_SCORE:
-      return {...state, score: action.score};
+      return { ...state, score: action.score };
     default:
       return state;
   }
