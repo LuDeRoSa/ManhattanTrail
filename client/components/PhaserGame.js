@@ -6,6 +6,8 @@ import { IonPhaser } from '@ion-phaser/react';
 import PhaserGameScore from './PhaserGameScore';
 const TOTAL_GAME_LENGTH = 10 * 10000; //game lasts 45 seconds
 //@sjsamphex has set game length to 10 seconds for faster debugging
+import { connect } from 'react-redux';
+import { updateMiniGameScore } from '../store/game';
 
 /*
 Timer methods
@@ -218,4 +220,14 @@ class PhaserGame extends Component {
     );
   }
 }
-export default PhaserGame;
+const mapState = (state) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatch = {
+  updateMiniGameScore,
+};
+
+export default connect(mapState, mapDispatch)(PhaserGame);
