@@ -34,27 +34,31 @@ export const Home = (props) => {
       <center>
         <h3>Welcome , {username}</h3>
       </center>
-      <Container style={styles.container}>
-        <Grid
-          container
-          spacing={0}
-          direction='row'
-          alignItems='center'
-          justify='center'
-        >
-          <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
-            <Map />
-          </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            {
-              {
-                quiz: <Quiz />,
-                cake: <PhaserGame />,
-              }[game_type]
-            }
-          </Grid>
+      {/* <Container style={styles.container}> */}
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item lg={1} md={1} sm={false} xs={false} />
+        <Grid item lg={3} md={3} sm={10} xs={12} style={{ height: '50vh' }}>
+          <Map />
         </Grid>
-      </Container>
+        <Grid item lg={1} md={1} sm={false} xs={false} />
+
+        <Grid item lg={5} md={5} sm={10} xs={12}>
+          {
+            {
+              quiz: <Quiz />,
+              cake: <PhaserGame />,
+            }[game_type]
+          }
+        </Grid>
+        <Grid item lg={1} md={1} sm={false} xs={false} />
+      </Grid>
+      {/* </Container> */}
     </div>
   );
 };
