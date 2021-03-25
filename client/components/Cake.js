@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import store from '../store/index.js';
 
 import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
-import PhaserGameScore from './PhaserGameScore';
-const TOTAL_GAME_LENGTH = 10 * 10000; //game lasts 45 seconds
-//@sjsamphex has set game length to 10 seconds for faster debugging
+const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds
 import { connect } from 'react-redux';
 import { updateMiniGameScore } from '../store/game';
 
@@ -70,152 +67,152 @@ function removeCake(game, cake) {
     game.health -= 2;
   }
 }
-function handleGameOver(game) {
-  // dispatch the points and put it into the database
-  store.dispatch({ type: 'UPDATE_MINI_SCORE', score: game.score });
-}
+
 class Cake extends Component {
-  state = {
-    scoreText: null,
-    timeText: null,
-    score: 0,
-    totalElapsedTime: 0,
-    health: 0,
-    _player: null,
-    _cakeGroup: null,
-    _spawnCakeTimer: 0,
-    _fontStyle: null,
-    _cursors: null,
-    _cake: null,
-    initialize: true,
-    gameDone: false,
-    game: {
-      width: 1200 / 2,
-      height: 950 / 2,
-      type: Phaser.AUTO,
-      physics: {
-        default: 'arcade',
-        arcade: {
-          gravity: { y: 200 },
-          debug: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      scoreText: null,
+      timeText: null,
+      score: 0,
+      totalElapsedTime: 0,
+      health: 0,
+      _player: null,
+      _cakeGroup: null,
+      _spawnCakeTimer: 0,
+      _fontStyle: null,
+      _cursors: null,
+      _cake: null,
+      initialize: true,
+      gameDone: false,
+      game: {
+        width: 1200 / 2,
+        height: 950 / 2,
+        type: Phaser.AUTO,
+        physics: {
+          default: 'arcade',
+          arcade: {
+            gravity: { y: 200 },
+            debug: false,
+          },
         },
-      },
-      scene: {
-        preload: function () {
-          this.load.image('preloaderBar', './img/loading-bar.png');
-          this.load.image('background', './img/background.jpg');
-          this.load.image('player', './img/player.png');
-          this.load.image('cookie', './img/cookie.png');
-          this.load.image('cupcake', './img/cupcake.png');
-          this.load.image('cake', './img/cake.png');
-          this.load.image('trashcan', './img/trashcan.png');
-          this.load.image('fishbone', './img/fishbone.png');
-          this.load.image('game-over', './img/game-over.png');
-          this.load.image('score-sign', './img/score-sign.png');
-          this.load.image('start-button', './img/start-button.png');
-        },
-        init: function () {},
-        create: function () {
-          this.add.sprite(0, 0, 'background').setOrigin(0).setScale(0.5, 0.5);
-          this.add
-            .sprite(10, 10, 'score-sign')
-            .setOrigin(0)
-            .setScale(0.25 / 2, 0.25 / 2);
-          // player setup
-          this._player = this.physics.add
-            .sprite(3, 320, 'player')
-            .setOrigin(0)
-            .setScale(0.2 / 3, 0.2 / 3);
-          this._player.body.setAllowGravity(false);
-          this._player.body.setCollideWorldBounds(true);
-          this._player.setVelocityX(0);
-          this._player.setImmovable(true);
-          // enabling keys to navigate player
-          this._cursors = this.input.keyboard.createCursorKeys();
-          // create timer & record the start time
-          this.start = getTime();
-          this._spawnCakeTimer = 0;
-          this.health = 6;
-          this.gameDone = false;
-          this._fontStyle = {
-            font: '36px Arial',
-            fill: '#FFCC00',
-            stroke: '#333',
-            strokeThickness: 5,
-            align: 'center',
-          };
-          this.scoreText = this.add.text(38, 6, '0', this._fontStyle);
-          this.timeText = this.add.text(100, 6, '0', this._fontStyle);
-          this.score = 0;
-          this.totalElapsedTime = 0;
-          this._cakeGroup = this.add.group();
-          // add food to game
-          let cakeOptions = [
-            'cake',
-            'cookie',
-            'cupcake',
-            'trashcan',
-            'fishbone',
-          ];
-          spawnCake(this, cakeOptions);
-        },
-        update: function () {
-          if (this.gameDone) {
-            return;
-          }
-          //counting total time elapsed
-          this.totalElapsedTime += getDelta(this);
-          this.timeText.setText(
-            'Time: ' + Math.floor(this.totalElapsedTime / 10000) + 's'
-          );
-          if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
-            this.add.sprite(300, 200, 'game-over').setScale(0.4, 0.4);
-            handleGameOver(this);
-            this.scene.pause();
-            this.gameDone = true;
-          }
-          // add food to game
-          let cakeOptions = [
-            'cake',
-            'cookie',
-            'cupcake',
-            'trashcan',
-            'fishbone',
-          ];
-          if (getDelta(this) > 1000) {
-            spawnCake(this, cakeOptions);
-            resetTime(this);
-          }
-          this.physics.add.overlap(
-            this._player,
-            this._cakeGroup,
-            collisionHandler,
-            null,
-            this
-          );
-          // Reset the players velocity (movement)
-          // Navigate player based on cursor keys
-          this._player.setVelocityX(0);
-          if (this._cursors.left.isDown) {
-            // Move to the left
-            this._player.setVelocityX(-300);
-          } else if (this._cursors.right.isDown) {
-            // Move to the right
-            this._player.setVelocityX(300);
-          } else {
-            // Stand still
+        scene: {
+          preload: function () {
+            this.load.image('preloaderBar', './img/loading-bar.png');
+            this.load.image('background', './img/background.jpg');
+            this.load.image('player', './img/player.png');
+            this.load.image('cookie', './img/cookie.png');
+            this.load.image('cupcake', './img/cupcake.png');
+            this.load.image('cake', './img/cake.png');
+            this.load.image('trashcan', './img/trashcan.png');
+            this.load.image('fishbone', './img/fishbone.png');
+            this.load.image('game-over', './img/game-over.png');
+            this.load.image('score-sign', './img/score-sign.png');
+            this.load.image('start-button', './img/start-button.png');
+          },
+          init: function () {},
+          create: function () {
+            this.add.sprite(0, 0, 'background').setOrigin(0).setScale(0.5, 0.5);
+            this.add
+              .sprite(10, 10, 'score-sign')
+              .setOrigin(0)
+              .setScale(0.25 / 2, 0.25 / 2);
+            // player setup
+            this._player = this.physics.add
+              .sprite(3, 320, 'player')
+              .setOrigin(0)
+              .setScale(0.2 / 3, 0.2 / 3);
+            this._player.body.setAllowGravity(false);
+            this._player.body.setCollideWorldBounds(true);
             this._player.setVelocityX(0);
-          }
-        }, // end bracket for update function
-      }, // end bracket for scene
-    }, // end bracket for game
-  }; // end bracket for state
+            this._player.setImmovable(true);
+            // enabling keys to navigate player
+            this._cursors = this.input.keyboard.createCursorKeys();
+            // create timer & record the start time
+            this.start = getTime();
+            this._spawnCakeTimer = 0;
+            this.health = 6;
+            this.gameDone = false;
+            this._fontStyle = {
+              font: '36px Arial',
+              fill: '#FFCC00',
+              stroke: '#333',
+              strokeThickness: 5,
+              align: 'center',
+            };
+            this.scoreText = this.add.text(38, 6, '0', this._fontStyle);
+            this.timeText = this.add.text(100, 6, '0', this._fontStyle);
+            this.score = 0;
+            this.totalElapsedTime = 0;
+            this._cakeGroup = this.add.group();
+            // add food to game
+            let cakeOptions = [
+              'cake',
+              'cookie',
+              'cupcake',
+              'trashcan',
+              'fishbone',
+            ];
+            spawnCake(this, cakeOptions);
+          },
+          update: function () {
+            if (this.gameDone) {
+              return;
+            }
+            //counting total time elapsed
+            this.totalElapsedTime += getDelta(this);
+            this.timeText.setText(
+              'Time: ' + Math.floor(this.totalElapsedTime / 10000) + 's'
+            );
+            if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
+              this.add.sprite(300, 200, 'game-over').setScale(0.4, 0.4);
+              props.updateMiniGameScore(this.score);
+              this.scene.pause();
+              this.gameDone = true;
+            }
+            // add food to game
+            let cakeOptions = [
+              'cake',
+              'cookie',
+              'cupcake',
+              'trashcan',
+              'fishbone',
+            ];
+            if (getDelta(this) > 1000) {
+              spawnCake(this, cakeOptions);
+              resetTime(this);
+            }
+            this.physics.add.overlap(
+              this._player,
+              this._cakeGroup,
+              collisionHandler,
+              null,
+              this
+            );
+            // Reset the players velocity (movement)
+            // Navigate player based on cursor keys
+            this._player.setVelocityX(0);
+            if (this._cursors.left.isDown) {
+              // Move to the left
+              this._player.setVelocityX(-300);
+            } else if (this._cursors.right.isDown) {
+              // Move to the right
+              this._player.setVelocityX(300);
+            } else {
+              // Stand still
+              this._player.setVelocityX(0);
+            }
+          }, // end bracket for update function
+        }, // end bracket for scene
+      }, // end bracket for game
+    }; // end bracket for state
+  }
+
   render() {
     const { initialize, game } = this.state;
     return (
       <div>
         <IonPhaser game={game} initialize={initialize} />
-        <PhaserGameScore />
       </div>
     );
   }

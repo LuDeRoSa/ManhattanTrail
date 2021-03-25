@@ -53,6 +53,7 @@ class Galaga extends Component {
             });
             this.load.image('burger', './img/burger.png');
             this.load.image('bullet', './img/bullet.png');
+            this.load.image('game-over', './img/game-over.png');
           },
           create: function () {
             //cursor keys from keyboard are set up
@@ -162,8 +163,10 @@ class Galaga extends Component {
           update: function () {
             //check gameover variable. this will freeze the player and return
             if (this.gameOver) {
+              this.scene.pause();
               this.player.setVelocityX(0);
               this.player.anims.play('turn');
+              this.add.sprite(300, 200, 'game-over').setScale(0.4, 0.4);
               return;
             }
 
