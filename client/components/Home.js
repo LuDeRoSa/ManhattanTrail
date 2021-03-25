@@ -12,8 +12,6 @@ import PhaserGameScore from './PhaserGameScore';
 //import PhaserGame from './PhaserGame';
 import Galaga from './Galaga';
 
-
-
 /**
  * COMPONENT
  */
@@ -44,9 +42,9 @@ export const Home = (props) => {
         <Grid
           container
           spacing={0}
-          direction='row'
-          alignItems='center'
-          justify='center'
+          direction="row"
+          alignItems="center"
+          justify="center"
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />
@@ -55,9 +53,9 @@ export const Home = (props) => {
             {
               {
                 quiz: <Quiz />,
-                cake: <PhaserGameStart />,
-                galaga: <Galaga />,
-
+                cake: <PhaserGameStart game_type={'cake'} />,
+                // galaga: <Galaga />,
+                galaga: <PhaserGameStart game_type={'galaga'} />,
               }[game_type]
             }
           </Grid>
