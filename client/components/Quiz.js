@@ -37,6 +37,8 @@ class Quiz extends React.Component {
   /// send the changes to our database/backend
   handleSubmit(ev) {
     ev.preventDefault();
+    console.log(this.state.currentQuestion);
+    console.log(this.props.quiz.questions.length);
     if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
       this.setState({
         currentQuestion: this.state.currentQuestion + 1,

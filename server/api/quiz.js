@@ -17,6 +17,7 @@ router.get('/:id', async (req, res, next) => {
         all: true,
         nested: true,
       },
+      limit: 5,
     });
     //magic - eager loading of every nested model
     res.send(quiz);
