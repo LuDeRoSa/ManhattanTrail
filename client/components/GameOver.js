@@ -17,14 +17,7 @@ const styles = {
     alignItems: 'center',
   },
 };
-/**
- * COMPONENT
- */
 class GameOver extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {}
   render() {
     const { username } = this.props;
     const { game } = this.props;
@@ -36,7 +29,7 @@ class GameOver extends React.Component {
           will be here
         </h4>
 
-        <div>Put score here</div>
+        <div>Score: {game.total_score}</div>
         <ButtonGroup>
           <Button
             startIcon={<SportsEsportsIcon />}
