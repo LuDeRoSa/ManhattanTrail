@@ -67,8 +67,6 @@ router.get('/pastgames', async (req, res, next) => {
 router.post('/addScores', async (req, res, next) => {
   try {
     const points = req.body.points;
-    console.log(`back end received`, points);
-    console.log('typeof points', typeof points);
     const user = await User.findByToken(req.headers.authorization);
     let game = await Game.findOne({
       where: {

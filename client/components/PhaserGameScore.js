@@ -7,21 +7,22 @@ class PhaserGameScore extends Component {
     this.state = {};
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.game.score !== this.props.game.score) {
-      this.props.updateMiniGameScore(this.props.game.score);
+    if (prevProps.mini_score !== this.props.mini_score) {
+      this.props.updateMiniGameScore(this.props.mini_score);
     }
   }
   render() {
-    return <div>MiniGame points to be submitted: {this.props.game.score}</div>;
+    return <div>MiniGame points to be submitted: {this.props.mini_score}</div>;
   }
 }
 
+const mapState = (state) => {
+  return {
+    mini_score: state.game.mini_score,
+  };
+};
 const mapDispatch = {
   updateMiniGameScore,
 };
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     updatePhaserGameScore: (points) => dispatch(updateMiniGameScore(points)),
-//   };
-// }
-export default connect((state) => state, mapDispatch)(PhaserGameScore);
+
+export default connect(mapState, mapDispatch)(PhaserGameScore);

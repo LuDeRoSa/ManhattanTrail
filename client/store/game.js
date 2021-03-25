@@ -7,15 +7,15 @@ const getToken = () => window.localStorage.getItem('token');
  */
 const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
-const UPDATE_SCORE = 'UPDATE_SCORE';
+const UPDATE_MINI_SCORE = 'UPDATE_MINI_SCORE';
 const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
 
 /**
  * ACTION CREATORS
  */
 const _setGame = (game) => ({ type: SET_GAME, game });
-const _nextStage = (game) => ({ type: NEXT_STAGE, game }); //double check what action data is
-export const updateScore = (score) => ({ type: UPDATE_SCORE, score });
+const _nextStage = (game) => ({ type: NEXT_STAGE, game });
+export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
 const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
 /**
  * THUNK CREATORS
@@ -96,8 +96,8 @@ export default function (state = initState, action) {
       };
     case UPDATE_TOTAL_SCORE:
       return { ...state, score: action.score.total_score };
-    case UPDATE_SCORE:
-      return { ...state, score: action.score };
+    case UPDATE_MINI_SCORE:
+      return { ...state, mini_score: action.score };
     default:
       return state;
   }

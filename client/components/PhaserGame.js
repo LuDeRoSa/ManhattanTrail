@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import store from '../store/index.js';
-import { updateMiniGameScore } from '../store/game.js';
 
 import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 import PhaserGameScore from './PhaserGameScore';
 const TOTAL_GAME_LENGTH = 10 * 10000; //game lasts 45 seconds
+//@sjsamphex has set game length to 10 seconds for faster debugging
+
 /*
 Timer methods
  */
@@ -69,8 +70,7 @@ function removeCake(game, cake) {
 }
 function handleGameOver(game) {
   // dispatch the points and put it into the database
-  store.dispatch({ type: 'UPDATE_SCORE', score: game.score });
-  //   updateMiniGameScore(game.score);
+  store.dispatch({ type: 'UPDATE_MINI_SCORE', score: game.score });
 }
 class PhaserGame extends Component {
   state = {
@@ -213,7 +213,7 @@ class PhaserGame extends Component {
     return (
       <div>
         <IonPhaser game={game} initialize={initialize} />
-        <PhaserGameScore points={this.score} />
+        <PhaserGameScore />
       </div>
     );
   }
