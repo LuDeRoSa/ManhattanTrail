@@ -45,7 +45,7 @@ router.post('/addScores', async (req, res, next) => {
     });
     scoreMatch.total_score += points;
     await scoreMatch.save();
-    res.send(scoreMatch.total_score);
+    res.send(scoreMatch);
   } catch (err) {
     next(err);
   }

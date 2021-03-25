@@ -8,12 +8,15 @@ const getToken = () => window.localStorage.getItem('token');
 const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
 const UPDATE_SCORE = 'UPDATE_SCORE';
+const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
+
 /**
  * ACTION CREATORS
  */
 const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game }); //double check what action data is
-const updateScore = (score) => ({ type: UPDATE_SCORE, score });
+export const updateScore = (score) => ({ type: UPDATE_SCORE, score });
+const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
 /**
  * THUNK CREATORS
  */
@@ -49,7 +52,6 @@ export const nextStage = () => async (dispatch) => {
 
 // Update score for any mini-game
 export const updateMiniGameScore = (points) => async (dispatch) => {
-  console.log('the updateMiniGameScore thunk received these points', points);
   const token = getToken();
   const score = (
     await axios.post(
@@ -62,7 +64,11 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
       }
     )
   ).data;
-  return dispatch(updateScore(score));
+  // console.log(
+  //   `thunk submitted ${points} to back end and got back ${score.total_score}
+  //    total from back end`
+  // );
+  return dispatch(_updateTotalScore(score));
 };
 /**
  * REDUCER
@@ -71,7 +77,8 @@ const initState = {
   pathId: 0,
   gameStage: 0,
   status: 'no-game',
-  score: 0,
+  mini_score: 0,
+  total_score: 0,
 };
 export default function (state = initState, action) {
   switch (action.type) {
@@ -87,6 +94,8 @@ export default function (state = initState, action) {
         gameStage: action.game.stage,
         status: action.game.status,
       };
+    case UPDATE_TOTAL_SCORE:
+      return { ...state, score: action.score.total_score };
     case UPDATE_SCORE:
       return { ...state, score: action.score };
     default:
