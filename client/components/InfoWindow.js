@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
-import { addFav } from '../store/favorite';
+import { addFav } from '../store/favorites';
 
 class InfoWindow extends Component {
   constructor(props) {

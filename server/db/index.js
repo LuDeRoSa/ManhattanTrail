@@ -39,7 +39,8 @@ Path.hasMany(Game);
 User.hasMany(Favorite);
 Favorite.belongsTo(User);
 
-Restaurant.hasOne(Favorite);
+Restaurant.hasMany(Favorite);
+Favorite.belongsTo(Restaurant);
 
 const syncAndSeed = async () => {
   await db.sync({ force: true });
