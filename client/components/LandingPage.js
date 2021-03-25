@@ -48,6 +48,7 @@ class LandingPage extends React.Component {
         <p>Path: {game.pathId}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p>
+        <p>Score: {game.total_score}</p>
 
         <Button
           variant="outlined"

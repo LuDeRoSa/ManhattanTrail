@@ -20,10 +20,18 @@ router.get('/', async (req, res, next) => {
         pathId: req.body.pathId || 1, //category definition can happen here
         userId: user.id,
       });
-      const score = Scores.create({
+      const score = await Scores.create({
         gameId: game.id,
       });
     }
+
+    game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+      include: Scores,
+    });
     res.send(game);
   } catch (err) {
     next(err);

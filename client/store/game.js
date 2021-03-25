@@ -87,15 +87,18 @@ export default function (state = initState, action) {
         pathId: action.game.pathId,
         gameStage: action.game.stage,
         status: action.game.status,
+        mini_score: 0,
+        total_score: action.game.score.total_score,
       };
     case NEXT_STAGE:
       return {
         ...state,
+        mini_score: 0,
         gameStage: action.game.stage,
         status: action.game.status,
       };
     case UPDATE_TOTAL_SCORE:
-      return { ...state, score: action.score.total_score };
+      return { ...state, total_score: action.score.total_score };
     case UPDATE_MINI_SCORE:
       return { ...state, mini_score: action.score };
     default:
