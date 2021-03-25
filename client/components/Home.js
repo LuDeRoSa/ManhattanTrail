@@ -10,6 +10,7 @@ import { setGame } from '../store/game';
 import PhaserGameStart from './PhaserGameStart';
 import PhaserGameScore from './PhaserGameScore';
 
+
 /**
  * COMPONENT
  */
@@ -40,9 +41,9 @@ export const Home = (props) => {
         <Grid
           container
           spacing={0}
-          direction="row"
-          alignItems="center"
-          justify="center"
+          direction='row'
+          alignItems='center'
+          justify='center'
         >
           <Grid item lg={6} md={6} sm={12} xs={12} style={{ height: '50vh' }}>
             <Map />

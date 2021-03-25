@@ -5,8 +5,8 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import TimelineIcon from '@material-ui/icons/Timeline';
 import PublicIcon from '@material-ui/icons/Public';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const styles = {
   root: {},
@@ -47,12 +47,12 @@ class GameOver extends React.Component {
             Play new Game
           </Button>
           <Button
-            startIcon={<TimelineIcon />}
+            startIcon={<AccountCircleIcon />}
             color="inherit"
             component={Link}
-            to="/pastgames"
+            to="/profile"
           >
-            Past Games
+            Profile
           </Button>
           <Button
             startIcon={<PublicIcon />}

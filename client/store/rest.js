@@ -4,6 +4,7 @@ import axios from 'axios';
  * ACTION TYPES
  */
 const SET_RESTS = 'SET_RESTS';
+
 /**
  * ACTION CREATORS
  */

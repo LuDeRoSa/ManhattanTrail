@@ -10,6 +10,7 @@ const User = require('./models/User');
 const Game = require('./models/Game');
 const Question = require('./models/Question');
 const Answer = require('./models/Answer');
+const Favorite = require('./models/Favorite');
 
 //associations could go here!
 Path.belongsTo(Restaurant);
@@ -35,8 +36,10 @@ Quiz.belongsTo(Restaurant);
 
 Path.hasMany(Game);
 
-// User_Responses.hasMany(Scores);
-// Scores.belongsTo(User_Responses);
+User.hasMany(Favorite);
+Favorite.belongsTo(User);
+
+Restaurant.hasOne(Favorite);
 
 const syncAndSeed = async () => {
   await db.sync({ force: true });
@@ -412,5 +415,6 @@ module.exports = {
     Game,
     Question,
     Answer,
+    Favorite,
   },
 };
