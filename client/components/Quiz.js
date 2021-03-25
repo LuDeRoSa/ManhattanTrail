@@ -6,8 +6,13 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import { makeStyles, StylesProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = {
+  button: {
+    color: 'white',
+  },
+};
 
 class Quiz extends React.Component {
   constructor(props) {
@@ -65,16 +70,19 @@ class Quiz extends React.Component {
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
-        <div id='quiz'>
-          <form id='quiz-form' onSubmit={this.handleSubmit}>
-            <FormControl id='form-control' component='fieldset'>
+        <div id="quiz" styles={styles.quiz}>
+          <form id="quiz-form" onSubmit={this.handleSubmit}>
+            <FormControl id="form-control" component="fieldset">
               {this.props.quiz.questions &&
                 this.props.quiz.questions.length > 0 && (
-                  <div id='question'>
-                    <SingleQuestion
+                  <div id="question">
+                    <h3>
+                      {this.props.quiz.questions[currentQuestion].question}
+                    </h3>
+                    {/* <SingleQuestion
                       questions={this.props.quiz.questions[currentQuestion]}
-                    />
-                    <div id='answer'>
+                    /> */}
+                    <div id="answer">
                       {this.props.quiz.questions[currentQuestion].answers.map(
                         (answerObj, index) => (
                           <RadioGroup
@@ -89,16 +97,22 @@ class Quiz extends React.Component {
                               value={answerObj.answer}
                               key={index}
                               label={answerObj.answer}
-                              id='form-label'
+                              id="form-label"
                             />
                           </RadioGroup>
                         )
                       )}
                     </div>
+                    <Button
+                      variant="outlined"
+                      style={styles.button}
+                      onClick={this.handleSubmit}
+                    >
+                      Submit{' '}
+                    </Button>
                   </div>
                 )}
             </FormControl>
-            <input type='submit' value='Submit' />
           </form>
         </div>
       </div>
