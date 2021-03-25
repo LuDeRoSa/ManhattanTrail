@@ -18,3 +18,22 @@ router.post('/addFave', async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    let favorites = await Favorite.findAll({
+      where: {
+        userId: user.id,
+      },
+      include: {
+        all: true,
+        nested: true,
+      },
+    });
+    res.send(favorites);
+    // console.log('api', fave);
+  } catch (err) {
+    next(err);
+  }
+});

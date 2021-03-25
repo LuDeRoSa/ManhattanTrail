@@ -8,8 +8,17 @@ import quiz from './quiz';
 import game from './game';
 import pastgames from './pastgames';
 import score from './globalscore';
+import favorites from './favorites';
 
-const reducer = combineReducers({ auth, rest, game, pastgames, quiz, score });
+const reducer = combineReducers({
+  auth,
+  rest,
+  game,
+  pastgames,
+  quiz,
+  score,
+  favorites,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
