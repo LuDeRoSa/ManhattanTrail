@@ -1,5 +1,4 @@
 import axios from 'axios';
-const getToken = () => window.localStorage.getItem('token');
 
 /**
  * ACTION TYPES
