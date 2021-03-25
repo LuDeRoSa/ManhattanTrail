@@ -34,10 +34,9 @@ export const Home = (props) => {
       <center>
         <h3>Welcome , {username}</h3>
       </center>
-      {/* <Container style={styles.container}> */}
       <Grid
         container
-        spacing={1}
+        spacing={3}
         direction="row"
         alignItems="center"
         justify="center"
@@ -58,7 +57,6 @@ export const Home = (props) => {
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
       </Grid>
-      {/* </Container> */}
     </div>
   );
 };
