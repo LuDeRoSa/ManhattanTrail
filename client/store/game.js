@@ -78,6 +78,7 @@ const initState = {
   gameStage: 0,
   status: 'no-game',
   mini_score: 0,
+  mini_status: 'ingame',
   total_score: 0,
 };
 export default function (state = initState, action) {
@@ -88,19 +89,25 @@ export default function (state = initState, action) {
         gameStage: action.game.stage,
         status: action.game.status,
         mini_score: 0,
+        mini_status: 'ingame',
         total_score: action.game.score.total_score,
       };
     case NEXT_STAGE:
       return {
         ...state,
         mini_score: 0,
+        mini_status: 'ingame',
         gameStage: action.game.stage,
         status: action.game.status,
       };
     case UPDATE_TOTAL_SCORE:
-      return { ...state, total_score: action.score.total_score };
+      return {
+        ...state,
+        total_score: action.score.total_score,
+        mini_status: 'finished',
+      };
     case UPDATE_MINI_SCORE:
-      return { ...state, mini_score: action.score };
+      return { ...state, mini_score: action.score, mini_status: 'finished' };
     default:
       return state;
   }
