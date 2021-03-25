@@ -1,10 +1,8 @@
 module.exports = {
-  entry: [
-    './client/index.js'
-  ],
+  entry: ['./client/index.js'],
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './public/bundle.js',
   },
   devtool: 'source-map',
   module: {
@@ -16,11 +14,10 @@ module.exports = {
         options: {
           presets: [
             '@babel/preset-react',
-            {'plugins': ['@babel/plugin-proposal-class-properties']}
+            { plugins: ['@babel/plugin-proposal-class-properties'] },
           ],
-          
-        }
-      }
-    ]
-  }
-}
+        },
+      },
+    ],
+  },
+};

@@ -9,6 +9,9 @@ import { setGame } from '../store/game';
 
 import PhaserGameStart from './PhaserGameStart';
 import PhaserGameScore from './PhaserGameScore';
+//import PhaserGame from './PhaserGame';
+import Galaga from './Galaga';
+
 
 
 /**
@@ -53,6 +56,8 @@ export const Home = (props) => {
               {
                 quiz: <Quiz />,
                 cake: <PhaserGameStart />,
+                galaga: <Galaga />,
+
               }[game_type]
             }
           </Grid>

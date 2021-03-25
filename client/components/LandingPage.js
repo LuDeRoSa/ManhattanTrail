@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setGame } from '../store/game';
 
-
-import PhaserGame from './PhaserGame'
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -50,7 +48,6 @@ class LandingPage extends React.Component {
         <p>Path: {game.pathId}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p>
-
 
         <Button
           variant="outlined"
