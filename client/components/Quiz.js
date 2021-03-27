@@ -42,15 +42,16 @@ class Quiz extends React.Component {
     ev.preventDefault();
     let finished = false;
     if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
-    if (this.state.currentQuestion < 3) {
-      this.setState({
-        currentQuestion: this.state.currentQuestion + 1,
-      });
-    } else {
-      finished = true;
-      this.setState({
-        finished: true,
-      });
+      if (this.state.currentQuestion < 3) {
+        this.setState({
+          currentQuestion: this.state.currentQuestion + 1,
+        });
+      } else {
+        finished = true;
+        this.setState({
+          finished: true,
+        });
+      }
     }
 
     let userResponse = this.state.value;
@@ -125,7 +126,7 @@ class Quiz extends React.Component {
                       variant='outlined'
                       style={styles.button}
                       onClick={this.handleSubmit}
-                      disabled={this.state.quizCount === 5 ? true : false}
+                      // disabled={this.state.quizCount === 5 ? true : false}
                     >
                       Submit{' '}
                     </Button>
