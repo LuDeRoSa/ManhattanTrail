@@ -20,7 +20,5 @@ const middleware = composeWithDevTools(
 );
 const store = createStore(reducer, middleware);
 
-// export const getToken = () => window.localStorage.getItem('token');
-
 export default store;
 export * from './auth';

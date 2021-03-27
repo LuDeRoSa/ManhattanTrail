@@ -1,7 +1,6 @@
-const Sequelize = require('sequelize');
 const router = require('express').Router();
 const {
-  models: { Restaurant, Path, Quiz, User, Game, Scores, Favorite },
+  models: { User, Favorite },
 } = require('../db');
 
 module.exports = router;

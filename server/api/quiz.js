@@ -1,4 +1,3 @@
-const Sequelize = require('sequelize');
 const router = require('express').Router();
 const {
   models: { Restaurant, Path, Quiz, User, Game, Scores },

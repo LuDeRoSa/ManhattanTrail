@@ -4,13 +4,10 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/Auth-Form';
 import Home from './components/Home';
 import { me } from './store';
-import Quiz from './components/Quiz';
 import LandingPage from './components/LandingPage';
 import GameOver from './components/GameOver';
 import Profile from './components/Profile';
-// import PastGames from './components/PastGames';
 import Leadership from './components/Leadership';
-import GlobalScore from './components/GlobalScore';
 /**
  * COMPONENT
  */

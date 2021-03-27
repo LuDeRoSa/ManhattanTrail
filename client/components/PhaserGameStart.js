@@ -1,7 +1,6 @@
 import React from 'react';
 // import { connect } from 'react-redux';
 import Galaga from './Galaga';
-
 import Cake from './Cake';
 
 class PhaserGameStart extends React.Component {

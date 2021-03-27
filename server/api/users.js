@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User, Scores },
+  models: { User },
 } = require('../db');
 module.exports = router;
 
@@ -31,32 +31,32 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:user_id/:game_id/:question_id'),
-  async (req, res, next) => {
-    try {
-      const userId = req.params.user_id;
-      const gameId = req.params.game_id;
-      const questionId = req.params.question_id;
+// router.put('/:user_id/:game_id/:question_id'),
+//   async (req, res, next) => {
+//     try {
+//       const userId = req.params.user_id;
+//       const gameId = req.params.game_id;
+//       const questionId = req.params.question_id;
 
-      console.log('THE PUT LOG!!!!!!!!!!!!!', userId, gameId, questionId);
-      // const totalScore = await Scores.find({
-      //   where: {
-      //     game_id: gameId,
-      //     user_id: userId,
-      //     question_id: questionId
-      //   }
-      // })
+//       console.log('THE PUT LOG!!!!!!!!!!!!!', userId, gameId, questionId);
+//       // const totalScore = await Scores.find({
+//       //   where: {
+//       //     game_id: gameId,
+//       //     user_id: userId,
+//       //     question_id: questionId
+//       //   }
+//       // })
 
-      // const newScore = totalScore+=1;
+//       // const newScore = totalScore+=1;
 
-      // totalScore.update({
-      //   totalScore: newScore
-      // });
+//       // totalScore.update({
+//       //   totalScore: newScore
+//       // });
 
-      // await totalScore.save();
+//       // await totalScore.save();
 
-      // res.send(totalScore);
-    } catch (ex) {
-      next(ex);
-    }
-  };
+//       // res.send(totalScore);
+//     } catch (ex) {
+//       next(ex);
+//     }
+//   };
