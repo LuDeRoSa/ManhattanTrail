@@ -20,10 +20,18 @@ router.get('/', async (req, res, next) => {
         pathId: req.body.pathId || 1, //category definition can happen here
         userId: user.id,
       });
-      const score = Scores.create({
+      const score = await Scores.create({
         gameId: game.id,
       });
     }
+
+    game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+      include: Scores,
+    });
     res.send(game);
   } catch (err) {
     next(err);
@@ -66,10 +74,7 @@ router.get('/pastgames', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-    // console.log('the req.body! ', req.body);
     const points = req.body.points;
-    //need to update the scores model!
-
     const user = await User.findByToken(req.headers.authorization);
     let game = await Game.findOne({
       where: {
@@ -78,7 +83,6 @@ router.post('/addScores', async (req, res, next) => {
       },
       include: Scores,
     });
-    // console.log('this is the game data associated to user', game);
 
     let scoreMatch = await Scores.findOne({
       where: {
@@ -87,14 +91,12 @@ router.post('/addScores', async (req, res, next) => {
     });
 
     scoreMatch.total_score += points;
-    scoreMatch.user_id = user.id;
     await scoreMatch.save();
-
+    res.send(scoreMatch);
   } catch (err) {
     next(err);
   }
 });
-
 
 //this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {

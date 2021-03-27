@@ -16,9 +16,11 @@ const Path = db.define('path', {
   },
 });
 
-Path.addHook('beforeSave', (path, options) => {
-  const gameIndex = Math.floor(Math.random() * GAME_OPTIONS.length);
+Path.addHook('afterCreate', async (path, options) => {
+  // const gameIndex = Math.floor(Math.random() * GAME_OPTIONS.length);
+  const gameIndex = (path.id - 1) % GAME_OPTIONS.length;
   path.game_type = GAME_OPTIONS[gameIndex];
+  await path.save();
 });
 
 module.exports = Path;
