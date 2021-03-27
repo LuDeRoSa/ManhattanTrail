@@ -52,8 +52,13 @@ export const Home = (props) => {
         <Grid item lg={1} md={1} sm={false} xs={false} />
 
         <Grid item lg={5} md={5} sm={10} xs={12}>
-          quiz: <Quiz />, cake: <PhaserGameStart />, galaga: <Galaga />,
-          }[game_type]
+          {
+            {
+              quiz: <Quiz />,
+              cake: <PhaserGameStart />,
+              galaga: <Galaga />,
+            }[game_type]
+          }
         </Grid>
       </Grid>
     </div>
