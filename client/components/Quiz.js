@@ -25,6 +25,7 @@ class Quiz extends React.Component {
       status: '',
       currentQuestion: 0,
       finished: false,
+      quizCount: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,6 +42,7 @@ class Quiz extends React.Component {
     ev.preventDefault();
     let finished = false;
     if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
+    if (this.state.currentQuestion < 3) {
       this.setState({
         currentQuestion: this.state.currentQuestion + 1,
       });
@@ -60,6 +62,7 @@ class Quiz extends React.Component {
       played: true,
       points,
       status: points > 0 ? 'correct' : 'wrong',
+      quizCount: (this.state.quizCount += 1),
     });
     this.props.updateMiniScore(points);
     if (finished) {
@@ -84,19 +87,20 @@ class Quiz extends React.Component {
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
-        <div id="quiz" styles={styles.quiz}>
-          <form id="quiz-form" onSubmit={this.handleSubmit}>
-            <FormControl id="form-control" component="fieldset">
+        {this.state.quizCount}/5
+        <div id='quiz' styles={styles.quiz}>
+          <form id='quiz-form' onSubmit={this.handleSubmit}>
+            <FormControl id='form-control' component='fieldset'>
               {this.props.quiz.questions &&
                 this.props.quiz.questions.length > 0 && (
-                  <div id="question">
+                  <div id='question'>
                     <h3>
                       {this.props.quiz.questions[currentQuestion].question}
                     </h3>
                     {/* <SingleQuestion
                       questions={this.props.quiz.questions[currentQuestion]}
                     /> */}
-                    <div id="answer">
+                    <div id='answer'>
                       {this.props.quiz.questions[currentQuestion].answers.map(
                         (answerObj, index) => (
                           <RadioGroup
@@ -111,16 +115,17 @@ class Quiz extends React.Component {
                               value={answerObj.answer}
                               key={index}
                               label={answerObj.answer}
-                              id="form-label"
+                              id='form-label'
                             />
                           </RadioGroup>
                         )
                       )}
                     </div>
                     <Button
-                      variant="outlined"
+                      variant='outlined'
                       style={styles.button}
                       onClick={this.handleSubmit}
+                      disabled={this.state.quizCount === 5 ? true : false}
                     >
                       Submit{' '}
                     </Button>

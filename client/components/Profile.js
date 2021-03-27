@@ -19,8 +19,6 @@ class Profile extends React.Component {
   }
   render() {
     const { account, favorites } = this.props;
-    console.log('favorites', favorites);
-
     return (
       <div className='account-page'>
         <h2>Welcome {account.username}.</h2>
@@ -37,11 +35,11 @@ class Profile extends React.Component {
             })}
         </ul>
         <h2>Favorited Restaraunts</h2>
-        <div>
+        <ul>
           {favorites.map((favorite, idx) => (
             <li key={idx}>{favorite.restaurant.restaurant_name}</li>
           ))}
-        </div>
+        </ul>
         <h2>Past Games</h2>
         <PastGames />
       </div>
