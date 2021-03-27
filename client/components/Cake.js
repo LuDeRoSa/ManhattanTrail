@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds
 import { connect } from 'react-redux';
-import { updateMiniGameScore } from '../store/game';
+import { updateMiniGameScore, updateLastStagePlayed } from '../store/game';
 
 /*
 Timer methods
@@ -68,10 +68,23 @@ function removeCake(game, cake) {
   }
 }
 
+function updateStage(game, current_stage) {
+  console.log('updatestage called');
+  if (current_stage) {
+    game.current_stage = current_stage;
+    console.log('in if statement of udpateStage')
+  }
+  console.log('current stage is ',current_stage);
+  console.log('game current stage', game.current_stage)
+  console.log('test print score', game.score)
+}
+
 class Cake extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // current_stage: this.props.current_stage, doesn't work
+      current_stage: 0,
       scoreText: null,
       timeText: null,
       score: 0,
@@ -167,6 +180,10 @@ class Cake extends Component {
             if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
               this.add.sprite(300, 200, 'game-over').setScale(0.4, 0.4);
               props.updateMiniGameScore(this.score);
+              props.updateLastStagePlayed(this.current_stage);
+              // updateStage();
+              
+              // props.updateLastStagePlayed(this.props.current_stage);
               this.scene.pause();
               this.gameDone = true;
             }
@@ -210,9 +227,15 @@ class Cake extends Component {
 
   render() {
     const { initialize, game } = this.state;
+    updateStage(game, this.props.current_stage);
     return (
       <div>
-        <IonPhaser game={game} initialize={initialize} />
+        {/* <h1>Current stage! {current_stage}</h1> */}
+        
+        <IonPhaser game={game} initialize={initialize}/> 
+        {/* {updateStage({game}, {this.props.current_stage})} */}
+
+        
       </div>
     );
   }
@@ -225,6 +248,7 @@ const mapState = (state) => {
 
 const mapDispatch = {
   updateMiniGameScore,
+  updateLastStagePlayed
 };
 
 export default connect(mapState, mapDispatch)(Cake);

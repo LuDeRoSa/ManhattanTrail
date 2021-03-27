@@ -33,7 +33,7 @@ class PhaserGameStart extends React.Component {
               trashcans
             </p>
             {this.state.gameStarted ? (
-              <Cake />
+              <Cake current_stage = {this.props.current_stage}/>
             ) : (
               <button onClick={this.handleClick}>Start Game</button>
             )}

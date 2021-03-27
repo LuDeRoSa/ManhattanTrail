@@ -8,6 +8,7 @@ const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
 const UPDATE_MINI_SCORE = 'UPDATE_MINI_SCORE';
 const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
+const UPDATE_LAST_STAGE_PLAYED = 'UPDATE_LAST_STAGE_PLAYED';
 
 /**
  * ACTION CREATORS
@@ -16,6 +17,7 @@ const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });
 export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
 const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
+export const _updateLastStagePlayed = (stage) => ({ type: UPDATE_LAST_STAGE_PLAYED, stage });
 /**
  * THUNK CREATORS
  */
@@ -68,11 +70,25 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
       }
     )
   ).data;
-  // console.log(
-  //   `thunk submitted ${points} to back end and got back ${score.total_score}
-  //    total from back end`
-  // );
   return dispatch(_updateTotalScore(score));
+};
+
+// Pass last stage played (so can't replay)
+export const updateLastStagePlayed = (stage) => async (dispatch) => {
+  console.log('in updateLastStagePlayed thunk', stage);
+  const token = getToken();
+  const score = (
+    await axios.post(
+      '/api/game/lastStagePlayed',
+      { stage },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
+  ).data;
+  return dispatch(_updateLastStagePlayed(stage));
 };
 /**
  * REDUCER
@@ -80,6 +96,7 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
 const initState = {
   pathId: 0,
   gameStage: 0,
+  lastStagePlayed: 0,
   status: 'no-game',
   mini_score: 0,
   mini_status: 'ingame',
@@ -91,6 +108,7 @@ export default function (state = initState, action) {
       return {
         pathId: action.game.pathId,
         gameStage: action.game.stage,
+        lastStagePlayed: action.game.lastStagePlayed,
         status: action.game.status,
         mini_score: 0,
         mini_status: 'ingame',
@@ -116,6 +134,11 @@ export default function (state = initState, action) {
         mini_score: action.score + state.mini_score,
         mini_status: 'finished',
       };
+    case  UPDATE_LAST_STAGE_PLAYED: 
+      return {
+        ...state,
+        lastStagePlayed: action.lastStagePlayed,
+      }
     default:
       return state;
   }

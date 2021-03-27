@@ -98,6 +98,33 @@ router.post('/addScores', async (req, res, next) => {
   }
 });
 
+router.post('/lastStagePlayed', async (req, res, next) => {
+  try {
+    const stage = req.body.stage;
+    console.log('back-end route stage', stage)
+    const user = await User.findByToken(req.headers.authorization);
+    let game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+      include: Scores,
+    });
+
+    let scoreMatch = await Scores.findOne({
+      where: {
+        gameId: game.id,
+      },
+    });
+
+    scoreMatch.lastStagePlayed = stage;
+    await scoreMatch.save();
+    res.send(scoreMatch);
+  } catch (err) {
+    next(err);
+  }
+});
+ 
 //this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {
   try {

@@ -52,7 +52,7 @@ export const Home = (props) => {
             {
               {
                 quiz: <Quiz />,
-                cake: <PhaserGameStart game_type={'cake'} />,
+                cake: <PhaserGameStart game_type={'cake'} current_stage={props.game.gameStage}/>,
                 galaga: <PhaserGameStart game_type={'galaga'} />,
               }[game_type]
             }

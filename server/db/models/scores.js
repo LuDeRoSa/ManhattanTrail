@@ -10,6 +10,10 @@ const Scores = db.define('scores', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW,
   },
+  last_stage_played: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  }
 });
 
 module.exports = Scores;

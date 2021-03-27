@@ -55,7 +55,6 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    //console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -147,10 +146,12 @@ class _Map extends React.Component {
               ))} */}
           </GoogleMapReact>
         </div>
-        <div>
-          <button onClick={this.stepStage}>Next</button>
-          {this.props.game.status}
-          {this.props.game.gameStage}
+        <div id = 'next-button-div'>
+          
+          {this.props.game.mini_status === 'finished' 
+            ? <button id = 'next-button' onClick={this.stepStage}>Move to Next Stage »</button> 
+            : ''
+          }
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
