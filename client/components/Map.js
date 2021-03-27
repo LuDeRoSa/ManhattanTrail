@@ -1,12 +1,11 @@
 import React from 'react';
-
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-import InfoWindow from './InfoWindow';
+// import InfoWindow from './InfoWindow';
 
 class _Map extends React.Component {
   constructor(props) {
@@ -105,7 +104,7 @@ class _Map extends React.Component {
                 lng={this.state.startingPoint.lng}
                 color={this.props.game.gameStage === 1 ? 'red' : 'black'}
                 show={this.state.show}
-                name='starting point'
+                name="starting point"
               />
             )}
             {this.props.rests.length > 0 &&

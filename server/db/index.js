@@ -5,7 +5,6 @@ const Path = require('./models/path');
 const Quiz = require('./models/quiz');
 const Restaurant = require('./models/restaurant');
 const Scores = require('./models/scores');
-const User_Responses = require('./models/user_responses');
 const User = require('./models/User');
 const Game = require('./models/Game');
 const Question = require('./models/Question');
@@ -15,9 +14,6 @@ const Favorite = require('./models/Favorite');
 //associations could go here!
 Path.belongsTo(Restaurant);
 Restaurant.hasMany(Path);
-
-User.hasMany(User_Responses);
-User_Responses.belongsTo(User);
 
 User.hasMany(Game);
 Game.belongsTo(User);
@@ -380,28 +376,6 @@ const syncAndSeed = async () => {
  * hooks
  */
 
-// automatically calculates user score after each user_response update
-
-User_Responses.afterBulkUpdate((user_responses) => {
-  user_responses.map(async (response) => {
-    const question_one_points = response.question_one_points;
-    const question_two_points = response.question_two_points;
-    const question_three_points = response.question_three_points;
-    const question_four_points = response.question_four_points;
-    const question_five_points = response.question_five_points;
-    const question_score =
-      question_one_points +
-      question_two_points +
-      question_three_points +
-      question_four_points +
-      question_five_points;
-
-    const score = Scores.findByPk(response.game_id);
-    score.total_score += question_score;
-    score.save();
-  });
-});
-
 module.exports = {
   db,
   syncAndSeed,
@@ -411,7 +385,6 @@ module.exports = {
     Quiz,
     Restaurant,
     Scores,
-    User_Responses,
     Game,
     Question,
     Answer,

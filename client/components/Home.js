@@ -13,7 +13,6 @@ import PhaserGameStart from './PhaserGameStart';
  * COMPONENT
  */
 import Quiz from './Quiz';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 const styles = {
   container: {
@@ -38,9 +37,9 @@ export const Home = (props) => {
       <Grid
         container
         spacing={3}
-        direction='row'
-        alignItems='center'
-        justify='center'
+        direction="row"
+        alignItems="center"
+        justify="center"
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
         <Grid item lg={3} md={3} sm={10} xs={12} style={{ height: '50vh' }}>
@@ -49,13 +48,13 @@ export const Home = (props) => {
         <Grid item lg={1} md={1} sm={false} xs={false} />
 
         <Grid item lg={5} md={5} sm={10} xs={12}>
+          {
             {
-              {
-                quiz: <Quiz />,
-                cake: <PhaserGameStart game_type={'cake'} />,
-                galaga: <PhaserGameStart game_type={'galaga'} />,
-              }[game_type]
-            }
+              quiz: <Quiz />,
+              cake: <PhaserGameStart game_type={'cake'} />,
+              galaga: <PhaserGameStart game_type={'galaga'} />,
+            }[game_type]
+          }
         </Grid>
       </Grid>
     </div>

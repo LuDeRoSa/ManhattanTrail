@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 import { connect } from 'react-redux';
-
 import { updateMiniGameScore } from '../store/game';
 
 //helpful docs https://gamedevacademy.org/how-to-make-a-mario-style-platformer-with-phaser-3/

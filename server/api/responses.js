@@ -1,5 +1,3 @@
-// when new game button is pressed, put new blank row for user_responses and scores tables
-
 const router = require('express').Router();
 const {
   models: { User, User_Responses, Scores },
@@ -33,17 +31,17 @@ router.post('/:user_id/:path_id/:game_id', async (req, res, next) => {
 
 // PUT user/user_id/game_id/question_id
 // (will put the question points in the req.body)
-router.put('/:user_id/:game_id/:question_id', async (req, res, next) => {
-  try {
-    const responseToEdit = await User_Response.findOne({
-      where: {
-        game_id: req.params.game_id,
-        question_id: req.params.question_id,
-        user_id: req.params.user_id,
-      },
-    });
-    await responseToEdit.update(req.body);
-  } catch (ex) {
-    next(ex);
-  }
-});
+// router.put('/:user_id/:game_id/:question_id', async (req, res, next) => {
+//   try {
+//     const responseToEdit = await User_Response.findOne({
+//       where: {
+//         game_id: req.params.game_id,
+//         question_id: req.params.question_id,
+//         user_id: req.params.user_id,
+//       },
+//     });
+//     await responseToEdit.update(req.body);
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });

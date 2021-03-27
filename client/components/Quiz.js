@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz } from '../store/quiz';
 import { updateMiniGameScore, updateMiniScore } from '../store/game';
-import SingleQuestion from './SingleQuestion';
+// import SingleQuestion from './SingleQuestion';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
