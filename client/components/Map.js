@@ -24,7 +24,7 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
-    this.props.setRests(this.props.game.pathId);
+    this.props.setRests(this.props.game.path_name);
 
     if (this.props.rests.length > 0) {
       this.setCenter();

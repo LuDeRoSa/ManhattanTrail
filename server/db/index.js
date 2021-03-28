@@ -30,7 +30,7 @@ Question.belongsTo(Quiz);
 Restaurant.hasOne(Quiz);
 Quiz.belongsTo(Restaurant);
 
-Path.hasMany(Game);
+// Path.hasMany(Game);
 
 User.hasMany(Favorite);
 Favorite.belongsTo(User);
@@ -81,13 +81,13 @@ const syncAndSeed = async () => {
 
   //hardcoding first path:
   const paths = await Promise.all([
-    Path.create({ path_id: 1, restaurantId: 1, stage: 1 }),
-    Path.create({ path_id: 1, restaurantId: 2, stage: 2 }),
-    Path.create({ path_id: 1, restaurantId: 3, stage: 3 }),
-    Path.create({ path_id: 1, restaurantId: 4, stage: 4 }),
-    Path.create({ path_id: 1, restaurantId: 5, stage: 5 }),
-    Path.create({ path_id: 2, restaurantId: 4, stage: 1 }),
-    Path.create({ path_id: 2, restaurantId: 5, stage: 2 }),
+    Path.create({ path_name: 1, restaurantId: 1, stage: 1 }),
+    Path.create({ path_name: 1, restaurantId: 2, stage: 2 }),
+    Path.create({ path_name: 1, restaurantId: 3, stage: 3 }),
+    Path.create({ path_name: 1, restaurantId: 4, stage: 4 }),
+    Path.create({ path_name: 1, restaurantId: 5, stage: 5 }),
+    Path.create({ path_name: 2, restaurantId: 4, stage: 1 }),
+    Path.create({ path_name: 2, restaurantId: 5, stage: 2 }),
   ]);
 
   const quizzes = await Promise.all([

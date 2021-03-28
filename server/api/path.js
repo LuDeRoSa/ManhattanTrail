@@ -7,10 +7,10 @@ module.exports = router;
 
 router.get('/:id/restaurants', async (req, res, next) => {
   try {
-    const path_id = req.params.id;
+    const path_name = req.params.id;
 
     const path = await Path.findAll({
-      where: { path_id },
+      where: { path_name },
       include: Restaurant,
       order: [['stage', 'ASC']],
     });
@@ -31,7 +31,7 @@ router.get('/:id/:stageId', async (req, res, next) => {
   try {
     const path = await Path.findOne({
       where: {
-        path_id: req.params.id,
+        path_name: req.params.id,
         stage: req.params.stageId,
       },
     });

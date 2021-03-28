@@ -4,8 +4,8 @@ const db = require('../db');
 const GAME_OPTIONS = ['quiz', 'cake', 'galaga'];
 
 const Path = db.define('path', {
-  path_id: {
-    type: Sequelize.INTEGER,
+  path_name: {
+    type: Sequelize.STRING,
   },
   stage: {
     type: Sequelize.INTEGER,

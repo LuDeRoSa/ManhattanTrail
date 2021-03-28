@@ -78,7 +78,7 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
  * REDUCER
  */
 const initState = {
-  pathId: 0,
+  path_name: 0,
   gameStage: 0,
   status: 'no-game',
   mini_score: 0,
@@ -89,7 +89,7 @@ export default function (state = initState, action) {
   switch (action.type) {
     case SET_GAME:
       return {
-        pathId: action.game.pathId,
+        path_name: action.game.path_name,
         gameStage: action.game.stage,
         status: action.game.status,
         mini_score: 0,

@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
     if (!game) {
       //create game
       game = await Game.create({
-        pathId: req.body.pathId || 1, //category definition can happen here
+        path_name: req.body.path_name || '1', //category definition can happen here
         userId: user.id,
       });
       const score = await Scores.create({

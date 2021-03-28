@@ -42,7 +42,7 @@ export default function GamesTable(props) {
                   <TableCell align="left">{game.id}</TableCell>
                   <TableCell align="left">{game.updatedAt}</TableCell>
                   <TableCell component="th" scope="row">
-                    {game.pathId}
+                    {game.path_name}
                   </TableCell>
                   <TableCell align="right">{game.score.total_score}</TableCell>
                 </TableRow>

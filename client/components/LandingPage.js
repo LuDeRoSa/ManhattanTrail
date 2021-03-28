@@ -44,7 +44,7 @@ class LandingPage extends React.Component {
           <Button disabled>Chinese</Button>
           <Button disabled>Indian</Button>
         </ButtonGroup>
-        <p>Path: {game.pathId}</p>
+        <p>Path: {game.path_name}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p>
         <p>Score: {game.total_score}</p>
