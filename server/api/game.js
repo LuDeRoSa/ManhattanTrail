@@ -13,17 +13,27 @@ router.get('/', async (req, res, next) => {
         userId: user.id,
         status: 'ingame',
       },
+      include: Scores,
     });
     if (!game) {
-      //create game
-      game = await Game.create({
-        path_name: req.body.path_name || '1', //category definition can happen here
-        userId: user.id,
-      });
-      const score = await Scores.create({
-        gameId: game.id,
-      });
+      res.status(204);
     }
+    res.send(game);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/path', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    let game = await Game.create({
+      path_name: req.body.path_name,
+      userId: user.id,
+    });
+    await Scores.create({
+      gameId: game.id,
+    });
 
     game = await Game.findOne({
       where: {

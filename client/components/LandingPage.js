@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setGame } from '../store/game';
+import { checkGame, setGame } from '../store/game';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -25,8 +25,7 @@ class LandingPage extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.setGame(this.props.userId);
-    //this can be altered to send information about desired path or category later on in a button onclick instead
+    this.props.checkGame();
   }
   render() {
     const { username } = this.props;
@@ -34,30 +33,43 @@ class LandingPage extends React.Component {
     return (
       <Container style={styles.container}>
         <h3>Welcome , {username}</h3>
-        <h4>In the future, category options might be here</h4>
-        <h4>
-          Some information could be displayed here whether a user currently has
-          a game in progress
-        </h4>
-        <ButtonGroup>
-          <Button disabled>Italian</Button>
-          <Button disabled>Chinese</Button>
-          <Button disabled>Indian</Button>
-        </ButtonGroup>
-        <p>Path: {game.path_name}</p>
-        <p>Stage: {game.gameStage}</p>
-        <p>Status: {game.status}</p>
-        <p>Score: {game.total_score}</p>
+        {!game.path_name && (
+          <React.Fragment>
+            <h4>You don't have a game set up yet, please pick a path! :)</h4>
+            <ButtonGroup>
+              <Button onClick={() => this.props.setGame('1')}>
+                Default dev path 1
+              </Button>
+              <Button disabled>Italian</Button>
+              <Button disabled>Chinese</Button>
+              <Button disabled>Indian</Button>
+              <Button
+                disabled
+                onClick={() => this.props.setGame('gluten-free')}
+              >
+                Gluten Free
+              </Button>
+            </ButtonGroup>
+          </React.Fragment>
+        )}
 
-        <Button
-          variant="outlined"
-          startIcon={<SportsEsportsIcon />}
-          color="inherit"
-          component={Link}
-          to="/home"
-        >
-          {game.gameStage > 1 ? 'Resume' : 'Begin'} Game
-        </Button>
+        {game.path_name && (
+          <React.Fragment>
+            <p>Path: {game.path_name}</p>
+            <p>Stage: {game.gameStage}</p>
+            <p>Status: {game.status}</p>
+            <p>Score: {game.total_score}</p>
+            <Button
+              variant="outlined"
+              startIcon={<SportsEsportsIcon />}
+              color="inherit"
+              component={Link}
+              to="/home"
+            >
+              {game.gameStage > 1 ? 'Resume' : 'Begin'} Game
+            </Button>
+          </React.Fragment>
+        )}
       </Container>
     );
   }
@@ -74,6 +86,7 @@ const mapState = (state) => {
   };
 };
 const mapDispatch = {
+  checkGame,
   setGame,
 };
 
