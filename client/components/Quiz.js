@@ -82,7 +82,6 @@ class Quiz extends React.Component {
     if (this.state.finished) {
       return <>Quiz Done!</>;
     }
-    console.log('quiz', this.props.quiz);
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
