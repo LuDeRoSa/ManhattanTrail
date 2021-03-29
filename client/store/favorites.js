@@ -45,7 +45,7 @@ export const getFavorites = (userId) => async (dispatch) => {
   ).data;
   return dispatch(_getFavorites(favorites));
 };
-/**
+/*
  * REDUCER
  */
 const initState = {
