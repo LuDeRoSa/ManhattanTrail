@@ -4,7 +4,12 @@ import Map from './Map';
 import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
+<<<<<<< HEAD
 import GameStart from './GameStart';
+=======
+import PhaserGameStart from './PhaserGameStart';
+import Galaga from './Galaga';
+>>>>>>> facebook oauth done finalllyyyyyyy woooot
 
 /**
  * COMPONENT
