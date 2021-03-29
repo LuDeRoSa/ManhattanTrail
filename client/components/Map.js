@@ -5,7 +5,6 @@ import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-// import InfoWindow from './InfoWindow';
 
 class _Map extends React.Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
-    this.props.setRests(this.props.game.pathId);
+    this.props.setRests(this.props.game.path_name);
 
     if (this.props.rests.length > 0) {
       this.setCenter();
@@ -54,7 +53,6 @@ class _Map extends React.Component {
   }
   stepStage() {
     this.props.nextStage();
-    //console.log('GAMESTAGE',this.props.game.gameStage);
     this.setCenter();
   }
   createMapOptions(maps) {
@@ -122,28 +120,6 @@ class _Map extends React.Component {
                     show={this.state.show}
                   />
                 ))}
-            {/* lat=
-            {
-              this.props.rests[this.props.game.gameStage - 1]
-                .restaurant_latitude
-            }
-            lng=
-            {
-              this.props.rests[this.props.game.gameStage - 1]
-                .restaurant_longitude
-            }
-            color={'red'}
-            /> )}
-            {this.props.rests
-              .filter((r, idx) => idx < this.props.game.gameStage - 1)
-              .map((r) => (
-                <Marker
-                  key={r.id}
-                  lat={r.restaurant_latitude}
-                  lng={r.restaurant_longitude}
-                  color={'black'}
-                />
-              ))} */}
           </GoogleMapReact>
         </div>
         <div>

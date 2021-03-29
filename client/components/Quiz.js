@@ -30,6 +30,9 @@ class Quiz extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    this.props.fetchQuiz(this.props.restaurantId);
+  }
 
   handleChange(ev) {
     this.setState({
@@ -70,13 +73,7 @@ class Quiz extends React.Component {
       this.props.updateMiniGameScore(this.props.game.mini_score);
     }
   }
-
-  componentDidMount() {
-    this.props.fetchQuiz(1);
-  }
-
-  componentDidUpdate() {}
-
+  
   render() {
     const { currentQuestion } = this.state;
     if (this.state.finished) {
@@ -138,7 +135,7 @@ const mapState = (state) => {
   return {
     quiz: state.quiz,
     rests: state.rest.rests,
-    restaurantId: state.rest.rests[state.game.gameStage - 1] || 0,
+    restaurantId: state.rest.rests[state.game.gameStage - 1].id || 0,
     game: state.game,
   };
 };
