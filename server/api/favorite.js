@@ -40,7 +40,6 @@ router.get('/', async (req, res, next) => {
       },
     });
     res.send(favorites);
-    // console.log('api', fave);
   } catch (err) {
     next(err);
   }
