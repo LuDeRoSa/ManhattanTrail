@@ -19,9 +19,6 @@ class Profile extends React.Component {
   }
   render() {
     const { account, favorites } = this.props;
-
-    console.log('favorites', favorites);
-
     return (
       <div className='account-page'>
         <h2>Welcome {account.username}.</h2>
