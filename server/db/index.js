@@ -401,24 +401,57 @@ const syncAndSeed = async () => {
     ),
     Question.create(
       {
-        question: 'GF question number 1!',
+        question: 'True or False?: Gluten is only found in wheat',
         quizId: quizzes[1].id,
         answers: [
           {
-            answer: 'Paprika',
+            answer: 'False',
             isCorrect: true,
           },
           {
-            answer: 'Nutmeg',
-            isCorrect: false,
+            answer: 'True',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'Which flour has gluten?',
+        quizId: quizzes[1].id,
+        answers: [
+          {
+            answer: 'Rice',
           },
           {
-            answer: 'Turmeric',
-            isCorrect: false,
+            answer: 'Rye',
+            isCorrect: true,
           },
           {
-            answer: 'Saffron',
-            isCorrect: false,
+            answer: 'Buckwheat',
+          },
+          {
+            answer: 'Potato',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'True or False?: Gluten is only found in food products',
+        quizId: quizzes[1].id,
+        answers: [
+          {
+            answer: 'True',
+          },
+          {
+            answer: 'False',
+            isCorrect: true,
           },
         ],
       },

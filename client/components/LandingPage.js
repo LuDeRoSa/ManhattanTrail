@@ -43,10 +43,7 @@ class LandingPage extends React.Component {
               <Button disabled>Italian</Button>
               <Button disabled>Chinese</Button>
               <Button disabled>Indian</Button>
-              <Button
-                disabled
-                onClick={() => this.props.setGame('gluten-free')}
-              >
+              <Button onClick={() => this.props.setGame('gluten-free')}>
                 Gluten Free
               </Button>
             </ButtonGroup>
