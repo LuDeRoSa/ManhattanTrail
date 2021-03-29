@@ -26,17 +26,3 @@ router.get('/:id/restaurants', async (req, res, next) => {
     next(err);
   }
 });
-
-router.get('/:id/:stageId', async (req, res, next) => {
-  try {
-    const path = await Path.findOne({
-      where: {
-        path_name: req.params.id,
-        stage: req.params.stageId,
-      },
-    });
-    res.send(path);
-  } catch (err) {
-    next(err);
-  }
-});

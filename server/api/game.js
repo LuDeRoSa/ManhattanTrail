@@ -68,7 +68,6 @@ router.put('/next', async (req, res, next) => {
 router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    //TODO: fetch user name in place of userId
     const pastgames = await Game.findAll({
       where: {
         userId: user.id,
@@ -111,7 +110,6 @@ router.post('/addScores', async (req, res, next) => {
 //this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {
   try {
-    //TODO: fetch user name in place of userId
     const leadership = await Game.findAll({
       where: {
         status: 'finished',
