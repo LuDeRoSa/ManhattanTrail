@@ -73,18 +73,16 @@ class Quiz extends React.Component {
 
   componentDidMount() {
     this.props.fetchQuiz(1);
-    // console.log(this.props.game.gameStage - 1);
   }
 
-  componentDidUpdate() {
-    //responsive to restaurant id  - COME BACK
-  }
+  componentDidUpdate() {}
 
   render() {
     const { currentQuestion } = this.state;
     if (this.state.finished) {
       return <>Quiz Done!</>;
     }
+    console.log('quiz', this.props.quiz);
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
@@ -98,9 +96,6 @@ class Quiz extends React.Component {
                     <h3>
                       {this.props.quiz.questions[currentQuestion].question}
                     </h3>
-                    {/* <SingleQuestion
-                      questions={this.props.quiz.questions[currentQuestion]}
-                    /> */}
                     <div id='answer'>
                       {this.props.quiz.questions[currentQuestion].answers.map(
                         (answerObj, index) => (

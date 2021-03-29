@@ -5,7 +5,7 @@ const {
 
 module.exports = router;
 
-router.post('/addFave', async (req, res, next) => {
+router.post('/addFavorite', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     let fave = await Favorite.findOne({
@@ -27,7 +27,7 @@ router.post('/addFave', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     let favorites = await Favorite.findAll({

@@ -1,14 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import Map from './Map';
-
 import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-
 import PhaserGameStart from './PhaserGameStart';
-import Galaga from './Galaga';
 
 /**
  * COMPONENT
@@ -52,8 +48,8 @@ export const Home = (props) => {
           {
             {
               quiz: <Quiz />,
-              cake: <PhaserGameStart />,
-              galaga: <Galaga />,
+              cake: <PhaserGameStart game_type={'cake'} />,
+              galaga: <PhaserGameStart game_type={'galaga'} />,
             }[game_type]
           }
         </Grid>

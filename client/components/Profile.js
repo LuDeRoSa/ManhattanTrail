@@ -9,8 +9,7 @@ class Profile extends React.Component {
     super(props);
   }
   componentDidMount() {
-    let userId = this.props.account.id;
-    this.props.getFavorites(userId);
+    this.props.getFavorites();
   }
 
   render() {
@@ -32,8 +31,8 @@ class Profile extends React.Component {
         </ul>
         <h2>Favorited Restaraunts</h2>
         <ul>
-          {favorites.map((favorite, key) => (
-            <li key={key}>{favorite.restaurant.restaurant_name}</li>
+          {favorites.map((favorite) => (
+            <li key={favorite.id}>{favorite.restaurant.restaurant_name}</li>
           ))}
         </ul>
         <h2>Past Games</h2>

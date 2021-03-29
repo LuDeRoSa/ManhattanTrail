@@ -22,7 +22,7 @@ export const addFavorite = (restId) => async (dispatch) => {
   const token = getToken();
   const rest = (
     await axios.post(
-      `/api/favorite/addFave`,
+      `/api/favorite/addFavorite`,
       { restId },
       {
         headers: {
@@ -34,10 +34,10 @@ export const addFavorite = (restId) => async (dispatch) => {
   return dispatch(_addFavorite(rest));
 };
 
-export const getFavorites = (userId) => async (dispatch) => {
+export const getFavorites = () => async (dispatch) => {
   const token = getToken();
   const favorites = (
-    await axios.get(`/api/favorite/${userId}`, {
+    await axios.get(`/api/favorite/`, {
       headers: {
         authorization: token,
       },
