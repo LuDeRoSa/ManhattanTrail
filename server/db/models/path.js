@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const GAME_OPTIONS = ['quiz', 'cake', 'galaga'];
+const GAME_OPTIONS = ['quiz', 'cake', 'galaga', 'snake'];
 
 const Path = db.define('path', {
   path_id: {
@@ -18,6 +18,7 @@ const Path = db.define('path', {
 
 Path.addHook('afterCreate', async (path, options) => {
   // const gameIndex = Math.floor(Math.random() * GAME_OPTIONS.length);
+  // const gameIndex = (path.id - 1) % GAME_OPTIONS.length;
   const gameIndex = (path.id - 1) % GAME_OPTIONS.length;
   path.game_type = GAME_OPTIONS[gameIndex];
   await path.save();

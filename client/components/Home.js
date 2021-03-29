@@ -53,6 +53,7 @@ export const Home = (props) => {
               quiz: <Quiz />,
               cake: <PhaserGameStart game_type={'cake'} />,
               galaga: <PhaserGameStart game_type={'galaga'} />,
+              snake: <PhaserGameStart game_type={'snake'} />
             }[game_type]
           }
         </Grid>
