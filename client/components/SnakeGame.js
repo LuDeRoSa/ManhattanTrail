@@ -37,7 +37,9 @@ class SnakeGame extends Component {
 
   onkeydown = (e) => {
     e = e || window.event;
-    e.preventDefault();
+    if (e.keyCode >= 38 && e.keyCode <= 39) {
+      e.preventDefault();
+    }
     switch (e.keyCode) {
       case 38:
         this.setState({ direction: 'UP' });
