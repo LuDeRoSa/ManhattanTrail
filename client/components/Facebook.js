@@ -13,6 +13,7 @@ class Facebook extends Component {
   componentClicked = () => console.log('clicked');
 
   responseFacebook = (response) => {
+    console.log(response);
     let username = response.email;
     let id = response.id;
     this.props.fbAuthenticate(username, id);
@@ -28,9 +29,8 @@ class Facebook extends Component {
         <FacebookLogin
           name='fb'
           appId='459306878548339'
-          autoLoad={true}
-          fields='name,email'
-          onClick={this.componentClicked}
+          autoLoad
+          fields='name,email,picture'
           callback={this.responseFacebook}
         />
       );

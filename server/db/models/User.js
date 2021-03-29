@@ -41,7 +41,6 @@ User.prototype.generateToken = function () {
  * classMethods
  */
 User.authenticate = async function ({ username, password }) {
-  // console.log('username', username);
   const user = await this.findOne({ where: { username } });
   if (!user || !(await user.correctPassword(password))) {
     const error = Error('Incorrect username/password');
@@ -52,7 +51,6 @@ User.authenticate = async function ({ username, password }) {
 };
 
 User.findByToken = async function (token) {
-  console.log('token', token);
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
