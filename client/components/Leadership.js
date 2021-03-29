@@ -26,7 +26,7 @@ class Leadership extends React.Component {
       </React.Fragment>
     );
   }
-} //end class
+}
 
 const mapState = (state) => {
   return {
