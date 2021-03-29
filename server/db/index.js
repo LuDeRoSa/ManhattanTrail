@@ -137,15 +137,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Vanilla',
-            isCorrect: false,
           },
           {
             answer: 'Cinnamon',
-            isCorrect: false,
           },
           {
             answer: 'Cardamom',
-            isCorrect: false,
           },
         ],
       },
@@ -164,15 +161,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Enchiladas',
-            isCorrect: false,
           },
           {
             answer: 'Tostada',
-            isCorrect: false,
           },
           {
             answer: 'Tamale',
-            isCorrect: false,
           },
         ],
       },
@@ -191,15 +185,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Crackers',
-            isCorrect: false,
           },
           {
             answer: 'Tomato',
-            isCorrect: false,
           },
           {
             answer: 'Pasta',
-            isCorrect: false,
           },
         ],
       },
@@ -218,15 +209,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Vitamin A',
-            isCorrect: false,
           },
           {
             answer: 'Vitamin V12',
-            isCorrect: false,
           },
           {
             answer: 'Vitamin K',
-            isCorrect: false,
           },
         ],
       },
@@ -245,15 +233,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Pork',
-            isCorrect: false,
           },
           {
             answer: 'Beef',
-            isCorrect: false,
           },
           {
             answer: 'Beef Jerky',
-            isCorrect: false,
           },
         ],
       },
@@ -273,15 +258,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Apple',
-            isCorrect: false,
           },
           {
             answer: 'Banana',
-            isCorrect: false,
           },
           {
             answer: 'Orange',
-            isCorrect: false,
           },
         ],
       },
@@ -300,15 +282,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Watermelon',
-            isCorrect: false,
           },
           {
             answer: 'Pines',
-            isCorrect: false,
           },
           {
             answer: 'Durian',
-            isCorrect: false,
           },
         ],
       },
@@ -327,15 +306,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Italy',
-            isCorrect: false,
           },
           {
             answer: 'Mexico',
-            isCorrect: false,
           },
           {
             answer: 'Japan',
-            isCorrect: false,
           },
         ],
       },
@@ -355,15 +331,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Taco Bell',
-            isCorrect: false,
           },
           {
             answer: 'Chipotle',
-            isCorrect: false,
           },
           {
             answer: 'Subway',
-            isCorrect: false,
           },
         ],
       },
@@ -383,15 +356,12 @@ const syncAndSeed = async () => {
           },
           {
             answer: 'Nutmeg',
-            isCorrect: false,
           },
           {
             answer: 'Turmeric',
-            isCorrect: false,
           },
           {
             answer: 'Saffron',
-            isCorrect: false,
           },
         ],
       },
@@ -423,12 +393,13 @@ const syncAndSeed = async () => {
         quizId: quizzes[1].id,
         answers: [
           {
-            answer: 'Rice',
-          },
-          {
             answer: 'Rye',
             isCorrect: true,
           },
+          {
+            answer: 'Rice',
+          },
+
           {
             answer: 'Buckwheat',
           },
