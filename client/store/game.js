@@ -30,8 +30,7 @@ export const checkGame = () => async (dispatch) => {
     },
   });
   if (game.status === 204) {
-    //no game exists for the user. this is fine.
-    console.log('no game exists for user yet. this is fine.');
+    //no game exists for the user. this is fine. they will create one.
     return dispatch(_clearGame());
   } else {
     return dispatch(_setGame(game.data));
