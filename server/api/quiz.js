@@ -24,28 +24,28 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/addScores', async (req, res, next) => {
-  try {
-    const points = req.body.points;
+// router.post('/addScores', async (req, res, next) => {
+//   try {
+//     const points = req.body.points;
 
-    const user = await User.findByToken(req.headers.authorization);
-    let game = await Game.findOne({
-      where: {
-        userId: user.id,
-        status: 'ingame',
-      },
-      include: Scores,
-    });
+//     const user = await User.findByToken(req.headers.authorization);
+//     let game = await Game.findOne({
+//       where: {
+//         userId: user.id,
+//         status: 'ingame',
+//       },
+//       include: Scores,
+//     });
 
-    let scoreMatch = await Scores.findOne({
-      where: {
-        gameId: game.id,
-      },
-    });
-    scoreMatch.total_score += points;
-    await scoreMatch.save();
-    res.send(scoreMatch);
-  } catch (err) {
-    next(err);
-  }
-});
+//     let scoreMatch = await Scores.findOne({
+//       where: {
+//         gameId: game.id,
+//       },
+//     });
+//     scoreMatch.total_score += points;
+//     await scoreMatch.save();
+//     res.send(scoreMatch);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
