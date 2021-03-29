@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
-import { addFav } from '../store/favorite';
+import { addFavorite } from '../store/favorites';
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class InfoWindow extends Component {
     this.setState({
       show: !this.state.show,
     });
-    this.props.addFav(this.state.index);
+    this.props.addFavorite(this.state.index);
   }
 
   render() {
@@ -28,9 +28,7 @@ class InfoWindow extends Component {
         {this.props.name}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
-          <FavoriteOutlinedIcon
-            style={{ fontSize: 20, color: this.state.show ? 'black' : 'red' }}
-          />
+          <FavoriteOutlinedIcon style={{ fontSize: 20, color: 'red' }} />
         </IconButton>
       </div>
     ) : null;
@@ -39,7 +37,7 @@ class InfoWindow extends Component {
 
 const mapToDispatch = (dispatch) => {
   return {
-    addFav: (restId) => dispatch(addFav(restId)),
+    addFavorite: (restId) => dispatch(addFavorite(restId)),
   };
 };
 

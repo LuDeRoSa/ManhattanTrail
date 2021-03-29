@@ -13,17 +13,27 @@ router.get('/', async (req, res, next) => {
         userId: user.id,
         status: 'ingame',
       },
+      include: Scores,
     });
     if (!game) {
-      //create game
-      game = await Game.create({
-        pathId: req.body.pathId || 1, //category definition can happen here
-        userId: user.id,
-      });
-      const score = await Scores.create({
-        gameId: game.id,
-      });
+      res.status(204);
     }
+    res.send(game);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/path', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    let game = await Game.create({
+      path_name: req.body.path_name,
+      userId: user.id,
+    });
+    await Scores.create({
+      gameId: game.id,
+    });
 
     game = await Game.findOne({
       where: {
@@ -58,7 +68,6 @@ router.put('/next', async (req, res, next) => {
 router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    //TODO: fetch user name in place of userId
     const pastgames = await Game.findAll({
       where: {
         userId: user.id,
@@ -101,7 +110,6 @@ router.post('/addScores', async (req, res, next) => {
 //this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {
   try {
-    //TODO: fetch user name in place of userId
     const leadership = await Game.findAll({
       where: {
         status: 'finished',

@@ -1,16 +1,24 @@
 const router = require('express').Router();
 const {
-  models: { Restaurant, Path, Quiz, User, Game, Scores },
+  models: { Quiz },
 } = require('../db');
 
 module.exports = router;
 
-//generate 5 random questions and return it
 router.get('/:id', async (req, res, next) => {
   try {
+    //VERY TEMP CODE
+    //TODO fix seeding so we have specifically designated quiz to restaurant relationships
+    //restaraunts id should very specifically bring up a designated quiz in future
+    let restaurantId;
+    if (req.params.id === 8) {
+      restaurantId = 8; //for the one seeded path of gluten-free
+    } else {
+      restaurantId = 1;
+    }
     const quiz = await Quiz.findOne({
       where: {
-        restaurantId: req.params.id,
+        restaurantId,
       },
       include: {
         all: true,
@@ -19,32 +27,6 @@ router.get('/:id', async (req, res, next) => {
     });
     //magic - eager loading of every nested model
     res.send(quiz);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/addScores', async (req, res, next) => {
-  try {
-    const points = req.body.points;
-
-    const user = await User.findByToken(req.headers.authorization);
-    let game = await Game.findOne({
-      where: {
-        userId: user.id,
-        status: 'ingame',
-      },
-      include: Scores,
-    });
-
-    let scoreMatch = await Scores.findOne({
-      where: {
-        gameId: game.id,
-      },
-    });
-    scoreMatch.total_score += points;
-    await scoreMatch.save();
-    res.send(scoreMatch);
   } catch (err) {
     next(err);
   }
