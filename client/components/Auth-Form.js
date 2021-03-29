@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
+import Facebook from './Facebook';
 
 /**
  * COMPONENT
@@ -28,6 +29,8 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      <Facebook />
+
       <br />
       {window.githubURL && (
         <a href={window.githubURL}>Login / Register Via Github </a>

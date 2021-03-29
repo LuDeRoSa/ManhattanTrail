@@ -5,6 +5,7 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import PhaserGameStart from './PhaserGameStart';
+import Galaga from './Galaga';
 
 /**
  * COMPONENT
