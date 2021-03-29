@@ -13,7 +13,6 @@ const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
 /**
  * ACTION CREATORS
  */
-const _checkGame = (game) => ({ type: SET_GAME, game });
 const _clearGame = () => ({ type: CLEAR_GAME });
 const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });

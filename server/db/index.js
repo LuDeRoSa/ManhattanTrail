@@ -30,8 +30,6 @@ Question.belongsTo(Quiz);
 Restaurant.hasOne(Quiz);
 Quiz.belongsTo(Restaurant);
 
-// Path.hasMany(Game);
-
 User.hasMany(Favorite);
 Favorite.belongsTo(User);
 
@@ -48,36 +46,48 @@ const syncAndSeed = async () => {
   //hardcoding first five restaurants:
   const restaurants = await Promise.all([
     Restaurant.create({
-      restaurant_id: 1,
       restaurant_name: 'Restaurant One',
       restaurant_longitude: -73.989308,
       restaurant_latitude: 40.741895,
     }),
     Restaurant.create({
-      restaurant_id: 2,
       restaurant_name: 'Restaurant Two',
       restaurant_longitude: -73.9699967,
       restaurant_latitude: 40.7580445,
     }),
     Restaurant.create({
-      restaurant_id: 3,
       restaurant_name: 'Restaurant Three',
       restaurant_longitude: -73.9561132,
       restaurant_latitude: 40.77152,
     }),
     Restaurant.create({
-      restaurant_id: 4,
       restaurant_name: 'Restaurant Four',
       restaurant_longitude: -73.3,
       restaurant_latitude: 40.78,
     }),
     Restaurant.create({
-      restaurant_id: 5,
       restaurant_name: 'Restaurant Five',
       restaurant_longitude: -73.3,
       restaurant_latitude: 40.5,
     }),
+    Restaurant.create({
+      restaurant_name: 'Don Antonio',
+      restaurant_longitude: -73.98664,
+      restaurant_latitude: 40.76269,
+    }),
+    Restaurant.create({
+      restaurant_name: 'Little Beet',
+      restaurant_longitude: -73.98248,
+      restaurant_latitude: 40.76089,
+    }),
+    Restaurant.create({
+      restaurant_name: 'Erin McKenna/s Bakery NYC',
+      restaurant_longitude: -73.98971,
+      restaurant_latitude: 40.71807,
+    }),
   ]);
+
+  // console.log(restaurants[5].restaurant_name); this is a test to see whether arrdata is more consistent
 
   //hardcoding first path:
   const paths = await Promise.all([
@@ -88,11 +98,30 @@ const syncAndSeed = async () => {
     Path.create({ path_name: 1, restaurantId: 5, stage: 5 }),
     Path.create({ path_name: 2, restaurantId: 4, stage: 1 }),
     Path.create({ path_name: 2, restaurantId: 5, stage: 2 }),
+    Path.create({
+      path_name: 'gluten-free',
+      restaurantId: restaurants[5].id,
+      stage: 1,
+    }),
+    Path.create({
+      path_name: 'gluten-free',
+      restaurantId: restaurants[6].id,
+      stage: 2,
+    }),
+    Path.create({
+      path_name: 'gluten-free',
+      restaurantId: restaurants[7].id,
+      stage: 3,
+      game_type: 'quiz',
+    }),
   ]);
 
   const quizzes = await Promise.all([
     Quiz.create({
       restaurantId: 1,
+    }),
+    Quiz.create({
+      restaurantId: restaurants[7].id,
     }),
   ]);
 
@@ -100,7 +129,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What is the most expensive spice in the world by weight?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Saffron',
@@ -127,7 +156,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: "What Mexican food has a name meaning 'Little Donkey'?",
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Burrito',
@@ -154,7 +183,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What is the most stolen food in the world?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Cheese',
@@ -181,7 +210,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: "What vitamin is the only one that you won't find in an egg?",
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Vitamin C',
@@ -208,7 +237,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What is the only edible food that never goes bad?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Honey',
@@ -236,7 +265,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What fruit inspired the paisley fabric pattern?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Mango',
@@ -263,7 +292,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What fruit was named after pine cones?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Pineapple',
@@ -290,7 +319,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What country wastes the most food?',
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'United States',
@@ -318,7 +347,7 @@ const syncAndSeed = async () => {
       {
         question:
           "What's the healthiest fast food chain in the US? (according to Health Magazine)",
-        quizId: 1,
+        quizId: quizzes[0].id,
         answers: [
           {
             answer: 'Panera Bread',
@@ -346,7 +375,34 @@ const syncAndSeed = async () => {
       {
         question:
           'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
-        quizId: 1,
+        quizId: quizzes[0].id,
+        answers: [
+          {
+            answer: 'Paprika',
+            isCorrect: true,
+          },
+          {
+            answer: 'Nutmeg',
+            isCorrect: false,
+          },
+          {
+            answer: 'Turmeric',
+            isCorrect: false,
+          },
+          {
+            answer: 'Saffron',
+            isCorrect: false,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'GF question number 1!',
+        quizId: quizzes[1].id,
         answers: [
           {
             answer: 'Paprika',
