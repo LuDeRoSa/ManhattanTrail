@@ -38,19 +38,6 @@ class Profile extends React.Component {
             })}
         </ul>
         <h2>Favorited Restaraunts</h2>
-
-        <ul>
-          {favorites.map((favorite, idx) => (
-            <li key={idx}>{favorite.restaurant.restaurant_name}</li>
-          ))}
-        </ul>
-
-        <div>
-          {favorites.map((favorite, idx) => (
-            <li key={idx}>{favorite.restaurant.restaurant_name}</li>
-          ))}
-        </div>
-
         <ul>
           {favorites.map((favorite, idx) => (
             <li key={idx}>{favorite.restaurant.restaurant_name}</li>
