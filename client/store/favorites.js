@@ -5,22 +5,21 @@ const getToken = () => window.localStorage.getItem('token');
  * ACTION TYPES
  */
 
-const ADD_FAV = 'ADD_FAV';
-const GET_FAV = 'GET_FAV';
+const ADD_FAVORITE = 'ADD_FAVORITE';
+const GET_FAVORITES = 'GET_FAVORITES';
 /**
  * ACTION CREATORS
  */
 
-const _addFav = (rest) => ({ type: ADD_FAV, rest });
-const _getFav = (favorites) => ({ type: GET_FAV, favorites });
+const _addFavorite = (rest) => ({ type: ADD_FAVORITE, rest });
+const _getFavorites = (favorites) => ({ type: GET_FAVORITES, favorites });
 
 /**
  * THUNK CREATORS
  */
 
-export const addFav = (restId) => async (dispatch) => {
+export const addFavorite = (restId) => async (dispatch) => {
   const token = getToken();
-  // console.log('store', restId);
   const rest = (
     await axios.post(
       `/api/favorite/addFave`,
@@ -32,13 +31,11 @@ export const addFav = (restId) => async (dispatch) => {
       }
     )
   ).data;
-  return dispatch(_addFav(rest));
+  return dispatch(_addFavorite(rest));
 };
 
-export const getFav = (userId) => async (dispatch) => {
+export const getFavorites = (userId) => async (dispatch) => {
   const token = getToken();
-
-  // console.log('store', userId);
   const favorites = (
     await axios.get(`/api/favorite/${userId}`, {
       headers: {
@@ -46,8 +43,7 @@ export const getFav = (userId) => async (dispatch) => {
       },
     })
   ).data;
-  return dispatch(_getFav(favorites));
-  // console.log('store', rest);
+  return dispatch(_getFavorites(favorites));
 };
 /**
  * REDUCER
@@ -57,9 +53,9 @@ const initState = {
 };
 export default function (state = initState, action) {
   switch (action.type) {
-    case ADD_FAV:
+    case ADD_FAVORITE:
       return { ...state, rests: action.rests };
-    case GET_FAV:
+    case GET_FAVORITES:
       return { ...state, favorites: action.favorites };
     default:
       return state;

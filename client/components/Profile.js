@@ -2,26 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, matchPath } from 'react-router-dom';
 import PastGames from './PastGames';
-import { getFav } from '../store/favorites';
+import { getFavorites } from '../store/favorites';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {
     let userId = this.props.account.id;
-    this.props.getFav(userId);
+    this.props.getFavorites(userId);
   }
 
-  onChange(ev) {
-    console.log(ev.target.files);
-  }
   render() {
     const { account, favorites } = this.props;
-
-    console.log('favorites', favorites);
-
     return (
       <div className='account-page'>
         <h2>Welcome {account.username}.</h2>
@@ -38,22 +31,9 @@ class Profile extends React.Component {
             })}
         </ul>
         <h2>Favorited Restaraunts</h2>
-
         <ul>
-          {favorites.map((favorite, idx) => (
-            <li key={idx}>{favorite.restaurant.restaurant_name}</li>
-          ))}
-        </ul>
-
-        <div>
-          {favorites.map((favorite, idx) => (
-            <li key={idx}>{favorite.restaurant.restaurant_name}</li>
-          ))}
-        </div>
-
-        <ul>
-          {favorites.map((favorite, idx) => (
-            <li key={idx}>{favorite.restaurant.restaurant_name}</li>
+          {favorites.map((favorite, key) => (
+            <li key={key}>{favorite.restaurant.restaurant_name}</li>
           ))}
         </ul>
         <h2>Past Games</h2>
@@ -73,10 +53,7 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    getFav: (userId) => dispatch(getFav(userId)),
-  };
+const mapDispatch = {
+  getFavorites,
 };
-
 export default connect(mapState, mapDispatch)(Profile);
