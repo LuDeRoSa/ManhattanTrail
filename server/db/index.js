@@ -56,7 +56,7 @@ Game.createGame = async function (userId, path_name) {
 };
 
 Game.getLeadership = function () {
-  const leadership = Game.findAll({
+  return Game.findAll({
     where: {
       status: 'finished',
     },
@@ -64,7 +64,6 @@ Game.getLeadership = function () {
     order: [[{ model: Scores }, 'total_score', 'DESC']],
     limit: 10,
   });
-  return leadership;
 };
 
 module.exports = {
