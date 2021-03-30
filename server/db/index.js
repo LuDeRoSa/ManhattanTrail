@@ -96,6 +96,21 @@ Scores.addScores = async function (userId, points) {
   return scoreMatch;
 };
 
+Path.getRestaurants = async function (path_name) {
+  const path = await Path.findAll({
+    where: { path_name },
+    include: Restaurant,
+    order: [['stage', 'ASC']],
+  });
+
+  const rests = path.map((path) => {
+    let rest = path.restaurant;
+    rest.dataValues.game_type = path.game_type;
+    return rest;
+  });
+  return rests;
+};
+
 module.exports = {
   db,
   syncAndSeed,
