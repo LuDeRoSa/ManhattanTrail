@@ -93,10 +93,6 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
       }
     )
   ).data;
-  // console.log(
-  //   `thunk submitted ${points} to back end and got back ${score.total_score}
-  //    total from back end`
-  // );
   return dispatch(_updateTotalScore(score));
 };
 /**

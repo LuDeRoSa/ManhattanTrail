@@ -83,25 +83,8 @@ router.get('/pastgames', async (req, res, next) => {
 
 router.post('/addScores', async (req, res, next) => {
   try {
-    const points = req.body.points;
     const user = await User.findByToken(req.headers.authorization);
-    let game = await Game.findOne({
-      where: {
-        userId: user.id,
-        status: 'ingame',
-      },
-      include: Scores,
-    });
-
-    let scoreMatch = await Scores.findOne({
-      where: {
-        gameId: game.id,
-      },
-    });
-
-    scoreMatch.total_score += points;
-    await scoreMatch.save();
-    res.send(scoreMatch);
+    res.send(await Scores.addScores(user.id, req.body.points));
   } catch (err) {
     next(err);
   }

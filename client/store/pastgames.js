@@ -18,11 +18,10 @@ const _setLeadership = (leadership) => ({ type: SET_LEADERSHIP, leadership });
  * THUNK CREATORS
  */
 export const fetchPastGames = () => async (dispatch) => {
-  const token = getToken();
   const pastgames = (
     await axios.get('/api/game/pastgames', {
       headers: {
-        authorization: token,
+        authorization: getToken(),
       },
     })
   ).data;
