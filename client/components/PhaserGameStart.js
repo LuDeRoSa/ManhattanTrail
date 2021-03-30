@@ -3,6 +3,7 @@ import React from 'react';
 import Galaga from './Galaga';
 
 import Cake from './Cake';
+import CakeGame from './CakeGame';
 
 class PhaserGameStart extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class PhaserGameStart extends React.Component {
               trashcans
             </p>
             {this.state.gameStarted ? (
-              <Cake current_stage = {this.props.current_stage}/>
+              <CakeGame current_stage = {this.props.current_stage}/>
             ) : (
               <button onClick={this.handleClick}>Start Game</button>
             )}

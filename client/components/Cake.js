@@ -102,6 +102,7 @@ class Cake extends Component {
       _cake: null,
       initialize: true,
       gameDone: false,
+      
       game: {
         width: 1200 / 2,
         height: 950 / 2,
@@ -118,13 +119,15 @@ class Cake extends Component {
             this.load.image('preloaderBar', './img/loading-bar.png');
             this.load.image('background', './img/background.jpg');
             this.load.image('player', './img/player.png');
+            this.load.image('score-sign', './img/score-sign.png');
+
             this.load.image('cookie', './img/cookie.png');
             this.load.image('cupcake', './img/cupcake.png');
             this.load.image('cake', './img/cake.png');
             this.load.image('trashcan', './img/trashcan.png');
             this.load.image('fishbone', './img/fishbone.png');
             this.load.image('game-over', './img/game-over.png');
-            this.load.image('score-sign', './img/score-sign.png');
+            
             this.load.image('start-button', './img/start-button.png');
           },
           init: function () {},
