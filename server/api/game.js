@@ -27,21 +27,7 @@ router.get('/', async (req, res, next) => {
 router.post('/path', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    let game = await Game.create({
-      path_name: req.body.path_name,
-      userId: user.id,
-    });
-    await Scores.create({
-      gameId: game.id,
-    });
-
-    game = await Game.findOne({
-      where: {
-        userId: user.id,
-        status: 'ingame',
-      },
-      include: Scores,
-    });
+    const game = await Game.createGame(user.id, req.body.path_name);
     res.send(game);
   } catch (err) {
     next(err);

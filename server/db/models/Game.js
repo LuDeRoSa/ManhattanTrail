@@ -33,6 +33,25 @@ Game.addHook('beforeValidate', async (game, options) => {
   }
 });
 
+// Game.createGame = async function (userId, path_name) {
+//   let game = await Game.create({
+//     path_name,
+//     userId,
+//   });
+//   await Scores.create({
+//     gameId: game.id,
+//   });
+
+//   game = await Game.findOne({
+//     where: {
+//       userId: user.id,
+//       status: 'ingame',
+//     },
+//     include: Scores,
+//   });
+//   return game;
+// };
+
 Game.getLeadership = function () {
   const leadership = Game.findAll({
     where: {
