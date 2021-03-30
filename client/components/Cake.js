@@ -79,6 +79,10 @@ function updateStage(game, current_stage) {
   console.log('test print score', game.score)
 }
 
+function getStage(game) {
+  return game.current_stage;
+}
+
 class Cake extends Component {
   constructor(props) {
     super(props);
@@ -156,6 +160,7 @@ class Cake extends Component {
             this.scoreText = this.add.text(38, 6, '0', this._fontStyle);
             this.timeText = this.add.text(100, 6, '0', this._fontStyle);
             this.score = 0;
+            this.current_stage = 0;
             this.totalElapsedTime = 0;
             this._cakeGroup = this.add.group();
             // add food to game
@@ -179,7 +184,9 @@ class Cake extends Component {
             );
             if (this.totalElapsedTime > TOTAL_GAME_LENGTH) {
               this.add.sprite(300, 200, 'game-over').setScale(0.4, 0.4);
+              console.log('passing score right before thunk is called', this.score);
               props.updateMiniGameScore(this.score);
+              console.log('passing getStage right before thunk is called', getStage(this));
               props.updateLastStagePlayed(this.current_stage);
               // updateStage();
               
