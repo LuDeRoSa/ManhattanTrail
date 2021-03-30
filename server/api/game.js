@@ -54,13 +54,7 @@ router.put('/next', async (req, res, next) => {
 router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    const pastgames = await Game.findAll({
-      where: {
-        userId: user.id,
-        status: 'finished',
-      },
-      include: [Scores, User],
-    });
+    const pastgames = await Game.getPastGames(user.id);
     res.send(pastgames);
   } catch (err) {
     next(err);

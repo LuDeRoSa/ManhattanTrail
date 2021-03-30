@@ -66,6 +66,16 @@ Game.getLeadership = function () {
   });
 };
 
+Game.getPastGames = function (userId) {
+  return Game.findAll({
+    where: {
+      userId,
+      status: 'finished',
+    },
+    include: [Scores, User],
+  });
+};
+
 Scores.addScores = async function (userId, points) {
   let game = await Game.findOne({
     where: {
