@@ -103,12 +103,11 @@ Path.getRestaurants = async function (path_name) {
     order: [['stage', 'ASC']],
   });
 
-  const rests = path.map((path) => {
+  return path.map((path) => {
     let rest = path.restaurant;
     rest.dataValues.game_type = path.game_type;
     return rest;
   });
-  return rests;
 };
 
 module.exports = {
