@@ -110,15 +110,7 @@ router.post('/addScores', async (req, res, next) => {
 //this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {
   try {
-    const leadership = await Game.findAll({
-      where: {
-        status: 'finished',
-      },
-      include: [Scores, User],
-      order: [[{ model: Scores }, 'total_score', 'DESC']],
-      limit: 10,
-    });
-    res.send(leadership);
+    res.send(await Game.getLeadership());
   } catch (err) {
     next(err);
   }

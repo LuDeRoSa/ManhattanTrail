@@ -1,5 +1,5 @@
-import axios from "axios";
-const getToken = () => window.localStorage.getItem("token");
+import axios from 'axios';
+const getToken = () => window.localStorage.getItem('token');
 
 /**
  * ACTION TYPES
@@ -20,7 +20,7 @@ const _setLeadership = (leadership) => ({ type: SET_LEADERSHIP, leadership });
 export const fetchPastGames = () => async (dispatch) => {
   const token = getToken();
   const pastgames = (
-    await axios.get("/api/game/pastgames", {
+    await axios.get('/api/game/pastgames', {
       headers: {
         authorization: token,
       },

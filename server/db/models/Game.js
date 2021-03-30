@@ -1,6 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Path = require('./path');
+const Scores = require('./scores');
+const User = require('./User');
+
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,
@@ -29,5 +32,17 @@ Game.addHook('beforeValidate', async (game, options) => {
     await game.save();
   }
 });
+
+Game.getLeadership = function () {
+  const leadership = Game.findAll({
+    where: {
+      status: 'finished',
+    },
+    include: [Scores, User],
+    order: [[{ model: Scores }, 'total_score', 'DESC']],
+    limit: 10,
+  });
+  return leadership;
+};
 
 module.exports = Game;
