@@ -16,27 +16,19 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
-<<<<<<< HEAD
+
 export const me = (method) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-=======
-export const me = () => async (dispatch) => {
-  const token = window.localStorage.getItem(TOKEN);
-  // console.log('me', token);
->>>>>>> facebook oauth done finalllyyyyyyy woooot
+
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
         authorization: token,
       },
     });
-<<<<<<< HEAD
     if (method) {
       history.push('/');
     }
-=======
-    // console.log('me', res.data);
->>>>>>> facebook oauth done finalllyyyyyyy woooot
     return dispatch(setAuth(res.data));
   }
 };
@@ -65,12 +57,7 @@ export const fbAuthenticate = (username, id) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-<<<<<<< HEAD
-  console.log('token', TOKEN);
-  history.push('/');
-=======
   history.push('/login');
->>>>>>> facebook oauth done finalllyyyyyyy woooot
   return {
     type: SET_AUTH,
     auth: {},
