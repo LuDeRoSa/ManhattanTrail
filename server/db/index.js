@@ -1,5 +1,3 @@
-//this is the access point for all things database related!
-
 const db = require('./db');
 const Path = require('./models/path');
 const Quiz = require('./models/quiz');
@@ -55,6 +53,18 @@ Game.createGame = async function (userId, path_name) {
     include: Scores,
   });
   return game;
+};
+
+Game.getLeadership = function () {
+  const leadership = Game.findAll({
+    where: {
+      status: 'finished',
+    },
+    include: [Scores, User],
+    order: [[{ model: Scores }, 'total_score', 'DESC']],
+    limit: 10,
+  });
+  return leadership;
 };
 
 module.exports = {
