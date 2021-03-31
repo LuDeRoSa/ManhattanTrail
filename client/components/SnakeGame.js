@@ -20,11 +20,26 @@ const initialState = {
     [0, 0],
     [2, 0],
   ],
-  score: 0
+  score: 0,
 };
 
 class SnakeGame extends Component {
-  state = initialState;
+  constructor(props) {
+    super(props);
+    this.state = {
+      food: getRandomCoordinates(),
+      speed: 200,
+      direction: 'RIGHT',
+      snakeDots: [
+        [0, 0],
+        [2, 0],
+      ],
+      score: 0,
+      playing: true,
+    };
+    this.onGameOver = this.onGameOver.bind(this);
+  }
+  // state = initialState;
 
   componentDidMount() {
     //start listening to the DOM
@@ -33,6 +48,9 @@ class SnakeGame extends Component {
   }
 
   componentDidUpdate() {
+    if (!this.state.playing) {
+      return;
+    }
     this.checkIfOutOfBorders();
     // this.checkIfCollapsed();
     this.checkIfEat();
@@ -40,7 +58,7 @@ class SnakeGame extends Component {
 
   onkeydown = (e) => {
     e = e || window.event;
-    if (e.keyCode >= 38 && e.keyCode <= 39) {
+    if (e.keyCode >= 37 && e.keyCode <= 40) {
       e.preventDefault();
     }
     switch (e.keyCode) {
@@ -114,7 +132,7 @@ class SnakeGame extends Component {
     if (head[0] == food[0] && head[1] == food[1]) {
       this.setState({
         food: getRandomCoordinates(),
-        score: this.state.score += 1
+        score: (this.state.score += 1),
       });
       this.enlargeSnake();
       this.increaseSpeed();
@@ -138,12 +156,24 @@ class SnakeGame extends Component {
   }
 
   onGameOver() {
-    alert(`Game Over! Your score is ${this.state.score}`);
-    this.props.updateMiniGameScore(this.state.score)
-    this.setState(initialState);
+    if (!this.state.playing) {
+      return;
+    }
+    // alert(`Game Over! Your score is ${this.state.score}`);
+    this.props.updateMiniGameScore(this.state.score);
+    this.setState({
+      playing: false,
+    });
   }
 
   render() {
+    if (!this.state.playing) {
+      return (
+        <div className="game-area">
+          Gameover! Snake Game score: {this.state.score}
+        </div>
+      );
+    }
     return (
       <div className="game-area">
         <Snake snakeDots={this.state.snakeDots} />
@@ -152,7 +182,6 @@ class SnakeGame extends Component {
     );
   }
 }
-
 
 const mapState = (state) => {
   return {
