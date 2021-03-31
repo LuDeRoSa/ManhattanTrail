@@ -25,6 +25,7 @@ class FlappyCake extends Component {
         radius: 20,
       },
       cakes: [{ x: 550, y: 100 }],
+      cakespeed: 1,
       score: 0,
       playing: true,
     };
@@ -42,7 +43,6 @@ class FlappyCake extends Component {
       }
     });
     document.addEventListener('keydown', (e) => {
-      console.log(e.code);
       if (e.code === 'Space' || e.code === 'ArrowUp') {
         this.bump();
       }
@@ -89,9 +89,25 @@ class FlappyCake extends Component {
     });
 
     this.state.cakes.forEach((cake) => {
+      if (
+        Math.abs(cake.y - this.state.bird.y) < 50 &&
+        Math.abs(cake.x - this.state.bird.x) < 50
+      ) {
+        console.log('got cake');
+        this.setState((state) => {
+          const cake = {
+            x: 550,
+            y: getRandomCoordinates(),
+          };
+          return {
+            score: state.score + 1,
+            cakes: [cake],
+          };
+        });
+      }
       if (cake.x === 0) {
-        // this.setState({ playing: false });
-        // this.gameover();
+        this.setState({ playing: false });
+        this.gameover();
       }
     });
   };
@@ -117,6 +133,7 @@ class FlappyCake extends Component {
     }
     return (
       <div>
+        {this.state.score}
         <canvas ref={this.canvasRef} width={600} height={400} />
       </div>
     );
