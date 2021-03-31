@@ -12,16 +12,16 @@ const getRandomCoordinates = () => {
   return [x, y];
 };
 
-const initialState = {
-  food: getRandomCoordinates(),
-  speed: 200,
-  direction: 'RIGHT',
-  snakeDots: [
-    [0, 0],
-    [2, 0],
-  ],
-  score: 0,
-};
+// const initialState = {
+//   food: getRandomCoordinates(),
+//   speed: 200,
+//   direction: 'RIGHT',
+//   snakeDots: [
+//     [0, 0],
+//     [2, 0],
+//   ],
+//   score: 0,
+// };
 
 class SnakeGame extends Component {
   constructor(props) {
