@@ -102,7 +102,7 @@ class _Map extends React.Component {
                 lng={this.state.startingPoint.lng}
                 color={this.props.game.gameStage === 1 ? 'red' : 'black'}
                 show={this.state.show}
-                name="starting point"
+                name='starting point'
               />
             )}
             {this.props.rests.length > 0 &&

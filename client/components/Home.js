@@ -10,6 +10,7 @@ import PhaserGameStart from './PhaserGameStart';
  * COMPONENT
  */
 import Quiz from './Quiz';
+import Hangman from './Hangman';
 import Grid from '@material-ui/core/Grid';
 const styles = {
   container: {
@@ -48,9 +49,10 @@ export const Home = (props) => {
           {
             {
               quiz: <Quiz />,
+              hangman: <Hangman />,
               cake: <PhaserGameStart game_type={'cake'} />,
               galaga: <PhaserGameStart game_type={'galaga'} />,
-              snake: <PhaserGameStart game_type={'snake'} />
+              snake: <PhaserGameStart game_type={'snake'} />,
             }[game_type]
           }
         </Grid>

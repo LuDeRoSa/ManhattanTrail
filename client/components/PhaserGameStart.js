@@ -3,6 +3,7 @@ import React from 'react';
 import Galaga from './Galaga';
 import Cake from './Cake';
 import SnakeGame from './SnakeGame';
+// import Hangman from './Hangman';
 
 class PhaserGameStart extends React.Component {
   constructor(props) {
@@ -53,19 +54,30 @@ class PhaserGameStart extends React.Component {
             )}
           </div>
         );
-        case 'snake':
-          return (
-            <div>
-              <h2>Snake Game:</h2>
-              <p>Snake game default text to be edited</p>
-              {this.state.gameStarted ? (
-                <SnakeGame />
-              ) : (
-                <button onClick={this.handleClick}>Start Game</button>
-              )}
-            </div>
-          );
-
+      case 'snake':
+        return (
+          <div>
+            <h2>Snake Game:</h2>
+            <p>Snake game default text to be edited</p>
+            {this.state.gameStarted ? (
+              <SnakeGame />
+            ) : (
+              <button onClick={this.handleClick}>Start Game</button>
+            )}
+          </div>
+        );
+      // case 'hangman':
+      //   return (
+      //     <div>
+      //       <h2>Hangman Game:</h2>
+      //       <p>Hangman Game default text to be edited</p>
+      //       {this.state.gameStarted ? (
+      //         <Hangman />
+      //       ) : (
+      //         <button onClick={this.handleClick}>Start Game</button>
+      //       )}
+      //     </div>
+      //   );
       default:
         return <></>;
     }

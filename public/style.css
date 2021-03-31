@@ -85,8 +85,8 @@ nav a {
   border: solid white 2px;
   font-style: bold;
 }
- /*snake game */
- .game-area {
+/*snake game */
+.game-area {
   position: relative;
   margin: 50px auto;
   width: 600px;
@@ -112,3 +112,9 @@ nav a {
   z-index: 1;
 }
 /* end snake game */
+
+.hangman-container {
+  width: 80%;
+  margin-top: 50px;
+  background-color: blue;
+}
