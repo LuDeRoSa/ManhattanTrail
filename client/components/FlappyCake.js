@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { updateMiniGameScore } from '../store/game';
+import { connect } from 'react-redux';
 
 const getRandomCoordinates = () => {
   let min = 5;
@@ -93,7 +95,6 @@ class FlappyCake extends Component {
         Math.abs(cake.y - this.state.bird.y) < 50 &&
         Math.abs(cake.x - this.state.bird.x) < 50
       ) {
-        console.log('got cake');
         this.setState((state) => {
           const cake = {
             x: 550,
@@ -126,6 +127,7 @@ class FlappyCake extends Component {
   };
   gameover() {
     console.log('game over');
+    this.props.updateMiniGameScore(this.state.score);
   }
   render() {
     if (!this.state.playing) {
@@ -139,4 +141,15 @@ class FlappyCake extends Component {
     );
   }
 }
-export default FlappyCake;
+
+const mapState = (state) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatch = {
+  updateMiniGameScore,
+};
+
+export default connect(mapState, mapDispatch)(FlappyCake);
