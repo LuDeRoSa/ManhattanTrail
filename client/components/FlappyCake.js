@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const penguin = new Image();
+penguin.src = './img/player.png';
 const cake = new Image();
 cake.src = './img/cupcake.png';
 
@@ -61,7 +63,7 @@ class FlappyCake extends Component {
     ctx.fillStyle = 'green';
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, node.width, node.height);
-    ctx.drawImage(cake, this.state.bird.x, this.state.bird.y, 50, 50);
+    ctx.drawImage(penguin, this.state.bird.x, this.state.bird.y, 50, 50);
   };
   render() {
     return (
