@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
 import Food from './Food';
+import { updateMiniGameScore } from '../store/game';
+import { connect } from 'react-redux';
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -18,6 +20,7 @@ const initialState = {
     [0, 0],
     [2, 0],
   ],
+  score: 0
 };
 
 class SnakeGame extends Component {
@@ -111,6 +114,7 @@ class SnakeGame extends Component {
     if (head[0] == food[0] && head[1] == food[1]) {
       this.setState({
         food: getRandomCoordinates(),
+        score: this.state.score += 1
       });
       this.enlargeSnake();
       this.increaseSpeed();
@@ -134,7 +138,8 @@ class SnakeGame extends Component {
   }
 
   onGameOver() {
-    alert(`Game Over, Snake length is ${this.state.snakeDots.length}`);
+    alert(`Game Over! Your score is ${this.state.score}`);
+    this.props.updateMiniGameScore(this.state.score)
     this.setState(initialState);
   }
 
@@ -148,4 +153,15 @@ class SnakeGame extends Component {
   }
 }
 
-export default SnakeGame;
+
+const mapState = (state) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatch = {
+  updateMiniGameScore,
+};
+
+export default connect(mapState, mapDispatch)(SnakeGame);
