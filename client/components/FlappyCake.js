@@ -126,7 +126,6 @@ class FlappyCake extends Component {
     });
   };
   gameover() {
-    console.log('game over');
     this.props.updateMiniGameScore(this.state.score);
   }
   render() {
