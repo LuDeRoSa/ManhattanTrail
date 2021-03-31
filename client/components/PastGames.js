@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { fetchPastGames } from '../store/pastgames';
 import GamesTable from './GamesTable';
 

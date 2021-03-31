@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { fetchLeadership } from '../store/pastgames';
-
 import GamesTable from './GamesTable';
 
 class Leadership extends React.Component {
@@ -28,7 +26,7 @@ class Leadership extends React.Component {
       </React.Fragment>
     );
   }
-} //end class
+}
 
 const mapState = (state) => {
   return {

@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, matchPath } from 'react-router-dom';
 import PastGames from './PastGames';
+import { getFavorites } from '../store/favorites';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
   }
-  componentDidMount() {}
-  onChange(ev) {
-    console.log(ev.target.files);
+  componentDidMount() {
+    this.props.getFavorites();
   }
+
   render() {
-    const { account } = this.props;
+    const { account, favorites } = this.props;
     return (
       <div className="account-page">
         <h2>Welcome {account.username}.</h2>
@@ -30,7 +30,11 @@ class Profile extends React.Component {
             })}
         </ul>
         <h2>Favorited Restaraunts</h2>
-        <div>{/* component table for favorites */}</div>
+        <ul>
+          {favorites.map((favorite) => (
+            <li key={favorite.id}>{favorite.restaurant.restaurant_name}</li>
+          ))}
+        </ul>
         <h2>Past Games</h2>
         <PastGames />
       </div>
@@ -44,9 +48,11 @@ class Profile extends React.Component {
 const mapState = (state) => {
   return {
     account: state.auth,
+    favorites: state.favorites.favorites,
   };
 };
 
-export default connect(mapState, (dispatch) => {
-  return {};
-})(Profile);
+const mapDispatch = {
+  getFavorites,
+};
+export default connect(mapState, mapDispatch)(Profile);

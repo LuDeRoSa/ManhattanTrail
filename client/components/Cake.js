@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Phaser from 'phaser';
 import { IonPhaser } from '@ion-phaser/react';
 const TOTAL_GAME_LENGTH = 45 * 10000; //game lasts 45 seconds

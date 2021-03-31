@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Path = require('./path');
+
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,
@@ -11,12 +12,15 @@ const Game = db.define('game', {
     type: Sequelize.ENUM('ingame', 'finished'),
     defaultValue: 'ingame',
   },
+  path_name: {
+    type: Sequelize.STRING,
+  },
 });
 
 Game.addHook('beforeValidate', async (game, options) => {
   const path = await Path.findAll({
     where: {
-      path_id: game.pathId,
+      path_name: game.path_name,
     },
   });
   const gamelength = path.length;

@@ -4,6 +4,7 @@ const getToken = () => window.localStorage.getItem('token');
 /**
  * ACTION TYPES
  */
+const CLEAR_GAME = 'CLEAR_GAME';
 const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
 const UPDATE_MINI_SCORE = 'UPDATE_MINI_SCORE';
@@ -13,6 +14,7 @@ const UPDATE_LAST_STAGE_PLAYED = 'UPDATE_LAST_STAGE_PLAYED';
 /**
  * ACTION CREATORS
  */
+const _clearGame = () => ({ type: CLEAR_GAME });
 const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });
 export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
@@ -21,17 +23,40 @@ export const _updateLastStagePlayed = (stage) => ({ type: UPDATE_LAST_STAGE_PLAY
 /**
  * THUNK CREATORS
  */
-export const setGame = () => async (dispatch) => {
+
+export const checkGame = () => async (dispatch) => {
+  const token = getToken();
+  const game = await axios.get('/api/game', {
+    headers: {
+      authorization: token,
+    },
+  });
+  if (game.status === 204) {
+    //no game exists for the user. this is fine. they will create one.
+    return dispatch(_clearGame());
+  } else {
+    return dispatch(_setGame(game.data));
+  }
+};
+
+export const setGame = (path_name) => async (dispatch) => {
   const token = getToken();
   const game = (
-    await axios.get('/api/game', {
-      headers: {
-        authorization: token,
+    await axios.post(
+      '/api/game/path',
+      {
+        path_name,
       },
-    })
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    )
   ).data;
   return dispatch(_setGame(game));
 };
+
 export const nextStage = () => async (dispatch) => {
   const token = getToken();
   const game = (
@@ -94,7 +119,7 @@ export const updateLastStagePlayed = (stage) => async (dispatch) => {
  * REDUCER
  */
 const initState = {
-  pathId: 0,
+  path_name: null,
   gameStage: 0,
   lastStagePlayed: 0,
   status: 'no-game',
@@ -106,7 +131,7 @@ export default function (state = initState, action) {
   switch (action.type) {
     case SET_GAME:
       return {
-        pathId: action.game.pathId,
+        path_name: action.game.path_name,
         gameStage: action.game.stage,
         lastStagePlayed: action.game.lastStagePlayed,
         status: action.game.status,
@@ -139,6 +164,15 @@ export default function (state = initState, action) {
         ...state,
         lastStagePlayed: action.lastStagePlayed,
       }
+    case CLEAR_GAME:
+      return {
+        path_name: null,
+        gameStage: 0,
+        status: 'no-game',
+        mini_score: 0,
+        mini_status: 'null',
+        total_score: 0,
+      };
     default:
       return state;
   }
