@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
+import Hangman from './Hangman';
 
 /**
  * COMPONENT
@@ -28,6 +29,7 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      {/* <Hangman /> */}
       <br />
       {window.githubURL && (
         <a href={window.githubURL}>Login / Register Via Github </a>

@@ -5,6 +5,7 @@ import Cake from './Cake';
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
 
+
 class PhaserGameStart extends React.Component {
   constructor(props) {
     super(props);
@@ -66,7 +67,6 @@ class PhaserGameStart extends React.Component {
             )}
           </div>
         );
-
       case 'flappy':
         return (
           <div>
@@ -79,7 +79,6 @@ class PhaserGameStart extends React.Component {
             )}
           </div>
         );
-
       default:
         return <></>;
     }

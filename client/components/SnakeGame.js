@@ -183,7 +183,7 @@ class SnakeGame extends Component {
       );
     }
     return (
-      <div className="game-area">
+      <div className='game-area'>
         <Snake snakeDots={this.state.snakeDots} />
         <Food dot={this.state.food} />
       </div>

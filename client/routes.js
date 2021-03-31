@@ -9,6 +9,7 @@ import GameOver from './components/GameOver';
 import Profile from './components/Profile';
 import Leadership from './components/Leadership';
 import SnakeGame from './components/SnakeGame';
+
 /**
  * COMPONENT
  */
@@ -24,20 +25,20 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/landing" component={LandingPage} />
-            <Route path="/home" component={Home} />
-            <Route path="/gameover" component={GameOver} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/snakegame" component={SnakeGame} />
-            <Route path="/leadership" component={Leadership} />
-            <Redirect to="/landing" />
+            <Route path='/landing' component={LandingPage} />
+            <Route path='/home' component={Home} />
+            <Route path='/gameover' component={GameOver} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/snakegame' component={SnakeGame} />
+            <Route path='/leadership' component={Leadership} />
+            <Redirect to='/landing' />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Redirect to="/login" />
+            <Route path='/' exact component={Login} />
+            <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
+            <Redirect to='/login' />
           </Switch>
         )}
       </div>
