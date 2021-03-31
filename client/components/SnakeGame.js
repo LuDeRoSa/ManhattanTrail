@@ -28,7 +28,7 @@ class SnakeGame extends Component {
     super(props);
     this.state = {
       food: getRandomCoordinates(),
-      speed: 200,
+      speed: 165,
       direction: 'RIGHT',
       snakeDots: [
         [0, 0],
@@ -130,13 +130,22 @@ class SnakeGame extends Component {
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     let food = this.state.food;
     if (head[0] == food[0] && head[1] == food[1]) {
+
       this.setState({
         food: getRandomCoordinates(),
         score: (this.state.score += 1),
       });
+      setTimeout(this.alertMessage, 1000);
       this.enlargeSnake();
       this.increaseSpeed();
     }
+  }
+
+  alertMessage() {
+    console.log("in the alert message method!");
+    <div className="YUM">
+      YUM!
+    </div>
   }
 
   enlargeSnake() {
@@ -148,9 +157,9 @@ class SnakeGame extends Component {
   }
 
   increaseSpeed() {
-    if (this.state.speed > 10) {
+    if (this.state.speed > 25) {
       this.setState({
-        speed: this.state.speed - 10,
+        speed: this.state.speed - 25,
       });
     }
   }
@@ -159,7 +168,6 @@ class SnakeGame extends Component {
     if (!this.state.playing) {
       return;
     }
-    // alert(`Game Over! Your score is ${this.state.score}`);
     this.props.updateMiniGameScore(this.state.score);
     this.setState({
       playing: false,
