@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const GAME_OPTIONS = ['quiz', 'cake', 'galaga', 'snake'];
+const GAME_OPTIONS = ['flappy', 'quiz', 'cake', 'galaga', 'snake'];
 
 const Path = db.define('path', {
   path_name: {
