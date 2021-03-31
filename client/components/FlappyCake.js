@@ -36,23 +36,33 @@ class FlappyCake extends Component {
       this.update();
       this.draw();
     }, 1000 / 60);
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'CANVAS') {
+        this.bump();
+      }
+    });
     document.addEventListener('keydown', (e) => {
-      e.code === 'Space'
-        ? this.setState({
-            bird: {
-              x: 50,
-              y: this.state.bird.y,
-              velocity: this.state.bird.velocity + this.state.lift,
-              radius: 20,
-            },
-          })
-        : null;
+      console.log(e.code);
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        this.bump();
+      }
     });
   }
+
   componentDidUpdate() {
     if (!this.state.playing) {
       return;
     }
+  }
+  bump() {
+    this.setState({
+      bird: {
+        x: 50,
+        y: this.state.bird.y,
+        velocity: this.state.bird.velocity + this.state.lift,
+        radius: 20,
+      },
+    });
   }
   update = () => {
     if (!this.state.playing) {
@@ -80,8 +90,8 @@ class FlappyCake extends Component {
 
     this.state.cakes.forEach((cake) => {
       if (cake.x === 0) {
-        this.setState({ playing: false });
-        this.gameover();
+        // this.setState({ playing: false });
+        // this.gameover();
       }
     });
   };
