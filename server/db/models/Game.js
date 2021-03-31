@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Path = require('./path');
+
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,

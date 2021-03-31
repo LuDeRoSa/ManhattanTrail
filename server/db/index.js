@@ -1,5 +1,3 @@
-//this is the access point for all things database related!
-
 const db = require('./db');
 const Path = require('./models/path');
 const Quiz = require('./models/quiz');
@@ -10,6 +8,7 @@ const Game = require('./models/Game');
 const Question = require('./models/Question');
 const Answer = require('./models/Answer');
 const Favorite = require('./models/Favorite');
+const syncAndSeed = require('./seed');
 
 //associations could go here!
 Path.belongsTo(Restaurant);
@@ -36,406 +35,80 @@ Favorite.belongsTo(User);
 Restaurant.hasMany(Favorite);
 Favorite.belongsTo(Restaurant);
 
-const syncAndSeed = async () => {
-  await db.sync({ force: true });
+//Model Methods
+Game.createGame = async function (userId, path_name) {
+  let game = await Game.create({
+    path_name,
+    userId,
+  });
+  await Scores.create({
+    gameId: game.id,
+  });
 
-  // const users = await Promise.all([
-  //   User.create({user_id: 1, first_name: 'Cody', password: '123'}),
-  //   User.create({user_id: 2, first_name: 'Murphy', password: '123'})
-  // ])
-
-  //hardcoding first five restaurants:
-  const restaurants = await Promise.all([
-    Restaurant.create({
-      restaurant_name: 'Restaurant One',
-      restaurant_longitude: -73.989308,
-      restaurant_latitude: 40.741895,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Restaurant Two',
-      restaurant_longitude: -73.9699967,
-      restaurant_latitude: 40.7580445,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Restaurant Three',
-      restaurant_longitude: -73.9561132,
-      restaurant_latitude: 40.77152,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Restaurant Four',
-      restaurant_longitude: -73.3,
-      restaurant_latitude: 40.78,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Restaurant Five',
-      restaurant_longitude: -73.3,
-      restaurant_latitude: 40.5,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Don Antonio',
-      restaurant_longitude: -73.98664,
-      restaurant_latitude: 40.76269,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Little Beet',
-      restaurant_longitude: -73.98248,
-      restaurant_latitude: 40.76089,
-    }),
-    Restaurant.create({
-      restaurant_name: 'Erin McKenna/s Bakery NYC',
-      restaurant_longitude: -73.98971,
-      restaurant_latitude: 40.71807,
-    }),
-  ]);
-
-  // console.log(restaurants[5].restaurant_name); this is a test to see whether arrdata is more consistent
-
-  //hardcoding first path:
-  const paths = await Promise.all([
-    Path.create({ path_name: 1, restaurantId: 1, stage: 1 }),
-    Path.create({ path_name: 1, restaurantId: 2, stage: 2 }),
-    Path.create({ path_name: 1, restaurantId: 3, stage: 3 }),
-    Path.create({ path_name: 1, restaurantId: 4, stage: 4 }),
-    Path.create({ path_name: 1, restaurantId: 5, stage: 5 }),
-    Path.create({ path_name: 2, restaurantId: 4, stage: 1 }),
-    Path.create({ path_name: 2, restaurantId: 5, stage: 2 }),
-    Path.create({
-      path_name: 'gluten-free',
-      restaurantId: restaurants[5].id,
-      stage: 1,
-    }),
-    Path.create({
-      path_name: 'gluten-free',
-      restaurantId: restaurants[6].id,
-      stage: 2,
-    }),
-    Path.create({
-      path_name: 'gluten-free',
-      restaurantId: restaurants[7].id,
-      stage: 3,
-      game_type: 'quiz',
-    }),
-  ]);
-
-  const quizzes = await Promise.all([
-    Quiz.create({
-      restaurantId: 1,
-    }),
-    Quiz.create({
-      restaurantId: restaurants[7].id,
-    }),
-  ]);
-
-  const questions = await Promise.all([
-    Question.create(
-      {
-        question: 'What is the most expensive spice in the world by weight?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Saffron',
-            isCorrect: true,
-          },
-          {
-            answer: 'Vanilla',
-          },
-          {
-            answer: 'Cinnamon',
-          },
-          {
-            answer: 'Cardamom',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: "What Mexican food has a name meaning 'Little Donkey'?",
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Burrito',
-            isCorrect: true,
-          },
-          {
-            answer: 'Enchiladas',
-          },
-          {
-            answer: 'Tostada',
-          },
-          {
-            answer: 'Tamale',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'What is the most stolen food in the world?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Cheese',
-            isCorrect: true,
-          },
-          {
-            answer: 'Crackers',
-          },
-          {
-            answer: 'Tomato',
-          },
-          {
-            answer: 'Pasta',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: "What vitamin is the only one that you won't find in an egg?",
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Vitamin C',
-            isCorrect: true,
-          },
-          {
-            answer: 'Vitamin A',
-          },
-          {
-            answer: 'Vitamin V12',
-          },
-          {
-            answer: 'Vitamin K',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'What is the only edible food that never goes bad?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Honey',
-            isCorrect: true,
-          },
-          {
-            answer: 'Pork',
-          },
-          {
-            answer: 'Beef',
-          },
-          {
-            answer: 'Beef Jerky',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-
-    Question.create(
-      {
-        question: 'What fruit inspired the paisley fabric pattern?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Mango',
-            isCorrect: true,
-          },
-          {
-            answer: 'Apple',
-          },
-          {
-            answer: 'Banana',
-          },
-          {
-            answer: 'Orange',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'What fruit was named after pine cones?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Pineapple',
-            isCorrect: true,
-          },
-          {
-            answer: 'Watermelon',
-          },
-          {
-            answer: 'Pines',
-          },
-          {
-            answer: 'Durian',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'What country wastes the most food?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'United States',
-            isCorrect: true,
-          },
-          {
-            answer: 'Italy',
-          },
-          {
-            answer: 'Mexico',
-          },
-          {
-            answer: 'Japan',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question:
-          "What's the healthiest fast food chain in the US? (according to Health Magazine)",
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Panera Bread',
-            isCorrect: true,
-          },
-          {
-            answer: 'Taco Bell',
-          },
-          {
-            answer: 'Chipotle',
-          },
-          {
-            answer: 'Subway',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question:
-          'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
-        quizId: quizzes[0].id,
-        answers: [
-          {
-            answer: 'Paprika',
-            isCorrect: true,
-          },
-          {
-            answer: 'Nutmeg',
-          },
-          {
-            answer: 'Turmeric',
-          },
-          {
-            answer: 'Saffron',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'True or False?: Gluten is only found in wheat',
-        quizId: quizzes[1].id,
-        answers: [
-          {
-            answer: 'False',
-            isCorrect: true,
-          },
-          {
-            answer: 'True',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'Which flour has gluten?',
-        quizId: quizzes[1].id,
-        answers: [
-          {
-            answer: 'Rye',
-            isCorrect: true,
-          },
-          {
-            answer: 'Rice',
-          },
-
-          {
-            answer: 'Buckwheat',
-          },
-          {
-            answer: 'Potato',
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-    Question.create(
-      {
-        question: 'True or False?: Gluten is only found in food products',
-        quizId: quizzes[1].id,
-        answers: [
-          {
-            answer: 'True',
-          },
-          {
-            answer: 'False',
-            isCorrect: true,
-          },
-        ],
-      },
-      {
-        include: Answer,
-      }
-    ),
-  ]);
+  game = await Game.findOne({
+    where: {
+      userId,
+      status: 'ingame',
+    },
+    include: Scores,
+  });
+  return game;
 };
-/**
- * hooks
- */
+
+Game.getLeadership = function () {
+  return Game.findAll({
+    where: {
+      status: 'finished',
+    },
+    include: [Scores, User],
+    order: [[{ model: Scores }, 'total_score', 'DESC']],
+    limit: 10,
+  });
+};
+
+Game.getPastGames = function (userId) {
+  return Game.findAll({
+    where: {
+      userId,
+      status: 'finished',
+    },
+    include: [Scores, User],
+  });
+};
+
+Scores.addScores = async function (userId, points) {
+  let game = await Game.findOne({
+    where: {
+      userId,
+      status: 'ingame',
+    },
+    include: Scores,
+  });
+
+  let scoreMatch = await Scores.findOne({
+    where: {
+      gameId: game.id,
+    },
+  });
+
+  scoreMatch.total_score += points;
+  await scoreMatch.save();
+  return scoreMatch;
+};
+
+Path.getRestaurants = async function (path_name) {
+  const path = await Path.findAll({
+    where: { path_name },
+    include: Restaurant,
+    order: [['stage', 'ASC']],
+  });
+
+  return path.map((path) => {
+    let rest = path.restaurant;
+    rest.dataValues.game_type = path.game_type;
+    return rest;
+  });
+};
 
 module.exports = {
   db,
