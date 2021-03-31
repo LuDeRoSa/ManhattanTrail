@@ -16,6 +16,7 @@ class FlappyCake extends Component {
         radius: 20,
       },
     };
+    this.canvasRef = React.createRef();
   }
 
   componentDidMount() {
@@ -37,6 +38,7 @@ class FlappyCake extends Component {
     );
   }
   update = () => {
+    const node = this.canvasRef.current;
     let newV = (this.state.bird.velocity + this.state.gravity) * 0.9;
     this.setState({
       bird: {
@@ -44,7 +46,7 @@ class FlappyCake extends Component {
         y: Math.max(
           Math.min(
             this.state.bird.y + newV,
-            this.refs.canvas.height - this.state.bird.radius
+            node.height - this.state.bird.radius
           ),
           0
         ),
@@ -54,16 +56,17 @@ class FlappyCake extends Component {
     });
   };
   draw = () => {
-    const ctx = this.refs.canvas.getContext('2d');
+    const node = this.canvasRef.current;
+    const ctx = node.getContext('2d');
     ctx.fillStyle = 'green';
     ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
+    ctx.fillRect(0, 0, node.width, node.height);
     ctx.drawImage(cake, this.state.bird.x, this.state.bird.y, 50, 50);
   };
   render() {
     return (
       <div>
-        <canvas ref="canvas" width={450} height={650} />
+        <canvas ref={this.canvasRef} width={450} height={650} />
       </div>
     );
   }
