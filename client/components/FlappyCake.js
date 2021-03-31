@@ -26,8 +26,8 @@ class FlappyCake extends Component {
       this.update();
       this.draw();
     }, 1000 / 60);
-    document.addEventListener('keydown', (e) =>
-      e.keyCode === 32
+    document.addEventListener('keydown', (e) => {
+      e.code === 'Space'
         ? this.setState({
             bird: {
               x: 50,
@@ -36,8 +36,8 @@ class FlappyCake extends Component {
               radius: 20,
             },
           })
-        : null
-    );
+        : null;
+    });
   }
   update = () => {
     const node = this.canvasRef.current;
@@ -68,7 +68,7 @@ class FlappyCake extends Component {
   render() {
     return (
       <div>
-        <canvas ref={this.canvasRef} width={450} height={650} />
+        <canvas ref={this.canvasRef} width={600} height={400} />
       </div>
     );
   }
