@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import FlappyCake from './FlappyCake';
 
 const styles = {
   root: {},
@@ -68,7 +67,6 @@ class LandingPage extends React.Component {
             </Button>
           </React.Fragment>
         )}
-        <FlappyCake />
       </Container>
     );
   }
