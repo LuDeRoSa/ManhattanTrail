@@ -24,7 +24,7 @@ class FlappyCake extends Component {
         velocity: 0,
         radius: 20,
       },
-      cake: [{ x: 550, y: 100 }],
+      cakes: [{ x: 550, y: 100 }],
       score: 0,
       playing: true,
     };
@@ -49,7 +49,15 @@ class FlappyCake extends Component {
         : null;
     });
   }
+  componentDidUpdate() {
+    if (!this.state.playing) {
+      return;
+    }
+  }
   update = () => {
+    if (!this.state.playing) {
+      return;
+    }
     const node = this.canvasRef.current;
     let newV = (this.state.bird.velocity + this.state.gravity) * 0.9;
     this.setState((state) => {
@@ -63,21 +71,40 @@ class FlappyCake extends Component {
           velocity: newV,
           radius: 20,
         },
+        cakes: state.cakes.map((cake) => {
+          cake.x = cake.x - 5;
+          return cake;
+        }),
       };
+    });
+
+    this.state.cakes.forEach((cake) => {
+      if (cake.x === 0) {
+        this.setState({ playing: false });
+        this.gameover();
+      }
     });
   };
   draw = () => {
+    if (!this.state.playing) {
+      return;
+    }
     const node = this.canvasRef.current;
     const ctx = node.getContext('2d');
-    ctx.fillStyle = 'green';
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'skyblue';
     ctx.fillRect(0, 0, node.width, node.height);
     ctx.drawImage(penguin, this.state.bird.x, this.state.bird.y, 50, 50);
-    this.state.cake.forEach((cake) => {
+    this.state.cakes.forEach((cake) => {
       ctx.drawImage(cupcake, cake.x, cake.y, 50, 50);
     });
   };
+  gameover() {
+    console.log('game over');
+  }
   render() {
+    if (!this.state.playing) {
+      return <div>Game Over! Flappy Cake score: {this.state.score}</div>;
+    }
     return (
       <div>
         <canvas ref={this.canvasRef} width={600} height={400} />
