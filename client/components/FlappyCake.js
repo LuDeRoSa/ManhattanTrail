@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 
+const getRandomCoordinates = () => {
+  let min = 5;
+  let max = 350;
+  let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+  return y;
+};
+
 const penguin = new Image();
 penguin.src = './img/player.png';
-const cake = new Image();
-cake.src = './img/cupcake.png';
+const cupcake = new Image();
+cupcake.src = './img/cupcake.png';
 
 class FlappyCake extends Component {
   constructor(props) {
@@ -17,6 +24,9 @@ class FlappyCake extends Component {
         velocity: 0,
         radius: 20,
       },
+      cake: [{ x: 550, y: 100 }],
+      score: 0,
+      playing: true,
     };
     this.canvasRef = React.createRef();
   }
@@ -42,19 +52,18 @@ class FlappyCake extends Component {
   update = () => {
     const node = this.canvasRef.current;
     let newV = (this.state.bird.velocity + this.state.gravity) * 0.9;
-    this.setState({
-      bird: {
-        x: 50,
-        y: Math.max(
-          Math.min(
-            this.state.bird.y + newV,
-            node.height - this.state.bird.radius
+    this.setState((state) => {
+      return {
+        bird: {
+          x: 50,
+          y: Math.max(
+            Math.min(state.bird.y + newV, node.height - state.bird.radius),
+            0
           ),
-          0
-        ),
-        velocity: newV,
-        radius: 20,
-      },
+          velocity: newV,
+          radius: 20,
+        },
+      };
     });
   };
   draw = () => {
@@ -64,6 +73,9 @@ class FlappyCake extends Component {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, node.width, node.height);
     ctx.drawImage(penguin, this.state.bird.x, this.state.bird.y, 50, 50);
+    this.state.cake.forEach((cake) => {
+      ctx.drawImage(cupcake, cake.x, cake.y, 50, 50);
+    });
   };
   render() {
     return (
