@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
 import Food from './Food';
+import { updateMiniGameScore } from '../store/game';
+import { connect } from 'react-redux';
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -10,18 +12,34 @@ const getRandomCoordinates = () => {
   return [x, y];
 };
 
-const initialState = {
-  food: getRandomCoordinates(),
-  speed: 200,
-  direction: 'RIGHT',
-  snakeDots: [
-    [0, 0],
-    [2, 0],
-  ],
-};
+// const initialState = {
+//   food: getRandomCoordinates(),
+//   speed: 200,
+//   direction: 'RIGHT',
+//   snakeDots: [
+//     [0, 0],
+//     [2, 0],
+//   ],
+//   score: 0,
+// };
 
 class SnakeGame extends Component {
-  state = initialState;
+  constructor(props) {
+    super(props);
+    this.state = {
+      food: getRandomCoordinates(),
+      speed: 165,
+      direction: 'RIGHT',
+      snakeDots: [
+        [0, 0],
+        [2, 0],
+      ],
+      score: 0,
+      playing: true,
+    };
+    this.onGameOver = this.onGameOver.bind(this);
+  }
+  // state = initialState;
 
   componentDidMount() {
     //start listening to the DOM
@@ -30,6 +48,9 @@ class SnakeGame extends Component {
   }
 
   componentDidUpdate() {
+    if (!this.state.playing) {
+      return;
+    }
     this.checkIfOutOfBorders();
     // this.checkIfCollapsed();
     this.checkIfEat();
@@ -37,7 +58,7 @@ class SnakeGame extends Component {
 
   onkeydown = (e) => {
     e = e || window.event;
-    if (e.keyCode >= 38 && e.keyCode <= 39) {
+    if (e.keyCode >= 37 && e.keyCode <= 40) {
       e.preventDefault();
     }
     switch (e.keyCode) {
@@ -109,12 +130,22 @@ class SnakeGame extends Component {
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     let food = this.state.food;
     if (head[0] == food[0] && head[1] == food[1]) {
+
       this.setState({
         food: getRandomCoordinates(),
+        score: (this.state.score += 1),
       });
+      setTimeout(this.alertMessage, 1000);
       this.enlargeSnake();
       this.increaseSpeed();
     }
+  }
+
+  alertMessage() {
+    console.log("in the alert message method!");
+    <div className="YUM">
+      YUM!
+    </div>
   }
 
   enlargeSnake() {
@@ -126,19 +157,31 @@ class SnakeGame extends Component {
   }
 
   increaseSpeed() {
-    if (this.state.speed > 10) {
+    if (this.state.speed > 25) {
       this.setState({
-        speed: this.state.speed - 10,
+        speed: this.state.speed - 25,
       });
     }
   }
 
   onGameOver() {
-    alert(`Game Over, Snake length is ${this.state.snakeDots.length}`);
-    this.setState(initialState);
+    if (!this.state.playing) {
+      return;
+    }
+    this.props.updateMiniGameScore(this.state.score);
+    this.setState({
+      playing: false,
+    });
   }
 
   render() {
+    if (!this.state.playing) {
+      return (
+        <div className="game-area">
+          Gameover! Snake Game score: {this.state.score}
+        </div>
+      );
+    }
     return (
       <div className='game-area'>
         <Snake snakeDots={this.state.snakeDots} />
@@ -148,4 +191,14 @@ class SnakeGame extends Component {
   }
 }
 
-export default SnakeGame;
+const mapState = (state) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatch = {
+  updateMiniGameScore,
+};
+
+export default connect(mapState, mapDispatch)(SnakeGame);
