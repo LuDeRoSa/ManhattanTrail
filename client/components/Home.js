@@ -4,7 +4,7 @@ import Map from './Map';
 import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-import PhaserGameStart from './PhaserGameStart';
+import GameStart from './GameStart';
 
 /**
  * COMPONENT
@@ -50,10 +50,8 @@ export const Home = (props) => {
             {
               quiz: <Quiz />,
               hangman: <Hangman />,
-              cake: <PhaserGameStart game_type={'cake'} />,
-              galaga: <PhaserGameStart game_type={'galaga'} />,
-              snake: <PhaserGameStart game_type={'snake'} />,
-              flappy: <PhaserGameStart game_type={'flappy'} />,
+              snake: <GameStart game_type={'snake'} />,
+              flappy: <GameStart game_type={'flappy'} />,
             }[game_type]
           }
         </Grid>
