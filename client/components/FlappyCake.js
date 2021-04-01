@@ -35,7 +35,10 @@ class FlappyCake extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    if (!this.state.playing) {
+      return;
+    }
+    this.interval = setInterval(() => {
       this.update();
       this.draw();
     }, 1000 / 60);
@@ -55,6 +58,12 @@ class FlappyCake extends Component {
     if (!this.state.playing) {
       return;
     }
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    this.setState({
+      playing: false,
+    });
   }
   bump() {
     this.setState({
