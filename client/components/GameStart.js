@@ -4,6 +4,19 @@ import React from 'react';
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
 import Hangman from './HangmanGame/Hangman';
+import Button from '@material-ui/core/Button';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+
+const Start = (props) => (
+  <Button
+    variant="contained"
+    color="primary"
+    startIcon={<PlayArrowIcon />}
+    onClick={props.handleClick}
+  >
+    Start Game
+  </Button>
+);
 
 class GameStart extends React.Component {
   constructor(props) {
@@ -30,7 +43,7 @@ class GameStart extends React.Component {
             {this.state.gameStarted ? (
               <SnakeGame />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
           </div>
         );
@@ -42,7 +55,7 @@ class GameStart extends React.Component {
             {this.state.gameStarted ? (
               <FlappyCake />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
           </div>
         );
@@ -54,7 +67,7 @@ class GameStart extends React.Component {
             {this.state.gameStarted ? (
               <Hangman />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
           </div>
         );
