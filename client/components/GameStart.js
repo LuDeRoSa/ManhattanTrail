@@ -6,6 +6,7 @@ import FlappyCake from './FlappyCake';
 import Hangman from './HangmanGame/Hangman';
 import Button from '@material-ui/core/Button';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Paper from '@material-ui/core/Paper';
 
 const Start = (props) => (
   <Button
@@ -37,7 +38,7 @@ class GameStart extends React.Component {
     switch (this.props.game_type) {
       case 'snake':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>Snake Game:</h2>
             <p>Snake game default text to be edited</p>
             {this.state.gameStarted ? (
@@ -45,11 +46,11 @@ class GameStart extends React.Component {
             ) : (
               <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
         );
       case 'flappy':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>FlappyCake Game:</h2>
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
             {this.state.gameStarted ? (
@@ -57,11 +58,11 @@ class GameStart extends React.Component {
             ) : (
               <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
         );
       case 'hangman':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>Hangman Game:</h2>
             <p>Game The Food Category</p>
             {this.state.gameStarted ? (
@@ -69,7 +70,7 @@ class GameStart extends React.Component {
             ) : (
               <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
         );
       default:
         return <></>;
