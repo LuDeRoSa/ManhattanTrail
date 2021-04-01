@@ -94,17 +94,6 @@ class CakeGame extends Component {
             this.ctx.drawImage(scoreSign, 5, 15, this.refs.canvas.width*.17, this.refs.canvas.height*.09);
         }
         
-        
-
-        // //ctx.fillStyle = "green";
-        // ctx.fillStyle = "white";
-        // ctx.fillRect(0, 0, this.refs.canvas.width,   
-        //              this.refs.canvas.height);           
-        // ctx.beginPath();
-        // ctx.arc(this.state.bird.x, this.state.bird.y, 
-        //        this.state.bird.radius, 0, 2 * Math.PI);
-        // ctx.fill();
-        // ctx.stroke();
     }
 
     
