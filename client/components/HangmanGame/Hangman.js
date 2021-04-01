@@ -4,13 +4,13 @@ import { randomWord } from '../HangmanGame/HangmanWord.js';
 import { updateMiniGameScore } from '../../store/game';
 
 // hangman images
-let step0 = './0.png';
-let step1 = './1.png';
-let step2 = './2.png';
-let step3 = './3.png';
-let step4 = './4.png';
-let step5 = './5.png';
-let step6 = './6.png';
+let step0 = './img/hangman/0.png';
+let step1 = './img/hangman/1.png';
+let step2 = './img/hangman/2.png';
+let step3 = './img/hangman/3.png';
+let step4 = './img/hangman/4.png';
+let step5 = './img/hangman/5.png';
+let step6 = './img/hangman/6.png';
 
 class Hangman extends Component {
   static defaultProps = {

@@ -1,4 +1,4 @@
-var food_category = ['italian', 'chinese', 'indian', 'american', 'turkish'];
+const food_category = ['italian', 'chinese', 'indian', 'american', 'turkish'];
 
 // returns a random word from the array
 function randomWord() {
