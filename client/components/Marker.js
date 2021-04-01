@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import InfoWindow from './InfoWindow';
-import css from './CSS/Marker.css';
+import './Style/Marker.css';
 
 const Marker = (props) => {
   const { color, name } = props;
