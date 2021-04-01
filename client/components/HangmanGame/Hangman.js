@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { randomWord } from '../HangmanGame/HangmanWord.js';
 import { updateMiniGameScore } from '../../store/game';
 
+import '../Style/Hangman.css';
+
 // hangman images
 let step0 = './img/hangman/0.png';
 let step1 = './img/hangman/1.png';
