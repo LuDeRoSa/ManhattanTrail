@@ -25,10 +25,16 @@ class Hangman extends Component {
       mistake: 0,
       guessed: new Set([]),
       answer: randomWord(),
-      finished: false,
       gameOver: false,
       isWinner: false,
     };
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', (e) => {
+      if (e.code >= 'A' && e.code <= 'z') {
+        this.handleGuess(e);
+      }
+    });
   }
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.isWinner && this.state.isWinner) {
@@ -46,7 +52,12 @@ class Hangman extends Component {
 
   //using arrow function to avoid binding
   handleGuess = (e) => {
-    let letter = e.target.value;
+    let letter;
+    if (e.target.tagName === 'BUTTON') {
+      letter = e.target.value;
+    } else {
+      letter = e.code.substr(e.code.length - 1).toLowerCase();
+    }
     this.setState((state) => ({
       guessed: state.guessed.add(letter),
       mistake: state.mistake + (state.answer.includes(letter) ? 0 : 1),
