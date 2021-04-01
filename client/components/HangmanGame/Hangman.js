@@ -30,7 +30,6 @@ class Hangman extends Component {
       isWinner: false,
     };
   }
-
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.isWinner && this.state.isWinner) {
       this.props.updateMiniGameScore(1);
@@ -39,7 +38,6 @@ class Hangman extends Component {
       });
     }
   }
-
   guessedWord() {
     return this.state.answer
       .split('')
@@ -56,12 +54,6 @@ class Hangman extends Component {
       isWinner:
         this.guessedWord().join('') === this.state.answer ? true : false,
     }));
-    if (this.state.isWinner) {
-      this.setState({
-        score: 1,
-      });
-      this.state.updateMiniGameScore(this.state.score);
-    }
   };
 
   // maps over the keyboard displaying every single character as a button
@@ -83,8 +75,6 @@ class Hangman extends Component {
     let gameStat = this.generateButtons();
     if (this.state.isWinner) {
       gameStat = 'You won!';
-      console.log(this.state.score);
-      console.log(this.state.isWinner);
     }
     if (this.state.gameOver) {
       gameStat = 'You Lost!';
