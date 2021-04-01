@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import GlobalScore from './GlobalScore';
 
@@ -25,13 +26,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   button: {
-    fontWeight: 500,
+    fontWeight: 550,
   },
 }));
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
-  // console.log(isLoggedIn)
   return (
     <div>
       <nav>
@@ -73,7 +73,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </Button>
 
                   <a href="#" onClick={handleClick} tabIndex="-1">
-                    <Button className={classes.button} color="secondary">
+                    <Button
+                      startIcon={<ExitToAppIcon />}
+                      className={classes.button}
+                      color="secondary"
+                    >
                       Logout
                     </Button>
                   </a>
