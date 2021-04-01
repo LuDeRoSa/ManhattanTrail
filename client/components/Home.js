@@ -10,7 +10,6 @@ import GameStart from './GameStart';
  * COMPONENT
  */
 import Quiz from './Quiz';
-import Hangman from './Hangman';
 import Grid from '@material-ui/core/Grid';
 const styles = {
   container: {
@@ -49,9 +48,9 @@ export const Home = (props) => {
           {
             {
               quiz: <Quiz />,
-              hangman: <Hangman />,
               snake: <GameStart game_type={'snake'} />,
               flappy: <GameStart game_type={'flappy'} />,
+              hangman: <GameStart game_type={'hangman'} />,
             }[game_type]
           }
         </Grid>

@@ -3,6 +3,7 @@ import React from 'react';
 //
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
+import Hangman from './HangmanGame/Hangman';
 
 class GameStart extends React.Component {
   constructor(props) {
@@ -40,6 +41,18 @@ class GameStart extends React.Component {
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
             {this.state.gameStarted ? (
               <FlappyCake />
+            ) : (
+              <button onClick={this.handleClick}>Start Game</button>
+            )}
+          </div>
+        );
+      case 'hangman':
+        return (
+          <div>
+            <h2>Hangman Game:</h2>
+            <p>Game The Food Category</p>
+            {this.state.gameStarted ? (
+              <Hangman />
             ) : (
               <button onClick={this.handleClick}>Start Game</button>
             )}

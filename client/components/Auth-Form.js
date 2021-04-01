@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
-import Hangman from './Hangman';
 
 /**
  * COMPONENT
@@ -11,25 +10,24 @@ const AuthForm = (props) => {
 
   return (
     <div>
-      <form id='authform' onSubmit={handleSubmit} name={name}>
+      <form id="authform" onSubmit={handleSubmit} name={name}>
         <div>
-          <label htmlFor='username'>
+          <label htmlFor="username">
             <small>Username</small>
           </label>
-          <input name='username' type='text' />
+          <input name="username" type="text" />
         </div>
         <div>
-          <label htmlFor='password'>
+          <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name='password' type='password' />
+          <input name="password" type="password" />
         </div>
         <div>
-          <button type='submit'>{displayName}</button>
+          <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      {/* <Hangman /> */}
       <br />
       {window.githubURL && (
         <a href={window.githubURL}>Login / Register Via Github </a>
