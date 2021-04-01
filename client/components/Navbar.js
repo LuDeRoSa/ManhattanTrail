@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    fontWeight: 500,
+  },
 }));
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
@@ -42,24 +45,27 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 <div>
                   <GlobalScore />
                   <Button
+                    className={classes.button}
                     startIcon={<SportsEsportsIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/landing"
                   >
                     Game
                   </Button>
                   <Button
+                    className={classes.button}
                     startIcon={<AccountCircleIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/profile"
                   >
                     Profile
                   </Button>
                   <Button
+                    className={classes.button}
                     startIcon={<PublicIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/leadership"
                   >
@@ -67,7 +73,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </Button>
 
                   <a href="#" onClick={handleClick} tabIndex="-1">
-                    <Button color="inherit">Logout</Button>
+                    <Button className={classes.button} color="secondary">
+                      Logout
+                    </Button>
                   </a>
                 </div>
               ) : (
