@@ -40,6 +40,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               </Typography>
               {isLoggedIn ? (
                 <div>
+                  <GlobalScore />
                   <Button
                     startIcon={<SportsEsportsIcon />}
                     color="inherit"
@@ -64,8 +65,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   >
                     Leadership
                   </Button>
-
-                  <GlobalScore />
 
                   <a href="#" onClick={handleClick} tabIndex="-1">
                     <Button color="inherit">Logout</Button>
