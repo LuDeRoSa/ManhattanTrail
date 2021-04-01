@@ -16,11 +16,6 @@ nav a {
   color: white;
 }
 
-#authform div {
-  margin: 1em;
-  display: inline-block;
-}
-
 .marker {
   position: absolute;
   top: 50%;
