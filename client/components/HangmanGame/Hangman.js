@@ -72,7 +72,7 @@ class Hangman extends Component {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
       <button
         key={letter}
-        className="btn btn-lg btn-primary m-2"
+        className='btn btn-lg btn-primary m-2'
         value={letter}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
@@ -91,15 +91,15 @@ class Hangman extends Component {
       gameStat = 'You Lost!';
     }
     return (
-      <div className="hangman-container">
-        <h1 className="text-center">Hangman</h1>
-        <div className="float-left">
+      <div className='hangman-container'>
+        <h1 className='text-center'>Hangman</h1>
+        <div className='float-left'>
           Wrong Guesses: {this.state.mistake} of {this.props.maxTry}
         </div>
-        <div className="text-center">
-          <img src={this.props.images[this.state.mistake]} alt="" />
+        <div className='text-center'>
+          <img src={this.props.images[this.state.mistake]} alt='' />
         </div>
-        <div className="text-center">
+        <div className='text-center'>
           <p>Guess The Food Category</p>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
           <p>{gameStat}</p>
