@@ -3,7 +3,7 @@ import React from 'react';
 //
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
-import Hangman from '../components/HangmanGame/Hangman';
+import Hangman from './HangmanGame/Hangman';
 
 class GameStart extends React.Component {
   constructor(props) {
