@@ -4,7 +4,7 @@ import Galaga from './Galaga';
 import Cake from './Cake';
 import SnakeGame from './SnakeGame';
 
-class PhaserGameStart extends React.Component {
+class GameStart extends React.Component {
   constructor(props) {
     super(props);
 
@@ -72,4 +72,4 @@ class PhaserGameStart extends React.Component {
   }
 }
 
-export default PhaserGameStart;
+export default GameStart;
