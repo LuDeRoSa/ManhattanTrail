@@ -102,9 +102,6 @@ class Hangman extends Component {
           <p>Guess The Food Category</p>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
           <p>{gameStat}</p>
-          {/* <button className='btn btn-info' onClick={this.resetButton}>
-            Reset
-          </button> */}
         </div>
       </div>
     );
