@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { randomWord } from './HangmanWord.js';
-import { updateMiniGameScore, updateMiniScore } from '../store/game';
+import { randomWord } from '../HangmanGame/HangmanWord.js';
+import { updateMiniGameScore } from '../../store/game';
 
 // hangman images
 let step0 = './0.png';
@@ -29,6 +29,15 @@ class Hangman extends Component {
       gameOver: false,
       isWinner: false,
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.isWinner && this.state.isWinner) {
+      this.props.updateMiniGameScore(1);
+      this.setState({
+        score: 1,
+      });
+    }
   }
 
   guessedWord() {
@@ -70,16 +79,6 @@ class Hangman extends Component {
     ));
   }
 
-  // resets the entire game
-  resetButton = () => {
-    this.setState({
-      mistake: 0,
-      guessed: new Set([]),
-      answer: randomWord(),
-    });
-    this.gameOver();
-  };
-
   render() {
     let gameStat = this.generateButtons();
     if (this.state.isWinner) {
@@ -101,12 +100,11 @@ class Hangman extends Component {
         </div>
         <div className='text-center'>
           <p>Guess The Food Category</p>
-          <p>{this.state.answer}</p>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
           <p>{gameStat}</p>
-          <button className='btn btn-info' onClick={this.resetButton}>
+          {/* <button className='btn btn-info' onClick={this.resetButton}>
             Reset
-          </button>
+          </button> */}
         </div>
       </div>
     );

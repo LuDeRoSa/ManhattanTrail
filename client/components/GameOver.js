@@ -33,25 +33,25 @@ class GameOver extends React.Component {
         <ButtonGroup>
           <Button
             startIcon={<SportsEsportsIcon />}
-            color="inherit"
+            color='inherit'
             component={Link}
-            to="/landing"
+            to='/landing'
           >
             Play new Game
           </Button>
           <Button
             startIcon={<AccountCircleIcon />}
-            color="inherit"
+            color='inherit'
             component={Link}
-            to="/profile"
+            to='/profile'
           >
             Profile
           </Button>
           <Button
             startIcon={<PublicIcon />}
-            color="inherit"
+            color='inherit'
             component={Link}
-            to="/leadership"
+            to='/leadership'
           >
             Leadership Board
           </Button>
