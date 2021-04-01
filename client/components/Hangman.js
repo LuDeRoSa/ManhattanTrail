@@ -31,13 +31,6 @@ class Hangman extends Component {
     };
   }
 
-  componentDidUpdate() {
-    if (this.state.isWinner === true) {
-      console.log(this.state.score);
-      // this.props.updateMiniGameScore(this.props.game.mini_score);
-    }
-  }
-
   guessedWord() {
     return this.state.answer
       .split('')
@@ -46,14 +39,20 @@ class Hangman extends Component {
 
   //using arrow function to avoid binding
   handleGuess = (e) => {
-    e.preventDefault();
     let letter = e.target.value;
     this.setState((state) => ({
       guessed: state.guessed.add(letter),
       mistake: state.mistake + (state.answer.includes(letter) ? 0 : 1),
       gameOver: this.state.mistake == this.props.maxTry ? true : false,
-      isWinner: this.guessedWord().join('') === this.state.answer,
+      isWinner:
+        this.guessedWord().join('') === this.state.answer ? true : false,
     }));
+    if (this.state.isWinner) {
+      this.setState({
+        score: 1,
+      });
+      this.state.updateMiniGameScore(this.state.score);
+    }
   };
 
   // maps over the keyboard displaying every single character as a button
@@ -78,23 +77,19 @@ class Hangman extends Component {
       guessed: new Set([]),
       answer: randomWord(),
     });
+    this.gameOver();
   };
 
   render() {
-    // const gameOver = this.state.mistake >= this.props.maxTry;
-
     let gameStat = this.generateButtons();
-
     if (this.state.isWinner) {
       gameStat = 'You won!';
-      this.state.score += 1;
+      console.log(this.state.score);
+      console.log(this.state.isWinner);
     }
-
     if (this.state.gameOver) {
       gameStat = 'You Lost!';
     }
-
-    // console.log(this.state.score);
     return (
       <div className='hangman-container'>
         <h1 className='text-center'>Hangman</h1>
