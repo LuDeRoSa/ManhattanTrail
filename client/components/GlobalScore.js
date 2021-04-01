@@ -9,9 +9,7 @@ const GlobalScore = (props) => (
       color="secondary"
       icon={<TrackChangesIcon />}
       label={'Score:' + props.total_score}
-    >
-      Current Score: {props.total_score}{' '}
-    </Chip>
+    />
   </>
 );
 
