@@ -14,6 +14,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import GlobalScore from './GlobalScore';
 
+import './Style/Nav.css';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -68,7 +70,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   <a href="#" onClick={handleClick} tabIndex="-1">
                     <Button color="inherit">Logout</Button>
                   </a>
-
                 </div>
               ) : (
                 <div>
