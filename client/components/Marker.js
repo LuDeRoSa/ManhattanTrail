@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InfoWindow from './InfoWindow';
+import css from './CSS/Marker.css';
 
 const Marker = (props) => {
   const { color, name } = props;
@@ -8,7 +9,7 @@ const Marker = (props) => {
   }
   return (
     <div
-      className='marker'
+      className="marker"
       style={{
         backgroundColor: color,
       }}

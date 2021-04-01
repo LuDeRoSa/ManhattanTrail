@@ -1,4 +1,4 @@
-/* .marker {
+.marker {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,4 +12,4 @@
   /* &;hover {
     z-index: 1;
   } */
-} */
+}
