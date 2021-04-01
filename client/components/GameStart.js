@@ -31,7 +31,7 @@ class GameStart extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   componentDidUpdate(prevProps) {
-    if (prevProps !== this.props) {
+    if (prevProps.game_type !== this.props.game_type) {
       this.setState({ gameStarted: false });
     }
   }
