@@ -4,6 +4,7 @@ import React from 'react';
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
 import Hangman from './HangmanGame/Hangman';
+import Quiz from './Quiz';
 import Button from '@material-ui/core/Button';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Paper from '@material-ui/core/Paper';
@@ -28,6 +29,11 @@ class GameStart extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({ gameStarted: false });
+    }
   }
 
   handleClick() {
@@ -67,6 +73,18 @@ class GameStart extends React.Component {
             <p>Game The Food Category</p>
             {this.state.gameStarted ? (
               <Hangman />
+            ) : (
+              <Start handleClick={this.handleClick} />
+            )}
+          </Paper>
+        );
+      case 'quiz':
+        return (
+          <Paper elevation={10}>
+            <h2>Quiz</h2>
+            <p>Answer all the questions!</p>
+            {this.state.gameStarted ? (
+              <Quiz />
             ) : (
               <Start handleClick={this.handleClick} />
             )}
