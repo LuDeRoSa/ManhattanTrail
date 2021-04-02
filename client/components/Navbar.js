@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import GlobalScore from './GlobalScore';
 
@@ -24,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  button: {
+    fontWeight: 550,
+  },
 }));
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
-  // console.log(isLoggedIn)
   return (
     <div>
       <nav>
@@ -42,24 +45,27 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 <div>
                   <GlobalScore />
                   <Button
+                    className={classes.button}
                     startIcon={<SportsEsportsIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/landing"
                   >
                     Game
                   </Button>
                   <Button
+                    className={classes.button}
                     startIcon={<AccountCircleIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/profile"
                   >
                     Profile
                   </Button>
                   <Button
+                    className={classes.button}
                     startIcon={<PublicIcon />}
-                    color="inherit"
+                    color="secondary"
                     component={Link}
                     to="/leadership"
                   >
@@ -67,7 +73,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </Button>
 
                   <a href="#" onClick={handleClick} tabIndex="-1">
-                    <Button color="inherit">Logout</Button>
+                    <Button
+                      startIcon={<ExitToAppIcon />}
+                      className={classes.button}
+                      color="secondary"
+                    >
+                      Logout
+                    </Button>
                   </a>
                 </div>
               ) : (

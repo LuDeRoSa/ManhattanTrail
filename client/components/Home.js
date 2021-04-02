@@ -45,14 +45,7 @@ export const Home = (props) => {
         <Grid item lg={1} md={1} sm={false} xs={false} />
 
         <Grid item lg={5} md={5} sm={10} xs={12}>
-          {
-            {
-              quiz: <Quiz />,
-              snake: <GameStart game_type={'snake'} />,
-              flappy: <GameStart game_type={'flappy'} />,
-              hangman: <GameStart game_type={'hangman'} />,
-            }[game_type]
-          }
+          <GameStart game_type={game_type} />
         </Grid>
       </Grid>
     </div>

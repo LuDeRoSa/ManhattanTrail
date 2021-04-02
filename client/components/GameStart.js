@@ -4,6 +4,21 @@ import React from 'react';
 import SnakeGame from './SnakeGame';
 import FlappyCake from './FlappyCake';
 import Hangman from './HangmanGame/Hangman';
+import Quiz from './Quiz';
+import Button from '@material-ui/core/Button';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Paper from '@material-ui/core/Paper';
+
+const Start = (props) => (
+  <Button
+    variant="contained"
+    color="primary"
+    startIcon={<PlayArrowIcon />}
+    onClick={props.handleClick}
+  >
+    Start Game
+  </Button>
+);
 
 class GameStart extends React.Component {
   constructor(props) {
@@ -15,6 +30,11 @@ class GameStart extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.game_type !== this.props.game_type) {
+      this.setState({ gameStarted: false });
+    }
+  }
 
   handleClick() {
     this.setState({ gameStarted: true });
@@ -24,39 +44,51 @@ class GameStart extends React.Component {
     switch (this.props.game_type) {
       case 'snake':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>Snake Game:</h2>
             <p>Snake game default text to be edited</p>
             {this.state.gameStarted ? (
               <SnakeGame />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
         );
       case 'flappy':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>FlappyCake Game:</h2>
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
             {this.state.gameStarted ? (
               <FlappyCake />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
         );
       case 'hangman':
         return (
-          <div>
+          <Paper elevation={10}>
             <h2>Hangman Game:</h2>
             <p>Game The Food Category</p>
             {this.state.gameStarted ? (
               <Hangman />
             ) : (
-              <button onClick={this.handleClick}>Start Game</button>
+              <Start handleClick={this.handleClick} />
             )}
-          </div>
+          </Paper>
+        );
+      case 'quiz':
+        return (
+          <Paper elevation={10}>
+            <h2>Quiz</h2>
+            <p>Answer all the questions!</p>
+            {this.state.gameStarted ? (
+              <Quiz />
+            ) : (
+              <Start handleClick={this.handleClick} />
+            )}
+          </Paper>
         );
       default:
         return <></>;
