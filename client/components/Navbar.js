@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
+import linksList from '../LinksList';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -51,34 +53,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 {isLoggedIn ? (
                   <div>
                     <GlobalScore />
-                    <Button
-                      className={classes.button}
-                      startIcon={<SportsEsportsIcon />}
-                      color="secondary"
-                      component={Link}
-                      to="/landing"
-                    >
-                      Game
-                    </Button>
-                    <Button
-                      className={classes.button}
-                      startIcon={<AccountCircleIcon />}
-                      color="secondary"
-                      component={Link}
-                      to="/profile"
-                    >
-                      Profile
-                    </Button>
-                    <Button
-                      className={classes.button}
-                      startIcon={<PublicIcon />}
-                      color="secondary"
-                      component={Link}
-                      to="/leadership"
-                    >
-                      Leadership
-                    </Button>
-
+                    {linksList.map((link) => (
+                      <Button
+                        key={link.text}
+                        className={classes.button}
+                        startIcon={link.icon}
+                        color="secondary"
+                        component={Link}
+                        to={link.path}
+                      >
+                        {link.text}
+                      </Button>
+                    ))}
                     <Button
                       startIcon={<ExitToAppIcon />}
                       className={classes.button}
