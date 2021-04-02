@@ -38,7 +38,7 @@ function SideMenu({ handleClick, isLoggedIn }) {
     <div
       className={classes.fullList}
       role="presentation"
-      onClick={() => toggleDrawer(true)}
+      onClick={() => toggleDrawer(false)}
     >
       {isLoggedIn ? (
         <>
