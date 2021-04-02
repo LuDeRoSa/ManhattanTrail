@@ -21,9 +21,11 @@
   position: absolute;
   width: 2%;
   height: 2%;
-  background: red;
-  /* background-image: url('../../../public/img/cupcake.png'); */
-  border: 1px solid #fff;
+  /* background: red; */
+  background-image: url('./img/cupcake.png');
+  background-size: cover;
+  background-position: center;
+  /* border: 1px solid #fff; */
   z-index: 1;
 }
 
