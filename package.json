@@ -34,6 +34,7 @@
     "pg": "^8.5.1",
     "react-facebook-login": "^4.1.1",
     "sequelize": "^6.3.5"
+
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
