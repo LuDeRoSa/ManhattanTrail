@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
-import Food from './Food'
+import Food from './Food';
 import { updateMiniGameScore } from '../store/game';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
+
+import './Style/Snake.css';
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -71,29 +73,31 @@ class SnakeGame extends Component {
     if (e.keyCode >= 37 && e.keyCode <= 40) {
       e.preventDefault();
     }
-    switch (e.keyCode) { //if stmt inside the cases
+    switch (
+      e.keyCode //if stmt inside the cases
+    ) {
       case 38:
         //if current direction on teh state is down, break , or return
         //there would be no this.setState
-        if (this.state.direction !== 'DOWN'){
+        if (this.state.direction !== 'DOWN') {
           this.setState({ direction: 'UP' });
         }
         break;
 
       case 40:
-        if (this.state.direction !== "UP"){
+        if (this.state.direction !== 'UP') {
           this.setState({ direction: 'DOWN' });
         }
         break;
 
       case 37:
-        if (this.state.direction !== "RIGHT"){
+        if (this.state.direction !== 'RIGHT') {
           this.setState({ direction: 'LEFT' });
         }
         break;
 
       case 39:
-        if (this.state.direction !== "LEFT"){
+        if (this.state.direction !== 'LEFT') {
           this.setState({ direction: 'RIGHT' });
         }
 
@@ -156,7 +160,6 @@ class SnakeGame extends Component {
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     let food = this.state.food;
     if (head[0] == food[0] && head[1] == food[1]) {
-
       this.setState({
         food: getRandomCoordinates(),
         score: (this.state.score += 1),
@@ -169,13 +172,12 @@ class SnakeGame extends Component {
   }
 
   handleClose() {
-    this.setState({open: false})
+    this.setState({ open: false });
   }
 
   snackbar() {
-    this.setState({open: true})
+    this.setState({ open: true });
   }
-
 
   enlargeSnake() {
     let newSnake = [...this.state.snakeDots];
@@ -212,21 +214,21 @@ class SnakeGame extends Component {
       );
     }
     return (
-      <div className='game-area'>
+      <div className="game-area">
         <Snake snakeDots={this.state.snakeDots} />
         <Food dot={this.state.food} />
         <Snackbar
-        anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-       }}
-        open={this.state.open}
-        onClose={this.handleClose}
-        // TransitionComponent={state.Transition}
-        message="YUM!"
-        // key={state.Transition.name}
-        autoHideDuration={500}
-      />
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          open={this.state.open}
+          onClose={this.handleClose}
+          // TransitionComponent={state.Transition}
+          message="YUM!"
+          // key={state.Transition.name}
+          autoHideDuration={500}
+        />
       </div>
     );
   }
