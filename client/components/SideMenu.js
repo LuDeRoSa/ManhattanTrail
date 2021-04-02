@@ -26,9 +26,10 @@ const useStyles = makeStyles({
   },
 });
 
-function SideMenu() {
+function SideMenu(props) {
   const classes = useStyles();
   const [isOpen, setIsOpen] = React.useState(false);
+  const { handleClick } = props;
 
   const toggleDrawer = (bool) => {
     setIsOpen(bool);
@@ -48,12 +49,14 @@ function SideMenu() {
       ))}
       <Divider />
       <List>
-        <ListItem>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText>click this? for log out</ListItemText>
-        </ListItem>
+        <a href="#" onClick={handleClick} tabIndex="-1">
+          <ListItem>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText>click this? for log out</ListItemText>
+          </ListItem>
+        </a>
       </List>
     </div>
   );

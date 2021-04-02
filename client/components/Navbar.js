@@ -102,8 +102,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 <Typography variant="h5" className={classes.title}>
                   Manhattan Trail
                 </Typography>
-                <GlobalScore />
-                <SideMenu />
+                {isLoggedIn && <GlobalScore />}
+                <SideMenu handleClick={handleClick} isLoggedIn={isLoggedIn} />
               </Toolbar>
             </Hidden>
           </AppBar>
