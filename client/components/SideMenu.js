@@ -48,14 +48,12 @@ function SideMenu({ handleClick, isLoggedIn }) {
       ))}
       <Divider />
       <List>
-        <a href="#" onClick={handleClick} tabIndex="-1">
-          <ListItem>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText>Log out</ListItemText>
-          </ListItem>
-        </a>
+        <ListItem button onClick={handleClick} component={Link} to={'/#'}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText>Log out</ListItemText>
+        </ListItem>
       </List>
     </div>
   );
