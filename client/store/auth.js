@@ -55,7 +55,8 @@ export const fbAuthenticate = (username, id) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push('/login');
+  console.log('token', TOKEN);
+  history.push('/');
   return {
     type: SET_AUTH,
     auth: {},
