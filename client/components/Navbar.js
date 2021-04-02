@@ -16,7 +16,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import GlobalScore from './GlobalScore';
 
-import './Style/Nav.css';
 import SideMenu from './SideMenu';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     fontWeight: 550,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+      color: 'inherit',
+    },
   },
 }));
 
@@ -75,15 +79,16 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                       Leadership
                     </Button>
 
-                    <a href="#" onClick={handleClick} tabIndex="-1">
-                      <Button
-                        startIcon={<ExitToAppIcon />}
-                        className={classes.button}
-                        color="secondary"
-                      >
-                        Logout
-                      </Button>
-                    </a>
+                    <Button
+                      startIcon={<ExitToAppIcon />}
+                      className={classes.button}
+                      color="secondary"
+                      onClick={handleClick}
+                      component={Link}
+                      to="/#"
+                    >
+                      Logout
+                    </Button>
                   </div>
                 ) : (
                   <div>

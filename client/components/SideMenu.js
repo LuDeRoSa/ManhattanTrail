@@ -26,10 +26,9 @@ const useStyles = makeStyles({
   },
 });
 
-function SideMenu(props) {
+function SideMenu({ handleClick, isLoggedIn }) {
   const classes = useStyles();
   const [isOpen, setIsOpen] = React.useState(false);
-  const { handleClick } = props;
 
   const toggleDrawer = (bool) => {
     setIsOpen(bool);
@@ -54,7 +53,7 @@ function SideMenu(props) {
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText>click this? for log out</ListItemText>
+            <ListItemText>Log out</ListItemText>
           </ListItem>
         </a>
       </List>
