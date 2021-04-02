@@ -46,7 +46,7 @@ class GameStart extends React.Component {
         return (
           <Paper elevation={10}>
             <h2>Snake Game:</h2>
-            <p>Snake game default text to be edited</p>
+            <p>Eat the food but don't hit the walls! The more food you eat, the faster you'll move!</p>
             {this.state.gameStarted ? (
               <SnakeGame />
             ) : (
