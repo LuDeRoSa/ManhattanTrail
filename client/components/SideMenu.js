@@ -40,21 +40,34 @@ function SideMenu({ handleClick, isLoggedIn }) {
       role="presentation"
       onClick={() => toggleDrawer(true)}
     >
-      {linksList.map((link) => (
-        <ListItem key={link.text} button component={Link} to={link.path}>
-          <ListItemIcon>{link.icon}</ListItemIcon>
-          <ListItemText>{link.text}</ListItemText>
-        </ListItem>
-      ))}
-      <Divider />
-      <List>
-        <ListItem button onClick={handleClick} component={Link} to={'/#'}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText>Log out</ListItemText>
-        </ListItem>
-      </List>
+      {isLoggedIn ? (
+        <>
+          {linksList.map((link) => (
+            <ListItem key={link.text} button component={Link} to={link.path}>
+              <ListItemIcon>{link.icon}</ListItemIcon>
+              <ListItemText>{link.text}</ListItemText>
+            </ListItem>
+          ))}
+          <Divider />
+          <List>
+            <ListItem button onClick={handleClick} component={Link} to={'/#'}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText>Log out</ListItemText>
+            </ListItem>
+          </List>
+        </>
+      ) : (
+        <List>
+          <ListItem button component={Link} to={'/login'}>
+            <ListItemText>Log in</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to={'/signup'}>
+            <ListItemText>Sign up</ListItemText>
+          </ListItem>
+        </List>
+      )}
     </div>
   );
 
