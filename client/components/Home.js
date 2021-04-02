@@ -34,9 +34,9 @@ export const Home = (props) => {
       <Grid
         container
         spacing={3}
-        direction="row"
-        alignItems="center"
-        justify="center"
+        direction='row'
+        alignItems='center'
+        justify='center'
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
         <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '50vh' }}>
