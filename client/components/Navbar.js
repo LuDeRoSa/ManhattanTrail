@@ -98,7 +98,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
               </Toolbar>
             </Hidden>
             <Hidden mdUp>
-              <SideMenu />
+              <Toolbar>
+                <Typography variant="h5" className={classes.title}>
+                  Manhattan Trail
+                </Typography>
+                <GlobalScore />
+                <SideMenu />
+              </Toolbar>
             </Hidden>
           </AppBar>
         </div>

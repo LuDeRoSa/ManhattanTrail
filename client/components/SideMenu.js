@@ -1,14 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import linksList from '../LinksList';
+
 import { makeStyles } from '@material-ui/core/styles';
+
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+
+import MenuIcon from '@material-ui/icons/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles({
   list: {
@@ -33,14 +40,18 @@ function SideMenu() {
       role="presentation"
       onClick={() => toggleDrawer(true)}
     >
-      <List>
-        <ListItem>
-          <ListItemText>click this?</ListItemText>
+      {linksList.map((link) => (
+        <ListItem key={link.text} button component={Link} to={link.path}>
+          <ListItemIcon>{link.icon}</ListItemIcon>
+          <ListItemText>{link.text}</ListItemText>
         </ListItem>
-      </List>
+      ))}
       <Divider />
       <List>
         <ListItem>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
           <ListItemText>click this? for log out</ListItemText>
         </ListItem>
       </List>
@@ -50,9 +61,11 @@ function SideMenu() {
   return (
     <div>
       <React.Fragment>
-        <Button onClick={() => toggleDrawer(true)}>Open drawer</Button>
+        <IconButton color="secondary" onClick={() => toggleDrawer(true)}>
+          <MenuIcon />
+        </IconButton>
         <Drawer
-          anchor={'left'}
+          anchor={'right'}
           open={isOpen}
           onClose={() => toggleDrawer(false)}
         >

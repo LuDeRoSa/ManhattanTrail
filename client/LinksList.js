@@ -1,0 +1,26 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import PublicIcon from '@material-ui/icons/Public';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+const linksList = [
+  {
+    text: 'Game',
+    icon: <SportsEsportsIcon />,
+    path: '/landing',
+  },
+  {
+    text: 'Profile',
+    icon: <AccountCircleIcon />,
+    path: '/profile',
+  },
+  {
+    text: 'Leadership',
+    icon: <PublicIcon />,
+    path: '/leadership',
+  },
+];
+
+export default linksList;
