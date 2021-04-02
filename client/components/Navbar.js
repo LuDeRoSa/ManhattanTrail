@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
 import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -16,6 +17,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GlobalScore from './GlobalScore';
 
 import './Style/Nav.css';
+import SideMenu from './SideMenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,62 +39,67 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
       <nav>
         <div className={classes.root}>
           <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h4" className={classes.title}>
-                Manhattan Trail
-              </Typography>
-              {isLoggedIn ? (
-                <div>
-                  <GlobalScore />
-                  <Button
-                    className={classes.button}
-                    startIcon={<SportsEsportsIcon />}
-                    color="secondary"
-                    component={Link}
-                    to="/landing"
-                  >
-                    Game
-                  </Button>
-                  <Button
-                    className={classes.button}
-                    startIcon={<AccountCircleIcon />}
-                    color="secondary"
-                    component={Link}
-                    to="/profile"
-                  >
-                    Profile
-                  </Button>
-                  <Button
-                    className={classes.button}
-                    startIcon={<PublicIcon />}
-                    color="secondary"
-                    component={Link}
-                    to="/leadership"
-                  >
-                    Leadership
-                  </Button>
-
-                  <a href="#" onClick={handleClick} tabIndex="-1">
+            <Hidden smDown>
+              <Toolbar>
+                <Typography variant="h4" className={classes.title}>
+                  Manhattan Trail
+                </Typography>
+                {isLoggedIn ? (
+                  <div>
+                    <GlobalScore />
                     <Button
-                      startIcon={<ExitToAppIcon />}
                       className={classes.button}
+                      startIcon={<SportsEsportsIcon />}
                       color="secondary"
+                      component={Link}
+                      to="/landing"
                     >
-                      Logout
+                      Game
                     </Button>
-                  </a>
-                </div>
-              ) : (
-                <div>
-                  <Button color="inherit" component={Link} to="/login">
-                    Login
-                  </Button>
-                  <Button color="inherit" component={Link} to="/signup">
-                    Sign Up
-                  </Button>
-                </div>
-              )}
-            </Toolbar>
+                    <Button
+                      className={classes.button}
+                      startIcon={<AccountCircleIcon />}
+                      color="secondary"
+                      component={Link}
+                      to="/profile"
+                    >
+                      Profile
+                    </Button>
+                    <Button
+                      className={classes.button}
+                      startIcon={<PublicIcon />}
+                      color="secondary"
+                      component={Link}
+                      to="/leadership"
+                    >
+                      Leadership
+                    </Button>
+
+                    <a href="#" onClick={handleClick} tabIndex="-1">
+                      <Button
+                        startIcon={<ExitToAppIcon />}
+                        className={classes.button}
+                        color="secondary"
+                      >
+                        Logout
+                      </Button>
+                    </a>
+                  </div>
+                ) : (
+                  <div>
+                    <Button color="inherit" component={Link} to="/login">
+                      Login
+                    </Button>
+                    <Button color="inherit" component={Link} to="/signup">
+                      Sign Up
+                    </Button>
+                  </div>
+                )}
+              </Toolbar>
+            </Hidden>
+            <Hidden mdUp>
+              <SideMenu />
+            </Hidden>
           </AppBar>
         </div>
       </nav>
