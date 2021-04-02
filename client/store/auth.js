@@ -43,6 +43,16 @@ export const authenticate = (username, password, method) => async (
   }
 };
 
+export const fbAuthenticate = (username, id) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/facebook`, { username, id });
+    let token = window.localStorage.setItem(TOKEN, res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
+
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
   history.push('/login');
