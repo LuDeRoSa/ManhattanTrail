@@ -11,9 +11,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
-import PublicIcon from '@material-ui/icons/Public';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import GlobalScore from './GlobalScore';
