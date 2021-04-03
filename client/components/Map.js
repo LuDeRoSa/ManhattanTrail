@@ -12,8 +12,12 @@ class _Map extends React.Component {
     this.state = {
       restaurants: [],
       center: {
-        lat: this.props.rests[this.props.gameStage - 1] || 40.7127281,
-        lng: this.props.rests[this.props.gameStage - 1] || -74.0060152,
+        lat:
+          this.props.rests[this.props.gameStage - 1].restaurant_latitude ||
+          40.7127281,
+        lng:
+          this.props.rests[this.props.gameStage - 1].restaurant_longitude ||
+          -74.0060152,
       },
       show: false,
       // startingPoint: { lat: 40.7127281, lng: -74.0060152 },
@@ -24,13 +28,11 @@ class _Map extends React.Component {
 
   componentDidMount() {
     if (this.props.rests.length > 0) {
-      console.log('we are setting center in component did mount');
       this.setCenter();
     }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
-      console.log('the props.rests has changed in componentdid update');
       if (this.props.rests.length > 0) {
         this.setCenter();
       }
@@ -83,6 +85,7 @@ class _Map extends React.Component {
   }
 
   render() {
+    console.log(this.state.center);
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
