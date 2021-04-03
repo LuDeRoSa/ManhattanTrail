@@ -1,7 +1,11 @@
+
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { CATEGORIES, FOODS } from './SortFruitsData';
 import SortFruitsDropzone from './SortFruitsDropzone';
+import { connect } from 'react-redux';
+import {updateMiniGameScore} from "../store/game";
+
 /**
  * Enums for representing the game play state
  */
@@ -15,9 +19,10 @@ const initialState = {
     unsorted: FOODS,
     [CATEGORIES.GOOD]: [],
     [CATEGORIES.BAD]: [],
-    gameState: GAME_STATE.READY
+    gameState: GAME_STATE.READY,
+    score: 0
 };
-export default class SortFruits extends React.Component {
+class SortFruits extends React.Component {
     state = initialState;
     startGame = () => {
         this.setState(
@@ -32,6 +37,8 @@ export default class SortFruits extends React.Component {
         });
         // Calculate final user score
         let score = getCalculatedScore(this.state[CATEGORIES.GOOD], this.state[CATEGORIES.BAD]);
+        this.state.score = score;
+        this.props.updateMiniGameScore(this.state.score);
     };
     onDragEnd = ({ source, destination }) => {
         // If the destination is not found, return
@@ -43,7 +50,7 @@ export default class SortFruits extends React.Component {
         });
     };
     render() {
-        const { gameState, unsorted } = this.state;
+        const { gameState, unsorted, score } = this.state;
         const isDropDisabled = gameState === GAME_STATE.DONE;
         return (
             <>
@@ -67,7 +74,12 @@ export default class SortFruits extends React.Component {
                         </div>
                     </DragDropContext>
                 )}
-                <button id='end-sort-fruit' onClick={this.endGame}>I'm done!</button>
+                <br/>
+                {(this.state.gameState === GAME_STATE.DONE) ?
+                    <div id='sort-fruits-score'>
+                        <p> Score: {score}</p>
+                    </div>
+                    :  <button id='end-sort-fruit' onClick={this.endGame}>I'm done!</button>}
             </>
         );
     }
@@ -132,3 +144,12 @@ function getComparedAnswerScore(userArray, correctArray) {
     }
     return score;
 }
+const mapStateToProps = (state) => {
+    return {
+        state,
+    };
+};
+const mapDispatchToProps = {
+    updateMiniGameScore,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SortFruits);

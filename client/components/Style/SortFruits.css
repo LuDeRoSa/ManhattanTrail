@@ -18,3 +18,9 @@ Sort Fruits Game CSS
     bottom: 0;
     font-size: 14px;
   }
+  #sort-fruits-score {
+    color: #ff4500;
+    font-weight: bold;
+    text-align: center;
+    font-size: large;
+}
