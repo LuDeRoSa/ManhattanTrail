@@ -28,6 +28,11 @@ class LandingPage extends React.Component {
   componentDidMount() {
     this.props.checkGame();
   }
+  componentDidUpdate() {
+    if (this.props.game.path_name && this.props.rests.length < 1) {
+      this.props.setRests(this.props.game.path_name);
+    }
+  }
   render() {
     const { username } = this.props;
     const { game } = this.props;
@@ -91,6 +96,7 @@ const mapState = (state) => {
     userId: state.auth.id,
     username: state.auth.username,
     game: state.game,
+    rests: state.rest.rests,
   };
 };
 const mapDispatch = {
