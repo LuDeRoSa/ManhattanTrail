@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 class Facebook extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoggedIn: false,
+    };
   }
 
   componentClicked = () => console.log('clicked');
@@ -28,7 +30,7 @@ class Facebook extends Component {
         <FacebookLogin
           name='fb'
           appId='459306878548339'
-          autoLoad={true}
+          autoLoad={false}
           fields='name,email'
           onClick={this.componentClicked}
           callback={this.responseFacebook}
