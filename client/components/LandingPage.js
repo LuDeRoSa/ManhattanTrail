@@ -13,8 +13,10 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignContent: 'space-around',
     alignItems: 'center',
+    height: '90vh',
   },
 };
 

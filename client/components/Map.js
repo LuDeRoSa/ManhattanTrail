@@ -20,7 +20,6 @@ class _Map extends React.Component {
           -74.0060152,
       },
       show: false,
-      // startingPoint: { lat: 40.7127281, lng: -74.0060152 },
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
@@ -41,10 +40,6 @@ class _Map extends React.Component {
 
   setCenter(index) {
     let center = this.props.rests[index];
-    console.log(
-      'this is the new center that needs to go into the map state',
-      center
-    );
     if (!center) {
       console.log('cancelling setCenter');
       return null;
@@ -88,8 +83,6 @@ class _Map extends React.Component {
   }
 
   render() {
-    console.log(this.state.center);
-    console.log(this.props.gameStage);
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
@@ -97,7 +90,7 @@ class _Map extends React.Component {
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
             }}
-            zoom={17}
+            zoom={16}
             center={this.state.center}
             options={this.createMapOptions}
             onChildClick={() => this.onChildClick()}
