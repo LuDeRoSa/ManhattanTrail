@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const GAME_OPTIONS = ['quiz', 'snake', 'hangman', 'flappy'];
-
+const GAME_OPTIONS = ['quiz', 'snake', 'hangman', 'flappy', 'sortfruits'];
 const Path = db.define('path', {
   path_name: {
     type: Sequelize.STRING,
@@ -13,7 +12,6 @@ const Path = db.define('path', {
     type: Sequelize.ENUM(...GAME_OPTIONS),
   },
 });
-
 Path.addHook('afterCreate', async (path, options) => {
   const gameIndex = (path.id - 1) % GAME_OPTIONS.length;
   if (!path.game_type) {
@@ -21,5 +19,4 @@ Path.addHook('afterCreate', async (path, options) => {
     await path.save();
   }
 });
-
 module.exports = Path;

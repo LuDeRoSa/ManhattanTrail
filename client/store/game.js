@@ -9,7 +9,7 @@ const SET_GAME = 'SET_GAME';
 const NEXT_STAGE = 'NEXT_STAGE';
 const UPDATE_MINI_SCORE = 'UPDATE_MINI_SCORE';
 const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
-
+const UPDATE_LAST_STAGE_PLAYED = 'UPDATE_LAST_STAGE_PLAYED';
 /**
  * ACTION CREATORS
  */
@@ -18,10 +18,10 @@ const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });
 export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
 const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
+export const _updateLastStagePlayed = (stage) => ({ type: UPDATE_LAST_STAGE_PLAYED, stage });
 /**
  * THUNK CREATORS
  */
-
 export const checkGame = () => async (dispatch) => {
   const token = getToken();
   const game = await axios.get('/api/game', {
@@ -36,7 +36,6 @@ export const checkGame = () => async (dispatch) => {
     return dispatch(_setGame(game.data));
   }
 };
-
 export const setGame = (path_name) => async (dispatch) => {
   const token = getToken();
   const game = (
@@ -54,7 +53,6 @@ export const setGame = (path_name) => async (dispatch) => {
   ).data;
   return dispatch(_setGame(game));
 };
-
 export const nextStage = () => async (dispatch) => {
   const token = getToken();
   const game = (
@@ -73,12 +71,10 @@ export const nextStage = () => async (dispatch) => {
   }
   return dispatch(_nextStage(game));
 };
-
 // Update score for current mini game in store
 export const updateMiniScore = (score) => (dispatch) => {
   return dispatch(_updateMiniScore(score));
 };
-
 // Update score for any mini-game
 export const updateMiniGameScore = (points) => async (dispatch) => {
   const token = getToken();
@@ -95,6 +91,23 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
   ).data;
   return dispatch(_updateTotalScore(score));
 };
+// Pass last stage played (so can't replay)
+export const updateLastStagePlayed = (stage) => async (dispatch) => {
+  console.log('in updateLastStagePlayed thunk', stage);
+  const token = getToken();
+  const score = (
+      await axios.post(
+          '/api/game/lastStagePlayed',
+          { stage },
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+      )
+  ).data;
+  return dispatch(_updateLastStagePlayed(stage));
+};
 /**
  * REDUCER
  */
@@ -102,6 +115,7 @@ const initState = {
   path_name: null,
   gameStage: 0,
   status: 'no-game',
+  lastStagePlayed: 0,
   mini_score: 0,
   mini_status: 'ingame',
   total_score: 0,
@@ -113,6 +127,7 @@ export default function (state = initState, action) {
         path_name: action.game.path_name,
         gameStage: action.game.stage,
         status: action.game.status,
+        lastStagePlayed: action.game.lastStagePlayed,
         mini_score: 0,
         mini_status: 'ingame',
         total_score: action.game.score.total_score,
@@ -137,6 +152,11 @@ export default function (state = initState, action) {
         mini_score: action.score + state.mini_score,
         mini_status: 'finished',
       };
+    case  UPDATE_LAST_STAGE_PLAYED:
+      return {
+        ...state,
+        lastStagePlayed: action.lastStagePlayed,
+      }
     case CLEAR_GAME:
       return {
         path_name: null,

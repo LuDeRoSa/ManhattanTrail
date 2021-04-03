@@ -5,7 +5,6 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
-
 /**
  * COMPONENT
  */
@@ -19,7 +18,6 @@ const styles = {
     justifyContent: 'space-between',
   },
 };
-
 export const Home = (props) => {
   const { username } = props;
   const game_type =
@@ -44,7 +42,6 @@ export const Home = (props) => {
           <Map />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
-
         <Grid item lg={5} md={5} sm={10} xs={12}>
           {
             {
@@ -52,6 +49,7 @@ export const Home = (props) => {
               hangman: <Hangman />,
               snake: <GameStart game_type={'snake'} />,
               flappy: <GameStart game_type={'flappy'} />,
+              sortfruits: <GameStart game_type={'sortfruits'} />,
             }[game_type]
           }
         </Grid>
@@ -59,11 +57,9 @@ export const Home = (props) => {
     </div>
   );
 };
-
 /**
  * CONTAINER
  */
-
 const mapState = (state) => {
   return {
     username: state.auth.username,
@@ -77,5 +73,4 @@ const mapDispatch = {
   nextStage,
   setGame,
 };
-
 export default connect(mapState, mapDispatch)(Home);

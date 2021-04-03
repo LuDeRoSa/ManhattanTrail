@@ -2,9 +2,7 @@ const router = require('express').Router();
 const {
   models: { User, Game, Scores },
 } = require('../db');
-
 module.exports = router;
-
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -23,7 +21,6 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
-
 router.post('/path', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -33,7 +30,6 @@ router.post('/path', async (req, res, next) => {
     next(err);
   }
 });
-
 router.put('/next', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -50,7 +46,6 @@ router.put('/next', async (req, res, next) => {
     next(err);
   }
 });
-
 router.get('/pastgames', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -60,7 +55,6 @@ router.get('/pastgames', async (req, res, next) => {
     next(err);
   }
 });
-
 router.post('/addScores', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
@@ -69,8 +63,31 @@ router.post('/addScores', async (req, res, next) => {
     next(err);
   }
 });
-
-//this is an opportunity to use socket.io for live updates
+router.post('/lastStagePlayed', async (req, res, next) => {
+  try {
+    const stage = req.body.stage;
+    console.log('back-end route stage', stage)
+    const user = await User.findByToken(req.headers.authorization);
+    let game = await Game.findOne({
+      where: {
+        userId: user.id,
+        status: 'ingame',
+      },
+      include: Scores,
+    });
+    let scoreMatch = await Scores.findOne({
+      where: {
+        gameId: game.id,
+      },
+    });
+    scoreMatch.lastStagePlayed = stage;
+    await scoreMatch.save();
+    res.send(scoreMatch);
+  } catch (err) {
+    next(err);
+  }
+});
+// this is an opportunity to use socket.io for live updates
 router.get('/leadership', async (req, res, next) => {
   try {
     res.send(await Game.getLeadership());

@@ -5,7 +5,6 @@ import { setRests } from '../store/rest';
 import Marker from './Marker';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
-
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -18,13 +17,11 @@ class _Map extends React.Component {
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
   }
-
   componentDidMount() {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
     this.props.setRests(this.props.game.path_name);
-
     if (this.props.rests.length > 0) {
       this.setCenter();
     }
@@ -36,7 +33,6 @@ class _Map extends React.Component {
       }
     }
   }
-
   setCenter() {
     const index = this.props.game.gameStage - 1;
     let center = this.props.rests[index];
@@ -77,11 +73,9 @@ class _Map extends React.Component {
       ],
     };
   }
-
   onChildClick() {
     this.setState({ show: !this.state.show });
   }
-
   render() {
     return (
       <React.Fragment>
@@ -122,6 +116,12 @@ class _Map extends React.Component {
                 ))}
           </GoogleMapReact>
         </div>
+        <div id = 'next-button-div'>
+          {this.props.game.mini_status === 'finished'
+              ? <button id = 'next-button' onClick={this.stepStage}>Move to Next Stage »</button>
+              : ''
+          }
+        </div>
         <div>
           <button onClick={this.stepStage}>Next</button>
           {this.props.game.status}
@@ -132,7 +132,6 @@ class _Map extends React.Component {
     );
   }
 }
-
 const mapState = (state) => {
   return {
     userId: state.auth.id,
@@ -145,5 +144,4 @@ const mapDispatch = {
   nextStage,
   setGame,
 };
-
 export default connect(mapState, mapDispatch)(_Map);
