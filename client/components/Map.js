@@ -95,16 +95,6 @@ class _Map extends React.Component {
             options={this.createMapOptions}
             onChildClick={() => this.onChildClick()}
           >
-            {/* {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
-              <Marker
-                key={'main'}
-                lat={this.state.startingPoint.lat}
-                lng={this.state.startingPoint.lng}
-                color={this.props.game.gameStage === 1 ? 'red' : 'black'}
-                show={this.state.show}
-                name="starting point"
-              />
-            )} */}
             {this.props.rests.map((r, idx) => (
               <Marker
                 key={r.id}
