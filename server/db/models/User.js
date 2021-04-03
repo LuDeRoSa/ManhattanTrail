@@ -107,7 +107,7 @@ User.authenticateGithub = async function (code) {
  * hooks
  */
 
-User.fbAuthenticate = async function ({ username, id }) {
+User.authenticateFb = async function ({ username, id }) {
   let user = await User.findOne({
     where: { facebookId: id, username: username },
   });

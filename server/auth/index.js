@@ -61,7 +61,7 @@ router.get('/me', async (req, res, next) => {
 
 router.post('/facebook', async (req, res, next) => {
   try {
-    res.send({ token: await User.fbAuthenticate(req.body) });
+    res.send({ token: await User.authenticateFb(req.body) });
   } catch (err) {
     next(err);
   }

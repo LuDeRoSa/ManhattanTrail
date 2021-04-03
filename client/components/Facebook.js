@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import axios from 'axios';
 import { fbAuthenticate } from '../store';
 import { connect } from 'react-redux';
 
@@ -15,6 +14,7 @@ class Facebook extends Component {
   componentClicked = () => console.log('clicked');
 
   responseFacebook = (response) => {
+    console.log(response);
     let username = response.email;
     let id = response.id;
     this.props.fbAuthenticate(username, id);
@@ -28,10 +28,9 @@ class Facebook extends Component {
     } else {
       fbContent = (
         <FacebookLogin
-          name='fb'
           appId='459306878548339'
-          autoLoad={false}
-          fields='name,email'
+          autoLoad
+          fields='name,email,picture'
           onClick={this.componentClicked}
           callback={this.responseFacebook}
         />
