@@ -9,7 +9,6 @@ import GameStart from './GameStart';
  * COMPONENT
  */
 import Quiz from './Quiz';
-import Hangman from './Hangman';
 import Grid from '@material-ui/core/Grid';
 const styles = {
   container: {
@@ -38,20 +37,13 @@ export const Home = (props) => {
         justify="center"
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={3} md={3} sm={10} xs={12} style={{ height: '50vh' }}>
+        <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '50vh' }}>
           <Map />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={5} md={5} sm={10} xs={12}>
-          {
-            {
-              quiz: <Quiz />,
-              hangman: <Hangman />,
-              snake: <GameStart game_type={'snake'} />,
-              flappy: <GameStart game_type={'flappy'} />,
-              sortfruits: <GameStart game_type={'sortfruits'} />,
-            }[game_type]
-          }
+
+        <Grid item lg={4} md={4} sm={10} xs={12}>
+          <GameStart game_type={game_type} />
         </Grid>
       </Grid>
     </div>

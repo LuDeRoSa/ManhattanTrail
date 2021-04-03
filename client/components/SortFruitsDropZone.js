@@ -1,5 +1,7 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import './Style/SortFruits.css';
+
 const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
     <div className="column col-4">
         <div className="divider" data-content={id.toUpperCase()} />

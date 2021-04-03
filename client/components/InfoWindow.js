@@ -4,6 +4,8 @@ import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
 
+import './Style/InfoWindow.css';
+
 class InfoWindow extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ class InfoWindow extends Component {
     const { name } = this.props;
     const restId = this.props.rest.rests[this.state.index].id;
     return this.props.show ? (
-      <div id='info' style={{ width: 100, height: 100 }}>
+      <div id="info" style={{ width: 100, height: 100 }}>
         {this.props.name}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>

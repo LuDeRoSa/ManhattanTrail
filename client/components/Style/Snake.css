@@ -1,0 +1,35 @@
+/*snake game */
+.game-area {
+  position: relative;
+  margin: 50px auto;
+  width: 470px;
+  height: 470px;
+  background-color: black;
+  border: solid teal 7px;
+}
+
+.snake-dot {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: darkgreen;
+  border: 1px solid #fff;
+  z-index: 2;
+}
+
+.snake-food {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background: red;
+  border: 1px solid #fff;
+  z-index: 1;
+}
+
+.game-message {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: large;
+}
+/* end snake game */
