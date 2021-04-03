@@ -11,9 +11,12 @@ class _Map extends React.Component {
     super(props);
     this.state = {
       restaurants: [],
-      center: { lat: 40.7127281, lng: -74.0060152 },
+      center: {
+        lat: this.props.rests[this.props.gameStage - 1] || 40.7127281,
+        lng: this.props.rests[this.props.gameStage - 1] || -74.0060152,
+      },
       show: false,
-      startingPoint: { lat: 40.7127281, lng: -74.0060152 },
+      // startingPoint: { lat: 40.7127281, lng: -74.0060152 },
     };
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
@@ -21,11 +24,13 @@ class _Map extends React.Component {
 
   componentDidMount() {
     if (this.props.rests.length > 0) {
+      console.log('we are setting center in component did mount');
       this.setCenter();
     }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
+      console.log('the props.rests has changed in componentdid update');
       if (this.props.rests.length > 0) {
         this.setCenter();
       }
@@ -33,7 +38,7 @@ class _Map extends React.Component {
   }
 
   setCenter() {
-    const index = this.props.game.gameStage - 1;
+    const index = this.props.gameStage - 1;
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -90,7 +95,7 @@ class _Map extends React.Component {
             options={this.createMapOptions}
             onChildClick={() => this.onChildClick()}
           >
-            {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
+            {/* {this.props.rests.length > 0 && this.props.game.gameStage > 0 && (
               <Marker
                 key={'main'}
                 lat={this.state.startingPoint.lat}
@@ -99,22 +104,17 @@ class _Map extends React.Component {
                 show={this.state.show}
                 name="starting point"
               />
-            )}
-            {this.props.rests.length > 0 &&
-              this.props.rests
-                .filter((r, idx) => idx < this.props.game.gameStage - 1)
-                .map((r, idx) => (
-                  <Marker
-                    key={r.id}
-                    name={r.restaurant_name}
-                    lat={r.restaurant_latitude}
-                    lng={r.restaurant_longitude}
-                    color={
-                      this.props.game.gameStage - 2 === idx ? 'red' : 'black'
-                    }
-                    show={this.state.show}
-                  />
-                ))}
+            )} */}
+            {this.props.rests.map((r, idx) => (
+              <Marker
+                key={r.id}
+                name={r.restaurant_name}
+                lat={r.restaurant_latitude}
+                lng={r.restaurant_longitude}
+                color={this.props.gameStage - 1 === idx ? 'red' : 'black'}
+                show={this.state.show}
+              />
+            ))}
           </GoogleMapReact>
         </div>
         <div>
@@ -130,9 +130,9 @@ class _Map extends React.Component {
 
 const mapState = (state) => {
   return {
-    userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
+    gameStage: state.game.gameStage,
   };
 };
 const mapDispatch = {
