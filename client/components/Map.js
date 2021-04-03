@@ -39,9 +39,12 @@ class _Map extends React.Component {
     }
   }
 
-  setCenter() {
-    const index = this.props.gameStage - 1;
+  setCenter(index) {
     let center = this.props.rests[index];
+    console.log(
+      'this is the new center that needs to go into the map state',
+      center
+    );
     if (!center) {
       console.log('cancelling setCenter');
       return null;
@@ -54,8 +57,8 @@ class _Map extends React.Component {
     });
   }
   stepStage() {
+    this.setCenter(this.props.gameStage);
     this.props.nextStage();
-    this.setCenter();
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -86,6 +89,7 @@ class _Map extends React.Component {
 
   render() {
     console.log(this.state.center);
+    console.log(this.props.gameStage);
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
@@ -93,7 +97,7 @@ class _Map extends React.Component {
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
             }}
-            zoom={12}
+            zoom={17}
             center={this.state.center}
             options={this.createMapOptions}
             onChildClick={() => this.onChildClick()}
