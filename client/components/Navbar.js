@@ -72,7 +72,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     Leadership
                   </Button>
 
-                  <a href='/' onClick={handleClick} tabIndex='-1'>
+                  <a href='#' onClick={handleClick} tabIndex='-1'>
                     <Button
                       startIcon={<ExitToAppIcon />}
                       className={classes.button}
