@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import axios from 'axios';
 import { fbAuthenticate } from '../store';
 import { connect } from 'react-redux';
 
