@@ -9,20 +9,18 @@ import {
   makeStyles,
   ThemeProvider,
 } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
+import indigo from '@material-ui/core/colors/indigo';
+import red from '@material-ui/core/colors/red';
 const theme = createMuiTheme({
   palette: {
     background: {
       default: '#F5F5F5',
     },
     primary: {
-      // main: purple[500],
-      main: '#115293'
+      main: indigo[800],
     },
     secondary: {
-      // main: green[500],
-      main: '#e57373',
+      main: red[900],
     },
   },
 });
