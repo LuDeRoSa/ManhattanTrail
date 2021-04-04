@@ -9,13 +9,13 @@ import GameStart from './GameStart';
  * COMPONENT
  */
 import Grid from '@material-ui/core/Grid';
+
 export const Home = (props) => {
   const { username } = props;
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
       : '';
-  //TODO: move game_type into store
   return (
     <div>
       <center>
@@ -27,9 +27,10 @@ export const Home = (props) => {
         direction="row"
         alignItems="center"
         justify="center"
+        style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '50vh' }}>
+        <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '70vh' }}>
           <Map />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />

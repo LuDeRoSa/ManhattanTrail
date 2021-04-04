@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { checkGame, setGame } from '../store/game';
+import { setRests } from '../store/rest';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -12,8 +13,10 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignContent: 'space-around',
     alignItems: 'center',
+    height: '90vh',
   },
 };
 
@@ -27,6 +30,11 @@ class LandingPage extends React.Component {
   componentDidMount() {
     this.props.checkGame();
   }
+  componentDidUpdate() {
+    if (this.props.game.path_name && this.props.rests.length < 1) {
+      this.props.setRests(this.props.game.path_name);
+    }
+  }
   render() {
     const { username } = this.props;
     const { game } = this.props;
@@ -37,13 +45,23 @@ class LandingPage extends React.Component {
           <React.Fragment>
             <h4>You don't have a game set up yet, please pick a path! :)</h4>
             <ButtonGroup>
-              <Button onClick={() => this.props.setGame('1')}>
+              <Button
+                onClick={() => {
+                  this.props.setGame('1');
+                  this.props.setRests('1');
+                }}
+              >
                 Default dev path 1
               </Button>
               <Button disabled>Italian</Button>
               <Button disabled>Chinese</Button>
               <Button disabled>Indian</Button>
-              <Button onClick={() => this.props.setGame('gluten-free')}>
+              <Button
+                onClick={() => {
+                  this.props.setGame('gluten-free');
+                  this.props.setRests('gluten-free');
+                }}
+              >
                 Gluten Free
               </Button>
             </ButtonGroup>
@@ -80,11 +98,13 @@ const mapState = (state) => {
     userId: state.auth.id,
     username: state.auth.username,
     game: state.game,
+    rests: state.rest.rests,
   };
 };
 const mapDispatch = {
   checkGame,
   setGame,
+  setRests,
 };
 
 export default connect(mapState, mapDispatch)(LandingPage);
