@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { CATEGORIES, FOODS } from './SortFruitsData';
 import SortFruitsDropzone from './SortFruitsDropzone';
 import { connect } from 'react-redux';
 import {updateMiniGameScore} from "../store/game";
-
 /**
  * Enums for representing the game play state
  */
@@ -114,15 +112,12 @@ export const move = (state, source, destination) => {
  * total possible max of 12 (5 good + 7 bad)
  */
 export const getCalculatedScore = (goodFoodUserAnswers, badFoodUserAnswers) => {
-    debugger;
     let score = 0;
     // Get good and bad correct answers
     let goodFoods = [];
     let badFoods = [];
     for (let i = 0; i < FOODS.length; i++) {
         if (FOODS[i].categories === 'good') {
-            debugger;
-            let temp = FOODS[i].name;
             goodFoods.push(FOODS[i].name);
         } else {
             badFoods.push(FOODS[i].name)
@@ -135,7 +130,6 @@ export const getCalculatedScore = (goodFoodUserAnswers, badFoodUserAnswers) => {
     return score;
 }
 function getComparedAnswerScore(userArray, correctArray) {
-    debugger;
     let score = 0;
     for (let i = 0; i < userArray.length; i++) {
         if (correctArray.includes(userArray[i].name)) {

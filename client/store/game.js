@@ -6,6 +6,7 @@ const getToken = () => window.localStorage.getItem('token');
  */
 const CLEAR_GAME = 'CLEAR_GAME';
 const SET_GAME = 'SET_GAME';
+const SET_MINI_GAME_COMPLETE = 'SET_MINI_GAME_COMPLETE';
 const NEXT_STAGE = 'NEXT_STAGE';
 const UPDATE_MINI_SCORE = 'UPDATE_MINI_SCORE';
 const UPDATE_TOTAL_SCORE = 'UPDATE_TOTAL_SCORE';
@@ -18,7 +19,7 @@ const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });
 export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
 const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
-export const _updateLastStagePlayed = (stage) => ({ type: UPDATE_LAST_STAGE_PLAYED, stage });
+export const _setMiniGameComplete = (game) => ({type: SET_MINI_GAME_COMPLETE, game})
 /**
  * THUNK CREATORS
  */
@@ -89,24 +90,30 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
       }
     )
   ).data;
+  // Update the mini games status to complete = true so the player cannot replay
+  await axios.post(
+      '/api/game/trackMiniGameStatus',
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+).data;
   return dispatch(_updateTotalScore(score));
 };
-// Pass last stage played (so can't replay)
-export const updateLastStagePlayed = (stage) => async (dispatch) => {
-  console.log('in updateLastStagePlayed thunk', stage);
-  const token = getToken();
-  const score = (
-      await axios.post(
-          '/api/game/lastStagePlayed',
-          { stage },
-          {
-            headers: {
-              authorization: token,
-            },
-          }
-      )
+/**
+ * Fetch mini-game status so we cannot replay mini-games even after refreshes
+ */
+export const fetchMiniGameComplete = () => async (dispatch) => {
+  const currentMiniGameComplete = (
+      await axios.get('/api/game/miniGameStatus', {
+        headers: {
+          authorization: getToken(),
+        },
+      })
   ).data;
-  return dispatch(_updateLastStagePlayed(stage));
+  return dispatch((_setMiniGameComplete(currentMiniGameComplete)));
 };
 /**
  * REDUCER
@@ -122,12 +129,13 @@ const initState = {
 };
 export default function (state = initState, action) {
   switch (action.type) {
+    case SET_MINI_GAME_COMPLETE:
+      return { ...state, mini_status: action.game.stage_completed ? "finished" : "ingame" };
     case SET_GAME:
       return {
         path_name: action.game.path_name,
         gameStage: action.game.stage,
         status: action.game.status,
-        lastStagePlayed: action.game.lastStagePlayed,
         mini_score: 0,
         mini_status: 'ingame',
         total_score: action.game.score.total_score,
@@ -150,13 +158,8 @@ export default function (state = initState, action) {
       return {
         ...state,
         mini_score: action.score + state.mini_score,
-        mini_status: 'finished',
+        mini_status: 'ingame',
       };
-    case  UPDATE_LAST_STAGE_PLAYED:
-      return {
-        ...state,
-        lastStagePlayed: action.lastStagePlayed,
-      }
     case CLEAR_GAME:
       return {
         path_name: null,

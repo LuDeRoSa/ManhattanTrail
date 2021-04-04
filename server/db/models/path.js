@@ -10,9 +10,9 @@ const Path = db.define('path', {
   },
   game_type: {
     type: Sequelize.ENUM(...GAME_OPTIONS),
-  },
+  }
 });
-Path.addHook('afterCreate', async (path, options) => {
+Path.addHook('afterCreate', async (path) => {
   const gameIndex = (path.id - 1) % GAME_OPTIONS.length;
   if (!path.game_type) {
     path.game_type = GAME_OPTIONS[gameIndex];

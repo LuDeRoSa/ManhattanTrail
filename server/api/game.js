@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User, Game, Scores },
+  models: { User, Game, Scores, Path },
 } = require('../db');
 module.exports = router;
 router.get('/', async (req, res, next) => {
@@ -40,6 +40,7 @@ router.put('/next', async (req, res, next) => {
       },
     });
     game.stage++;
+    game.stage_completed = false;
     await game.save();
     res.send(game);
   } catch (err) {
@@ -63,26 +64,27 @@ router.post('/addScores', async (req, res, next) => {
     next(err);
   }
 });
-router.post('/lastStagePlayed', async (req, res, next) => {
+//  Track the last completed stage played to avoid multiple score updates to the same mini game after refreshes
+router.post('/trackMiniGameStatus', async (req, res, next) => {
   try {
-    const stage = req.body.stage;
-    console.log('back-end route stage', stage)
     const user = await User.findByToken(req.headers.authorization);
+    res.send(await Game.updateMiniGameStatus(user.id))
+  } catch (err) {
+    next(err);
+  }
+});
+// Get the current mini game for the mini game completion status
+router.get('/miniGameStatus', async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.headers.authorization);
+    // Find the game we are in and return - we will pull the status when we actually use it
     let game = await Game.findOne({
       where: {
         userId: user.id,
         status: 'ingame',
       },
-      include: Scores,
     });
-    let scoreMatch = await Scores.findOne({
-      where: {
-        gameId: game.id,
-      },
-    });
-    scoreMatch.lastStagePlayed = stage;
-    await scoreMatch.save();
-    res.send(scoreMatch);
+    res.send(game);
   } catch (err) {
     next(err);
   }

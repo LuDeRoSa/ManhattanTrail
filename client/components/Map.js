@@ -3,8 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import { setRests } from '../store/rest';
 import Marker from './Marker';
-import { nextStage } from '../store/game';
-import { setGame } from '../store/game';
+import { nextStage, setGame, fetchMiniGameComplete } from '../store/game';
+import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +21,8 @@ class _Map extends React.Component {
     if (this.props.game.status === 'no-game') {
       this.props.setGame(this.props.userId);
     }
+    // Check if this game has previously been played already
+    this.props.fetchMiniGameComplete();
     this.props.setRests(this.props.game.path_name);
     if (this.props.rests.length > 0) {
       this.setCenter();
@@ -123,9 +125,6 @@ class _Map extends React.Component {
           }
         </div>
         <div>
-          <button onClick={this.stepStage}>Next</button>
-          {this.props.game.status}
-          {this.props.game.gameStage}
           {this.props.game.status === 'finished' && 'gameover'}
         </div>
       </React.Fragment>
@@ -143,5 +142,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
+  fetchMiniGameComplete
 };
 export default connect(mapState, mapDispatch)(_Map);

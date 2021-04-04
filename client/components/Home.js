@@ -8,15 +8,7 @@ import GameStart from './GameStart';
 /**
  * COMPONENT
  */
-import Quiz from './Quiz';
 import Grid from '@material-ui/core/Grid';
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-};
 export const Home = (props) => {
   const { username } = props;
   const game_type =
@@ -27,7 +19,7 @@ export const Home = (props) => {
   return (
     <div>
       <center>
-        <h3>Welcome , {username}</h3>
+        <h3>Welcome, {username}</h3>
       </center>
       <Grid
         container
@@ -41,7 +33,6 @@ export const Home = (props) => {
           <Map />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
-
         <Grid item lg={4} md={4} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>

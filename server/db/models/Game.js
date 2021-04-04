@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Path = require('./path');
-
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,
@@ -15,8 +14,11 @@ const Game = db.define('game', {
   path_name: {
     type: Sequelize.STRING,
   },
+  stage_completed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 });
-
 Game.addHook('beforeValidate', async (game, options) => {
   const path = await Path.findAll({
     where: {
@@ -30,5 +32,4 @@ Game.addHook('beforeValidate', async (game, options) => {
     await game.save();
   }
 });
-
 module.exports = Game;

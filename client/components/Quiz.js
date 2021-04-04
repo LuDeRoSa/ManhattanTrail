@@ -2,21 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz } from '../store/quiz';
 import { updateMiniGameScore, updateMiniScore } from '../store/game';
-// import SingleQuestion from './SingleQuestion';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-
 import './Style/Quiz.css';
-
 const styles = {
   button: {
     color: 'white',
   },
 };
-
 class Quiz extends React.Component {
   constructor(props) {
     super(props);
@@ -35,13 +31,11 @@ class Quiz extends React.Component {
   componentDidMount() {
     this.props.fetchQuiz(this.props.restaurantId);
   }
-
   handleChange(ev) {
     this.setState({
       value: ev.target.value,
     });
   }
-
   /// send the changes to our database/backend
   handleSubmit(ev) {
     ev.preventDefault();
@@ -58,7 +52,6 @@ class Quiz extends React.Component {
         });
       }
     }
-
     let userResponse = this.state.value;
     const correctAnswer = this.props.quiz.questions[
       this.state.currentQuestion
@@ -75,11 +68,13 @@ class Quiz extends React.Component {
       this.props.updateMiniGameScore(this.props.game.mini_score);
     }
   }
-
   render() {
     const { currentQuestion } = this.state;
     if (this.state.finished) {
-      return <>Quiz Done!</>;
+      return (<>
+        <p>Quiz Done!</p>
+        <p>You answered {this.props.game.mini_score} questions correctly </p>
+      </>);
     }
     return (
       <div className={this.state.status}>
@@ -119,7 +114,6 @@ class Quiz extends React.Component {
                       variant="outlined"
                       style={styles.button}
                       onClick={this.handleSubmit}
-                      // disabled={this.state.quizCount === 5 ? true : false}
                     >
                       Submit{' '}
                     </Button>
@@ -132,7 +126,6 @@ class Quiz extends React.Component {
     );
   }
 }
-
 const mapState = (state) => {
   return {
     quiz: state.quiz,
@@ -141,11 +134,9 @@ const mapState = (state) => {
     game: state.game,
   };
 };
-
 const mapDispatch = {
   fetchQuiz,
   updateMiniScore,
   updateMiniGameScore,
 };
-
 export default connect(mapState, mapDispatch)(Quiz);
