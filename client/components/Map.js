@@ -23,20 +23,16 @@ class _Map extends React.Component {
     this.setCenter = this.setCenter.bind(this);
     this.stepStage = this.stepStage.bind(this);
   }
-  
+
   componentDidMount() {
-    if (this.props.game.status === 'no-game') {
-      this.props.setGame(this.props.userId);
-    }
     // Check if this game has previously been played already
     this.props.fetchMiniGameComplete();
-    this.props.setRests(this.props.game.path_name);
 
     if (this.props.rests.length > 0) {
       this.setCenter();
     }
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
       if (this.props.rests.length > 0) {
@@ -112,15 +108,16 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-        <div id = 'next-button-div'>
-          {this.props.game.mini_status === 'finished'
-              ? <button id = 'next-button' onClick={this.stepStage}>Move to Next Stage »</button>
-              : ''
-          }
+        <div id="next-button-div">
+          {this.props.game.mini_status === 'finished' ? (
+            <button id="next-button" onClick={this.stepStage}>
+              Move to Next Stage »
+            </button>
+          ) : (
+            ''
+          )}
         </div>
-        <div>
-          {this.props.game.status === 'finished' && 'gameover'}
-        </div>
+        <div>{this.props.game.status === 'finished' && 'gameover'}</div>
       </React.Fragment>
     );
   }
@@ -136,6 +133,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
-  fetchMiniGameComplete
+  fetchMiniGameComplete,
 };
 export default connect(mapState, mapDispatch)(_Map);
