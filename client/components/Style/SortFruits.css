@@ -1,0 +1,26 @@
+/**
+Sort Fruits Game CSS
+ */
+ header.navbar {
+    height: 40px;
+    margin: 5px 20px;
+  }
+  div.menu .menu-item.tile.tile-centered {
+    margin-top: 5px;
+  }
+  .menu.food-list {
+    z-index: inherit;
+    transform: none;
+    min-height: 500px;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    font-size: 14px;
+  }
+  #sort-fruits-score {
+    color: #ff4500;
+    font-weight: bold;
+    text-align: center;
+    font-size: large;
+}

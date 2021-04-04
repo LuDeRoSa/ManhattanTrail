@@ -5,21 +5,10 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
-
 /**
  * COMPONENT
  */
-import Quiz from './Quiz';
 import Grid from '@material-ui/core/Grid';
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    alignItems: 'center',
-  },
-};
 
 export const Home = (props) => {
   const { username } = props;
@@ -30,7 +19,7 @@ export const Home = (props) => {
   return (
     <div>
       <center>
-        <h3>Welcome , {username}</h3>
+        <h3>Welcome, {username}</h3>
       </center>
       <Grid
         container
@@ -45,7 +34,6 @@ export const Home = (props) => {
           <Map />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
-
         <Grid item lg={4} md={4} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
@@ -53,11 +41,9 @@ export const Home = (props) => {
     </div>
   );
 };
-
 /**
  * CONTAINER
  */
-
 const mapState = (state) => {
   return {
     username: state.auth.username,
@@ -71,5 +57,4 @@ const mapDispatch = {
   nextStage,
   setGame,
 };
-
 export default connect(mapState, mapDispatch)(Home);

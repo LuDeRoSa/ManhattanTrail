@@ -3,9 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import { setRests } from '../store/rest';
 import Marker from './Marker';
-import { nextStage } from '../store/game';
-import { setGame } from '../store/game';
-
+import { nextStage, setGame, fetchMiniGameComplete } from '../store/game';
+import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -26,10 +25,14 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
+    // Check if this game has previously been played already
+    this.props.fetchMiniGameComplete();
+
     if (this.props.rests.length > 0) {
       this.setCenter();
     }
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
       if (this.props.rests.length > 0) {
@@ -77,11 +80,9 @@ class _Map extends React.Component {
       ],
     };
   }
-
   onChildClick() {
     this.setState({ show: !this.state.show });
   }
-
   render() {
     return (
       <React.Fragment>
@@ -107,17 +108,20 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-        <div>
-          <button onClick={this.stepStage}>Next</button>
-          {this.props.game.status}
-          {this.props.game.gameStage}
-          {this.props.game.status === 'finished' && 'gameover'}
+        <div id="next-button-div">
+          {this.props.game.mini_status === 'finished' ? (
+            <button id="next-button" onClick={this.stepStage}>
+              Move to Next Stage »
+            </button>
+          ) : (
+            ''
+          )}
         </div>
+        <div>{this.props.game.status === 'finished' && 'gameover'}</div>
       </React.Fragment>
     );
   }
 }
-
 const mapState = (state) => {
   return {
     rests: state.rest.rests,
@@ -129,6 +133,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
+  fetchMiniGameComplete,
 };
-
 export default connect(mapState, mapDispatch)(_Map);

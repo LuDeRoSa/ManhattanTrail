@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { randomWord } from '../HangmanGame/HangmanWord.js';
 import { updateMiniGameScore } from '../../store/game';
-
 import '../Style/Hangman.css';
-
 // hangman images
 let step0 = './img/hangman/0.png';
 let step1 = './img/hangman/1.png';
@@ -13,13 +11,11 @@ let step3 = './img/hangman/3.png';
 let step4 = './img/hangman/4.png';
 let step5 = './img/hangman/5.png';
 let step6 = './img/hangman/6.png';
-
 class Hangman extends Component {
   static defaultProps = {
     maxTry: 6,
     images: [step0, step1, step2, step3, step4, step5, step6],
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +35,7 @@ class Hangman extends Component {
     });
   }
   componentDidUpdate(prevProps, prevState) {
-    if (!prevState.isWinner && this.state.isWinner) {
+    if (!prevState.gameOver && this.state.gameOver) {
       this.props.updateMiniGameScore(1);
       this.setState({
         score: 1,
@@ -51,7 +47,6 @@ class Hangman extends Component {
       .split('')
       .map((letter) => (this.state.guessed.has(letter) ? letter : '_'));
   }
-
   //using arrow function to avoid binding
   handleGuess = (e) => {
     let letter;
@@ -63,12 +58,11 @@ class Hangman extends Component {
     this.setState((state) => ({
       guessed: state.guessed.add(letter),
       mistake: state.mistake + (state.answer.includes(letter) ? 0 : 1),
-      gameOver: this.state.mistake == this.props.maxTry ? true : false,
+      gameOver: this.state.mistake + 1 == this.props.maxTry ? true : false,
       isWinner:
         this.guessedWord().join('') === this.state.answer ? true : false,
     }));
   };
-
   // maps over the keyboard displaying every single character as a button
   generateButtons() {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
@@ -83,7 +77,6 @@ class Hangman extends Component {
       </button>
     ));
   }
-
   render() {
     let gameStat = this.generateButtons();
     if (this.state.isWinner) {
@@ -110,9 +103,7 @@ class Hangman extends Component {
     );
   }
 }
-
 const mapDispatch = {
   updateMiniGameScore,
 };
-
 export default connect((state) => state, mapDispatch)(Hangman);
