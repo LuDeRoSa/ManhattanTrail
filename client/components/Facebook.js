@@ -8,7 +8,6 @@ class Facebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
       clicked: false,
     };
   }
@@ -25,7 +24,7 @@ class Facebook extends Component {
   };
 
   render() {
-    console.log(this.state.isLoggedIn);
+    console.log(this.state.clicked);
     // let fbContent;
 
     // if (this.state.isLoggedIn) {
@@ -50,7 +49,7 @@ class Facebook extends Component {
         autoLoad={true}
         fields='name,email'
         onClick={this.componentClicked}
-        callback={this.responseFacebook}
+        callback={this.state.clicked && this.responseFacebook}
       />
     );
     return <div>{fbContent}</div>;
