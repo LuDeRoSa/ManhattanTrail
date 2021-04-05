@@ -8,23 +8,12 @@ import Snackbar from '@material-ui/core/Snackbar';
 import './Style/Snake.css';
 
 const getRandomCoordinates = () => {
-  let min = 1;
-  let max = 98;
+  let min = 5;
+  let max = 95;
   let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
   let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
   return [x, y];
 };
-
-// const initialState = {
-//   food: getRandomCoordinates(),
-//   speed: 200,
-//   direction: 'RIGHT',
-//   snakeDots: [
-//     [0, 0],
-//     [2, 0],
-//   ],
-//   score: 0,
-// };
 
 class SnakeGame extends Component {
   constructor(props) {
@@ -159,7 +148,7 @@ class SnakeGame extends Component {
     //if the snake eats the food
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     let food = this.state.food;
-    if (head[0] == food[0] && head[1] == food[1]) {
+    if (Math.abs(head[0] - food[0]) < 5 && Math.abs(head[1] - food[1]) < 5) {
       this.setState({
         food: getRandomCoordinates(),
         score: (this.state.score += 1),

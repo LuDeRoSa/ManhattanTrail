@@ -19,10 +19,13 @@
 
 .snake-food {
   position: absolute;
-  width: 2%;
-  height: 2%;
-  background: red;
-  border: 1px solid #fff;
+  width: 5%;
+  height: 5%;
+  /* background: red; */
+  background-image: url('./img/cupcakesquare.png');
+  background-size: cover;
+  background-position: center;
+  /* border: 1px solid #fff; */
   z-index: 1;
 }
 
