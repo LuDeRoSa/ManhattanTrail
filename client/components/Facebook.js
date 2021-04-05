@@ -8,13 +8,14 @@ class Facebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
+      isLoggedIn: false,
+      clicked: false,
     };
   }
 
   componentClicked = () =>
     this.setState({
-      show: true,
+      clicked: true,
     });
 
   responseFacebook = (response) => {
@@ -24,9 +25,10 @@ class Facebook extends Component {
   };
 
   render() {
+    console.log(this.state.isLoggedIn);
     let fbContent;
 
-    if (this.state.isLoggedIn) {
+    if (this.state.clicked && this.state.isLoggedIn) {
       fbContent = null;
     } else {
       fbContent = (
