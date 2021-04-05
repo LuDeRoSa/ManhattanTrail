@@ -8,14 +8,16 @@ class Facebook extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      show: false,
     };
   }
 
-  componentClicked = () => console.log('clicked');
+  componentClicked = () =>
+    this.setState({
+      show: true,
+    });
 
   responseFacebook = (response) => {
-    console.log(response);
     let username = response.email;
     let id = response.id;
     this.props.fbAuthenticate(username, id);
@@ -29,9 +31,10 @@ class Facebook extends Component {
     } else {
       fbContent = (
         <FacebookLogin
+          name='fb'
           appId='459306878548339'
-          autoLoad
-          fields='name,email,picture'
+          autoLoad={true}
+          fields='name,email'
           onClick={this.componentClicked}
           callback={this.responseFacebook}
         />
