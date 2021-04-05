@@ -38,7 +38,7 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <Facebook clicked='false' />
+      <Facebook />
       <br />
       {window.githubURL && (
         <a href={window.githubURL}>Login / Register Via Github </a>
