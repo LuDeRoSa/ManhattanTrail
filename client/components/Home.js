@@ -18,9 +18,6 @@ export const Home = (props) => {
       : '';
   return (
     <div>
-      <center>
-        <h3>Welcome, {username}</h3>
-      </center>
       <Grid
         container
         spacing={3}

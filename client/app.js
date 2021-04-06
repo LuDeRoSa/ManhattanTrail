@@ -6,22 +6,28 @@ import Routes from './routes';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   createMuiTheme,
-  makeStyles,
   ThemeProvider,
 } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import red from '@material-ui/core/colors/red';
+import teal from '@material-ui/core/colors/teal';
+import amber from '@material-ui/core/colors/amber';
+import orange from '@material-ui/core/colors/orange';
+import createPalette from '@material-ui/core/styles/createPalette';
+import createTypography from '@material-ui/core/styles/createTypography';
+
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#F5F5F5',
+      default: 'white',
     },
     primary: {
-      main: indigo[800],
+      main: teal[500],
     },
     secondary: {
-      main: red[900],
+      main: amber[400],
     },
+    typography: createTypography(createPalette({}), {
+      fontFamily: 'Helvetica'
+    }),
   },
 });
 
@@ -29,7 +35,7 @@ const App = () => {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+       <CssBaseline />
         <Navbar />
         <Routes />
       </ThemeProvider>

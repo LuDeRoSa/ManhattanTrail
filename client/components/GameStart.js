@@ -5,6 +5,7 @@ import SortFruits from '../components/SortFruitsGame/SortFruits';
 import Hangman from './HangmanGame/Hangman';
 import Quiz from './Quiz';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Paper from '@material-ui/core/Paper';
 import { fetchMiniGameComplete } from "../store/game";
@@ -13,14 +14,18 @@ import { connect } from "react-redux";
 const Start = (props) => (
   props.mini_status === 'finished' 
   ? "" 
-  : (<Button
+  : (
+  <Box mb = {3}>
+  <Button
     variant="contained"
     color="primary"
     startIcon={<PlayArrowIcon />}
     onClick={props.handleClick}
   >
     Start Game
-  </Button>)
+  </Button>
+  </Box>
+  )
 );
 class GameStart extends React.Component {
   constructor(props) {
@@ -46,7 +51,7 @@ class GameStart extends React.Component {
     switch (this.props.game_type) {
       case 'snake':
         return (
-          <Paper elevation={10}>
+          <Paper variant="outlined" m = {2}>
             <h2>Snake Game:</h2>
             <p>Eat the food but don't hit the walls! The more food you eat, the faster you'll move!</p>
             {this.state.gameStarted 
@@ -79,13 +84,14 @@ class GameStart extends React.Component {
         );
       case 'quiz':
         return (
-          <Paper elevation={10}>
-            <h2>Quiz</h2>
-            <p>Answer all the questions!</p>
+          <Paper variant="outlined" square>
+            <center>
+            <h2>Test Your Knowledge!</h2>
             {this.state.gameStarted 
             ? <Quiz />
             : <Start mini_status={this.props.game.mini_status} handleClick={this.handleClick}  />
             }
+            </center>
           </Paper>
         );
       case 'sortfruits':

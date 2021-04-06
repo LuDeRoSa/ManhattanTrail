@@ -5,7 +5,7 @@ import { logout } from '../store';
 
 import linksList from '../LinksList';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,23 +17,36 @@ import GlobalScore from './GlobalScore';
 
 import SideMenu from './SideMenu';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const useStyles = makeStyles((theme) => (
+  
+  
+  {root: {
     flexGrow: 1,
     marginBottom: '1rem',
   },
   title: {
     flexGrow: 1,
+    fontSize: '1.4rem',
   },
   button: {
+    textTransform: 'none',
     fontWeight: 550,
     textDecoration: 'none',
+    color: theme.palette.secondary.main,
     '&:hover': {
       textDecoration: 'none',
-      color: 'inherit',
+      color: theme.palette.secondary.dark,
+      backgroundColor: theme.palette.primary.main,
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: theme.palette.primary.main,
+      borderColor: theme.palette.primary.main,
     },
   },
-}));
+})
+);
+
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
@@ -41,31 +54,31 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
     <div>
       <nav>
         <div className={classes.root}>
-          <AppBar position="static">
+          <AppBar position="static" className={classes.palette}>
             <Hidden smDown>
               <Toolbar>
-                <Typography variant="h4" className={classes.title}>
-                  Manhattan Trail
+                <Typography variant="h4"  className={classes.title}>
+                  MANHATTAN TRAIL
                 </Typography>
                 {isLoggedIn ? (
                   <div>
                     <GlobalScore />
                     {linksList.map((link) => (
                       <Button
-                        key={link.text}
-                        className={classes.button}
-                        startIcon={link.icon}
-                        color="secondary"
-                        component={Link}
-                        to={link.path}
+                      key={link.text}
+                      className={classes.button}
+                      startIcon={link.icon}
+                      component={Link }
+                      to={link.path}
+
                       >
                         {link.text}
                       </Button>
                     ))}
+                    {/* Logout button */}
                     <Button
                       startIcon={<ExitToAppIcon />}
                       className={classes.button}
-                      color="secondary"
                       onClick={handleClick}
                       component={Link}
                       to="/#"
@@ -75,10 +88,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </div>
                 ) : (
                   <div>
-                    <Button color="inherit" component={Link} to="/login">
+                    <Button component={Link} to="/login">
                       Login
                     </Button>
-                    <Button color="inherit" component={Link} to="/signup">
+                    <Button component={Link} to="/signup">
                       Sign Up
                     </Button>
                   </div>
@@ -88,7 +101,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <Hidden mdUp>
               <Toolbar>
                 <Typography variant="h5" className={classes.title}>
-                  Manhattan Trail
+                  MANHATTAN TRAIL
                 </Typography>
                 {isLoggedIn && <GlobalScore />}
                 <SideMenu handleClick={handleClick} isLoggedIn={isLoggedIn} />

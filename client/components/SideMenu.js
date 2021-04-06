@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
   },
+  
 });
 
 function SideMenu({ handleClick, isLoggedIn }) {
