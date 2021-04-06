@@ -25,23 +25,25 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
-    // Check if this game has previously been played already
     this.props.fetchMiniGameComplete();
 
     if (this.props.rests.length > 0) {
-      this.setCenter();
+      this.setCenter(this.props.gameStage - 1);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
       if (this.props.rests.length > 0) {
-        this.setCenter();
+        this.setCenter(this.props.gameStage - 1);
       }
+    }
+    if (prevProps.gameStage !== this.props.gameStage) {
+      this.setCenter(this.props.gameStage - 1);
     }
   }
 
-  setCenter(index) {
+  setCenter(index = this.props.gameStage) {
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -55,7 +57,6 @@ class _Map extends React.Component {
     });
   }
   stepStage() {
-    this.setCenter(this.props.gameStage);
     this.props.nextStage();
   }
   createMapOptions(maps) {
