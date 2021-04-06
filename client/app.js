@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Routes from './routes';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import amber from '@material-ui/core/colors/amber';
