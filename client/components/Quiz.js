@@ -48,11 +48,6 @@ class Quiz extends React.Component {
         this.setState({
           currentQuestion: this.state.currentQuestion + 1,
         });
-      } else {
-        finished = true;
-        this.setState({
-          finished: true,
-        });
       }
     }
     let userResponse = this.state.value;
@@ -65,6 +60,7 @@ class Quiz extends React.Component {
       points,
       status: points > 0 ? 'correct' : 'wrong',
       quizCount: (this.state.quizCount += 1),
+      finished: this.state.quizCount > 3 ? true : false,
     });
     this.props.updateMiniScore(points);
     if (finished) {
@@ -73,7 +69,7 @@ class Quiz extends React.Component {
   }
   render() {
     const { currentQuestion } = this.state;
-    console.log('props', this.props);
+    console.log('status', this.state.finished);
     if (this.state.finished) {
       return (
         <>
@@ -85,7 +81,7 @@ class Quiz extends React.Component {
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
-        {this.state.quizCount}/5
+        {this.state.quizCount}/4
         <div id='quiz' styles={styles.quiz}>
           <form id='quiz-form' onSubmit={this.handleSubmit}>
             <FormControl id='form-control' component='fieldset'>
@@ -120,6 +116,7 @@ class Quiz extends React.Component {
                       variant='outlined'
                       style={styles.button}
                       onClick={this.handleSubmit}
+                      // disable={this.state.quizCount > 3 ? true : false}
                     >
                       Submit{' '}
                     </Button>
