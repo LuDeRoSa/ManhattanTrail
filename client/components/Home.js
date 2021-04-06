@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Map from './Map';
 import { setRests } from '../store/rest';
-import { nextStage } from '../store/game';
+import { nextStage, fetchMiniGameComplete } from '../store/game';
+
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
 
@@ -11,6 +12,10 @@ import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export const Home = (props) => {
+  useEffect(() => {
+    console.log('use effect running');
+    props.fetchMiniGameComplete();
+  }, []);
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
@@ -19,7 +24,6 @@ export const Home = (props) => {
     <div>
       <center>
         <h3>Welcome, {props.username}</h3>
-
         <Button
           variant="contained"
           color="primary"
@@ -65,5 +69,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
+  fetchMiniGameComplete,
 };
 export default connect(mapState, mapDispatch)(Home);

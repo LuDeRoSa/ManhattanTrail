@@ -1,9 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import { setRests } from '../store/rest';
 import Marker from './Marker';
-import { fetchMiniGameComplete } from '../store/game';
 import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
@@ -24,8 +22,6 @@ class _Map extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchMiniGameComplete();
-
     if (this.props.rests.length > 0) {
       this.setCenter(this.props.gameStage - 1);
     }
@@ -117,8 +113,5 @@ const mapState = (state) => {
     gameStage: state.game.gameStage,
   };
 };
-const mapDispatch = {
-  setRests,
-  fetchMiniGameComplete,
-};
+const mapDispatch = {};
 export default connect(mapState, mapDispatch)(_Map);
