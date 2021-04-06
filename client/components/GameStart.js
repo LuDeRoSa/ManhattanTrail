@@ -1,5 +1,5 @@
 import React from 'react';
-import SnakeGame from './SnakeGame';
+import SnakeGame from './SnakeApp/SnakeGame';
 import FlappyCake from './FlappyCake';
 import SortFruits from './SortFruits';
 import Hangman from './HangmanGame/Hangman';
@@ -7,8 +7,8 @@ import Quiz from './Quiz';
 import Button from '@material-ui/core/Button';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Paper from '@material-ui/core/Paper';
-import { fetchMiniGameComplete } from "../store/game";
-import { connect } from "react-redux";
+import { fetchMiniGameComplete } from '../store/game';
+import { connect } from 'react-redux';
 const Start = (props) => (
   <Button
     variant="contained"
@@ -24,7 +24,7 @@ class GameStart extends React.Component {
     super(props);
     this.state = {
       gameStarted: false,
-        miniGameComplete: false
+      miniGameComplete: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -37,7 +37,7 @@ class GameStart extends React.Component {
     this.setState({ gameStarted: true });
   }
   componentDidMount() {
-      this.props.fetchMiniGameComplete();
+    this.props.fetchMiniGameComplete();
   }
   render() {
     switch (this.props.game_type) {
@@ -45,11 +45,15 @@ class GameStart extends React.Component {
         return (
           <Paper elevation={10}>
             <h2>Snake Game:</h2>
-            <p>Eat the food but don't hit the walls! The more food you eat, the faster you'll move!</p>
+            <p>
+              Eat the food but don't hit the walls! The more food you eat, the
+              faster you'll move!
+            </p>
             {this.state.gameStarted ? (
               <SnakeGame />
+            ) : this.props.game.mini_status === 'finished' ? (
+              ''
             ) : (
-                this.props.game.mini_status === 'finished' ? "" :
               <Start handleClick={this.handleClick} />
             )}
           </Paper>
@@ -61,9 +65,10 @@ class GameStart extends React.Component {
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
             {this.state.gameStarted ? (
               <FlappyCake />
-            ) :  (
-                this.props.game.mini_status === 'finished' ? "" :
-                    <Start handleClick={this.handleClick} />
+            ) : this.props.game.mini_status === 'finished' ? (
+              ''
+            ) : (
+              <Start handleClick={this.handleClick} />
             )}
           </Paper>
         );
@@ -74,9 +79,10 @@ class GameStart extends React.Component {
             <p>Game The Food Category</p>
             {this.state.gameStarted ? (
               <Hangman />
+            ) : this.props.game.mini_status === 'finished' ? (
+              ''
             ) : (
-                this.props.game.mini_status === 'finished' ? "" :
-                    <Start handleClick={this.handleClick} />
+              <Start handleClick={this.handleClick} />
             )}
           </Paper>
         );
@@ -87,29 +93,32 @@ class GameStart extends React.Component {
             <p>Answer all the questions!</p>
             {this.state.gameStarted ? (
               <Quiz />
-            ) :  (
-                this.props.game.mini_status === 'finished' ? "" :
-                    <Start handleClick={this.handleClick} />
+            ) : this.props.game.mini_status === 'finished' ? (
+              ''
+            ) : (
+              <Start handleClick={this.handleClick} />
             )}
           </Paper>
         );
       case 'sortfruits':
         return (
-            <div>
-              <h2>Sort the Foods!</h2>
-              <p>Drag and drop each food into the "Good" or "Bad" column
-                 depending on whether it's "good" for the environment or "bad."
-                 <br />
-                 When you're done, press the "I'm done!" button.
-              </p>
-     
-              {this.state.gameStarted ? (
-                  <SortFruits />
-              ) :  (
-                  this.props.game.mini_status === 'finished' ? "" :
-                      <Start handleClick={this.handleClick} />
-              )}
-            </div>
+          <div>
+            <h2>Sort the Foods!</h2>
+            <p>
+              Drag and drop each food into the "Good" or "Bad" column depending
+              on whether it's "good" for the environment or "bad."
+              <br />
+              When you're done, press the "I'm done!" button.
+            </p>
+
+            {this.state.gameStarted ? (
+              <SortFruits />
+            ) : this.props.game.mini_status === 'finished' ? (
+              ''
+            ) : (
+              <Start handleClick={this.handleClick} />
+            )}
+          </div>
         );
       default:
         return <></>;
@@ -117,13 +126,13 @@ class GameStart extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-    return {
-        userId: state.auth.id,
-        rests: state.rest.rests,
-        game: state.game,
-    };
+  return {
+    userId: state.auth.id,
+    rests: state.rest.rests,
+    game: state.game,
+  };
 };
 const mapDispatchToProps = {
-    fetchMiniGameComplete
+  fetchMiniGameComplete,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(GameStart);

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
 import Food from './Food';
-import { updateMiniGameScore } from '../store/game';
+import { updateMiniGameScore } from '../../store/game';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import './Style/Snake.css';
+import '../Style/Snake.css';
 
 const getRandomCoordinates = () => {
   let min = 5;
