@@ -21,7 +21,6 @@ export const Home = (props) => {
       : '';
   return (
     <div>
-
       <center>
         <Button
           variant="contained"

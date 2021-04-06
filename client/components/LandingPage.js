@@ -19,7 +19,7 @@ const styles = {
     alignContent: 'space-around',
     alignItems: 'center',
     height: '90vh',
-  }
+  },
 };
 
 /**

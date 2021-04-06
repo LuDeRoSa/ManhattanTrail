@@ -17,10 +17,8 @@ import GlobalScore from './GlobalScore';
 
 import SideMenu from './SideMenu';
 
-const useStyles = makeStyles((theme) => (
-  
-  
-  {root: {
+const useStyles = makeStyles((theme) => ({
+  root: {
     flexGrow: 1,
     marginBottom: '1rem',
   },
@@ -44,9 +42,7 @@ const useStyles = makeStyles((theme) => (
       borderColor: theme.palette.primary.main,
     },
   },
-})
-);
-
+}));
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
@@ -57,7 +53,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           <AppBar position="static" className={classes.palette}>
             <Hidden smDown>
               <Toolbar>
-                <Typography variant="h4"  className={classes.title}>
+                <Typography variant="h4" className={classes.title}>
                   MANHATTAN TRAIL
                 </Typography>
                 {isLoggedIn ? (
@@ -65,12 +61,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     <GlobalScore />
                     {linksList.map((link) => (
                       <Button
-                      key={link.text}
-                      className={classes.button}
-                      startIcon={link.icon}
-                      component={Link }
-                      to={link.path}
-
+                        key={link.text}
+                        className={classes.button}
+                        startIcon={link.icon}
+                        component={Link}
+                        to={link.path}
                       >
                         {link.text}
                       </Button>
