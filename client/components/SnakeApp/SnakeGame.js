@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
 import Food from './Food';
-import { updateMiniGameScore } from '../store/game';
+import { updateMiniGameScore } from '../../store/game';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import './Style/Snake.css';
+import '../Style/Snake.css';
 
 const getRandomCoordinates = () => {
   let min = 5;
@@ -44,7 +44,7 @@ class SnakeGame extends Component {
 
   componentDidMount() {
     //start listening to the DOM
-    setInterval(this.moveSnake, this.state.speed);
+    this.interval = setInterval(this.moveSnake, this.state.speed);
     document.onkeydown = this.onkeydown;
   }
 
@@ -55,6 +55,13 @@ class SnakeGame extends Component {
     this.checkIfOutOfBorders();
     // this.checkIfCollapsed();
     this.checkIfEat();
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    document.onkeydown = null;
+    this.setState({
+      playing: false,
+    });
   }
 
   onkeydown = (e) => {

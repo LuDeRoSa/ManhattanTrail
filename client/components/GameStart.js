@@ -1,5 +1,5 @@
 import React from 'react';
-import SnakeGame from './SnakeGame';
+import SnakeGame from './SnakeApp/SnakeGame';
 import FlappyCake from './FlappyCake';
 import SortFruits from '../components/SortFruitsGame/SortFruits';
 import Hangman from './HangmanGame/Hangman';
@@ -8,8 +8,8 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Paper from '@material-ui/core/Paper';
-import { fetchMiniGameComplete } from "../store/game";
-import { connect } from "react-redux";
+import { fetchMiniGameComplete } from '../store/game';
+import { connect } from 'react-redux';
 
 const Start = (props) => (
   props.mini_status === 'finished' 
@@ -32,7 +32,7 @@ class GameStart extends React.Component {
     super(props);
     this.state = {
       gameStarted: false,
-      miniGameComplete: false
+      miniGameComplete: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -45,7 +45,7 @@ class GameStart extends React.Component {
     this.setState({ gameStarted: true });
   }
   componentDidMount() {
-      this.props.fetchMiniGameComplete();
+    this.props.fetchMiniGameComplete();
   }
   render() {
     switch (this.props.game_type) {
@@ -96,6 +96,7 @@ class GameStart extends React.Component {
         );
       case 'sortfruits':
         return (
+
             <div>
               <h2>Sort the Foods!</h2>
               <p>Drag and drop each food into the "Good" or "Bad" column
@@ -116,13 +117,13 @@ class GameStart extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-    return {
-        userId: state.auth.id,
-        rests: state.rest.rests,
-        game: state.game,
-    };
+  return {
+    userId: state.auth.id,
+    rests: state.rest.rests,
+    game: state.game,
+  };
 };
 const mapDispatchToProps = {
-    fetchMiniGameComplete
+  fetchMiniGameComplete,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(GameStart);
