@@ -68,11 +68,10 @@ class GameStart extends React.Component {
         );
       case 'flappy':
         return (
-         <Paper variant="outlined" m={2}>
+          <Paper variant="outlined" m={2}>
             <h2>FlappyCake Game:</h2>
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
             {this.state.gameStarted ? <FlappyCake /> : start}
-
           </Paper>
         );
       case 'hangman':
@@ -88,11 +87,7 @@ class GameStart extends React.Component {
           <Paper variant="outlined" square>
             <center>
               <h2>Test Your Knowledge!</h2>
-              {this.state.gameStarted ? (
-                <Quiz />
-              ) : (
-                {this.state.gameStarted ? <Quiz /> : start}
-              )}
+              {this.state.gameStarted ? <Quiz /> : start}
             </center>
           </Paper>
         );
@@ -106,7 +101,7 @@ class GameStart extends React.Component {
               <br />
               When you're done, press the "I'm done!" button.
             </p>
-           {this.state.gameStarted ? <SortFruits /> : start}
+            {this.state.gameStarted ? <SortFruits /> : start}
           </div>
         );
       default:
