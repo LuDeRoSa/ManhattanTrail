@@ -1,5 +1,5 @@
 import React from 'react';
-import SnakeGame from './SnakeGame';
+import SnakeGame from './SnakeApp/SnakeGame';
 import FlappyCake from './FlappyCake';
 import SortFruits from '../components/SortFruitsGame/SortFruits';
 import Hangman from './HangmanGame/Hangman';
@@ -23,6 +23,7 @@ const Start = (props) =>
       Start Game
     </Button>
   );
+
 class GameStart extends React.Component {
   constructor(props) {
     super(props);
@@ -59,6 +60,7 @@ class GameStart extends React.Component {
               Eat the food but don't hit the walls! The more food you eat, the
               faster you'll move!
             </p>
+
             {this.state.gameStarted ? <SnakeGame /> : start}
           </Paper>
         );
@@ -67,7 +69,9 @@ class GameStart extends React.Component {
           <Paper elevation={10}>
             <h2>FlappyCake Game:</h2>
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
+
             {this.state.gameStarted ? <FlappyCake /> : start}
+
           </Paper>
         );
       case 'hangman':
@@ -75,7 +79,9 @@ class GameStart extends React.Component {
           <Paper elevation={10}>
             <h2>Hangman Game:</h2>
             <p>Game The Food Category</p>
+
             {this.state.gameStarted ? <Hangman /> : start}
+
           </Paper>
         );
       case 'quiz':
@@ -83,7 +89,9 @@ class GameStart extends React.Component {
           <Paper elevation={10}>
             <h2>Quiz</h2>
             <p>Answer all the questions!</p>
+
             {this.state.gameStarted ? <Quiz /> : start}
+
           </Paper>
         );
       case 'sortfruits':
@@ -98,6 +106,7 @@ class GameStart extends React.Component {
             </p>
 
             {this.state.gameStarted ? <SortFruits /> : start}
+
           </div>
         );
       default:

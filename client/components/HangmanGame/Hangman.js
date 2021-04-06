@@ -26,13 +26,18 @@ class Hangman extends Component {
       gameOver: false,
       isWinner: false,
     };
+    this.onKey = this.onKey.bind(this);
   }
   componentDidMount() {
-    document.addEventListener('keydown', (e) => {
-      if (e.code >= 'A' && e.code <= 'z') {
-        this.handleGuess(e);
-      }
-    });
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKey);
+  }
+  onKey(e) {
+    if (e.code >= 'A' && e.code <= 'z' && !this.gameOver) {
+      this.handleGuess(e);
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.gameOver && this.state.gameOver) {
