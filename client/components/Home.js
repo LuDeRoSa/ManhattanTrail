@@ -5,13 +5,12 @@ import { setRests } from '../store/rest';
 import { nextStage } from '../store/game';
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
-/**
- * COMPONENT
- */
+
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export const Home = (props) => {
-  const { username } = props;
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
@@ -19,7 +18,17 @@ export const Home = (props) => {
   return (
     <div>
       <center>
-        <h3>Welcome, {username}</h3>
+        <h3>Welcome, {props.username}</h3>
+
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={props.game.mini_status !== 'finished'}
+          endIcon={<NavigateNextIcon />}
+          onClick={props.nextStage}
+        >
+          Move to Next Stage
+        </Button>
       </center>
       <Grid
         container

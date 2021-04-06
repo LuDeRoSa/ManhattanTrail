@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import { setRests } from '../store/rest';
 import Marker from './Marker';
-import { nextStage, setGame, fetchMiniGameComplete } from '../store/game';
+import { fetchMiniGameComplete } from '../store/game';
 import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
@@ -21,7 +21,6 @@ class _Map extends React.Component {
       show: false,
     };
     this.setCenter = this.setCenter.bind(this);
-    this.stepStage = this.stepStage.bind(this);
   }
 
   componentDidMount() {
@@ -55,9 +54,6 @@ class _Map extends React.Component {
         lng: center.restaurant_longitude,
       },
     });
-  }
-  stepStage() {
-    this.props.nextStage();
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -109,15 +105,6 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-        <div id="next-button-div">
-          {this.props.game.mini_status === 'finished' ? (
-            <button id="next-button" onClick={this.props.nextStage}>
-              Move to Next Stage »
-            </button>
-          ) : (
-            ''
-          )}
-        </div>
         <div>{this.props.game.status === 'finished' && 'gameover'}</div>
       </React.Fragment>
     );
@@ -132,8 +119,6 @@ const mapState = (state) => {
 };
 const mapDispatch = {
   setRests,
-  nextStage,
-  setGame,
   fetchMiniGameComplete,
 };
 export default connect(mapState, mapDispatch)(_Map);
