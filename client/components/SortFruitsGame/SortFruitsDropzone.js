@@ -48,6 +48,10 @@ const Food = ({ name, index }) => (
               style={{ backgroundColor: 'transparent' }}
               className="avatar tile-icon"
             >
+              {/* <CardMedia
+                image={`./img/${name.toLowerCase().replace(' ', '-')}.jpeg`}
+                title={name}
+              /> */}
               <img
                 height={'64'}
                 width={'90'}
@@ -55,7 +59,9 @@ const Food = ({ name, index }) => (
                 alt={name}
               />
             </figure>
-            <div className="tile-content">{name}</div>
+            <CardContent>
+              <Typography>{name}</Typography>
+            </CardContent>
           </Card>
         </div>
       );
