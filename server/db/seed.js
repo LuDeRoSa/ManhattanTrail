@@ -57,6 +57,21 @@ const syncAndSeed = async () => {
       restaurant_longitude: -73.98971,
       restaurant_latitude: 40.71807,
     }),
+    Restaurant.create({
+      restaurant_name: 'Bengal Tiger',
+      restaurant_longitude: -73.989308,
+      restaurant_latitude: 40.741895,
+    }),
+    Restaurant.create({
+      restaurant_name: 'The Drunken Monkey',
+      restaurant_longitude: -73.9475594,
+      restaurant_latitude: 40.7809852,
+    }),
+    Restaurant.create({
+      restaurant_name: 'Tamarind Tribeca',
+      restaurant_longitude: -74.0089165,
+      restaurant_latitude: 40.719086,
+    }),
   ]);
 
   // console.log(restaurants[5].restaurant_name); this is a test to see whether arrdata is more consistent
@@ -87,6 +102,24 @@ const syncAndSeed = async () => {
       stage: 3,
       game_type: 'quiz',
     }),
+    Path.create({
+      path_name: 'indian',
+      restaurantId: restaurants[8].id,
+      stage: 1,
+      game_type: 'quiz',
+    }),
+    Path.create({
+      path_name: 'indian',
+      restaurantId: restaurants[9].id,
+      stage: 2,
+      game_type: 'quiz',
+    }),
+    Path.create({
+      path_name: 'indian',
+      restaurantId: restaurants[10].id,
+      stage: 3,
+      game_type: 'quiz',
+    }),
   ]);
 
   const quizzes = await Promise.all([
@@ -95,6 +128,9 @@ const syncAndSeed = async () => {
     }),
     Quiz.create({
       restaurantId: restaurants[7].id,
+    }),
+    Quiz.create({
+      restaurantId: restaurants[8].id,
     }),
   ]);
 
@@ -389,6 +425,75 @@ const syncAndSeed = async () => {
       {
         question: 'True or False?: Gluten is only found in food products',
         quizId: quizzes[1].id,
+        answers: [
+          {
+            answer: 'True',
+          },
+          {
+            answer: 'False',
+            isCorrect: true,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'there are over how many different types of indian desserts?',
+        quizId: quizzes[2].id,
+        answers: [
+          {
+            answer: '200',
+            isCorrect: true,
+          },
+          {
+            answer: '100',
+          },
+
+          {
+            answer: ' 300',
+          },
+          {
+            answer: '50',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'The chicken tikka masala was invented in?',
+        quizId: quizzes[2].id,
+        answers: [
+          {
+            answer: 'Glasgow, Scotland',
+            isCorrect: true,
+          },
+          {
+            answer: 'Mumbai, India',
+          },
+
+          {
+            answer: 'Delhi, India',
+          },
+          {
+            answer: 'London, England',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question:
+          'True or False?: Tomatoes, potatatos, and chilies do not have origins in India and were brought by foreign traders in the 15th century?',
+        quizId: quizzes[2].id,
         answers: [
           {
             answer: 'True',
