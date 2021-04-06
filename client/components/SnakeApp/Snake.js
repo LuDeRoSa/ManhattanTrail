@@ -1,5 +1,5 @@
 import React from 'react';
-import './Style/Snake.css';
+import '../Style/Snake.css';
 
 export default (props) => {
   return (

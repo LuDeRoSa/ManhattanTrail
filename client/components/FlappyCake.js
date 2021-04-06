@@ -32,6 +32,8 @@ class FlappyCake extends Component {
       playing: true,
     };
     this.canvasRef = React.createRef();
+    this.onClick = this.onClick.bind(this);
+    this.onKey = this.onKey.bind(this);
   }
 
   componentDidMount() {
@@ -42,16 +44,8 @@ class FlappyCake extends Component {
       this.update();
       this.draw();
     }, 1000 / 60);
-    document.addEventListener('click', (e) => {
-      if (e.target.tagName === 'CANVAS') {
-        this.bump();
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space' || e.code === 'ArrowUp') {
-        this.bump();
-      }
-    });
+    document.addEventListener('click', this.onClick);
+    document.addEventListener('keydown', this.onKey);
   }
 
   componentDidUpdate() {
@@ -59,8 +53,20 @@ class FlappyCake extends Component {
       return;
     }
   }
+  onClick(e) {
+    if (e.target.tagName === 'CANVAS') {
+      this.bump();
+    }
+  }
+  onKey(e) {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+      this.bump();
+    }
+  }
   componentWillUnmount() {
     clearInterval(this.interval);
+    document.removeEventListener('click', this.onClick);
+    document.removeEventListener('keydown', this.onKey);
     this.setState({
       playing: false,
     });
