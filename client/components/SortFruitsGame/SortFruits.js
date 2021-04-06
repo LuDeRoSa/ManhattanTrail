@@ -69,7 +69,6 @@ class SortFruits extends React.Component {
               spacing={1}
             >
               <Grid item xs={4}>
-                Good
                 <SortFruitsDropzone
                   id={CATEGORIES.GOOD}
                   foods={this.state[CATEGORIES.GOOD]}
@@ -77,7 +76,6 @@ class SortFruits extends React.Component {
                 />
               </Grid>
               <Grid item xs={4}>
-                Unsorted
                 <SortFruitsDropzone
                   id="unsorted"
                   foods={unsorted}
@@ -85,7 +83,6 @@ class SortFruits extends React.Component {
                 />
               </Grid>
               <Grid item xs={4}>
-                Bad
                 <SortFruitsDropzone
                   id={CATEGORIES.BAD}
                   foods={this.state[CATEGORIES.BAD]}
