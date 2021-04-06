@@ -111,7 +111,7 @@ class _Map extends React.Component {
         </div>
         <div id="next-button-div">
           {this.props.game.mini_status === 'finished' ? (
-            <button id="next-button" onClick={this.stepStage}>
+            <button id="next-button" onClick={this.props.nextStage}>
               Move to Next Stage »
             </button>
           ) : (
