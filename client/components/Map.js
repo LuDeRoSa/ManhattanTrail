@@ -2,7 +2,6 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
-import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
