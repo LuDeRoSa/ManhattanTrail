@@ -13,7 +13,6 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export const Home = (props) => {
   useEffect(() => {
-    console.log('use effect running');
     props.fetchMiniGameComplete();
   }, []);
   const game_type =
