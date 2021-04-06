@@ -8,13 +8,15 @@ import {
   createMuiTheme,
   makeStyles,
   ThemeProvider,
+  withTheme,
 } from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import red from '@material-ui/core/colors/red';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#F5F5F5',
+      // default: '#F5F5F5',
+      default: "#fafafa",
     },
     primary: {
       main: indigo[800],
