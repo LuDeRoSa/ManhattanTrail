@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import PublicIcon from '@material-ui/icons/Public';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';

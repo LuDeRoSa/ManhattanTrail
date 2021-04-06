@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
+import { makeStyles } from '@material-ui/core/styles';
+
 const styles = {
   root: {},
   container: {
@@ -40,7 +42,7 @@ class LandingPage extends React.Component {
     const { game } = this.props;
     return (
       <Container style={styles.container}>
-        <h3>Welcome , {username}</h3>
+        <h3>Welcome, {username}! Here's your current status:</h3>
         {!game.path_name && (
           <React.Fragment>
             <h4>You don't have a game set up yet, please pick a path! :)</h4>
@@ -76,10 +78,13 @@ class LandingPage extends React.Component {
             <p>Score: {game.total_score}</p>
             <Button
               variant="outlined"
+              style={styles.button}
               startIcon={<SportsEsportsIcon />}
-              color="inherit"
+              variant="contained"
+              color="primary"
               component={Link}
               to="/home"
+              radius={0}
             >
               {game.gameStage > 1 ? 'Resume' : 'Begin'} Game
             </Button>

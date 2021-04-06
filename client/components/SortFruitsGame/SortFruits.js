@@ -5,6 +5,10 @@ import SortFruitsDropzone from './SortFruitsDropzone';
 // import SortFruitsDropzone from '../SortFruitsGame/SortFruitsDropzone.js';
 import { connect } from 'react-redux';
 import { updateMiniGameScore } from '../../store/game';
+
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
 /**
  * Enums for representing the game play state
  */
@@ -57,25 +61,35 @@ class SortFruits extends React.Component {
         {(this.state.gameState === GAME_STATE.PLAYING ||
           this.state.gameState === GAME_STATE.DONE) && (
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <div className="container">
-              <div className="columns">
+            <Grid
+              container
+              direction="row"
+              alignItems="flex-start"
+              justify="center"
+              spacing={1}
+            >
+              <Grid item xs={4}>
                 <SortFruitsDropzone
                   id={CATEGORIES.GOOD}
                   foods={this.state[CATEGORIES.GOOD]}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={4}>
                 <SortFruitsDropzone
                   id="unsorted"
                   foods={unsorted}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={4}>
                 <SortFruitsDropzone
                   id={CATEGORIES.BAD}
                   foods={this.state[CATEGORIES.BAD]}
                   isDropDisabled={isDropDisabled}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </DragDropContext>
         )}
         <br />
@@ -84,9 +98,9 @@ class SortFruits extends React.Component {
             <p> Score: {score}</p>
           </div>
         ) : (
-          <button id="end-sort-fruit" onClick={this.endGame}>
+          <Button id="end-sort-fruit" onClick={this.endGame}>
             I'm done!
-          </button>
+          </Button>
         )}
       </>
     );

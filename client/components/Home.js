@@ -22,7 +22,6 @@ export const Home = (props) => {
   return (
     <div>
       <center>
-        <h3>Welcome, {props.username}</h3>
         <Button
           variant="contained"
           color="primary"

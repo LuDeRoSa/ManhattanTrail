@@ -100,7 +100,6 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-        <div>{this.props.game.status === 'finished' && 'gameover'}</div>
       </React.Fragment>
     );
   }
