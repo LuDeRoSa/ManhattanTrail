@@ -82,11 +82,11 @@ class LandingPage extends React.Component {
             <p>Status: {game.status}</p>
             <p>Score: {game.total_score}</p>
             <Button
-              variant='outlined'
+              variant="outlined"
               startIcon={<SportsEsportsIcon />}
-              color='inherit'
+              color="inherit"
               component={Link}
-              to='/home'
+              to="/home"
             >
               {game.gameStage > 1 ? 'Resume' : 'Begin'} Game
             </Button>
