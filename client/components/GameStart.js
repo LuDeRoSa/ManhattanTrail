@@ -26,6 +26,7 @@ const Start = (props) =>
       </Button>
     </Box>
   );
+
 class GameStart extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +48,12 @@ class GameStart extends React.Component {
     this.props.fetchMiniGameComplete();
   }
   render() {
+    const start = (
+      <Start
+        mini_status={this.props.game.mini_status}
+        handleClick={this.handleClick}
+      />
+    );
     switch (this.props.game_type) {
       case 'snake':
         return (
@@ -56,44 +63,24 @@ class GameStart extends React.Component {
               Eat the food but don't hit the walls! The more food you eat, the
               faster you'll move!
             </p>
-            {this.state.gameStarted ? (
-              <SnakeGame />
-            ) : (
-              <Start
-                mini_status={this.props.game.mini_status}
-                handleClick={this.handleClick}
-              />
-            )}
+            {this.state.gameStarted ? <SnakeGame /> : start}
           </Paper>
         );
       case 'flappy':
         return (
-          <Paper elevation={10}>
+         <Paper variant="outlined" m={2}>
             <h2>FlappyCake Game:</h2>
             <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
-            {this.state.gameStarted ? (
-              <FlappyCake />
-            ) : (
-              <Start
-                mini_status={this.props.game.mini_status}
-                handleClick={this.handleClick}
-              />
-            )}
+            {this.state.gameStarted ? <FlappyCake /> : start}
+
           </Paper>
         );
       case 'hangman':
         return (
-          <Paper elevation={10}>
+          <Paper variant="outlined" m={2}>
             <h2>Hangman Game:</h2>
             <p>Game The Food Category</p>
-            {this.state.gameStarted ? (
-              <Hangman />
-            ) : (
-              <Start
-                mini_status={this.props.game.mini_status}
-                handleClick={this.handleClick}
-              />
-            )}
+            {this.state.gameStarted ? <Hangman /> : start}
           </Paper>
         );
       case 'quiz':
@@ -104,10 +91,7 @@ class GameStart extends React.Component {
               {this.state.gameStarted ? (
                 <Quiz />
               ) : (
-                <Start
-                  mini_status={this.props.game.mini_status}
-                  handleClick={this.handleClick}
-                />
+                {this.state.gameStarted ? <Quiz /> : start}
               )}
             </center>
           </Paper>
@@ -122,15 +106,7 @@ class GameStart extends React.Component {
               <br />
               When you're done, press the "I'm done!" button.
             </p>
-
-            {this.state.gameStarted ? (
-              <SortFruits />
-            ) : (
-              <Start
-                mini_status={this.props.game.mini_status}
-                handleClick={this.handleClick}
-              />
-            )}
+           {this.state.gameStarted ? <SortFruits /> : start}
           </div>
         );
       default:

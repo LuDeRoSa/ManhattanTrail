@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Map from './Map';
 import { setRests } from '../store/rest';
-import { nextStage } from '../store/game';
+import { nextStage, fetchMiniGameComplete } from '../store/game';
+
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
-/**
- * COMPONENT
- */
+
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export const Home = (props) => {
-  const { username } = props;
+  useEffect(() => {
+    props.fetchMiniGameComplete();
+  }, []);
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
       : '';
   return (
     <div>
+
+      <center>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={props.game.mini_status !== 'finished'}
+          endIcon={<NavigateNextIcon />}
+          onClick={props.nextStage}
+        >
+          Move to Next Stage
+        </Button>
+      </center>
       <Grid
         container
         spacing={3}
@@ -53,5 +68,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
+  fetchMiniGameComplete,
 };
 export default connect(mapState, mapDispatch)(Home);
