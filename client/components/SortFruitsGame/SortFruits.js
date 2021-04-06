@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { updateMiniGameScore } from '../../store/game';
 
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 /**
  * Enums for representing the game play state
@@ -65,6 +66,7 @@ class SortFruits extends React.Component {
               direction="row"
               alignItems="flex-start"
               justify="center"
+              spacing={1}
             >
               <Grid item xs={4}>
                 Good
@@ -99,9 +101,9 @@ class SortFruits extends React.Component {
             <p> Score: {score}</p>
           </div>
         ) : (
-          <button id="end-sort-fruit" onClick={this.endGame}>
+          <Button id="end-sort-fruit" onClick={this.endGame}>
             I'm done!
-          </button>
+          </Button>
         )}
       </>
     );

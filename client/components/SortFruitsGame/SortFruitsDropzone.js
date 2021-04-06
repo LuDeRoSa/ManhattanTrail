@@ -1,10 +1,13 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import '../Style/SortFruits.css';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
 
 const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
-  <div className="column col-4">
-    <div className="divider" data-content={id.toUpperCase()} />
+  <Paper variant="outlined">
+    {id.toUpperCase()}
+    <Divider />
     <Droppable droppableId={id} isDropDisabled={isDropDisabled}>
       {(provided) => {
         return (
@@ -21,7 +24,7 @@ const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
         );
       }}
     </Droppable>
-  </div>
+  </Paper>
 );
 const Food = ({ name, index }) => (
   <Draggable key={name} draggableId={name} index={index}>
