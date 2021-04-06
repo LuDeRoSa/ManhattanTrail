@@ -2,8 +2,9 @@ import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { CATEGORIES, FOODS } from './SortFruitsData';
 import SortFruitsDropzone from './SortFruitsDropzone';
+// import SortFruitsDropzone from '../SortFruitsGame/SortFruitsDropzone.js';
 import { connect } from 'react-redux';
-import { updateMiniGameScore } from '../store/game';
+import { updateMiniGameScore } from '../../store/game';
 /**
  * Enums for representing the game play state
  */
