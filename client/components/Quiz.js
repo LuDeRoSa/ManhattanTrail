@@ -30,6 +30,7 @@ class Quiz extends React.Component {
   }
   componentDidMount() {
     console.log('restId', this.props.restaurantId);
+    console.log(typeof this.props.restaurantId);
     this.props.fetchQuiz(this.props.restaurantId);
   }
 
