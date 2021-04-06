@@ -5,6 +5,9 @@ import SortFruitsDropzone from './SortFruitsDropzone';
 // import SortFruitsDropzone from '../SortFruitsGame/SortFruitsDropzone.js';
 import { connect } from 'react-redux';
 import { updateMiniGameScore } from '../../store/game';
+
+import Grid from '@material-ui/core/Grid';
+
 /**
  * Enums for representing the game play state
  */
@@ -57,25 +60,37 @@ class SortFruits extends React.Component {
         {(this.state.gameState === GAME_STATE.PLAYING ||
           this.state.gameState === GAME_STATE.DONE) && (
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <div className="container">
-              <div className="columns">
+            <Grid
+              container
+              direction="row"
+              alignItems="flex-start"
+              justify="center"
+            >
+              <Grid item xs={4}>
+                Good
                 <SortFruitsDropzone
                   id={CATEGORIES.GOOD}
                   foods={this.state[CATEGORIES.GOOD]}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={4}>
+                Unsorted
                 <SortFruitsDropzone
                   id="unsorted"
                   foods={unsorted}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={4}>
+                Bad
                 <SortFruitsDropzone
                   id={CATEGORIES.BAD}
                   foods={this.state[CATEGORIES.BAD]}
                   isDropDisabled={isDropDisabled}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </DragDropContext>
         )}
         <br />
