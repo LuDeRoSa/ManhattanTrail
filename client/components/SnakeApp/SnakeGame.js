@@ -44,7 +44,7 @@ class SnakeGame extends Component {
 
   componentDidMount() {
     //start listening to the DOM
-    setInterval(this.moveSnake, this.state.speed);
+    this.interval = setInterval(this.moveSnake, this.state.speed);
     document.onkeydown = this.onkeydown;
   }
 
@@ -55,6 +55,13 @@ class SnakeGame extends Component {
     this.checkIfOutOfBorders();
     // this.checkIfCollapsed();
     this.checkIfEat();
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    document.onkeydown = null;
+    this.setState({
+      playing: false,
+    });
   }
 
   onkeydown = (e) => {
