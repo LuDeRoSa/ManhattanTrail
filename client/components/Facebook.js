@@ -20,12 +20,14 @@ class Facebook extends Component {
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
-    this.props.fbAuthenticate(username, id);
+    if (this.state.clicked) {
+      this.props.fbAuthenticate(username, id);
+    }
   };
 
   render() {
     console.log(this.state.clicked);
-    // let fbContent;
+    let fbContent;
 
     // if (this.state.isLoggedIn) {
     //   fbContent = null;
@@ -42,16 +44,20 @@ class Facebook extends Component {
     //   );
     // }
 
-    let fbContent = (
-      <FacebookLogin
-        name='fb'
-        appId='459306878548339'
-        autoLoad={true}
-        fields='name,email'
-        onClick={this.componentClicked}
-        callback={this.state.clicked && this.responseFacebook}
-      />
-    );
+    if (this.state.clicked) {
+      fbContent = (
+        <FacebookLogin
+          name='fb'
+          appId='459306878548339'
+          autoLoad={true}
+          fields='name,email'
+          onClick={this.componentClicked}
+          callback={this.responseFacebook}
+        />
+      );
+    } else {
+      fbContent = null;
+    }
     return <div>{fbContent}</div>;
   }
 }
