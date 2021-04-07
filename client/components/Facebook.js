@@ -12,7 +12,7 @@ class Facebook extends Component {
     };
   }
 
-  componentClicked = () => console.log('cliked');
+  componentClicked = () => console.log('clicked');
 
   responseFacebook = (response) => {
     let username = response.email;
