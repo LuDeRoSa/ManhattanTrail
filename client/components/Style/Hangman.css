@@ -1,5 +1,9 @@
 .hangman-container {
   width: 80%;
-  margin-top: 50px;
-  background-color: blue;
+  /* background-color: white; */
+}
+
+#instructions {
+  margin-top: -20px;
+  margin-bottom: -2px;
 }
