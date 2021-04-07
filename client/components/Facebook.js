@@ -12,14 +12,14 @@ class Facebook extends Component {
     };
   }
 
-  componentClicked = () =>
-    this.setState({
-      clicked: true,
-    });
+  componentClicked = () => console.log('cliked');
 
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
+    this.setState({
+      clicked: true,
+    });
     if (this.state.clicked) {
       this.props.fbAuthenticate(username, id);
     }
@@ -29,22 +29,9 @@ class Facebook extends Component {
     console.log(this.state.clicked);
     let fbContent;
 
-    // if (this.state.isLoggedIn) {
-    //   fbContent = null;
-    // } else {
-    //   fbContent = (
-    //     <FacebookLogin
-    //       name='fb'
-    //       appId='459306878548339'
-    //       autoLoad={true}
-    //       fields='name,email'
-    //       onClick={this.componentClicked}
-    //       callback={this.responseFacebook}
-    //     />
-    //   );
-    // }
-
-    if (this.state.clicked) {
+    if (this.state.isLoggedIn) {
+      fbContent = null;
+    } else {
       fbContent = (
         <FacebookLogin
           name='fb'
@@ -55,9 +42,8 @@ class Facebook extends Component {
           callback={this.responseFacebook}
         />
       );
-    } else {
-      fbContent = null;
     }
+
     return <div>{fbContent}</div>;
   }
 }
