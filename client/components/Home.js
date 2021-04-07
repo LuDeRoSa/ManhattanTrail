@@ -45,7 +45,7 @@ export const Home = (props) => {
           <Map />
         </Grid>
         <Grid item lg={1} md={false} sm={false} xs={false} />
-        <Grid item lg={4} md={4} sm={10} xs={12}>
+        <Grid item lg={6} md={6} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />
