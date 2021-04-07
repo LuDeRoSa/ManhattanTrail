@@ -15,10 +15,10 @@ class Profile extends React.Component {
   render() {
     const { account, favorites } = this.props;
     return (
-      <div className='account-page'>
+      <div className="account-page">
         <h2>Welcome {account.username}.</h2>
         <h3>Account details</h3>
-        <ul id='account_component' className='account_component_class'>
+        <ul id="account_component" className="account_component_class">
           {Object.keys(account)
             .filter((key) => key !== 'password' && key !== 'id')
             .map((key, idx) => {
