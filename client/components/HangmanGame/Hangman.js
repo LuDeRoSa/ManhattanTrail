@@ -100,22 +100,21 @@ class Hangman extends Component {
   render() {
     let gameStat = this.generateButtons();
     if (this.state.isWinner) {
-      gameStat = 'You won!';
+      gameStat = 'Congratus, you saved him!';
     }
     if (this.state.gameOver) {
-      gameStat = 'You Lost!';
+      gameStat = 'Uh-oh...You failed to save him!';
     }
     return (
       <Paper style={styles.hangmanContainer}>
-        <h1>Hangman</h1>
+        <div id="instructions">Hint: The word is a category of food</div>
         <div>
-          Wrong Guesses: {this.state.mistake} of {this.props.maxTry}
+          **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
         </div>
         <div>
           <img src={this.props.images[this.state.mistake]} alt="" />
         </div>
         <div>
-          <p>Guess The Food Category</p>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
           <>{gameStat}</>
         </div>

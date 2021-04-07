@@ -16,8 +16,10 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 /**
  * THUNK CREATORS
  */
+
 export const me = (method) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
+
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
@@ -37,6 +39,16 @@ export const authenticate = (username, password, method) => async (
   try {
     const res = await axios.post(`/auth/${method}`, { username, password });
     window.localStorage.setItem(TOKEN, res.data.token);
+    dispatch(me());
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }));
+  }
+};
+
+export const fbAuthenticate = (username, id) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/facebook`, { username, id });
+    let token = window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));

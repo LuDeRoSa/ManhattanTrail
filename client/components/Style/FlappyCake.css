@@ -1,0 +1,14 @@
+#instructions {
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+#game-message {
+  margin-bottom: 20px;
+}
+
+#game-area {
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
