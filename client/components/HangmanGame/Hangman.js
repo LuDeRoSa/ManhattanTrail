@@ -92,9 +92,9 @@ class Hangman extends Component {
     }
     return (
       <div className="hangman-container">
-        <div id = "instructions">Hint: The word is a category of food</div>
+        <div id="instructions">Hint: The word is a category of food</div>
         <div className="float-left">
-          **Guesses Remaining: {this.props.maxTry-this.state.mistake}**
+          **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
         </div>
         <div className="text-center">
           <img src={this.props.images[this.state.mistake]} alt="" />

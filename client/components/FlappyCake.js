@@ -3,7 +3,6 @@ import { updateMiniGameScore } from '../store/game';
 import { connect } from 'react-redux';
 import './Style/FlappyCake.css';
 
-
 const getRandomCoordinates = () => {
   let min = 5;
   let max = 350;
@@ -147,13 +146,18 @@ class FlappyCake extends Component {
   }
   render() {
     if (!this.state.playing) {
-      return <div id="game-message">Good game! You earned {this.state.score} points</div>;
+      return (
+        <div id="game-message">
+          Good game! You earned {this.state.score} points
+        </div>
+      );
     }
     return (
-      <div id = "instructions">Use the spacebar to fly the penguin so he can catch the cakes.
-      <div id = "game-area">
-        <canvas ref={this.canvasRef} width={400} height={400} />
-      </div>
+      <div id="instructions">
+        Use the spacebar to fly the penguin so he can catch the cakes.
+        <div id="game-area">
+          <canvas ref={this.canvasRef} width={400} height={400} />
+        </div>
       </div>
     );
   }

@@ -209,24 +209,25 @@ class SnakeGame extends Component {
       );
     }
     return (
-      <div id = "instructions">
-        Use your arrow keys to move the snake and gobble the cookies. But beware! Don't hit the walls or your own tail.
-      <div className="game-area">
-        <Snake snakeDots={this.state.snakeDots} />
-        <Food dot={this.state.food} />
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          open={this.state.open}
-          onClose={this.handleClose}
-          // TransitionComponent={state.Transition}
-          message="YUM!"
-          // key={state.Transition.name}
-          autoHideDuration={500}
-        />
-      </div>
+      <div id="instructions">
+        Use your arrow keys to move the snake and gobble the cookies. But
+        beware! Don't hit the walls or your own tail.
+        <div className="game-area">
+          <Snake snakeDots={this.state.snakeDots} />
+          <Food dot={this.state.food} />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={this.state.open}
+            onClose={this.handleClose}
+            // TransitionComponent={state.Transition}
+            message="YUM!"
+            // key={state.Transition.name}
+            autoHideDuration={500}
+          />
+        </div>
       </div>
     );
   }
