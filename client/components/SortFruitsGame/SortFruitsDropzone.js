@@ -10,6 +10,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+
 
 const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
   <Paper variant="outlined">
@@ -43,25 +45,14 @@ const Food = ({ name, index }) => (
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <Card>
-            <figure
-              style={{ backgroundColor: 'transparent' }}
-              className="avatar tile-icon"
-            >
-              {/* <CardMedia
-                image={`./img/${name.toLowerCase().replace(' ', '-')}.jpeg`}
-                title={name}
-              /> */}
-              <img
-                height={'64'}
-                width={'90'}
+          <Card style={{width: '6rem', height: '4rem',}} elevation={1} >
+              <Avatar
+                height={'25'}
+                width={'25'}
                 src={`./img/${name.toLowerCase().replace(' ', '-')}.jpeg`}
                 alt={name}
               />
-            </figure>
-            <CardContent>
-              <Typography>{name}</Typography>
-            </CardContent>
+              <Typography variant='body2' component="p">{name}</Typography>
           </Card>
         </div>
       );

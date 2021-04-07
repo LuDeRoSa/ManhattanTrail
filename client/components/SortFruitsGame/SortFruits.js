@@ -8,6 +8,7 @@ import { updateMiniGameScore } from '../../store/game';
 
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
 /**
  * Enums for representing the game play state
@@ -58,6 +59,9 @@ class SortFruits extends React.Component {
     const isDropDisabled = gameState === GAME_STATE.DONE;
     return (
       <>
+      <div id='instructions'>
+        Drag each food into the "good" or "bad" column depending on its effect on the environment.
+      </div>
         {(this.state.gameState === GAME_STATE.PLAYING ||
           this.state.gameState === GAME_STATE.DONE) && (
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -75,7 +79,7 @@ class SortFruits extends React.Component {
                   isDropDisabled={isDropDisabled}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <SortFruitsDropzone
                   id="unsorted"
                   foods={unsorted}
@@ -95,12 +99,18 @@ class SortFruits extends React.Component {
         <br />
         {this.state.gameState === GAME_STATE.DONE ? (
           <div id="sort-fruits-score">
-            <p> Score: {score}</p>
+            <p> You earned {score} points</p>
           </div>
         ) : (
-          <Button id="end-sort-fruit" onClick={this.endGame}>
-            I'm done!
-          </Button>
+          <Box mb={3}>
+            <Button 
+            variant="contained"
+            color="primary"
+            id="end-sort-fruit" 
+            onClick={this.endGame}>
+              I'm done!
+            </Button>
+          </Box>
         )}
       </>
     );

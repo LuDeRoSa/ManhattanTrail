@@ -57,52 +57,48 @@ class GameStart extends React.Component {
     switch (this.props.game_type) {
       case 'snake':
         return (
-          <Paper variant="outlined" m={2}>
-            <h2>Snake Game:</h2>
-            <p>
-              Eat the food but don't hit the walls! The more food you eat, the
-              faster you'll move!
-            </p>
-            {this.state.gameStarted ? <SnakeGame /> : start}
+          <Paper variant="outlined" square>
+            <center>
+              <h2>Feed the (Hungry Hungry) Snake</h2>
+              {this.state.gameStarted ? <SnakeGame /> : start}
+            </center>
           </Paper>
         );
       case 'flappy':
         return (
-          <Paper variant="outlined" m={2}>
-            <h2>FlappyCake Game:</h2>
-            <p>Press spacebar, up, or click to raise Penguin to catch cakes</p>
-            {this.state.gameStarted ? <FlappyCake /> : start}
+          <Paper variant="outlined" square>
+            <center>
+              <h2>Catch the Cakes</h2>
+              {this.state.gameStarted ? <FlappyCake /> : start}
+            </center>
           </Paper>
         );
       case 'hangman':
         return (
-          <Paper variant="outlined" m={2}>
-            <h2>Hangman Game:</h2>
-            <p>Game The Food Category</p>
-            {this.state.gameStarted ? <Hangman /> : start}
+          <Paper variant="outlined" square>
+            <center>
+              <h2>Save the Hangman</h2>
+              {this.state.gameStarted ? <Hangman /> : start}
+            </center>
           </Paper>
         );
       case 'quiz':
         return (
           <Paper variant="outlined" square>
             <center>
-              <h2>Test Your Knowledge!</h2>
+              <h2>Test Your Knowledge</h2>
               {this.state.gameStarted ? <Quiz /> : start}
             </center>
           </Paper>
         );
       case 'sortfruits':
         return (
-          <div>
-            <h2>Sort the Foods!</h2>
-            <p>
-              Drag and drop each food into the "Good" or "Bad" column depending
-              on whether it's "good" for the environment or "bad."
-              <br />
-              When you're done, press the "I'm done!" button.
-            </p>
-            {this.state.gameStarted ? <SortFruits /> : start}
-          </div>
+          <Paper variant="outlined" square>
+            <center>
+              <h2>Sort the Foods</h2>
+              {this.state.gameStarted ? <SortFruits /> : start}
+            </center>
+          </Paper>
         );
       default:
         return <></>;

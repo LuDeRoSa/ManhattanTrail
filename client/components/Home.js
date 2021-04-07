@@ -29,7 +29,7 @@ export const Home = (props) => {
           endIcon={<NavigateNextIcon />}
           onClick={props.nextStage}
         >
-          Move to Next Stage
+          Continue Your Adventure!
         </Button>
       </center>
       <Grid

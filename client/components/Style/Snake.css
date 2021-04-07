@@ -1,19 +1,24 @@
 /*snake game */
+#instructions {
+  margin-top: -30px;
+}
+
 .game-area {
   position: relative;
-  margin: 50px auto;
-  width: 470px;
-  height: 470px;
-  background-color: black;
-  border: solid teal 7px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  width: 400px;
+  height: 400px;
+  background-color: white;
+  border: solid black 5px;
 }
 
 .snake-dot {
   position: absolute;
   width: 2%;
   height: 2%;
-  background-color: darkgreen;
-  border: 1px solid #fff;
+  background-color: teal;
+  border: 1px solid teal ;
   z-index: 2;
 }
 
@@ -21,18 +26,13 @@
   position: absolute;
   width: 5%;
   height: 5%;
-  /* background: red; */
-  background-image: url('./img/cupcakesquare.png');
+  background-image: url('./img/cookie.png');
   background-size: cover;
   background-position: center;
-  /* border: 1px solid #fff; */
   z-index: 1;
 }
 
 .game-message {
-  color: black;
-  font-weight: bold;
-  text-align: center;
-  font-size: large;
+  margin-bottom: 20px;
 }
 /* end snake game */

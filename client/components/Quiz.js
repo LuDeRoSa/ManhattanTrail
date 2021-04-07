@@ -69,7 +69,7 @@ class Quiz extends React.Component {
     const { currentQuestion } = this.state;
     if (this.state.finished) {
       return (<>
-        <p>Quiz Done!</p>
+        <p>And that's a wrap...</p>
         <p>You answered {this.props.game.mini_score} questions correctly </p>
       </>);
     }
