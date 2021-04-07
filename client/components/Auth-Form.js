@@ -4,6 +4,8 @@ import { authenticate } from '../store';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import Facebook from './Facebook';
 
 /**
@@ -19,31 +21,64 @@ const AuthForm = (props) => {
   } = props;
 
   return (
-    <div>
-      <form id="authform" onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <Facebook />
-      <br />
-      {window.githubURL && (
-        <a href={window.githubURL}>Login / Register Via Github </a>
-      )}
-    </div>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: '30vh' }}
+    >
+      <Paper
+        variant="elevation"
+        elevation={24}
+        style={{ margin: '3rem', padding: '3rem' }}
+      >
+        <FormControl color="primary">
+          <form onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" autoComplete="email" />
+            </div>
+            <br />
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input
+                name="password"
+                type="password"
+                autoComplete={autocomplete_attribute}
+              />
+            </div>
+            <br />
+            <center>
+              <Button variant="outlined" color="primary" type="submit">
+                {displayName}
+              </Button>
+            </center>
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
+          <Divider />
+          <center>
+            <Facebook />
+            <Divider />
+
+            {window.githubURL && (
+              <Button
+                variant="outlined"
+                color="primary"
+                href={window.githubURL}
+              >
+                Login / Register Via Github{' '}
+              </Button>
+            )}
+          </center>
+        </FormControl>
+      </Paper>
+    </Grid>
   );
 };
 

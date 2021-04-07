@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import axios from 'axios';
 import { fbAuthenticate } from '../store';
 import { connect } from 'react-redux';
+
+import Button from '@material-ui/core/Button';
 
 class Facebook extends Component {
   constructor(props) {
@@ -36,6 +39,15 @@ class Facebook extends Component {
             fields="name,email"
             onClick={this.componentClicked}
             callback={this.responseFacebook}
+            render={(renderProps) => (
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={renderProps.onClick}
+              >
+                Facebook Login
+              </Button>
+            )}
           />
         }
       </div>
