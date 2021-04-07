@@ -15,6 +15,16 @@ let step3 = './img/hangman/3.png';
 let step4 = './img/hangman/4.png';
 let step5 = './img/hangman/5.png';
 let step6 = './img/hangman/6.png';
+
+const styles = {
+  hangmanContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
 class Hangman extends Component {
   static defaultProps = {
     maxTry: 6,
@@ -96,7 +106,7 @@ class Hangman extends Component {
       gameStat = 'You Lost!';
     }
     return (
-      <Paper className="hangman-container">
+      <Paper style={styles.hangmanContainer}>
         <h1>Hangman</h1>
         <div>
           Wrong Guesses: {this.state.mistake} of {this.props.maxTry}
