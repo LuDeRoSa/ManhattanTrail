@@ -34,20 +34,21 @@ export const Home = (props) => {
       </center>
       <Grid
         container
-        spacing={3}
+        spacing={2}
         direction="row"
         alignItems="center"
-        justify="center"
+        justify="space-around"
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
         <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '70vh' }}>
           <Map />
         </Grid>
-        <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={4} md={4} sm={10} xs={12}>
+        <Grid item lg={1} md={false} sm={false} xs={false} />
+        <Grid item lg={5} md={5} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
+        <Grid item lg={1} md={1} sm={false} xs={false} />
       </Grid>
     </div>
   );
