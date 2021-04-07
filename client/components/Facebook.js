@@ -26,24 +26,6 @@ class Facebook extends Component {
   };
 
   render() {
-    console.log(this.state.clicked);
-    // let fbContent;
-
-    // if (this.state.isLoggedIn) {
-    //   fbContent = null;
-    // } else {
-    //   fbContent = (
-    //     <FacebookLogin
-    //       name='fb'
-    //       appId='459306878548339'
-    //       autoLoad={true}
-    //       fields='name,email'
-    //       onClick={this.componentClicked}
-    //       callback={this.responseFacebook}
-    //     />
-    //   );
-    // }
-
     return (
       <div>
         {
