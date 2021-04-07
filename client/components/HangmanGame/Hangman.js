@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { randomWord } from '../HangmanGame/HangmanWord.js';
 import { updateMiniGameScore } from '../../store/game';
+
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+
 import '../Style/Hangman.css';
 // hangman images
 let step0 = './img/hangman/0.png';
@@ -71,7 +75,8 @@ class Hangman extends Component {
   // maps over the keyboard displaying every single character as a button
   generateButtons() {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
-      <button
+      <Button
+        variant="outlined"
         key={letter}
         className="btn btn-lg btn-primary m-2"
         value={letter}
@@ -79,7 +84,7 @@ class Hangman extends Component {
         disabled={this.state.guessed.has(letter)}
       >
         {letter}
-      </button>
+      </Button>
     ));
   }
   render() {
@@ -91,20 +96,20 @@ class Hangman extends Component {
       gameStat = 'You Lost!';
     }
     return (
-      <div className="hangman-container">
-        <h1 className="text-center">Hangman</h1>
-        <div className="float-left">
+      <Paper className="hangman-container">
+        <h1>Hangman</h1>
+        <div>
           Wrong Guesses: {this.state.mistake} of {this.props.maxTry}
         </div>
-        <div className="text-center">
+        <div>
           <img src={this.props.images[this.state.mistake]} alt="" />
         </div>
-        <div className="text-center">
+        <div>
           <p>Guess The Food Category</p>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
-          <p>{gameStat}</p>
+          <>{gameStat}</>
         </div>
-      </div>
+      </Paper>
     );
   }
 }
