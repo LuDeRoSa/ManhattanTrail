@@ -36,9 +36,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
     <div>
       <nav>
         <div className={classes.root}>
-          <AppBar position='static'>
+          <AppBar position="static">
             <Toolbar>
-              <Typography variant='h4' className={classes.title}>
+              <Typography variant="h4" className={classes.title}>
                 Manhattan Trail
               </Typography>
               {isLoggedIn ? (
@@ -47,36 +47,36 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   <Button
                     className={classes.button}
                     startIcon={<SportsEsportsIcon />}
-                    color='secondary'
+                    color="secondary"
                     component={Link}
-                    to='/landing'
+                    to="/landing"
                   >
                     Game
                   </Button>
                   <Button
                     className={classes.button}
                     startIcon={<AccountCircleIcon />}
-                    color='secondary'
+                    color="secondary"
                     component={Link}
-                    to='/profile'
+                    to="/profile"
                   >
                     Profile
                   </Button>
                   <Button
                     className={classes.button}
                     startIcon={<PublicIcon />}
-                    color='secondary'
+                    color="secondary"
                     component={Link}
-                    to='/leadership'
+                    to="/leadership"
                   >
                     Leadership
                   </Button>
 
-                  <a href='#' onClick={handleClick} tabIndex='-1'>
+                  <a href="#" onClick={handleClick} tabIndex="-1">
                     <Button
                       startIcon={<ExitToAppIcon />}
                       className={classes.button}
-                      color='secondary'
+                      color="secondary"
                     >
                       Logout
                     </Button>
@@ -84,10 +84,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </div>
               ) : (
                 <div>
-                  <Button color='inherit' component={Link} to='/login'>
+                  <Button color="inherit" component={Link} to="/login">
                     Login
                   </Button>
-                  <Button color='inherit' component={Link} to='/signup'>
+                  <Button color="inherit" component={Link} to="/signup">
                     Sign Up
                   </Button>
                 </div>
