@@ -37,7 +37,7 @@ export const Home = (props) => {
         spacing={2}
         direction="row"
         alignItems="center"
-        justify="space-evenly"
+        justify="space-around"
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
@@ -45,7 +45,7 @@ export const Home = (props) => {
           <Map />
         </Grid>
         <Grid item lg={1} md={false} sm={false} xs={false} />
-        <Grid item lg={6} md={6} sm={10} xs={12}>
+        <Grid item lg={5} md={5} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
         <Grid item lg={1} md={1} sm={false} xs={false} />

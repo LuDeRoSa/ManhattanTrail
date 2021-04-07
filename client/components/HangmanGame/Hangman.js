@@ -24,6 +24,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   },
+  Button: {
+    margin: '0.5rem',
+  },
 };
 class Hangman extends Component {
   static defaultProps = {
@@ -71,6 +74,8 @@ class Hangman extends Component {
     let letter;
     if (e.target.tagName === 'BUTTON') {
       letter = e.target.value;
+    } else if (e.target.tagName === 'SPAN') {
+      letter = e.target.innerHTML;
     } else {
       letter = e.code.substr(e.code.length - 1).toLowerCase();
     }
@@ -88,10 +93,11 @@ class Hangman extends Component {
       <Button
         variant="outlined"
         key={letter}
-        className="btn btn-lg btn-primary m-2"
         value={letter}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
+        color={this.state.guessed.has(letter) ? 'inherit' : 'primary'}
+        style={styles.Button}
       >
         {letter}
       </Button>
