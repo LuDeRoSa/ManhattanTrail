@@ -21,14 +21,9 @@ const githubURL = process.env.GITHUB_CLIENT_ID
   ? `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
   : null;
 
-// const facebookURL = process.env.FB_CLIENT_ID
-//   ? ` "https://connect.facebook.net/en_US/sdk.client_id=${process.env.FB_CLIENT_ID}`
-//   : null;
-
 app.get('/', (req, res) =>
   res.render(path.join(__dirname, '..', 'public/index.html'), {
     githubURL,
-    // facebookURL,
   })
 );
 
@@ -50,7 +45,6 @@ app.use((req, res, next) => {
 app.use('*', (req, res) => {
   res.render(path.join(__dirname, '..', 'public/index.html'), {
     githubURL,
-    // facebookURL,
   });
 });
 
