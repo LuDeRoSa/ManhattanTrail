@@ -13,14 +13,12 @@ router.post('/addFavorite', async (req, res, next) => {
         restaurantId: req.body.restId,
       },
     });
-
     if (!fave) {
-      let fave = await Favorite.create({
+      fave = await Favorite.create({
         restaurantId: req.body.restId,
         userId: user.id,
       });
     }
-
     res.send(fave);
   } catch (err) {
     next(err);

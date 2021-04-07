@@ -22,7 +22,9 @@ const githubURL = process.env.GITHUB_CLIENT_ID
   : null;
 
 app.get('/', (req, res) =>
-  res.render(path.join(__dirname, '..', 'public/index.html'), { githubURL })
+  res.render(path.join(__dirname, '..', 'public/index.html'), {
+    githubURL,
+  })
 );
 
 // static file-serving middleware
@@ -41,7 +43,9 @@ app.use((req, res, next) => {
 
 // sends index.html
 app.use('*', (req, res) => {
-  res.render(path.join(__dirname, '..', 'public/index.html'), { githubURL });
+  res.render(path.join(__dirname, '..', 'public/index.html'), {
+    githubURL,
+  });
 });
 
 // error handling endware
