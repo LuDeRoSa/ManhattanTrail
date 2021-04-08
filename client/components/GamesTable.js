@@ -28,14 +28,24 @@ export default function GamesTable(props) {
           <Table stickyHeader style={styles.Table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="left"><b>Date Played</b></TableCell>
-                <TableCell align="left"><b>Path Taken</b></TableCell>
-                <TableCell align="left"><b>Score</b></TableCell>
+                <TableCell align="left">
+                  <b>Username</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Date Played</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Path Taken</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Score</b>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((game) => (
                 <TableRow key={game.id}>
+                  <TableCell align="left">{game.user.username}</TableCell>
                   <TableCell align="left">{game.updatedAt}</TableCell>
                   <TableCell component="th" scope="row">
                     {game.path_name}
