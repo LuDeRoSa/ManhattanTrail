@@ -15,7 +15,7 @@ import createTypography from '@material-ui/core/styles/createTypography';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#ffffff',
+      default: '#F5F5F5',
     },
     primary: {
       main: teal[500],
