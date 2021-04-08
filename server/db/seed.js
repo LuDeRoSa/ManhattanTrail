@@ -112,13 +112,13 @@ const syncAndSeed = async () => {
       path_name: 'indian',
       restaurantId: restaurants[9].id,
       stage: 2,
-      game_type: 'quiz',
+      game_type: 'snake',
     }),
     Path.create({
       path_name: 'indian',
       restaurantId: restaurants[10].id,
       stage: 3,
-      game_type: 'quiz',
+      game_type: 'flappy',
     }),
   ]);
 
