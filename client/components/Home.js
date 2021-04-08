@@ -30,12 +30,12 @@ export const Home = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   useEffect(() => {
     if (props.game.mini_status === 'finished') {
       setOpen(true);
     }
   }, [props.game.mini_status]);
+
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
