@@ -10,22 +10,14 @@ import Button from '@material-ui/core/Button';
 class Facebook extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      clicked: false,
-    };
   }
 
-  componentClicked = () => console.log('clicked');
+  componentClicked = () => {};
 
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
-    this.setState({
-      clicked: true,
-    });
-    if (this.state.clicked) {
-      this.props.fbAuthenticate(username, id);
-    }
+    this.props.fbAuthenticate(username, id);
   };
 
   render() {
@@ -33,16 +25,16 @@ class Facebook extends Component {
       <div>
         {
           <FacebookLogin
-            name="fb"
-            appId="459306878548339"
+            name='fb'
+            appId='459306878548339'
             autoLoad={false}
-            fields="name,email"
+            fields='name,email'
             onClick={this.componentClicked}
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
-                variant="outlined"
-                color="primary"
+                variant='outlined'
+                color='primary'
                 onClick={renderProps.onClick}
               >
                 Facebook Login
