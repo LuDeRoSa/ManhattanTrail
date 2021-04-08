@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
 
@@ -13,12 +14,14 @@ class InfoWindow extends Component {
     this.state = {
       index: this.props.game.gameStage - 1,
       show: false,
+      clicked: false,
     };
   }
 
   addFav() {
     this.setState({
       show: !this.state.show,
+      clicked: true,
     });
     this.props.addFavorite(this.props.rest.rests[this.state.index].id);
   }
@@ -31,7 +34,20 @@ class InfoWindow extends Component {
         {this.props.name}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
-          <FavoriteBorderOutlinedIcon style={{ fontSize: 20, color: 'red' }} />
+          {!this.state.clicked && (
+            <FavoriteBorderOutlinedIcon
+              style={{
+                fontSize: 20,
+              }}
+            />
+          )}
+          {this.state.clicked && (
+            <FavoriteOutlinedIcon
+              style={{
+                fontSize: 20,
+              }}
+            />
+          )}
         </IconButton>
       </div>
     ) : null;
