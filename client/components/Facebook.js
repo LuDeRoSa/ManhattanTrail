@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-// import FacebookLogin from 'react-facebook-login';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import axios from 'axios';
 import { fbAuthenticate } from '../store';
 import { connect } from 'react-redux';
-
 import Button from '@material-ui/core/Button';
-
 class Facebook extends Component {
   constructor(props) {
     super(props);
@@ -14,9 +11,7 @@ class Facebook extends Component {
       clicked: false,
     };
   }
-
   componentClicked = () => console.log('clicked');
-
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
@@ -27,7 +22,6 @@ class Facebook extends Component {
       this.props.fbAuthenticate(username, id);
     }
   };
-
   render() {
     return (
       <div>
@@ -41,11 +35,13 @@ class Facebook extends Component {
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
-                variant="outlined"
+                style={{ width: '300px', height: '40px', textAlign: 'center' }}
+                variant="contained"
                 color="primary"
+                startIcon={<FacebookIcon />}
                 onClick={renderProps.onClick}
               >
-                Facebook Login
+                Continue with Facebook
               </Button>
             )}
           />
@@ -54,11 +50,9 @@ class Facebook extends Component {
     );
   }
 }
-
 const mapToDispatch = (dispatch) => {
   return {
     fbAuthenticate: (username, id) => dispatch(fbAuthenticate(username, id)),
   };
 };
-
 export default connect((state) => state, mapToDispatch)(Facebook);

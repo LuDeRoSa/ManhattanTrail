@@ -11,40 +11,46 @@ import Container from '@material-ui/core/Container';
 export default function GamesTable(props) {
   const styles = {
     Table: {
-      minWidth: 650,
-      height: 200,
+      minWidth: 600,
+      height: 100,
       overflowY: 'auto',
     },
     Row: {},
     Cell: {
-      width: 130,
+      width: 100,
     },
   };
   let { data } = props;
   return (
-    <Container>
-      <Paper variant="elevation" elevation={24}>
+    <Container style={{ width: 700 }}>
+      <Paper variant="elevation" elevation={1}>
         <TableContainer>
           <Table stickyHeader style={styles.Table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Username</TableCell>
-                <TableCell align="left">Game ID</TableCell>
-                <TableCell align="left">Date</TableCell>
-                <TableCell align="left">Path taken</TableCell>
-                <TableCell align="right">Score</TableCell>
+                <TableCell align="left">
+                  <b>Username</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Date Played</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Path Taken</b>
+                </TableCell>
+                <TableCell align="left">
+                  <b>Score</b>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data.map((game) => (
                 <TableRow key={game.id}>
                   <TableCell align="left">{game.user.username}</TableCell>
-                  <TableCell align="left">{game.id}</TableCell>
                   <TableCell align="left">{game.updatedAt}</TableCell>
                   <TableCell component="th" scope="row">
                     {game.path_name}
                   </TableCell>
-                  <TableCell align="right">{game.score.total_score}</TableCell>
+                  <TableCell align="left">{game.score.total_score}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -1,0 +1,9 @@
+.login-form {
+  justify-content: center;
+  min-height: 90vh;
+}
+.login-background {
+  justify-content: center;
+  min-height: 30vh;
+  padding: 50px;
+}
