@@ -1,7 +1,6 @@
 .landing-page-heading {
   font-size: 50px;
-  margin-top: 420px;
-
+  /* margin-top: 420px; */
 }
 
 .landing-page-body {
@@ -17,12 +16,12 @@
 }
 
 img {
-    height: 38%;
-    width: 38%;
-    align-items: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  height: 38%;
+  width: 38%;
+  align-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p {
