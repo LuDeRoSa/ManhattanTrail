@@ -74,17 +74,19 @@ const syncAndSeed = async () => {
     }),
   ]);
 
-  // console.log(restaurants[5].restaurant_name); this is a test to see whether arrdata is more consistent
-
   //hardcoding first path:
   const paths = await Promise.all([
-    Path.create({ path_name: 1, restaurantId: 1, stage: 1 }),
-    Path.create({ path_name: 1, restaurantId: 2, stage: 2 }),
-    Path.create({ path_name: 1, restaurantId: 3, stage: 3 }),
-    Path.create({ path_name: 1, restaurantId: 4, stage: 4 }),
-    Path.create({ path_name: 1, restaurantId: 5, stage: 5 }),
-    Path.create({ path_name: 2, restaurantId: 4, stage: 1 }),
-    Path.create({ path_name: 2, restaurantId: 5, stage: 2 }),
+    Path.create({
+      path_name: 'italian',
+      restaurantId: 1,
+      stage: 1,
+    }),
+    Path.create({ path_name: 'italian', restaurantId: 2, stage: 2 }),
+    Path.create({ path_name: 'italian', restaurantId: 3, stage: 3 }),
+    Path.create({ path_name: 'italian', restaurantId: 4, stage: 4 }),
+    Path.create({ path_name: 'italian', restaurantId: 5, stage: 5 }),
+    Path.create({ path_name: 'chinese', restaurantId: 4, stage: 1 }),
+    Path.create({ path_name: 'chinese', restaurantId: 5, stage: 2 }),
     Path.create({
       path_name: 'gluten-free',
       restaurantId: restaurants[5].id,

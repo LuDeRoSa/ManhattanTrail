@@ -58,11 +58,18 @@ class LandingPage extends React.Component {
             </div>
             <br />
             <ButtonGroup>
-              <Button disabled>Italian</Button>
               <Button
                 onClick={() => {
                   this.props.setGame('italian');
                   this.props.setRests('italian');
+                }}
+              >
+                Italian
+              </Button>
+              <Button
+                onClick={() => {
+                  this.props.setGame('chinese');
+                  this.props.setRests('chinese');
                 }}
               >
                 Chinese
