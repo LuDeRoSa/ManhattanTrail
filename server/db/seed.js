@@ -159,7 +159,7 @@ const syncAndSeed = async () => {
       restaurantId: restaurants[7].id,
     }),
     Quiz.create({
-      restaurantId: restaurants[9].id,
+      restaurantId: restaurants[8].id,
     }),
     Quiz.create({
       restaurantId: restaurants[6].id,
