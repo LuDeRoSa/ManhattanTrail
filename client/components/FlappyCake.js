@@ -154,7 +154,8 @@ class FlappyCake extends Component {
     }
     return (
       <div id="instructions">
-        Use the spacebar to fly the penguin so he can catch the cakes.
+        Use the spacebar or mouse-click to fly the penguin so he can catch the
+        cakes.
         <div id="game-area">
           <canvas ref={this.canvasRef} width={400} height={400} />
         </div>
