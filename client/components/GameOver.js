@@ -7,7 +7,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import PublicIcon from '@material-ui/icons/Public';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import GlobalScore from './GlobalScore';
 import './Style/GameOver.css';
 
 const styles = {
@@ -60,10 +59,6 @@ class GameOver extends React.Component {
           </p>
         </div>
 
-        {/* <p>Path: {game.pathId}</p>
-        <p>Stage: {game.gameStage}</p>
-        <p>Status: {game.status}</p> */}
-
         <ButtonGroup>
           <Button
             startIcon={<SportsEsportsIcon />}
@@ -89,7 +84,6 @@ class GameOver extends React.Component {
           >
             Leadership Board
           </Button>
-          <Button disabled>Share with friends</Button>
         </ButtonGroup>
       </Container>
     );
