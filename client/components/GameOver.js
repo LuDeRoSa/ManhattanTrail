@@ -90,15 +90,11 @@ class GameOver extends React.Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     username: state.auth.username,
     game: state.game,
   };
 };
-const mapDispatch = {};
 
-export default connect(mapState, mapDispatch)(GameOver);
+export default connect(mapState)(GameOver);
