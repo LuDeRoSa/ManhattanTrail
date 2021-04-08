@@ -119,6 +119,7 @@ class FlappyCake extends Component {
           return {
             score: state.score + 1,
             cakes: [cake],
+            cakespeed: state.cakespeed + 1,
           };
         });
       }
