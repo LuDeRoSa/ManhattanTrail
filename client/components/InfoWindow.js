@@ -20,7 +20,7 @@ class InfoWindow extends Component {
     this.setState({
       show: !this.state.show,
     });
-    this.props.addFavorite(this.state.index);
+    this.props.addFavorite(this.props.rest.rests[this.state.index].id);
   }
 
   render() {

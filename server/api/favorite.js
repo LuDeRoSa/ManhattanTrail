@@ -8,18 +8,18 @@ module.exports = router;
 router.post('/addFavorite', async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    let fave = await Favorite.findOne({
+    let favorite = await Favorite.findOne({
       where: {
         restaurantId: req.body.restId,
       },
     });
-    if (!fave) {
-      fave = await Favorite.create({
+    if (!favorite) {
+      favorite = await Favorite.create({
         restaurantId: req.body.restId,
         userId: user.id,
       });
     }
-    res.send(fave);
+    res.send(favorite);
   } catch (err) {
     next(err);
   }
