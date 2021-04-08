@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -23,49 +24,66 @@ class Profile extends React.Component {
   render() {
     const { account, favorites } = this.props;
     return (
-      <div className="account-page">
-        <center>
-          <h2>Welcome, {account.username}! Here are your account details:</h2>
-          <Container id="account_container" style={{ width: 450 }}>
-            <Paper variant="elevation" elevation={1}>
-              <TableContainer>
-                <Table aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="left">
-                        <b>Credentials</b>
-                      </TableCell>
-                      <TableCell align="left">
-                        <b>Information</b>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {Object.keys(account)
-                      .filter(
-                        (key) =>
-                          key !== 'password' &&
-                          key !== 'id' &&
-                          key !== 'updatedAt'
-                      )
-                      .map((key, idx) => {
-                        return (
-                          <TableRow key={idx}>
-                            <TableCell align="left">{key}</TableCell>
-                            <TableCell align="left">{account[key]}</TableCell>
-                          </TableRow>
-                        );
-                      })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
-          </Container>
-
-          <h2>Game History</h2>
-          <PastGames />
-        </center>
-      </div>
+      <>
+        <h2>Welcome, {account.username}! Here are your account details:</h2>
+        <Grid
+          container
+          spacing={1}
+          direction="row"
+          alignItems="center"
+          justify="space-around"
+        >
+          <Grid item>
+            <Container id="account_container" style={{ width: 450 }}>
+              <Paper variant="elevation" elevation={1}>
+                <TableContainer>
+                  <Table aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="left">
+                          <b>Credentials</b>
+                        </TableCell>
+                        <TableCell align="left">
+                          <b>Information</b>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {Object.keys(account)
+                        .filter(
+                          (key) =>
+                            key !== 'password' &&
+                            key !== 'id' &&
+                            key !== 'updatedAt'
+                        )
+                        .map((key, idx) => {
+                          return (
+                            <TableRow key={idx}>
+                              <TableCell align="left">{key}</TableCell>
+                              <TableCell align="left">{account[key]}</TableCell>
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Container>
+          </Grid>
+          <Grid item>
+            <h2>Favorited Restaraunts</h2>
+            <ul>
+              {favorites.map((favorite) => (
+                <li key={favorite.id}>{favorite.restaurant.restaurant_name}</li>
+              ))}
+            </ul>
+          </Grid>
+          <Grid item>
+            <h2>Game History</h2>
+            <PastGames />
+          </Grid>
+        </Grid>
+      </>
     );
   }
 }
