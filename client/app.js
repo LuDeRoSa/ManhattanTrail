@@ -36,9 +36,7 @@ const App = () => {
         <CssBaseline />
         <Navbar />
         <Routes />
-        <footer>
-          <Footer />
-        </footer>
+        <Footer />
       </ThemeProvider>
     </React.Fragment>
   );

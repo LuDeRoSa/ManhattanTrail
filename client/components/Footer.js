@@ -6,9 +6,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 function Footer() {
   return (
-    <>
-      <Toolbar>Made with ♥ by Luderosa</Toolbar>
-    </>
+    <footer>
+      <center>Made with ♥ by Luderosa</center>
+    </footer>
   );
 }
 
