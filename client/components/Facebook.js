@@ -7,20 +7,14 @@ import Button from '@material-ui/core/Button';
 class Facebook extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      clicked: false,
-    };
   }
-  componentClicked = () => console.log('clicked');
+
+  componentClicked = () => {};
+
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
-    this.setState({
-      clicked: true,
-    });
-    if (this.state.clicked) {
-      this.props.fbAuthenticate(username, id);
-    }
+    this.props.fbAuthenticate(username, id);
   };
   render() {
     return (
@@ -35,6 +29,8 @@ class Facebook extends Component {
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
+                variant="outlined"
+                color="primary"
                 style={{ width: '300px', height: '40px', textAlign: 'center' }}
                 variant="contained"
                 color="primary"

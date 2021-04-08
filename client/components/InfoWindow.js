@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
@@ -12,25 +14,40 @@ class InfoWindow extends Component {
     this.state = {
       index: this.props.game.gameStage - 1,
       show: false,
+      clicked: false,
     };
   }
 
   addFav() {
     this.setState({
       show: !this.state.show,
+      clicked: true,
     });
-    this.props.addFavorite(this.state.index);
+    this.props.addFavorite(this.props.rest.rests[this.state.index].id);
   }
 
   render() {
     const { name } = this.props;
     const restId = this.props.rest.rests[this.state.index].id;
     return this.props.show ? (
-      <div id="info" style={{ width: 100, height: 100 }}>
+      <div id='info' style={{ width: 100, height: 100 }}>
         {this.props.name}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
-          <FavoriteOutlinedIcon style={{ fontSize: 20, color: 'red' }} />
+          {!this.state.clicked && (
+            <FavoriteBorderOutlinedIcon
+              style={{
+                fontSize: 20,
+              }}
+            />
+          )}
+          {this.state.clicked && (
+            <FavoriteOutlinedIcon
+              style={{
+                fontSize: 20,
+              }}
+            />
+          )}
         </IconButton>
       </div>
     ) : null;
