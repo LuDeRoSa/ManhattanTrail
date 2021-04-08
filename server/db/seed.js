@@ -10,11 +10,6 @@ const Answer = require('./models/Answer');
 const syncAndSeed = async () => {
   await db.sync({ force: true });
 
-  // const users = await Promise.all([
-  //   User.create({user_id: 1, first_name: 'Cody', password: '123'}),
-  //   User.create({user_id: 2, first_name: 'Murphy', password: '123'})
-  // ])
-
   //hardcoding first five restaurants:
   const restaurants = await Promise.all([
     Restaurant.create({
