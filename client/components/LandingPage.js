@@ -10,6 +10,7 @@ import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import './Style/LandingPage.css';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const styles = {
   root: {},
   container: {
@@ -42,7 +43,14 @@ class LandingPage extends React.Component {
     const { game } = this.props;
     return (
       <Container style={styles.container}>
-        <div className="landing-page-heading">Welcome to Manhattan Trail!</div>
+
+
+      <center>
+
+        <h1>
+        Welcome to Manhattan Trail!
+        </h1>
+
         <br />
         <div className="landing-page-body">
           Travel through Manhattan restaurants, play games, and collect food at
@@ -86,7 +94,7 @@ class LandingPage extends React.Component {
               </Button>
             </ButtonGroup>
 
-            <h1>Food Waste: A Massive Crisis</h1>
+            <h2>Food Waste: A Massive Crisis</h2>
             <img src="./img/zero-waste.jpeg" />
             <p>
               US restaurants generate an estimated 22 to 33 billion pounds of
@@ -145,6 +153,7 @@ class LandingPage extends React.Component {
             </Button>
           </React.Fragment>
         )}
+</center>
       </Container>
     );
   }
