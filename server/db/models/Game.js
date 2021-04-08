@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const Path = require('./path');
+const moment = require('moment');
+
 const Game = db.define('game', {
   stage: {
     type: Sequelize.INTEGER,
@@ -16,8 +18,24 @@ const Game = db.define('game', {
   },
   stage_completed: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    get() {
+      return moment(this.getDataValue('createdAt')).format(
+        'DD/MM/YYYY h:mm:ss'
+      );
+    },
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    get() {
+      return moment(this.getDataValue('updatedAt')).format(
+        'DD/MM/YYYY h:mm:ss'
+      );
+    },
+  },
 });
 Game.addHook('beforeValidate', async (game, options) => {
   const path = await Path.findAll({

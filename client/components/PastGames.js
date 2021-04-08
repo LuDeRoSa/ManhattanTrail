@@ -22,7 +22,7 @@ class PastGames extends React.Component {
     let { pastgames } = this.props;
     return (
       <React.Fragment>
-        <GamesTable data={pastgames} />
+        <GamesTable data={pastgames} pastgames={true} />
       </React.Fragment>
     );
   }

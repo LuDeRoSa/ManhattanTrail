@@ -3,6 +3,7 @@ const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const moment = require('moment');
 
 const SALT_ROUNDS = 5;
 
@@ -20,6 +21,22 @@ const User = db.define('user', {
   },
   facebookId: {
     type: Sequelize.STRING,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    get() {
+      return moment(this.getDataValue('createdAt')).format(
+        'DD/MM/YYYY h:mm:ss'
+      );
+    },
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    get() {
+      return moment(this.getDataValue('updatedAt')).format(
+        'DD/MM/YYYY h:mm:ss'
+      );
+    },
   },
 });
 

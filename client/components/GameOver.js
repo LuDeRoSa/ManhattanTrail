@@ -7,7 +7,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import PublicIcon from '@material-ui/icons/Public';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import GlobalScore from './GlobalScore';
 import './Style/GameOver.css';
 
 const styles = {
@@ -26,40 +25,22 @@ class GameOver extends React.Component {
     return (
       <Container style={styles.container}>
         <div className="game-over-heading">GAME OVER</div>
-        <h2>Total Amount of Food Items Donated: {game.total_score}</h2>
-        <div className="empty-box"></div>
-        <h3>Help combat food waste!</h3>
+        <div className="score">
+          Total Amount of Food Items Donated: {game.total_score}
+        </div>
+        <br />
 
         <div className="food-shelter">
           <img src="./img/food-donation.jpeg" />
-          <br />
-          <p>
-            {' '}
-            US restaurants generate an estimated 22 to 33 billion pounds of food
-            waste each year. Drivers of food waste at restaurants include
-            oversized portions, inflexibility of chain store management and
-            extensive menu choices. According to the Cornell University Food and
-            Brand Lab, on average, diners leave 17 percent of their meals
-            uneaten and 55 percent of edible leftovers are left at the
-            restaurant. When the pandemic first happened there was a lot of
-            extra waste because the sudden closures of businesses created
-            bottlenecks in supply chains. As a result, food could not reach
-            people fast enough. The pandemic has forced many restaurants to
-            innovate, cut back, and better utilize their resources. In doing so,
-            they have shifted away from buffet models, a major contributor of
-            food waste. They are also offering smaller menus and, as a result,
-            are keeping smaller inventories. These new shifts will hopefully
-            help ensure less food waste going forward. One of the best ways to
-            help reduce food waste is to provide extra food to those in need,
-            via food pantries and food shelters. Our game seeks to bring
-            awareness to this issue and show how restaurants and food shelters
-            can work together to reduce food waste.{' '}
-          </p>
+        </div>
 
-          <p>
-            <b>Food pantries in New York City that you can help support! </b>
-          </p>
+        <br />
 
+        <div className="donation-text">
+          Food pantries in New York City that you can help support!
+        </div>
+
+        <div className="donation-links">
           <p>
             New York Common Pantry{' '}
             <a href="https://nycommonpantry.org/donate-to-new-york-common-pantry/">
@@ -77,9 +58,6 @@ class GameOver extends React.Component {
             </a>
           </p>
         </div>
-        {/* <p>Path: {game.pathId}</p>
-        <p>Stage: {game.gameStage}</p>
-        <p>Status: {game.status}</p> */}
 
         <ButtonGroup>
           <Button
@@ -106,22 +84,17 @@ class GameOver extends React.Component {
           >
             Leadership Board
           </Button>
-          <Button disabled>Share with friends</Button>
         </ButtonGroup>
       </Container>
     );
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     username: state.auth.username,
     game: state.game,
   };
 };
-const mapDispatch = {};
 
-export default connect(mapState, mapDispatch)(GameOver);
+export default connect(mapState)(GameOver);
