@@ -32,7 +32,6 @@ export const Home = (props) => {
   };
 
   useEffect(() => {
-    console.log(props.game.mini_status);
     if (props.game.mini_status === 'finished') {
       setOpen(true);
     }
