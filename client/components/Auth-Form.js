@@ -1,89 +1,107 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { authenticate } from '../store';
-import FormControl from '@material-ui/core/FormControl';
+import {connect} from 'react-redux';
+import {authenticate} from '../store';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
 import Facebook from './Facebook';
-
+import GitHubIcon from '@material-ui/icons/GitHub';
+import Box from '@material-ui/core/Box';
+import './Style/AuthForm.css';
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const {
     name,
-    displayName,
     handleSubmit,
     error,
     autocomplete_attribute,
   } = props;
-
   return (
     <Grid
       container
-      spacing={0}
+      spacing={2}
+      wrap="wrap"
       direction="column"
       alignItems="center"
       justify="center"
-      style={{ minHeight: '30vh' }}
+      className="login-form"
+      style={{ minHeight: '100vh' }}
     >
       <Paper
         variant="elevation"
-        elevation={24}
+        elevation={2}
         style={{ margin: '3rem', padding: '3rem' }}
+        className="login-background"
       >
-        <FormControl color="primary">
-          <form onSubmit={handleSubmit} name={name}>
-            <div>
-              <label htmlFor="email">
-                <small>Email</small>
-              </label>
-              <input name="email" type="text" autoComplete="email" />
-            </div>
-            <br />
-            <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input
-                name="password"
-                type="password"
-                autoComplete={autocomplete_attribute}
-              />
-            </div>
-            <br />
-            <center>
-              <Button variant="outlined" color="primary" type="submit">
-                {displayName}
-              </Button>
-            </center>
-            {error && error.response && <div> {error.response.data} </div>}
+        <Grid item>
+          <form onSubmit={ handleSubmit } name={ name }>
+            <Grid container
+                  direction="column"
+                  spacing={2}
+                  alignItems="center"
+                  justify="center">
+              <Grid item>
+                <TextField
+                    type="email"
+                    placeholder="Email"
+                    fullWidthname="username"
+                    autoComplete="email"
+                    variant="outlined"
+                    required
+                    autoFocus
+                    style = {{width: 300}}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                    type="password"
+                    placeholder="Password"
+                    fullWidthname="password"
+                    variant="outlined"
+                    autoComplete={autocomplete_attribute}
+                    required
+                    style = {{width: 300}}
+                    />
+              </Grid>
+              <Grid item>
+                <Button style={{width: '300px', height: '40px'}}
+                    variant="contained"
+                    color="primary"
+                    type="submit">
+                  Log in
+                </Button>
+              </Grid>
+            </Grid>
           </form>
-          <Divider />
-          <center>
+          <Box m={3} pt={10}>
+          <Grid Item>
             <Facebook />
-            <Divider />
-
-            {window.githubURL && (
-              <Button
-                variant="outlined"
-                color="primary"
-                href={window.githubURL}
+          </Grid>
+            <Box pt={2}>
+          <Grid Item>
+          {window.githubURL && (
+              <Button style={{width: '300px', height: '40px', textAlign: 'center'}}
+                variant="contained"
+                  color="primary"
+                  startIcon={<GitHubIcon />}
+                  href={window.githubURL}
               >
-                Login / Register Via Github{' '}
+                Continue with GitHub
               </Button>
-            )}
-          </center>
-        </FormControl>
+          )}
+            </Grid>
+            </Box>
+        </Box>
+          {error && error.response && <div> {error.response.data} </div>}
+        </Grid>
       </Paper>
     </Grid>
   );
 };
-
 /**
- * CONTAIN
  *   Note that we have two different sets of 'mapStateToProps' functions -
  *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
  *   function, and share the same Component. This is a good example of how we
@@ -97,7 +115,6 @@ const mapLogin = (state) => {
     error: state.auth.error,
   };
 };
-
 const mapSignup = (state) => {
   return {
     name: 'signup',
@@ -106,7 +123,6 @@ const mapSignup = (state) => {
     error: state.auth.error,
   };
 };
-
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
@@ -118,6 +134,5 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);

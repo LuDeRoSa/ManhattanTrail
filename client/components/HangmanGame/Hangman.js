@@ -94,6 +94,7 @@ class Hangman extends Component {
         variant="outlined"
         key={letter}
         value={letter}
+        size="small"
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
         color={this.state.guessed.has(letter) ? 'inherit' : 'primary'}
