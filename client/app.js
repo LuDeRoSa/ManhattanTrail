@@ -2,7 +2,7 @@ import React from 'react';
 
 import Navbar from './components/Navbar';
 import Routes from './routes';
-
+import Footer from './components/Footer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -36,6 +36,9 @@ const App = () => {
         <CssBaseline />
         <Navbar />
         <Routes />
+        <footer>
+          <Footer />
+        </footer>
       </ThemeProvider>
     </React.Fragment>
   );
