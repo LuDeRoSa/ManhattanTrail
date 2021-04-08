@@ -41,12 +41,15 @@ class Quiz extends React.Component {
   handleSubmit(ev) {
     ev.preventDefault();
     let finished = false;
-    if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
-      if (this.state.currentQuestion < 2) {
-        this.setState({
-          currentQuestion: this.state.currentQuestion + 1,
-        });
-      }
+    if (this.state.currentQuestion < this.props.quiz.questions.length) {
+      this.setState({
+        currentQuestion: this.state.currentQuestion + 1,
+      });
+    } else {
+      finished = true;
+      this.setState({
+        finished: true,
+      });
     }
     let userResponse = this.state.value;
     const correctAnswer = this.props.quiz.questions[
@@ -58,7 +61,7 @@ class Quiz extends React.Component {
       points,
       status: points > 0 ? 'correct' : 'wrong',
       quizCount: (this.state.quizCount += 1),
-      finished: this.state.quizCount > 3 ? true : false,
+      finished: this.state.quizCount >= this.props.quiz.questions.length,
     });
     this.props.updateMiniScore(points);
     if (finished) {
@@ -67,7 +70,6 @@ class Quiz extends React.Component {
   }
   render() {
     const { currentQuestion } = this.state;
-    console.log('status', this.state.finished);
     if (this.state.finished) {
       return (
         <>
@@ -76,10 +78,13 @@ class Quiz extends React.Component {
         </>
       );
     }
+    if (!this.props.quiz.questions) {
+      return <div>loading</div>;
+    }
     return (
       <div className={this.state.status}>
         <h2>QUIZ</h2>
-        {this.state.quizCount}/4
+        {this.state.currentQuestion + 1}/{this.props.quiz.questions.length}
         <div id="quiz" styles={styles.quiz}>
           <form id="quiz-form" onSubmit={this.handleSubmit}>
             <FormControl id="form-control" component="fieldset">
