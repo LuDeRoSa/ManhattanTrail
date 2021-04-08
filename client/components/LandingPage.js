@@ -57,7 +57,14 @@ class LandingPage extends React.Component {
               </Button>
               <Button disabled>Italian</Button>
               <Button disabled>Chinese</Button>
-              <Button disabled>Indian</Button>
+              <Button
+                onClick={() => {
+                  this.props.setGame('indian');
+                  this.props.setRests('indian');
+                }}
+              >
+                Indian
+              </Button>
               <Button
                 onClick={() => {
                   this.props.setGame('gluten-free');

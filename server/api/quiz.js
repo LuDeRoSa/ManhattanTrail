@@ -7,15 +7,7 @@ module.exports = router;
 
 router.get('/:id', async (req, res, next) => {
   try {
-    //VERY TEMP CODE
-    //TODO fix seeding so we have specifically designated quiz to restaurant relationships
-    //restaraunts id should very specifically bring up a designated quiz in future
-    let restaurantId;
-    if (req.params.id === 8) {
-      restaurantId = 8; //for the one seeded path of gluten-free
-    } else {
-      restaurantId = 1;
-    }
+    let restaurantId = req.params.id;
     const quiz = await Quiz.findOne({
       where: {
         restaurantId,

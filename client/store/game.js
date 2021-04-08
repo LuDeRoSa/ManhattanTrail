@@ -19,7 +19,10 @@ const _setGame = (game) => ({ type: SET_GAME, game });
 const _nextStage = (game) => ({ type: NEXT_STAGE, game });
 export const _updateMiniScore = (score) => ({ type: UPDATE_MINI_SCORE, score });
 const _updateTotalScore = (score) => ({ type: UPDATE_TOTAL_SCORE, score });
-export const _setMiniGameComplete = (game) => ({type: SET_MINI_GAME_COMPLETE, game})
+export const _setMiniGameComplete = (game) => ({
+  type: SET_MINI_GAME_COMPLETE,
+  game,
+});
 /**
  * THUNK CREATORS
  */
@@ -92,14 +95,14 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
   ).data;
   // Update the mini games status to complete = true so the player cannot replay
   await axios.post(
-      '/api/game/trackMiniGameStatus',
-      {},
-      {
-        headers: {
-          authorization: token,
-        },
-      }
-).data;
+    '/api/game/trackMiniGameStatus',
+    {},
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  ).data;
   return dispatch(_updateTotalScore(score));
 };
 /**
@@ -107,13 +110,13 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
  */
 export const fetchMiniGameComplete = () => async (dispatch) => {
   const currentMiniGameComplete = (
-      await axios.get('/api/game/miniGameStatus', {
-        headers: {
-          authorization: getToken(),
-        },
-      })
+    await axios.get('/api/game/miniGameStatus', {
+      headers: {
+        authorization: getToken(),
+      },
+    })
   ).data;
-  return dispatch((_setMiniGameComplete(currentMiniGameComplete)));
+  return dispatch(_setMiniGameComplete(currentMiniGameComplete));
 };
 /**
  * REDUCER
@@ -130,7 +133,10 @@ const initState = {
 export default function (state = initState, action) {
   switch (action.type) {
     case SET_MINI_GAME_COMPLETE:
-      return { ...state, mini_status: action.game.stage_completed ? "finished" : "ingame" };
+      return {
+        ...state,
+        mini_status: action.game.stage_completed ? 'finished' : 'ingame',
+      };
     case SET_GAME:
       return {
         path_name: action.game.path_name,

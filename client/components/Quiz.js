@@ -20,7 +20,6 @@ class Quiz extends React.Component {
       status: '',
       currentQuestion: 0,
       finished: false,
-      quizCount: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +27,7 @@ class Quiz extends React.Component {
   componentDidMount() {
     this.props.fetchQuiz(this.props.restaurantId);
   }
+
   handleChange(ev) {
     this.setState({
       value: ev.target.value,
@@ -38,16 +38,16 @@ class Quiz extends React.Component {
     ev.preventDefault();
     let finished = false;
     if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
-      if (this.state.currentQuestion < 3) {
-        this.setState({
-          currentQuestion: this.state.currentQuestion + 1,
-        });
-      } else {
-        finished = true;
-        this.setState({
-          finished: true,
-        });
-      }
+      this.setState((state) => {
+        return {
+          currentQuestion: state.currentQuestion + 1,
+        };
+      });
+    } else {
+      finished = true;
+      this.setState({
+        finished: true,
+      });
     }
     let userResponse = this.state.value;
     const correctAnswer = this.props.quiz.questions[
@@ -58,7 +58,6 @@ class Quiz extends React.Component {
       played: true,
       points,
       status: points > 0 ? 'correct' : 'wrong',
-      quizCount: (this.state.quizCount += 1),
     });
     this.props.updateMiniScore(points);
     if (finished) {
@@ -75,6 +74,9 @@ class Quiz extends React.Component {
         </>
       );
     }
+    if (!this.props.quiz.questions) {
+      return <div>loading</div>;
+    }
     return (
       <div className={this.state.status}>
         <div id="instructions">
@@ -87,7 +89,8 @@ class Quiz extends React.Component {
                 this.props.quiz.questions.length > 0 && (
                   <div id="question">
                     <h3>
-                      Question {this.state.quizCount}/5:{' '}
+                      Question {this.state.currentQuestion + 1}/
+                      {this.props.quiz.questions.length}:{' '}
                       {this.props.quiz.questions[currentQuestion].question}
                     </h3>
                     <div id="answer">
@@ -117,6 +120,7 @@ class Quiz extends React.Component {
                       variant="contained"
                       color="primary"
                       onClick={this.handleSubmit}
+                      // disable={this.state.quizCount > 3 ? true : false}
                     >
                       Submit{' '}
                     </Button>
