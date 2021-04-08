@@ -30,31 +30,40 @@ class Profile extends React.Component {
             <Paper variant="elevation" elevation={1}>
               <TableContainer>
                 <Table aria-label="simple table">
-                <TableHead>
-                <TableRow>
-                  <TableCell align="left"><b>Credentials</b></TableCell>
-                  <TableCell align="left"><b>Information</b></TableCell>
-                </TableRow>
-              </TableHead>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left">
+                        <b>Credentials</b>
+                      </TableCell>
+                      <TableCell align="left">
+                        <b>Information</b>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
                   <TableBody>
-                  {Object.keys(account)
-                    .filter((key) => key !== 'password' && key !== 'id')
-                    .map((key, idx) => {
-                      return (
-                        <TableRow key={idx}>
-                          <TableCell align="left">{key}</TableCell>
-                          <TableCell align="left">{account[key]}</TableCell>
-                        </TableRow>
-                      );
-                    })}
+                    {Object.keys(account)
+                      .filter(
+                        (key) =>
+                          key !== 'password' &&
+                          key !== 'id' &&
+                          key !== 'updatedAt'
+                      )
+                      .map((key, idx) => {
+                        return (
+                          <TableRow key={idx}>
+                            <TableCell align="left">{key}</TableCell>
+                            <TableCell align="left">{account[key]}</TableCell>
+                          </TableRow>
+                        );
+                      })}
                   </TableBody>
                 </Table>
               </TableContainer>
             </Paper>
           </Container>
 
-        <h2>Game History</h2>
-        <PastGames />
+          <h2>Game History</h2>
+          <PastGames />
         </center>
       </div>
     );
