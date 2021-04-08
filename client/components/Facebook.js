@@ -11,7 +11,6 @@ class Facebook extends Component {
 
   componentClicked = () => {};
 
-
   responseFacebook = (response) => {
     let username = response.email;
     let id = response.id;
@@ -22,16 +21,16 @@ class Facebook extends Component {
       <div>
         {
           <FacebookLogin
-            name='fb'
-            appId='459306878548339'
+            name="fb"
+            appId="459306878548339"
             autoLoad={false}
-            fields='name,email'
+            fields="name,email"
             onClick={this.componentClicked}
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
-                variant='outlined'
-                color='primary'
+                variant="outlined"
+                color="primary"
                 style={{ width: '300px', height: '40px', textAlign: 'center' }}
                 variant="contained"
                 color="primary"
