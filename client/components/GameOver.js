@@ -33,32 +33,8 @@ class GameOver extends React.Component {
         <div className="food-shelter">
           <img src="./img/food-donation.jpeg" />
           <br />
-          <p>
-            {' '}
-            US restaurants generate an estimated 22 to 33 billion pounds of food
-            waste each year. Drivers of food waste at restaurants include
-            oversized portions, inflexibility of chain store management and
-            extensive menu choices. According to the Cornell University Food and
-            Brand Lab, on average, diners leave 17 percent of their meals
-            uneaten and 55 percent of edible leftovers are left at the
-            restaurant. When the pandemic first happened there was a lot of
-            extra waste because the sudden closures of businesses created
-            bottlenecks in supply chains. As a result, food could not reach
-            people fast enough. The pandemic has forced many restaurants to
-            innovate, cut back, and better utilize their resources. In doing so,
-            they have shifted away from buffet models, a major contributor of
-            food waste. They are also offering smaller menus and, as a result,
-            are keeping smaller inventories. These new shifts will hopefully
-            help ensure less food waste going forward. One of the best ways to
-            help reduce food waste is to provide extra food to those in need,
-            via food pantries and food shelters. Our game seeks to bring
-            awareness to this issue and show how restaurants and food shelters
-            can work together to reduce food waste.{' '}
-          </p>
 
-          <p>
             <b>Food pantries in New York City that you can help support! </b>
-          </p>
 
           <p>
             New York Common Pantry{' '}
