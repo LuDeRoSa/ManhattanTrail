@@ -26,16 +26,19 @@ class GameOver extends React.Component {
     return (
       <Container style={styles.container}>
         <div className="game-over-heading">GAME OVER</div>
-        <h2>Total Amount of Food Items Donated: {game.total_score}</h2>
-        <div className="empty-box"></div>
-        <h3>Help combat food waste!</h3>
+        <div className="score">Total Amount of Food Items Donated: {game.total_score}</div>
+        <br />
 
         <div className="food-shelter">
           <img src="./img/food-donation.jpeg" />
+        </div>
+
           <br />
 
-            <b>Food pantries in New York City that you can help support! </b>
 
+            <div className="donation-text">Food pantries in New York City that you can help support!</div>
+
+          <div className="donation-links">
           <p>
             New York Common Pantry{' '}
             <a href="https://nycommonpantry.org/donate-to-new-york-common-pantry/">
@@ -53,6 +56,7 @@ class GameOver extends React.Component {
             </a>
           </p>
         </div>
+
         {/* <p>Path: {game.pathId}</p>
         <p>Stage: {game.gameStage}</p>
         <p>Status: {game.status}</p> */}

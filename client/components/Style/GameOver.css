@@ -11,14 +11,22 @@
   margin-right: auto;
 }
 
-.score-box {
-  font-weight: bold;
-  font-size: larger;
-}
 .game-over-heading {
   font-size: 60px;
 }
 
 h2 {
   font-weight: bold;
+}
+
+.score {
+  font-size: 30px;
+}
+
+.donation-text {
+  font-size: 22px;
+}
+
+.donation-links {
+  align-items: center;
 }
