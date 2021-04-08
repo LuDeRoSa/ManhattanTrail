@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {authenticate} from '../store';
+import { connect } from 'react-redux';
+import { authenticate } from '../store';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -17,6 +17,7 @@ const AuthForm = (props) => {
     name,
     handleSubmit,
     error,
+    displayName,
     autocomplete_attribute,
   } = props;
   return (
@@ -37,64 +38,73 @@ const AuthForm = (props) => {
         className="login-background"
       >
         <Grid item>
-          <form onSubmit={ handleSubmit } name={ name }>
-            <Grid container
-                  direction="column"
-                  spacing={2}
-                  alignItems="center"
-                  justify="center">
+          <form onSubmit={handleSubmit} name={name}>
+            <Grid
+              container
+              direction="column"
+              spacing={2}
+              alignItems="center"
+              justify="center"
+            >
               <Grid item>
                 <TextField
-                    type="email"
-                    placeholder="Email"
-                    fullWidthname="username"
-                    autoComplete="email"
-                    variant="outlined"
-                    required
-                    autoFocus
-                    style = {{width: 300}}
+                  type="email"
+                  placeholder="Email"
+                  fullWidthname="username"
+                  autoComplete="email"
+                  variant="outlined"
+                  required
+                  autoFocus
+                  style={{ width: 300 }}
                 />
               </Grid>
               <Grid item>
                 <TextField
-                    type="password"
-                    placeholder="Password"
-                    fullWidthname="password"
-                    variant="outlined"
-                    autoComplete={autocomplete_attribute}
-                    required
-                    style = {{width: 300}}
-                    />
+                  type="password"
+                  placeholder="Password"
+                  fullWidthname="password"
+                  variant="outlined"
+                  autoComplete={autocomplete_attribute}
+                  required
+                  style={{ width: 300 }}
+                />
               </Grid>
               <Grid item>
-                <Button style={{width: '300px', height: '40px'}}
-                    variant="contained"
-                    color="primary"
-                    type="submit">
-                  Log in
+                <Button
+                  style={{ width: '300px', height: '40px' }}
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  {displayName}
                 </Button>
               </Grid>
             </Grid>
           </form>
           <Box m={3} pt={10}>
-          <Grid Item>
-            <Facebook />
-          </Grid>
-            <Box pt={2}>
-          <Grid Item>
-          {window.githubURL && (
-              <Button style={{width: '300px', height: '40px', textAlign: 'center'}}
-                variant="contained"
-                  color="primary"
-                  startIcon={<GitHubIcon />}
-                  href={window.githubURL}
-              >
-                Continue with GitHub
-              </Button>
-          )}
+            <Grid Item>
+              <Facebook />
             </Grid>
+            <Box pt={2}>
+              <Grid Item>
+                {window.githubURL && (
+                  <Button
+                    style={{
+                      width: '300px',
+                      height: '40px',
+                      textAlign: 'center',
+                    }}
+                    variant="contained"
+                    color="primary"
+                    startIcon={<GitHubIcon />}
+                    href={window.githubURL}
+                  >
+                    Continue with GitHub
+                  </Button>
+                )}
+              </Grid>
             </Box>
-        </Box>
+          </Box>
           {error && error.response && <div> {error.response.data} </div>}
         </Grid>
       </Paper>
