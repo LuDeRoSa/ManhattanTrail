@@ -50,7 +50,8 @@ const AuthForm = (props) => {
                 <TextField
                   type="email"
                   placeholder="Email"
-                  fullWidthname="username"
+                  fullWidth
+                  name="username"
                   autoComplete="email"
                   variant="outlined"
                   required
@@ -62,7 +63,8 @@ const AuthForm = (props) => {
                 <TextField
                   type="password"
                   placeholder="Password"
-                  fullWidthname="password"
+                  fullWidth
+                  name="password"
                   variant="outlined"
                   autoComplete={autocomplete_attribute}
                   required
@@ -82,11 +84,11 @@ const AuthForm = (props) => {
             </Grid>
           </form>
           <Box m={3} pt={10}>
-            <Grid Item>
+            <Grid item>
               <Facebook />
             </Grid>
             <Box pt={2}>
-              <Grid Item>
+              <Grid item>
                 {window.githubURL && (
                   <Button
                     style={{
