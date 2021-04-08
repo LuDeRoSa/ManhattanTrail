@@ -29,8 +29,6 @@ class Quiz extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    console.log('restId', this.props.restaurantId);
-    console.log(typeof this.props.restaurantId);
     this.props.fetchQuiz(this.props.restaurantId);
   }
 
