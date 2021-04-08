@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import FacebookIcon from '@material-ui/icons/Facebook'
+import React, { Component } from 'react';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import {fbAuthenticate} from '../store';
-import {connect} from 'react-redux';
+import { fbAuthenticate } from '../store';
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 class Facebook extends Component {
   constructor(props) {
@@ -34,7 +34,8 @@ class Facebook extends Component {
             onClick={this.componentClicked}
             callback={this.responseFacebook}
             render={(renderProps) => (
-              <Button style={{width: '300px', height: '40px', textAlign: 'center'}}
+              <Button
+                style={{ width: '300px', height: '40px', textAlign: 'center' }}
                 variant="contained"
                 color="primary"
                 startIcon={<FacebookIcon />}
