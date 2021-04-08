@@ -78,15 +78,46 @@ const syncAndSeed = async () => {
   const paths = await Promise.all([
     Path.create({
       path_name: 'italian',
-      restaurantId: 1,
+      restaurantId: restaurants[0].id,
       stage: 1,
+      game_type: 'quiz',
     }),
-    Path.create({ path_name: 'italian', restaurantId: 2, stage: 2 }),
-    Path.create({ path_name: 'italian', restaurantId: 3, stage: 3 }),
-    Path.create({ path_name: 'italian', restaurantId: 4, stage: 4 }),
-    Path.create({ path_name: 'italian', restaurantId: 5, stage: 5 }),
-    Path.create({ path_name: 'chinese', restaurantId: 4, stage: 1 }),
-    Path.create({ path_name: 'chinese', restaurantId: 5, stage: 2 }),
+    Path.create({
+      path_name: 'italian',
+      restaurantId: restaurants[1].id,
+      stage: 2,
+      game_type: 'hangman',
+    }),
+    Path.create({
+      path_name: 'italian',
+      restaurantId: restaurants[2].id,
+      stage: 3,
+      game_type: 'snake',
+    }),
+    Path.create({
+      path_name: 'italian',
+      restaurantId: restaurants[3].id,
+      stage: 4,
+      game_type: 'flappy',
+    }),
+    Path.create({
+      path_name: 'italian',
+      restaurantId: restaurants[4].id,
+      stage: 5,
+      game_type: 'sortfruits',
+    }),
+    Path.create({
+      path_name: 'chinese',
+      restaurantId: restaurants[6].id,
+      stage: 1,
+      game_type: 'quiz',
+    }),
+    Path.create({
+      path_name: 'chinese',
+      restaurantId: restaurants[7].id,
+      stage: 2,
+      game_type: 'hangman',
+    }),
     Path.create({
       path_name: 'gluten-free',
       restaurantId: restaurants[5].id,
@@ -127,13 +158,16 @@ const syncAndSeed = async () => {
 
   const quizzes = await Promise.all([
     Quiz.create({
-      restaurantId: 1,
+      restaurantId: restaurants[0].id,
     }),
     Quiz.create({
       restaurantId: restaurants[7].id,
     }),
     Quiz.create({
       restaurantId: restaurants[8].id,
+    }),
+    Quiz.create({
+      restaurantId: restaurants[6].id,
     }),
   ]);
 
@@ -237,7 +271,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What is the only edible food that never goes bad?',
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'Honey',
@@ -262,7 +296,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What fruit inspired the paisley fabric pattern?',
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'Mango',
@@ -286,7 +320,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What fruit was named after pine cones?',
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'Pineapple',
@@ -310,7 +344,7 @@ const syncAndSeed = async () => {
     Question.create(
       {
         question: 'What country wastes the most food?',
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'United States',
@@ -335,7 +369,7 @@ const syncAndSeed = async () => {
       {
         question:
           "What's the healthiest fast food chain in the US? (according to Health Magazine)",
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'Panera Bread',
@@ -360,7 +394,7 @@ const syncAndSeed = async () => {
       {
         question:
           'What spice prevents spider veins, inhibits hair loss, and has lots of Vitamin A?',
-        quizId: quizzes[0].id,
+        quizId: quizzes[3].id,
         answers: [
           {
             answer: 'Paprika',
