@@ -23,7 +23,6 @@ class Quiz extends React.Component {
       status: '',
       currentQuestion: 0,
       finished: false,
-      quizCount: 1,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,9 +40,11 @@ class Quiz extends React.Component {
   handleSubmit(ev) {
     ev.preventDefault();
     let finished = false;
-    if (this.state.currentQuestion < this.props.quiz.questions.length) {
-      this.setState({
-        currentQuestion: this.state.currentQuestion + 1,
+    if (this.state.currentQuestion < this.props.quiz.questions.length - 1) {
+      this.setState((state) => {
+        return {
+          currentQuestion: state.currentQuestion + 1,
+        };
       });
     } else {
       finished = true;
@@ -60,8 +61,6 @@ class Quiz extends React.Component {
       played: true,
       points,
       status: points > 0 ? 'correct' : 'wrong',
-      quizCount: (this.state.quizCount += 1),
-      finished: this.state.quizCount >= this.props.quiz.questions.length,
     });
     this.props.updateMiniScore(points);
     if (finished) {

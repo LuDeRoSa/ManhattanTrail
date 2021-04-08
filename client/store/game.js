@@ -103,7 +103,6 @@ export const updateMiniGameScore = (points) => async (dispatch) => {
       },
     }
   ).data;
-  console.log('hello from updateminigamescore');
   return dispatch(_updateTotalScore(score));
 };
 /**
