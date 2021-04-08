@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 const Start = (props) =>
   props.mini_status === 'finished' ? (
-    ''
+    'Mini Game finished - please hit Continue button above!'
   ) : (
     <Box mb={3}>
       <Button

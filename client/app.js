@@ -2,7 +2,7 @@ import React from 'react';
 
 import Navbar from './components/Navbar';
 import Routes from './routes';
-
+import Footer from './components/Footer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ import createTypography from '@material-ui/core/styles/createTypography';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: '#ffffff',
+      default: '#F5F5F5',
     },
     primary: {
       main: teal[500],
@@ -36,6 +36,7 @@ const App = () => {
         <CssBaseline />
         <Navbar />
         <Routes />
+        <Footer />
       </ThemeProvider>
     </React.Fragment>
   );
