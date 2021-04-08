@@ -82,7 +82,6 @@ class Quiz extends React.Component {
         <div id="instructions">
           Earn points by answering the questions correctly
         </div>
-        {this.state.currentQuestion + 1}/{this.props.quiz.questions.length}
         <div id="quiz">
           <form id="quiz-form" onSubmit={this.handleSubmit}>
             <FormControl id="form-control" component="fieldset">
@@ -90,7 +89,8 @@ class Quiz extends React.Component {
                 this.props.quiz.questions.length > 0 && (
                   <div id="question">
                     <h3>
-                      Question {this.state.quizCount}/5:{' '}
+                      Question {this.state.currentQuestion + 1}/
+                      {this.props.quiz.questions.length}:{' '}
                       {this.props.quiz.questions[currentQuestion].question}
                     </h3>
                     <div id="answer">
