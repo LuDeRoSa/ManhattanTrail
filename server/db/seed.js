@@ -94,6 +94,7 @@ const syncAndSeed = async () => {
     Path.create({
       path_name: 'gluten-free',
       restaurantId: restaurants[6].id,
+      game_type: 'snake',
       stage: 2,
     }),
     Path.create({

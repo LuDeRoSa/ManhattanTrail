@@ -4,6 +4,10 @@ import { authenticate } from '../store';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Facebook from './Facebook';
+
 /**
  * COMPONENT
  */
@@ -51,15 +55,27 @@ const AuthForm = (props) => {
             </div>
             <br />
             <center>
-              <button type="submit">{displayName}</button>
+              <Button variant="outlined" color="primary" type="submit">
+                {displayName}
+              </Button>
             </center>
             {error && error.response && <div> {error.response.data} </div>}
           </form>
-          <div className="login-link">
+          <Divider />
+          <center>
+            <Facebook />
+            <Divider />
+
             {window.githubURL && (
-              <a href={window.githubURL}>Login / Register Via Github </a>
+              <Button
+                variant="outlined"
+                color="primary"
+                href={window.githubURL}
+              >
+                Login / Register Via Github{' '}
+              </Button>
             )}
-          </div>
+          </center>
         </FormControl>
       </Paper>
     </Grid>
@@ -67,7 +83,7 @@ const AuthForm = (props) => {
 };
 
 /**
- * CONTAINER
+ * CONTAIN
  *   Note that we have two different sets of 'mapStateToProps' functions -
  *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
  *   function, and share the same Component. This is a good example of how we

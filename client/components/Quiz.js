@@ -7,12 +7,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import './Style/Quiz.css';
-const styles = {
-  button: {
-    color: 'white',
-  },
-};
+
 class Quiz extends React.Component {
   constructor(props) {
     super(props);
@@ -72,7 +69,7 @@ class Quiz extends React.Component {
     if (this.state.finished) {
       return (
         <>
-          <p>Quiz Done!</p>
+          <p>And that's a wrap...</p>
           <p>You answered {this.props.game.mini_score} questions correctly </p>
         </>
       );
@@ -82,41 +79,46 @@ class Quiz extends React.Component {
     }
     return (
       <div className={this.state.status}>
-        <h2>QUIZ</h2>
+        <div id="instructions">
+          Earn points by answering the questions correctly
+        </div>
         {this.state.currentQuestion + 1}/{this.props.quiz.questions.length}
-        <div id="quiz" styles={styles.quiz}>
+        <div id="quiz">
           <form id="quiz-form" onSubmit={this.handleSubmit}>
             <FormControl id="form-control" component="fieldset">
               {this.props.quiz.questions &&
                 this.props.quiz.questions.length > 0 && (
                   <div id="question">
                     <h3>
+                      Question {this.state.quizCount}/5:{' '}
                       {this.props.quiz.questions[currentQuestion].question}
                     </h3>
                     <div id="answer">
-                      {this.props.quiz.questions[currentQuestion].answers.map(
-                        (answerObj, index) => (
-                          <RadioGroup
-                            key={index}
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            disabled={this.state.played}
-                            inputprops={{ 'aria-label': 'Radio A' }}
-                          >
-                            <FormControlLabel
-                              control={<Radio />}
-                              value={answerObj.answer}
+                      <Box ml={1} mb={2}>
+                        {this.props.quiz.questions[currentQuestion].answers.map(
+                          (answerObj, index) => (
+                            <RadioGroup
                               key={index}
-                              label={answerObj.answer}
-                              id="form-label"
-                            />
-                          </RadioGroup>
-                        )
-                      )}
+                              value={this.state.value}
+                              onChange={this.handleChange}
+                              disabled={this.state.played}
+                              inputprops={{ 'aria-label': 'Radio A' }}
+                            >
+                              <FormControlLabel
+                                control={<Radio />}
+                                value={answerObj.answer}
+                                key={index}
+                                label={answerObj.answer}
+                                id="form-label"
+                              />
+                            </RadioGroup>
+                          )
+                        )}
+                      </Box>
                     </div>
                     <Button
-                      variant="outlined"
-                      style={styles.button}
+                      variant="contained"
+                      color="primary"
                       onClick={this.handleSubmit}
                       // disable={this.state.quizCount > 3 ? true : false}
                     >

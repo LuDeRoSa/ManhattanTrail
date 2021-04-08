@@ -2,8 +2,14 @@ import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { CATEGORIES, FOODS } from './SortFruitsData';
 import SortFruitsDropzone from './SortFruitsDropzone';
+// import SortFruitsDropzone from '../SortFruitsGame/SortFruitsDropzone.js';
 import { connect } from 'react-redux';
-import { updateMiniGameScore } from '../store/game';
+import { updateMiniGameScore } from '../../store/game';
+
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+
 /**
  * Enums for representing the game play state
  */
@@ -53,39 +59,58 @@ class SortFruits extends React.Component {
     const isDropDisabled = gameState === GAME_STATE.DONE;
     return (
       <>
+      <div id='instructions'>
+        Drag each food into the "good" or "bad" column depending on its effect on the environment.
+      </div>
         {(this.state.gameState === GAME_STATE.PLAYING ||
           this.state.gameState === GAME_STATE.DONE) && (
           <DragDropContext onDragEnd={this.onDragEnd}>
-            <div className="container">
-              <div className="columns">
+            <Grid
+              container
+              direction="row"
+              alignItems="flex-start"
+              justify="center"
+              spacing={1}
+            >
+              <Grid item xs={4}>
                 <SortFruitsDropzone
                   id={CATEGORIES.GOOD}
                   foods={this.state[CATEGORIES.GOOD]}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={3}>
                 <SortFruitsDropzone
                   id="unsorted"
                   foods={unsorted}
                   isDropDisabled={isDropDisabled}
                 />
+              </Grid>
+              <Grid item xs={4}>
                 <SortFruitsDropzone
                   id={CATEGORIES.BAD}
                   foods={this.state[CATEGORIES.BAD]}
                   isDropDisabled={isDropDisabled}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </DragDropContext>
         )}
         <br />
         {this.state.gameState === GAME_STATE.DONE ? (
           <div id="sort-fruits-score">
-            <p> Score: {score}</p>
+            <p> You earned {score} points</p>
           </div>
         ) : (
-          <button id="end-sort-fruit" onClick={this.endGame}>
-            I'm done!
-          </button>
+          <Box mb={3}>
+            <Button 
+            variant="contained"
+            color="primary"
+            id="end-sort-fruit" 
+            onClick={this.endGame}>
+              I'm done!
+            </Button>
+          </Box>
         )}
       </>
     );

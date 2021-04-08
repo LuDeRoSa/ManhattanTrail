@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { randomWord } from '../HangmanGame/HangmanWord.js';
 import { updateMiniGameScore } from '../../store/game';
+
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+
 import '../Style/Hangman.css';
 // hangman images
 let step0 = './img/hangman/0.png';
@@ -11,6 +15,19 @@ let step3 = './img/hangman/3.png';
 let step4 = './img/hangman/4.png';
 let step5 = './img/hangman/5.png';
 let step6 = './img/hangman/6.png';
+
+const styles = {
+  hangmanContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Button: {
+    margin: '0.5rem',
+  },
+};
 class Hangman extends Component {
   static defaultProps = {
     maxTry: 6,
@@ -26,13 +43,18 @@ class Hangman extends Component {
       gameOver: false,
       isWinner: false,
     };
+    this.onKey = this.onKey.bind(this);
   }
   componentDidMount() {
-    document.addEventListener('keydown', (e) => {
-      if (e.code >= 'A' && e.code <= 'z') {
-        this.handleGuess(e);
-      }
-    });
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.onKey);
+  }
+  onKey(e) {
+    if (e.code >= 'A' && e.code <= 'z' && !this.gameOver) {
+      this.handleGuess(e);
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.gameOver && this.state.gameOver) {
@@ -52,6 +74,8 @@ class Hangman extends Component {
     let letter;
     if (e.target.tagName === 'BUTTON') {
       letter = e.target.value;
+    } else if (e.target.tagName === 'SPAN') {
+      letter = e.target.innerHTML;
     } else {
       letter = e.code.substr(e.code.length - 1).toLowerCase();
     }
@@ -66,40 +90,41 @@ class Hangman extends Component {
   // maps over the keyboard displaying every single character as a button
   generateButtons() {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
-      <button
+      <Button
+        variant="outlined"
         key={letter}
-        className="btn btn-lg btn-primary m-2"
         value={letter}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
+        color={this.state.guessed.has(letter) ? 'inherit' : 'primary'}
+        style={styles.Button}
       >
         {letter}
-      </button>
+      </Button>
     ));
   }
   render() {
     let gameStat = this.generateButtons();
     if (this.state.isWinner) {
-      gameStat = 'You won!';
+      gameStat = 'Congratus, you saved him!';
     }
     if (this.state.gameOver) {
-      gameStat = 'You Lost!';
+      gameStat = 'Uh-oh...You failed to save him!';
     }
     return (
-      <div className="hangman-container">
-        <h1 className="text-center">Hangman</h1>
-        <div className="float-left">
-          Wrong Guesses: {this.state.mistake} of {this.props.maxTry}
+      <Paper style={styles.hangmanContainer}>
+        <div id="instructions">Hint: The word is a category of food</div>
+        <div>
+          **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
         </div>
-        <div className="text-center">
+        <div>
           <img src={this.props.images[this.state.mistake]} alt="" />
         </div>
-        <div className="text-center">
-          <p>Guess The Food Category</p>
+        <div>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
-          <p>{gameStat}</p>
+          <>{gameStat}</>
         </div>
-      </div>
+      </Paper>
     );
   }
 }

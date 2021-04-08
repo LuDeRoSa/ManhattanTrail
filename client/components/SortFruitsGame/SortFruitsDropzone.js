@@ -1,10 +1,22 @@
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import './Style/SortFruits.css';
+import '../Style/SortFruits.css';
+
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+
 
 const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
-  <div className="column col-4">
-    <div className="divider" data-content={id.toUpperCase()} />
+  <Paper variant="outlined">
+    {id.toUpperCase()}
+    <Divider />
     <Droppable droppableId={id} isDropDisabled={isDropDisabled}>
       {(provided) => {
         return (
@@ -21,7 +33,7 @@ const SortFruitsDropzone = ({ isDropDisabled, foods, id }) => (
         );
       }}
     </Droppable>
-  </div>
+  </Paper>
 );
 const Food = ({ name, index }) => (
   <Draggable key={name} draggableId={name} index={index}>
@@ -33,18 +45,15 @@ const Food = ({ name, index }) => (
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <figure
-            style={{ backgroundColor: 'transparent' }}
-            className="avatar tile-icon"
-          >
-            <img
-              height={'64'}
-              width={'90'}
-              src={`./img/${name.toLowerCase().replace(' ', '-')}.jpeg`}
-              alt={name}
-            />
-          </figure>
-          <div className="tile-content">{name}</div>
+          <Card style={{width: '6rem', height: '4rem',}} elevation={1} >
+              <Avatar
+                height={'25'}
+                width={'25'}
+                src={`./img/${name.toLowerCase().replace(' ', '-')}.jpeg`}
+                alt={name}
+              />
+              <Typography variant='body2' component="p">{name}</Typography>
+          </Card>
         </div>
       );
     }}

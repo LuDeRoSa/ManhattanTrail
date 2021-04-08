@@ -18,6 +18,9 @@ const User = db.define('user', {
   githubId: {
     type: Sequelize.INTEGER,
   },
+  facebookId: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = User;
@@ -38,6 +41,7 @@ User.prototype.generateToken = function () {
  * classMethods
  */
 User.authenticate = async function ({ username, password }) {
+  // console.log('username', username);
   const user = await this.findOne({ where: { username } });
   if (!user || !(await user.correctPassword(password))) {
     const error = Error('Incorrect username/password');
@@ -99,10 +103,21 @@ User.authenticateGithub = async function (code) {
   //step 4: return jwt token
   return user.generateToken();
 };
-
 /**
  * hooks
  */
+
+User.fbAuthenticate = async function ({ username, id }) {
+  let user = await User.findOne({
+    where: { facebookId: id, username: username },
+  });
+  if (!user) {
+    user = await User.create({ username: username, facebookId: id });
+  }
+  //step 4: return jwt token
+  return user.generateToken();
+};
+
 const hashPassword = async (user) => {
   //in case the password has been changed, we want to encrypt it with bcrypt
   if (user.changed('password')) {

@@ -21,7 +21,6 @@ export const _fetchQuiz = (quiz) => {
  */
 export const fetchQuiz = (id) => async (dispatch) => {
   const quiz = (await axios.get(`/api/quiz/${id}`)).data;
-  // console.log(quiz);
   return dispatch(_fetchQuiz(quiz));
 };
 

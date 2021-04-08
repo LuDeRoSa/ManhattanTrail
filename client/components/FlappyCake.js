@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { updateMiniGameScore } from '../store/game';
 import { connect } from 'react-redux';
+import './Style/FlappyCake.css';
 
 const getRandomCoordinates = () => {
   let min = 5;
@@ -32,6 +33,8 @@ class FlappyCake extends Component {
       playing: true,
     };
     this.canvasRef = React.createRef();
+    this.onClick = this.onClick.bind(this);
+    this.onKey = this.onKey.bind(this);
   }
 
   componentDidMount() {
@@ -42,16 +45,8 @@ class FlappyCake extends Component {
       this.update();
       this.draw();
     }, 1000 / 60);
-    document.addEventListener('click', (e) => {
-      if (e.target.tagName === 'CANVAS') {
-        this.bump();
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space' || e.code === 'ArrowUp') {
-        this.bump();
-      }
-    });
+    document.addEventListener('click', this.onClick);
+    document.addEventListener('keydown', this.onKey);
   }
 
   componentDidUpdate() {
@@ -59,8 +54,20 @@ class FlappyCake extends Component {
       return;
     }
   }
+  onClick(e) {
+    if (e.target.tagName === 'CANVAS') {
+      this.bump();
+    }
+  }
+  onKey(e) {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+      this.bump();
+    }
+  }
   componentWillUnmount() {
     clearInterval(this.interval);
+    document.removeEventListener('click', this.onClick);
+    document.removeEventListener('keydown', this.onKey);
     this.setState({
       playing: false,
     });
@@ -139,12 +146,18 @@ class FlappyCake extends Component {
   }
   render() {
     if (!this.state.playing) {
-      return <div>Game Over! Flappy Cake score: {this.state.score}</div>;
+      return (
+        <div id="game-message">
+          Good game! You earned {this.state.score} points
+        </div>
+      );
     }
     return (
-      <div>
-        {this.state.score}
-        <canvas ref={this.canvasRef} width={600} height={400} />
+      <div id="instructions">
+        Use the spacebar to fly the penguin so he can catch the cakes.
+        <div id="game-area">
+          <canvas ref={this.canvasRef} width={400} height={400} />
+        </div>
       </div>
     );
   }

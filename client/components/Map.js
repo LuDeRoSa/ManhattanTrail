@@ -1,10 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
-import { setRests } from '../store/rest';
 import Marker from './Marker';
-import { nextStage, setGame, fetchMiniGameComplete } from '../store/game';
-import './Style/NextButton.css';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -21,27 +18,26 @@ class _Map extends React.Component {
       show: false,
     };
     this.setCenter = this.setCenter.bind(this);
-    this.stepStage = this.stepStage.bind(this);
   }
 
   componentDidMount() {
-    // Check if this game has previously been played already
-    this.props.fetchMiniGameComplete();
-
     if (this.props.rests.length > 0) {
-      this.setCenter();
+      this.setCenter(this.props.gameStage - 1);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.rests !== this.props.rests) {
       if (this.props.rests.length > 0) {
-        this.setCenter();
+        this.setCenter(this.props.gameStage - 1);
       }
+    }
+    if (prevProps.gameStage !== this.props.gameStage) {
+      this.setCenter(this.props.gameStage - 1);
     }
   }
 
-  setCenter(index) {
+  setCenter(index = this.props.gameStage) {
     let center = this.props.rests[index];
     if (!center) {
       console.log('cancelling setCenter');
@@ -53,10 +49,6 @@ class _Map extends React.Component {
         lng: center.restaurant_longitude,
       },
     });
-  }
-  stepStage() {
-    this.setCenter(this.props.gameStage);
-    this.props.nextStage();
   }
   createMapOptions(maps) {
     //these options create a frozen map. intention is to have the map move itself only to the new restarauns on its own
@@ -108,16 +100,6 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-        <div id="next-button-div">
-          {this.props.game.mini_status === 'finished' ? (
-            <button id="next-button" onClick={this.stepStage}>
-              Move to Next Stage »
-            </button>
-          ) : (
-            ''
-          )}
-        </div>
-        <div>{this.props.game.status === 'finished' && 'gameover'}</div>
       </React.Fragment>
     );
   }
@@ -129,10 +111,5 @@ const mapState = (state) => {
     gameStage: state.game.gameStage,
   };
 };
-const mapDispatch = {
-  setRests,
-  nextStage,
-  setGame,
-  fetchMiniGameComplete,
-};
+const mapDispatch = {};
 export default connect(mapState, mapDispatch)(_Map);

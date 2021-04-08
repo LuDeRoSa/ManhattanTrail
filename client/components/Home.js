@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Map from './Map';
 import { setRests } from '../store/rest';
-import { nextStage } from '../store/game';
+import { nextStage, fetchMiniGameComplete } from '../store/game';
+
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
-/**
- * COMPONENT
- */
+
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export const Home = (props) => {
-  const { username } = props;
+  useEffect(() => {
+    props.fetchMiniGameComplete();
+  }, []);
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
@@ -19,24 +22,33 @@ export const Home = (props) => {
   return (
     <div>
       <center>
-        <h3>Welcome, {username}</h3>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={props.game.mini_status !== 'finished'}
+          endIcon={<NavigateNextIcon />}
+          onClick={props.nextStage}
+        >
+          Continue Your Adventure!
+        </Button>
       </center>
       <Grid
         container
-        spacing={3}
+        spacing={2}
         direction="row"
         alignItems="center"
-        justify="center"
+        justify="space-around"
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
         <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '70vh' }}>
           <Map />
         </Grid>
-        <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={4} md={4} sm={10} xs={12}>
+        <Grid item lg={1} md={false} sm={false} xs={false} />
+        <Grid item lg={5} md={5} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
+        <Grid item lg={1} md={1} sm={false} xs={false} />
       </Grid>
     </div>
   );
@@ -56,5 +68,6 @@ const mapDispatch = {
   setRests,
   nextStage,
   setGame,
+  fetchMiniGameComplete,
 };
 export default connect(mapState, mapDispatch)(Home);
