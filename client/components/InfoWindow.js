@@ -11,10 +11,18 @@ class InfoWindow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: this.props.game.gameStage - 1,
+      index: this.props.gameStage - 1,
       clicked: false,
       show: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.gameStage !== this.props.gameStage) {
+      this.setState({
+        clicked: false,
+      });
+    }
   }
 
   addFav() {
@@ -22,16 +30,15 @@ class InfoWindow extends Component {
       show: !this.state.show,
       clicked: true,
     });
-    this.props.addFavorite(this.props.rest.rests[this.state.index].id);
+    this.props.addFavorite(this.props.rests[this.state.index].id);
   }
 
   render() {
-    console.log('infowindow', this.props);
-    const restaurantName = this.props.rest.rests[this.state.index]
+    console.log('infowindow', this.props.state);
+    const restaurantName = this.props.rests[this.props.state - 1]
       .restaurant_name;
-    console.log('name', restaurantName);
 
-    const restId = this.props.rest.rests[this.state.index].id;
+    const restId = this.props.rests[this.state.index].id;
     return (
       <div className='info' style={{ width: 50, height: 80 }}>
         {restaurantName}
@@ -56,6 +63,12 @@ class InfoWindow extends Component {
     );
   }
 }
+const mapState = (state) => {
+  return {
+    rests: state.rest.rests,
+    gameStage: state.game.gameStage,
+  };
+};
 
 const mapToDispatch = (dispatch) => {
   return {
@@ -63,4 +76,4 @@ const mapToDispatch = (dispatch) => {
   };
 };
 
-export default connect((state) => state, mapToDispatch)(InfoWindow);
+export default connect(mapState, mapToDispatch)(InfoWindow);
