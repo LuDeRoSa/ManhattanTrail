@@ -27,6 +27,7 @@ const AuthForm = (props) => {
       wrap="wrap"
       direction="column"
       alignItems="center"
+      alignContent="center"
       justify="center"
       className="login-form"
       style={{ minHeight: '100vh' }}
@@ -34,7 +35,12 @@ const AuthForm = (props) => {
       <Paper
         variant="elevation"
         elevation={2}
-        style={{ margin: '3rem', padding: '3rem' }}
+        style={
+          {
+            // margin: '3rem',
+            // padding: '3rem',
+          }
+        }
         className="login-background"
       >
         <Grid item>
@@ -50,28 +56,33 @@ const AuthForm = (props) => {
                 <TextField
                   type="email"
                   placeholder="Email"
-                  fullWidthname="username"
+                  fullWidth
+                  name="username"
                   autoComplete="email"
                   variant="outlined"
                   required
                   autoFocus
-                  style={{ width: 300 }}
+                  // style={{ width: 300 }}
                 />
               </Grid>
               <Grid item>
                 <TextField
                   type="password"
                   placeholder="Password"
-                  fullWidthname="password"
+                  fullWidth
+                  name="password"
                   variant="outlined"
                   autoComplete={autocomplete_attribute}
                   required
-                  style={{ width: 300 }}
+                  // style={{ width: 300 }}
                 />
               </Grid>
               <Grid item>
                 <Button
-                  style={{ width: '300px', height: '40px' }}
+                  style={{
+                    // width: '300px',
+                    height: '40px',
+                  }}
                   variant="contained"
                   color="primary"
                   type="submit"
@@ -82,15 +93,15 @@ const AuthForm = (props) => {
             </Grid>
           </form>
           <Box m={3} pt={10}>
-            <Grid Item>
+            <Grid item>
               <Facebook />
             </Grid>
             <Box pt={2}>
-              <Grid Item>
+              <Grid item>
                 {window.githubURL && (
                   <Button
                     style={{
-                      width: '300px',
+                      // width: '300px',
                       height: '40px',
                       textAlign: 'center',
                     }}
