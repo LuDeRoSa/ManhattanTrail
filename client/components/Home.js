@@ -17,10 +17,25 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export const Home = (props) => {
   useEffect(() => {
     props.fetchMiniGameComplete();
   }, []);
+
+  const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    if (props.game.mini_status === 'finished') {
+      setOpen(true);
+    }
+  }, [props.game.mini_status]);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const game_type =
     props.rests.length > 0
       ? props.rests[props.game.gameStage - 1].game_type
@@ -37,6 +52,37 @@ export const Home = (props) => {
         >
           Stage: {props.game.gameStage}. {props.nextDisplay}
         </Button>
+
+        <Dialog
+          open={open}
+          // TransitionComponent={Transition}
+          keepMounted
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {"You've finished the minigame!"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Stage: {props.game.gameStage}.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="primary"
+              endIcon={<NavigateNextIcon />}
+              onClick={() => {
+                props.nextStage();
+                handleClose();
+              }}
+            >
+              {props.nextDisplay}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </center>
       <Grid
         container
