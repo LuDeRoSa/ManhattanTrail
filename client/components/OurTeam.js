@@ -24,8 +24,8 @@ const styles = {
   },
   card: { margin: '1rem', padding: '1rem' },
   media: {
-    height: 175,
-    width: 175
+    height: 150,
+    width: 150
   }
 };
 
@@ -34,15 +34,16 @@ class OurTeam extends Component {
   state = {  }
   render() {
     return (
-      <Paper style={styles.paper}>
+      <Container>
+        <Paper style={styles.paper}>
         <div className="tech-heading">Our Team</div>
-      <Grid
-        container
-        spacing={1}
-        direction="row"
-        alignItems="center"
-        justify="space-around"
-      >
+          <Grid
+            container
+            spacing={1}
+            direction="row"
+            alignItems="center"
+            justify="space-around"
+          >
 
         <Grid item xs={5} sm={5} lg={3}>
           <Card style={styles.card}>
@@ -50,7 +51,7 @@ class OurTeam extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          // height="140"
           image="./img/devy.jpeg"
         />
           <b> Devy Agarwal </b>
@@ -62,7 +63,7 @@ class OurTeam extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          // height="140"
           image="./img/samir.png"
         />
           <b>Samir Jain</b>
@@ -74,7 +75,7 @@ class OurTeam extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          // height="140"
           image="./img/luisa.jpeg"
         />
           <b>Luisa Zhou</b>
@@ -87,20 +88,15 @@ class OurTeam extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          // height="140"
           image="./img/rommel.png"
         />
           <b>Rommel Demano</b>
           </Card>
         </Grid>
-
-
-
-
-
-
       </Grid>
     </Paper>
+    </Container>
 
 
     );

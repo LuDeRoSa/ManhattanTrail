@@ -35,6 +35,7 @@ class AboutUs extends Component {
   state = {  }
   render() {
     return (
+      <Container>
       <Paper style={styles.paper}>
         <div className="tech-heading">Technologies</div>
       <Grid
@@ -50,11 +51,16 @@ class AboutUs extends Component {
           <CardMedia
           style={styles.media}
           component="img"
-          alt="Contemplative Reptile"
+          alt="react-logo"
           // height="140"
           image="./img/react-logo.png"
         />
           <b>  React.js </b>
+          <li>Builds user interfaces and interactive UI components</li>
+          <li>Rich and dynamic single page and mobile applications</li>
+          <li>React Hooks allowed state and lifecycle functions without writing entire classes</li>
+
+
           </Card>
         </Grid>
         <Grid item xs={5} sm={5} lg={3}>
@@ -62,11 +68,14 @@ class AboutUs extends Component {
           <CardMedia
           style={styles.media}
           component="img"
-          alt="Contemplative Reptile"
+          alt="material-ui-logo"
           // height="140"
           image="./img/material-ui-logo.png"
         />
           <b>Material UI</b>
+
+          <li>Provides an optional CssBaseline component. </li>
+          <li>Fixes some inconsistencies across browsers and devices while providing slightly more opinionated resets to common HTML elements</li>
           </Card>
         </Grid>
         <Grid item xs={5} sm={5} lg={3}>
@@ -74,17 +83,20 @@ class AboutUs extends Component {
           <CardMedia
           style={styles.media}
           component="img"
-          alt="Contemplative Reptile"
+          alt="google-maps-logo"
           // height="140"
           image="./img/google-maps-logo.png"
         />
           <b>Google Maps API</b>
+
+          <li>Customize maps with your own content and imagery for display on web pages and mobile devices </li>
+
           </Card>
         </Grid>
       </Grid>
       <OurTeam/>
     </Paper>
-
+  </Container>
     );
   }
 }
