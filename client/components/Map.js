@@ -2,6 +2,20 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
+import Snackbar from '@material-ui/core/Snackbar';
+
+const styles = {
+  snackBar: {
+    color: 'black',
+    width: '100px',
+    height: '100%',
+    // display: 'flex',
+    // justifyContent: 'center',
+    alignContent: 'center',
+    margin: '0 auto',
+  },
+};
+
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +30,7 @@ class _Map extends React.Component {
           -74.0060152,
       },
       show: false,
+      open: false,
     };
     this.setCenter = this.setCenter.bind(this);
   }
@@ -72,12 +87,40 @@ class _Map extends React.Component {
       ],
     };
   }
+
   onChildClick() {
     this.setState({ show: !this.state.show });
+    this.snackBar();
   }
+
+  snackBar() {
+    this.setState({
+      open: true,
+    });
+  }
+
   render() {
+    // console.log('props', this.props);
+    console.log(
+      'name',
+      this.props.rests[this.props.game.gameStage - 1].restaurant_name
+    );
     return (
       <React.Fragment>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+          }}
+          open={this.state.open}
+          style={styles.snackBar}
+          onClose={this.handleClose}
+          message={
+            this.props.rests[this.props.game.gameStage - 1].restaurant_name
+          }
+          // autoHideDuration={500}
+        />
+
         <div style={{ height: '90%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{

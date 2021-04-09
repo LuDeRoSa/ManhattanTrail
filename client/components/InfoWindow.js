@@ -30,7 +30,7 @@ class InfoWindow extends Component {
     const { name } = this.props;
     const restId = this.props.rest.rests[this.state.index].id;
     return this.props.show ? (
-      <div id='info' style={{ width: 100, height: 100 }}>
+      <div id='info' style={{ width: 50, height: 50 }}>
         {this.props.name}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>

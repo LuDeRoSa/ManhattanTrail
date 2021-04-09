@@ -10,6 +10,7 @@ import GameStart from './GameStart';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+// import InfoWindow from './InfoWindow';
 
 export const Home = (props) => {
   useEffect(() => {
@@ -23,8 +24,8 @@ export const Home = (props) => {
     <div>
       <center>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           disabled={props.game.mini_status !== 'finished'}
           endIcon={<NavigateNextIcon />}
           onClick={props.nextStage}
@@ -35,13 +36,14 @@ export const Home = (props) => {
       <Grid
         container
         spacing={2}
-        direction="row"
-        alignItems="center"
-        justify="space-around"
+        direction='row'
+        alignItems='center'
+        justify='space-around'
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
         <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '70vh' }}>
+          {/* <InfoWindow center={props.gameStage} /> */}
           <Map />
         </Grid>
         <Grid item lg={1} md={false} sm={false} xs={false} />
