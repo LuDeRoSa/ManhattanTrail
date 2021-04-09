@@ -174,19 +174,19 @@ const syncAndSeed = async () => {
 
   const quizzes = await Promise.all([
     Quiz.create({
-      restaurantId: restaurants[0].id,
+      restaurantId: restaurants[0].id, //italian "Restaraunt One"
     }),
     Quiz.create({
-      restaurantId: restaurants[7].id,
+      restaurantId: restaurants[7].id, //points to little beet but can be rerouted into another path if needed
     }),
     Quiz.create({
-      restaurantId: restaurants[8].id,
+      restaurantId: restaurants[8].id, //indian Bengal Tiger
     }),
     Quiz.create({
-      restaurantId: restaurants[6].id,
+      restaurantId: restaurants[6].id, //gluten free erin mckenna
     }),
     Quiz.create({
-      restaurantId: restaurants[11].id,
+      restaurantId: restaurants[11].id, //chinese "Mala Project"
     }),
   ]);
 
