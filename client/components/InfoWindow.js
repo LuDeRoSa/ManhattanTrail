@@ -29,7 +29,7 @@ class InfoWindow extends Component {
     const restaurantName = this.props.rest.rests[this.state.index]
       .restaurant_name;
     const restId = this.props.rest.rests[this.state.index].id;
-    return this.props.show ? (
+    return (
       <div className='info' style={{ width: 50, height: 80 }}>
         {restaurantName}
         <br />
@@ -50,7 +50,7 @@ class InfoWindow extends Component {
           )}
         </IconButton>
       </div>
-    ) : null;
+    );
   }
 }
 

@@ -16,7 +16,6 @@ class _Map extends React.Component {
           this.props.rests[this.props.gameStage - 1].restaurant_longitude ||
           -74.0060152,
       },
-      show: false,
     };
     this.setCenter = this.setCenter.bind(this);
   }
@@ -79,11 +78,7 @@ class _Map extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <InfoWindow
-          show={this.state.show}
-          lat={this.state.center.lat}
-          lng={this.state.center.lng}
-        />
+        <InfoWindow lat={this.state.center.lat} lng={this.state.center.lng} />
         <div style={{ height: '90%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
@@ -101,7 +96,6 @@ class _Map extends React.Component {
                 lat={r.restaurant_latitude}
                 lng={r.restaurant_longitude}
                 color={this.props.gameStage - 1 === idx ? 'red' : 'black'}
-                show={this.state.show}
               />
             ))}
           </GoogleMapReact>
