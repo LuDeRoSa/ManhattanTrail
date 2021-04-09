@@ -34,7 +34,6 @@ class InfoWindow extends Component {
   }
 
   render() {
-    console.log('infowindow', this.props.state);
     const restaurantName = this.props.rests[this.props.state - 1]
       .restaurant_name;
 
