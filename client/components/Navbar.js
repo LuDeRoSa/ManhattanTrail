@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
 import linksList from '../LinksList';
-
+import AboutUs from './AboutUs';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -79,6 +79,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                       to="/#"
                     >
                       Logout
+                    </Button>
+                    <Button component={Link} to="/aboutus">
+                      About Us
                     </Button>
                   </div>
                 ) : (
