@@ -29,8 +29,7 @@ export const Home = (props) => {
           endIcon={<NavigateNextIcon />}
           onClick={props.nextStage}
         >
-          {props.game.gameStage}
-          {props.nextDisplay}
+          Stage: {props.game.gameStage}. {props.nextDisplay}
         </Button>
       </center>
       <Grid
