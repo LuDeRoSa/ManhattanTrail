@@ -1,4 +1,4 @@
-#info {
+.info {
   background-color: white;
   border: 1px solid rgba(72, 181, 233, 0.6);
   border-radius: 10px;
@@ -8,4 +8,9 @@
   text-align: center;
   top: 15px !important;
   width: 150px !important;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-around;
+  margin: auto;
 }

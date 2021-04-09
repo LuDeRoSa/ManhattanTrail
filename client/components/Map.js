@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
+import InfoWindow from './InfoWindow';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,6 @@ class _Map extends React.Component {
           this.props.rests[this.props.gameStage - 1].restaurant_longitude ||
           -74.0060152,
       },
-      show: false,
     };
     this.setCenter = this.setCenter.bind(this);
   }
@@ -79,6 +79,7 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
+          <InfoWindow gameStage={this.props.gameStage} />
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -95,7 +96,6 @@ class _Map extends React.Component {
                 lat={r.restaurant_latitude}
                 lng={r.restaurant_longitude}
                 color={this.props.gameStage - 1 === idx ? 'red' : 'black'}
-                show={this.state.show}
               />
             ))}
           </GoogleMapReact>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InfoWindow from './InfoWindow';
 import './Style/Marker.css';
 
 const Marker = (props) => {
@@ -14,17 +13,7 @@ const Marker = (props) => {
         backgroundColor: color,
       }}
       title={name}
-    >
-      {' '}
-      {color === 'red' && (
-        <InfoWindow
-          show={props.show}
-          lat={props.lat}
-          lng={props.lng}
-          name={name}
-        />
-      )}
-    </div>
+    ></div>
   );
 };
 

@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Favorites from './Favorites';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -71,12 +72,7 @@ class Profile extends React.Component {
             </Container>
           </Grid>
           <Grid item>
-            <h2>Favorited Restaraunts</h2>
-            <ul>
-              {favorites.map((favorite) => (
-                <li key={favorite.id}>{favorite.restaurant.restaurant_name}</li>
-              ))}
-            </ul>
+            <Favorites />
           </Grid>
           <Grid item>
             <h2>Game History</h2>

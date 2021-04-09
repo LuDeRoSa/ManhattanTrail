@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,26 +11,37 @@ class InfoWindow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: this.props.game.gameStage - 1,
-      show: false,
+      index: this.props.gameStage - 1,
       clicked: false,
+      show: false,
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.gameStage !== this.props.gameStage) {
+      this.setState({
+        clicked: false,
+      });
+    }
+  }
+
+  // this.props.gameStage being passedf from infoWindow to grab the right restaurant
   addFav() {
     this.setState({
       show: !this.state.show,
       clicked: true,
     });
-    this.props.addFavorite(this.props.rest.rests[this.state.index].id);
+    this.props.addFavorite(this.props.rests[this.props.gameStage - 1].id);
   }
 
   render() {
-    const { name } = this.props;
-    const restId = this.props.rest.rests[this.state.index].id;
-    return this.props.show ? (
-      <div id='info' style={{ width: 100, height: 100 }}>
-        {this.props.name}
+    const restaurantName = this.props.rests[this.props.gameStage - 1]
+      .restaurant_name;
+
+    const restId = this.props.rests[this.state.index].id;
+    return (
+      <div className='info' style={{ width: 50, height: 80 }}>
+        {restaurantName}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
           {!this.state.clicked && (
@@ -50,9 +60,15 @@ class InfoWindow extends Component {
           )}
         </IconButton>
       </div>
-    ) : null;
+    );
   }
 }
+const mapState = (state) => {
+  return {
+    rests: state.rest.rests,
+    gameStage: state.game.gameStage,
+  };
+};
 
 const mapToDispatch = (dispatch) => {
   return {
@@ -60,4 +76,4 @@ const mapToDispatch = (dispatch) => {
   };
 };
 
-export default connect((state) => state, mapToDispatch)(InfoWindow);
+export default connect(mapState, mapToDispatch)(InfoWindow);
