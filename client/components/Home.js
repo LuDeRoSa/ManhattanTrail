@@ -30,7 +30,7 @@ export const Home = (props) => {
           onClick={props.nextStage}
         >
           {props.game.gameStage}
-          {/* {props.nextDisplay} */}
+          {props.nextDisplay}
         </Button>
       </center>
       <Grid
@@ -63,6 +63,10 @@ const mapState = (state) => {
     userId: state.auth.id,
     rests: state.rest.rests,
     game: state.game,
+    nextDisplay:
+      state.game.gameStage === state.rest.rests.length
+        ? 'End Game'
+        : 'Continue your Adventure!',
   };
 };
 const mapDispatch = {
