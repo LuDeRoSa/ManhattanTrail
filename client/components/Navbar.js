@@ -80,7 +80,12 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                     >
                       Logout
                     </Button>
-                    <Button component={Link} to="/aboutus">
+                    <Button
+                      className={classes.button}
+                      // onClick={handleClick}
+                      component={Link}
+                      to="/aboutus"
+                    >
                       About Us
                     </Button>
                   </div>

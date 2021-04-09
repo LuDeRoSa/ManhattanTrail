@@ -19,10 +19,14 @@ const styles = {
     height: '90vh',
   },
   paper: {
-    margin: '1rem',
+    margin: '5rem',
     padding: '1rem',
   },
   card: { margin: '1rem', padding: '1rem' },
+  media: {
+    height: 175,
+    width: 175
+  }
 };
 
 
@@ -34,31 +38,46 @@ class AboutUs extends Component {
         <div className="tech-heading">Technologies</div>
       <Grid
         container
-        spacing={2}
+        spacing={1}
         direction="row"
         alignItems="center"
         justify="space-around"
       >
 
-        <Grid item xs={12} sm={6} lg={4}>
+        <Grid item xs={5} sm={5} lg={3}>
           <Card style={styles.card}>
-            <CardMedia
-            // className={classes.media}
-            src={require('logo.svg')}
-            component="img"
-            // style={styles.media}
-            />
-            React.js
+          <CardMedia
+          style={styles.media}
+          component="img"
+          alt="Contemplative Reptile"
+          height="140"
+          image="./img/react-logo.png"
+        />
+          <b>  React.js </b>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} lg={4}>
-          <Card style={styles.card}>
-            Material UI
+        <Grid item xs={5} sm={5} lg={3}>
+        <Card style={styles.card}>
+          <CardMedia
+          style={styles.media}
+          component="img"
+          alt="Contemplative Reptile"
+          height="140"
+          image="./img/material-ui-logo.png"
+        />
+          <b>Material UI</b>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6} lg={4}>
-          <Card style={styles.card}>
-            Google Maps API
+        <Grid item xs={5} sm={5} lg={3}>
+        <Card style={styles.card}>
+          <CardMedia
+          style={styles.media}
+          component="img"
+          alt="Contemplative Reptile"
+          height="140"
+          image="./img/google-maps-logo.png"
+        />
+          <b>Google Maps API</b>
           </Card>
         </Grid>
       </Grid>
