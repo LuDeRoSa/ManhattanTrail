@@ -23,8 +23,8 @@ export const Home = (props) => {
     <div>
       <center>
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           disabled={props.game.mini_status !== 'finished'}
           endIcon={<NavigateNextIcon />}
           onClick={props.nextStage}
@@ -35,9 +35,9 @@ export const Home = (props) => {
       <Grid
         container
         spacing={2}
-        direction='row'
-        alignItems='center'
-        justify='space-around'
+        direction="row"
+        alignItems="center"
+        justify="space-around"
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
