@@ -30,11 +30,11 @@ class InfoWindow extends Component {
       show: !this.state.show,
       clicked: true,
     });
-    this.props.addFavorite(this.props.rests[this.props.state - 1].id);
+    this.props.addFavorite(this.props.rests[this.props.gameStage - 1].id);
   }
 
   render() {
-    const restaurantName = this.props.rests[this.props.state - 1]
+    const restaurantName = this.props.rests[this.props.gameStage - 1]
       .restaurant_name;
 
     const restId = this.props.rests[this.state.index].id;
