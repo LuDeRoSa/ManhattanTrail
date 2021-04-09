@@ -25,6 +25,7 @@ class InfoWindow extends Component {
     }
   }
 
+  // this.props.gameStage being passedf from infoWindow to grab the right restaurant
   addFav() {
     this.setState({
       show: !this.state.show,
