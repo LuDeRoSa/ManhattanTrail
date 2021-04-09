@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up('xs')]: {
       height: '100vh',
-      alignItems: 'stretch',
+      alignItems: 'flex-start',
     },
     [theme.breakpoints.up('md')]: {
       height: '90vh',
