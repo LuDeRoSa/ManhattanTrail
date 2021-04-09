@@ -12,6 +12,19 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import './Style/LandingPage.css';
 import { makeStyles } from '@material-ui/core/styles';
+import { CardMedia } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  typography: {
+    // Tell Material-UI what the font-size on the html element is.
+    body1: {
+      fontWeight: 700,
+      fontSize: 25,
+    },
+  },
+});
 
 const styles = {
   root: {},
@@ -27,6 +40,9 @@ const styles = {
     padding: '1rem',
   },
   card: { margin: '1rem', padding: '1rem' },
+  media: {
+    padding: '2rem',
+  },
 };
 
 /**
@@ -50,21 +66,25 @@ class LandingPage extends React.Component {
     return (
       <Container style={styles.container}>
         <center>
-          <h1>Welcome to Manhattan Trail!</h1>
+          <Typography variant="h2">Welcome to Manhattan Trail!</Typography>
 
           <br />
-          <div className="landing-page-body">
+
+          {/* <div className="landing-page-body">
             Travel through Manhattan restaurants, play games, and collect food
             at each restaurant that you will donate to a food shelter at the
             end. The better you do in the games, the more food you can collect!{' '}
-          </div>
+          </div> */}
 
           {!game.path_name && (
             <React.Fragment>
               <br />
-              <div className="game-play-text">
+
+              <Typography variant="h4">
+                {' '}
                 You don't have a game set up yet, please pick a path!
-              </div>
+              </Typography>
+
               <br />
               <ButtonGroup>
                 <Button
@@ -100,9 +120,23 @@ class LandingPage extends React.Component {
                   Gluten Free
                 </Button>
               </ButtonGroup>
+              <br />
 
-              <h2>Food Waste: A Massive Crisis</h2>
-              <img src="./img/zero-waste.jpeg" />
+              <ThemeProvider theme={theme}>
+                <Typography variant="body1">
+                  Food Waste: A Massive Crisis
+                </Typography>
+              </ThemeProvider>
+
+              <Card>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="zero-waste"
+                  image="./img/zero-waste.jpeg"
+                />
+              </Card>
+
               <Paper style={styles.paper}>
                 <Grid
                   container
