@@ -12,6 +12,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import './Style/LandingPage.css';
 import { makeStyles } from '@material-ui/core/styles';
+import { CardMedia } from '@material-ui/core';
+
 
 const styles = {
   root: {},
@@ -102,7 +104,17 @@ class LandingPage extends React.Component {
               </ButtonGroup>
 
               <h2>Food Waste: A Massive Crisis</h2>
-              <img src="./img/zero-waste.jpeg" />
+
+              <Card >
+                <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                height="10"
+                width="10"
+                image="./img/zero-waste.jpeg"
+              />
+            </Card>
+
               <Paper style={styles.paper}>
                 <Grid
                   container

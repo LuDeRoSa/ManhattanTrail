@@ -8,7 +8,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import './Style/AboutUs.css';
 import { CardMedia } from '@material-ui/core';
-import OurTeam from './OurTeam';
 
 const styles = {
   root: {},
@@ -31,12 +30,12 @@ const styles = {
 };
 
 
-class AboutUs extends Component {
+class OurTeam extends Component {
   state = {  }
   render() {
     return (
       <Paper style={styles.paper}>
-        <div className="tech-heading">Technologies</div>
+        <div className="tech-heading">Our Team</div>
       <Grid
         container
         spacing={1}
@@ -51,10 +50,10 @@ class AboutUs extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          // height="140"
-          image="./img/react-logo.png"
+          height="140"
+          image="./img/devy.jpeg"
         />
-          <b>  React.js </b>
+          <b> Devy Agarwal </b>
           </Card>
         </Grid>
         <Grid item xs={5} sm={5} lg={3}>
@@ -63,10 +62,10 @@ class AboutUs extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          // height="140"
-          image="./img/material-ui-logo.png"
+          height="140"
+          image="./img/samir.png"
         />
-          <b>Material UI</b>
+          <b>Samir Jain</b>
           </Card>
         </Grid>
         <Grid item xs={5} sm={5} lg={3}>
@@ -75,18 +74,37 @@ class AboutUs extends Component {
           style={styles.media}
           component="img"
           alt="Contemplative Reptile"
-          // height="140"
-          image="./img/google-maps-logo.png"
+          height="140"
+          image="./img/luisa.jpeg"
         />
-          <b>Google Maps API</b>
+          <b>Luisa Zhou</b>
           </Card>
         </Grid>
+
+        <Grid item xs={5} sm={5} lg={3}>
+        <Card style={styles.card}>
+          <CardMedia
+          style={styles.media}
+          component="img"
+          alt="Contemplative Reptile"
+          height="140"
+          image="./img/rommel.png"
+        />
+          <b>Rommel Demano</b>
+          </Card>
+        </Grid>
+
+
+
+
+
+
       </Grid>
-      <OurTeam/>
     </Paper>
+
 
     );
   }
 }
 
-export default AboutUs;
+export default OurTeam;

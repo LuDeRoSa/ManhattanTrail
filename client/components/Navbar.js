@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import GroupIcon from '@material-ui/icons/Group';
 
 import GlobalScore from './GlobalScore';
 
