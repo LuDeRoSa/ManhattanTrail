@@ -31,7 +31,11 @@ class Facebook extends Component {
               <Button
                 variant="outlined"
                 color="primary"
-                style={{ width: '300px', height: '40px', textAlign: 'center' }}
+                style={{
+                  // width: '300px',
+                  height: '40px',
+                  textAlign: 'center',
+                }}
                 variant="contained"
                 color="primary"
                 startIcon={<FacebookIcon />}
