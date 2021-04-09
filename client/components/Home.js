@@ -27,7 +27,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
-    height: '90vh',
+    [theme.breakpoints.up('xs')]: {
+      height: '100vh',
+      alignItems: 'stretch',
+    },
+    [theme.breakpoints.up('md')]: {
+      height: '90vh',
+      alignItems: 'center',
+    },
   },
   map: {
     height: '30vh',
@@ -108,11 +115,11 @@ export const Home = (props) => {
         container
         spacing={2}
         direction="row"
-        alignItems="center"
-        justify="space-around"
+        alignContent="space-around"
+        justify="space-evenly"
         className={classes.container}
       >
-        <Grid item lg={1} md={1} sm={false} xs={false} />
+        <Grid item lg={1} md={false} sm={false} xs={false} />
         <Grid item lg={4} md={4} sm={10} xs={12} className={classes.map}>
           <Map />
         </Grid>
@@ -120,7 +127,7 @@ export const Home = (props) => {
         <Grid item lg={5} md={5} sm={10} xs={12}>
           <GameStart game_type={game_type} />
         </Grid>
-        <Grid item lg={1} md={1} sm={false} xs={false} />
+        <Grid item lg={1} md={false} sm={false} xs={false} />
       </Grid>
     </div>
   );
