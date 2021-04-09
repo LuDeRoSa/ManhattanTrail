@@ -31,13 +31,14 @@ const Favorites = (props) => {
               </TableHead>
               <TableBody>
                 {favorites.map((favorite, id) => {
+                  const query = favorite.restaurant.restaurant_name
+                    .split(' ')
+                    .join('+');
+                  const searchGoogle = `https://www.google.com/search?q=${query}`;
                   return (
                     <TableRow key={IDBObjectStore}>
                       <TableCell align="left" key={id}>
-                        <a
-                          href="https://www.google.com/search?q=google&rlz=1C5CHFA_enUS787US787&sxsrf=ALeKk03emDt_mc6aqQc_kTjCA7PcVZnIxA%3A1617935407322&ei=L7xvYNKYE9Kl5NoP4biH6As&oq=google&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBAgjECcyBAgjECcyDQgAEIcCELEDEIMBEBQyCggAELEDEIMBEEMyBQgAEJECMgYIABAKEEMyBQgAEJECMgcIABCxAxBDMgcIABCxAxBDOgcIABBHELADOggIABCxAxCDAToFCAAQsQM6BAgAEENQ6PYQWOb7EGCc_RBoA3ACeACAAVmIAaIEkgEBN5gBAKABAaoBB2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiS7OOJj_DvAhXSElkFHWHcAb0Q4dUDCA0&uact=5"
-                          target="_blank"
-                        >
+                        <a href={searchGoogle} target="_blank">
                           {favorite.restaurant.restaurant_name}
                         </a>
                       </TableCell>
