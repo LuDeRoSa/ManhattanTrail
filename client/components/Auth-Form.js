@@ -24,35 +24,35 @@ const AuthForm = (props) => {
     <Grid
       container
       spacing={2}
-      wrap='wrap'
-      direction='column'
-      alignItems='center'
-      justify='center'
-      className='login-form'
+      wrap="wrap"
+      direction="column"
+      alignItems="center"
+      justify="center"
+      className="login-form"
       style={{ minHeight: '100vh' }}
     >
       <Paper
-        variant='elevation'
+        variant="elevation"
         elevation={2}
         style={{ margin: '3rem', padding: '3rem' }}
-        className='login-background'
+        className="login-background"
       >
         <Grid item>
           <form onSubmit={handleSubmit} name={name}>
             <Grid
               container
-              direction='column'
+              direction="column"
               spacing={2}
-              alignItems='center'
-              justify='center'
+              alignItems="center"
+              justify="center"
             >
               <Grid item>
                 <TextField
-                  type='email'
-                  placeholder='Email'
-                  fullWidthname='username'
-                  autoComplete='email'
-                  variant='outlined'
+                  type="email"
+                  placeholder="Email"
+                  fullWidthname="username"
+                  autoComplete="email"
+                  variant="outlined"
                   required
                   autoFocus
                   style={{ width: 300 }}
@@ -60,10 +60,10 @@ const AuthForm = (props) => {
               </Grid>
               <Grid item>
                 <TextField
-                  type='password'
-                  placeholder='Password'
-                  fullWidthname='password'
-                  variant='outlined'
+                  type="password"
+                  placeholder="Password"
+                  fullWidthname="password"
+                  variant="outlined"
                   autoComplete={autocomplete_attribute}
                   required
                   style={{ width: 300 }}
@@ -72,9 +72,9 @@ const AuthForm = (props) => {
               <Grid item>
                 <Button
                   style={{ width: '300px', height: '40px' }}
-                  variant='contained'
-                  color='primary'
-                  type='submit'
+                  variant="contained"
+                  color="primary"
+                  type="submit"
                 >
                   {displayName}
                 </Button>
@@ -94,8 +94,8 @@ const AuthForm = (props) => {
                       height: '40px',
                       textAlign: 'center',
                     }}
-                    variant='contained'
-                    color='primary'
+                    variant="contained"
+                    color="primary"
                     startIcon={<GitHubIcon />}
                     href={window.githubURL}
                   >
