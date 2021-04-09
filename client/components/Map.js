@@ -76,9 +76,10 @@ class _Map extends React.Component {
     this.setState({ show: !this.state.show });
   }
   render() {
+    // console.log('map', this.props);
     return (
       <React.Fragment>
-        <InfoWindow lat={this.state.center.lat} lng={this.state.center.lng} />
+        <InfoWindow lat={this.state.center.lat} lng={this.state.center.lng} />)
         <div style={{ height: '90%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{

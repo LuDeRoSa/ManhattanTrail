@@ -13,9 +13,7 @@ const Marker = (props) => {
         backgroundColor: color,
       }}
       title={name}
-    >
-      )}
-    </div>
+    ></div>
   );
 };
 

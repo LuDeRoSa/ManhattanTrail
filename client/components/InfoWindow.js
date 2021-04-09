@@ -12,8 +12,8 @@ class InfoWindow extends Component {
     super(props);
     this.state = {
       index: this.props.game.gameStage - 1,
-      show: false,
       clicked: false,
+      show: false,
     };
   }
 
@@ -26,8 +26,11 @@ class InfoWindow extends Component {
   }
 
   render() {
+    console.log('infowindow', this.props);
     const restaurantName = this.props.rest.rests[this.state.index]
       .restaurant_name;
+    console.log('name', restaurantName);
+
     const restId = this.props.rest.rests[this.state.index].id;
     return (
       <div className='info' style={{ width: 50, height: 80 }}>
