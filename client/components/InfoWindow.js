@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
@@ -27,11 +26,12 @@ class InfoWindow extends Component {
   }
 
   render() {
-    const { name } = this.props;
+    const restaurantName = this.props.rest.rests[this.state.index]
+      .restaurant_name;
     const restId = this.props.rest.rests[this.state.index].id;
     return this.props.show ? (
-      <div id='info' style={{ width: 100, height: 100 }}>
-        {this.props.name}
+      <div className='info' style={{ width: 50, height: 80 }}>
+        {restaurantName}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
           {!this.state.clicked && (

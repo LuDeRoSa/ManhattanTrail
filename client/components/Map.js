@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
+import InfoWindow from './InfoWindow';
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -78,6 +79,11 @@ class _Map extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <InfoWindow
+          show={this.state.show}
+          lat={this.state.center.lat}
+          lng={this.state.center.lng}
+        />
         <div style={{ height: '90%', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
