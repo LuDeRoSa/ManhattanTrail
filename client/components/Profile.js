@@ -29,21 +29,21 @@ class Profile extends React.Component {
         <Grid
           container
           spacing={1}
-          direction='row'
-          alignItems='center'
-          justify='space-around'
+          direction="row"
+          alignItems="center"
+          justify="space-around"
         >
           <Grid item>
-            <Container id='account_container' style={{ width: 450 }}>
-              <Paper variant='elevation' elevation={1}>
+            <Container id="account_container" style={{ width: 450 }}>
+              <Paper variant="elevation" elevation={1}>
                 <TableContainer>
-                  <Table aria-label='simple table'>
+                  <Table aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align='left'>
+                        <TableCell align="left">
                           <b>Credentials</b>
                         </TableCell>
-                        <TableCell align='left'>
+                        <TableCell align="left">
                           <b>Information</b>
                         </TableCell>
                       </TableRow>
@@ -59,8 +59,8 @@ class Profile extends React.Component {
                         .map((key, idx) => {
                           return (
                             <TableRow key={idx}>
-                              <TableCell align='left'>{key}</TableCell>
-                              <TableCell align='left'>{account[key]}</TableCell>
+                              <TableCell align="left">{key}</TableCell>
+                              <TableCell align="left">{account[key]}</TableCell>
                             </TableRow>
                           );
                         })}
@@ -71,13 +71,13 @@ class Profile extends React.Component {
             </Container>
           </Grid>
           <Grid item>
-            <Container id='account_container' style={{ width: 450 }}>
-              <Paper variant='elevation' elevation={1}>
+            <Container id="account_container" style={{ width: 450 }}>
+              <Paper variant="elevation" elevation={1}>
                 <TableContainer>
-                  <Table aria-label='simple table'>
+                  <Table aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align='left'>
+                        <TableCell align="left">
                           <b>Favorited Restaraunts</b>
                         </TableCell>
                       </TableRow>
@@ -87,10 +87,10 @@ class Profile extends React.Component {
                         return (
                           <TableRow key={IDBObjectStore}>
                             <a
-                              href='https://www.google.com/search?q=google&rlz=1C5CHFA_enUS787US787&sxsrf=ALeKk03emDt_mc6aqQc_kTjCA7PcVZnIxA%3A1617935407322&ei=L7xvYNKYE9Kl5NoP4biH6As&oq=google&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBAgjECcyBAgjECcyDQgAEIcCELEDEIMBEBQyCggAELEDEIMBEEMyBQgAEJECMgYIABAKEEMyBQgAEJECMgcIABCxAxBDMgcIABCxAxBDOgcIABBHELADOggIABCxAxCDAToFCAAQsQM6BAgAEENQ6PYQWOb7EGCc_RBoA3ACeACAAVmIAaIEkgEBN5gBAKABAaoBB2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiS7OOJj_DvAhXSElkFHWHcAb0Q4dUDCA0&uact=5'
-                              target='_blank'
+                              href="https://www.google.com/search?q=google&rlz=1C5CHFA_enUS787US787&sxsrf=ALeKk03emDt_mc6aqQc_kTjCA7PcVZnIxA%3A1617935407322&ei=L7xvYNKYE9Kl5NoP4biH6As&oq=google&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBAgjECcyBAgjECcyDQgAEIcCELEDEIMBEBQyCggAELEDEIMBEEMyBQgAEJECMgYIABAKEEMyBQgAEJECMgcIABCxAxBDMgcIABCxAxBDOgcIABBHELADOggIABCxAxCDAToFCAAQsQM6BAgAEENQ6PYQWOb7EGCc_RBoA3ACeACAAVmIAaIEkgEBN5gBAKABAaoBB2d3cy13aXrIAQjAAQE&sclient=gws-wiz&ved=0ahUKEwiS7OOJj_DvAhXSElkFHWHcAb0Q4dUDCA0&uact=5"
+                              target="_blank"
                             >
-                              <TableCell align='left' key={id}>
+                              <TableCell align="left" key={id}>
                                 {favorite.restaurant.restaurant_name}
                               </TableCell>
                             </a>
