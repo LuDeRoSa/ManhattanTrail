@@ -18,7 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 export const Home = (props) => {
@@ -44,8 +44,8 @@ export const Home = (props) => {
     <div>
       <center>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           disabled={props.game.mini_status !== 'finished'}
           endIcon={<NavigateNextIcon />}
           onClick={props.nextStage}
@@ -56,9 +56,9 @@ export const Home = (props) => {
       <Grid
         container
         spacing={2}
-        direction="row"
-        alignItems="center"
-        justify="space-around"
+        direction='row'
+        alignItems='center'
+        justify='space-around'
         style={{ height: '90vh' }}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
@@ -76,22 +76,31 @@ export const Home = (props) => {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
+        aria-labelledby='alert-dialog-slide-title'
+        aria-describedby='alert-dialog-slide-description'
       >
-        <DialogTitle id="alert-dialog-slide-title">
-          {'Mini Game finished! Continue to next stage'}
+        <DialogTitle id='alert-dialog-slide-title'>
+          {props.nextDisplay === 'End Game'
+            ? 'Congratulations! You are done with this path.'
+            : 'Mini Game finished! Continue to next stage'}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            You're ready to move onto the next stage on {props.game.path_name}{' '}
-            pathway. Your score so far is {props.game.total_score}
-          </DialogContentText>
+          {props.nextDisplay === 'End Game' ? (
+            <DialogContentText id='alert-dialog-slide-description'>
+              You are ready to move onto the next path. Your score so far is{' '}
+              {props.game.total_score}
+            </DialogContentText>
+          ) : (
+            <DialogContentText id='alert-dialog-slide-description'>
+              You're ready to move onto the next stage on {props.game.path_name}{' '}
+              pathway. Your score so far is {props.game.total_score}
+            </DialogContentText>
+          )}
         </DialogContent>
         <DialogActions>
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             disabled={props.game.mini_status !== 'finished'}
             endIcon={<NavigateNextIcon />}
             onClick={() => {
@@ -103,6 +112,7 @@ export const Home = (props) => {
           </Button>
         </DialogActions>
       </Dialog>
+      )
     </div>
   );
 };
