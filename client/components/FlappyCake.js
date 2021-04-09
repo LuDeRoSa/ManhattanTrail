@@ -35,6 +35,7 @@ class FlappyCake extends Component {
     this.canvasRef = React.createRef();
     this.onClick = this.onClick.bind(this);
     this.onKey = this.onKey.bind(this);
+    this.onTouch = this.onTouch.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +48,7 @@ class FlappyCake extends Component {
     }, 1000 / 60);
     document.addEventListener('click', this.onClick);
     document.addEventListener('keydown', this.onKey);
+    document.addEventListener('touchstart', this.onTouch);
   }
 
   componentDidUpdate() {
@@ -56,23 +58,30 @@ class FlappyCake extends Component {
   }
   onClick(e) {
     if (e.target.tagName === 'CANVAS') {
-      this.bump();
+      this.bump(e);
     }
   }
   onKey(e) {
     if (e.code === 'Space' || e.code === 'ArrowUp') {
-      this.bump();
+      this.bump(e);
+    }
+  }
+  onTouch(e) {
+    if (e.target.tagName === 'CANVAS') {
+      this.bump(e);
     }
   }
   componentWillUnmount() {
     clearInterval(this.interval);
     document.removeEventListener('click', this.onClick);
     document.removeEventListener('keydown', this.onKey);
+    document.removeEventListener('touchstart', this.onTouch);
     this.setState({
       playing: false,
     });
   }
-  bump() {
+  bump(e) {
+    e.preventDefault();
     this.setState({
       bird: {
         x: 50,
