@@ -21,11 +21,10 @@ const theme = createMuiTheme({
     // Tell Material-UI what the font-size on the html element is.
     body1: {
       fontWeight: 700,
-      fontSize: 25
-    }
+      fontSize: 25,
+    },
   },
 });
-
 
 const styles = {
   root: {},
@@ -42,8 +41,8 @@ const styles = {
   },
   card: { margin: '1rem', padding: '1rem' },
   media: {
-    padding: '2rem'
-  }
+    padding: '2rem',
+  },
 };
 
 /**
@@ -67,8 +66,7 @@ class LandingPage extends React.Component {
     return (
       <Container style={styles.container}>
         <center>
-
-          <Typography variant="h2" >Welcome to Manhattan Trail!</Typography >
+          <Typography variant="h2">Welcome to Manhattan Trail!</Typography>
 
           <br />
 
@@ -82,7 +80,10 @@ class LandingPage extends React.Component {
             <React.Fragment>
               <br />
 
-              <Typography variant="h4"> You don't have a game set up yet, please pick a path!</Typography>
+              <Typography variant="h4">
+                {' '}
+                You don't have a game set up yet, please pick a path!
+              </Typography>
 
               <br />
               <ButtonGroup>
@@ -119,19 +120,21 @@ class LandingPage extends React.Component {
                   Gluten Free
                 </Button>
               </ButtonGroup>
-              <br/>
+              <br />
 
               <ThemeProvider theme={theme}>
-              <Typography variant="body1">Food Waste: A Massive Crisis</Typography>
+                <Typography variant="body1">
+                  Food Waste: A Massive Crisis
+                </Typography>
               </ThemeProvider>
 
-              <Card >
+              <Card>
                 <CardMedia
-                style={styles.media}
-                component="img"
-                alt="zero-waste"
-                image="./img/zero-waste.jpeg"
-              />
+                  style={styles.media}
+                  component="img"
+                  alt="zero-waste"
+                  image="./img/zero-waste.jpeg"
+                />
               </Card>
 
               <Paper style={styles.paper}>

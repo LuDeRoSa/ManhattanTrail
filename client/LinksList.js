@@ -22,10 +22,10 @@ const linksList = [
     path: '/leadership',
   },
   {
-    text: "About Us",
+    text: 'About Us',
     icon: <GroupIcon />,
-    path: '/aboutus'
-  }
+    path: '/aboutus',
+  },
 ];
 
 export default linksList;
