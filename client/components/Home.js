@@ -7,6 +7,8 @@ import { nextStage, fetchMiniGameComplete } from '../store/game';
 import { setGame } from '../store/game';
 import GameStart from './GameStart';
 
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -16,12 +18,30 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { StylesProvider } from '@material-ui/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  container: {
+    height: '90vh',
+  },
+  map: {
+    height: '30vh',
+    [theme.breakpoints.up('md')]: {
+      height: '70vh',
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '80vh',
+    },
+  },
+}));
+
 export const Home = (props) => {
+  const classes = useStyles();
   useEffect(() => {
     props.fetchMiniGameComplete();
   }, []);
@@ -90,10 +110,10 @@ export const Home = (props) => {
         direction="row"
         alignItems="center"
         justify="space-around"
-        style={{ height: '90vh' }}
+        className={classes.container}
       >
         <Grid item lg={1} md={1} sm={false} xs={false} />
-        <Grid item lg={4} md={4} sm={10} xs={12} style={{ height: '70vh' }}>
+        <Grid item lg={4} md={4} sm={10} xs={12} className={classes.map}>
           <Map />
         </Grid>
         <Grid item lg={1} md={false} sm={false} xs={false} />
