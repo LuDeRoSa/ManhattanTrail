@@ -77,10 +77,11 @@ class _Map extends React.Component {
   }
   render() {
     // console.log('map', this.props);
+    console.log('gameStage', this.props.gameStage);
     return (
       <React.Fragment>
-        <InfoWindow lat={this.state.center.lat} lng={this.state.center.lng} />)
         <div style={{ height: '90%', width: '100%' }}>
+          <InfoWindow center={this.props.center} />
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
