@@ -55,8 +55,8 @@ export const Home = (props) => {
 
         <Dialog
           open={open}
-          // TransitionComponent={Transition}
-          keepMounted
+          TransitionComponent={Transition}
+          // keepMounted
           onClose={handleClose}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
