@@ -30,7 +30,7 @@ class InfoWindow extends Component {
       show: !this.state.show,
       clicked: true,
     });
-    this.props.addFavorite(this.props.rests[this.state.index].id);
+    this.props.addFavorite(this.props.rests[this.props.state - 1].id);
   }
 
   render() {
@@ -39,7 +39,7 @@ class InfoWindow extends Component {
 
     const restId = this.props.rests[this.state.index].id;
     return (
-      <div className="info" style={{ width: 50, height: 80 }}>
+      <div className='info' style={{ width: 50, height: 80 }}>
         {restaurantName}
         <br />
         <IconButton onClick={() => this.addFav(restId)}>
