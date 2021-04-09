@@ -67,6 +67,21 @@ const syncAndSeed = async () => {
       restaurant_longitude: -74.0089165,
       restaurant_latitude: 40.719086,
     }),
+    Restaurant.create({
+      restaurant_name: 'Mala Project',
+      restaurant_longitude: -73.989308,
+      restaurant_latitude: 40.741895,
+    }),
+    Restaurant.create({
+      restaurant_name: 'Szechuan Mountain House',
+      restaurant_longitude: -73.9879662,
+      restaurant_latitude: 40.7288338,
+    }),
+    Restaurant.create({
+      restaurant_name: 'Café China',
+      restaurant_longitude: -73.9821195,
+      restaurant_latitude: 40.7500524,
+    }),
   ]);
 
   //hardcoding first path:
@@ -100,18 +115,6 @@ const syncAndSeed = async () => {
       restaurantId: restaurants[4].id,
       stage: 5,
       game_type: 'sortfruits',
-    }),
-    Path.create({
-      path_name: 'chinese',
-      restaurantId: restaurants[6].id,
-      stage: 1,
-      game_type: 'quiz',
-    }),
-    Path.create({
-      path_name: 'chinese',
-      restaurantId: restaurants[7].id,
-      stage: 2,
-      game_type: 'hangman',
     }),
     Path.create({
       path_name: 'gluten-free',
@@ -149,6 +152,24 @@ const syncAndSeed = async () => {
       stage: 3,
       game_type: 'flappy',
     }),
+    Path.create({
+      path_name: 'chinese',
+      restaurantId: restaurants[11].id,
+      stage: 1,
+      game_type: 'quiz',
+    }),
+    Path.create({
+      path_name: 'chinese',
+      restaurantId: restaurants[12].id,
+      stage: 2,
+      game_type: 'snake',
+    }),
+    Path.create({
+      path_name: 'chinese',
+      restaurantId: restaurants[13].id,
+      stage: 3,
+      game_type: 'hangman',
+    }),
   ]);
 
   const quizzes = await Promise.all([
@@ -163,6 +184,9 @@ const syncAndSeed = async () => {
     }),
     Quiz.create({
       restaurantId: restaurants[6].id,
+    }),
+    Quiz.create({
+      restaurantId: restaurants[11].id,
     }),
   ]);
 
@@ -533,6 +557,84 @@ const syncAndSeed = async () => {
           {
             answer: 'False',
             isCorrect: true,
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question: 'What is extra-firm tofu made from?',
+        quizId: quizzes[4].id,
+        answers: [
+          {
+            answer: 'Soy Beans',
+            isCorrect: true,
+          },
+          {
+            answer: 'Recycled Cardboard',
+          },
+
+          {
+            answer: 'Egg Whites And Cream',
+          },
+          {
+            answer: 'Processed Potato Peel',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+
+    Question.create(
+      {
+        question:
+          'What collection of small dishes, often including dumplings, is served for snack or lunch in China?',
+        quizId: quizzes[4].id,
+        answers: [
+          {
+            answer: 'Dim Sum',
+            isCorrect: true,
+          },
+          {
+            answer: 'Egg Roll',
+          },
+
+          {
+            answer: 'Thai Chi',
+          },
+          {
+            answer: 'Bahn Mi',
+          },
+        ],
+      },
+      {
+        include: Answer,
+      }
+    ),
+    Question.create(
+      {
+        question:
+          'Which of these vegetables are least likely to be found in a Chinese food recipe?',
+        quizId: quizzes[4].id,
+        answers: [
+          {
+            answer: 'Artichokes',
+            isCorrect: true,
+          },
+          {
+            answer: 'Bok Choy',
+          },
+
+          {
+            answer: 'Water Chestnuts',
+          },
+          {
+            answer: 'Brocolli',
           },
         ],
       },
