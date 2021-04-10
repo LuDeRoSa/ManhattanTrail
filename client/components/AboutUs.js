@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
     return (
       <Container>
-        <Paper className={styles.paper}>
+        <Paper className={classes.paper}>
           <div className="tech-heading">Technologies</div>
           <Grid
             container
