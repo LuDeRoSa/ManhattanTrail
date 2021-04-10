@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import GameOver from './components/GameOver';
 import Profile from './components/Profile';
 import Leadership from './components/Leadership';
+import AboutUs from './components/AboutUs';
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
             <Route path="/gameover" component={GameOver} />
             <Route path="/profile" component={Profile} />
             <Route path="/leadership" component={Leadership} />
+            <Route path="/aboutus" component={AboutUs} />
             <Redirect to="/landing" />
           </Switch>
         ) : (
