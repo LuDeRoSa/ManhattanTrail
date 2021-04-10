@@ -60,7 +60,6 @@ export const AboutUs = (props) => {
                 alt="material-ui-logo"
                 image="./img/material-ui-logo.png"
               />
-              <b>Material UI</b>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
