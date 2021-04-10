@@ -70,6 +70,7 @@ const AuthForm = (props) => {
                   className="login-field"
                   type="password"
                   name="password"
+                  placeholder="Password"
                   variant="outlined"
                   autoComplete={autocomplete_attribute}
                   required
