@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import './Style/AboutUs.css';
 import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -28,7 +29,7 @@ export const OurTeam = (props) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" square className={classes.paper}>
-      <div className="tech-heading">Our Team</div>
+      <div className="tech-heading">The Team</div>
       <Grid
         container
         spacing={1}
@@ -38,6 +39,9 @@ export const OurTeam = (props) => {
       >
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
+            <Typography variant="h5" component="h2">
+              Devy Agarwal
+            </Typography>
             <CardMedia
               className={classes.media}
               component="img"
@@ -45,11 +49,13 @@ export const OurTeam = (props) => {
               // height="140"
               image="./img/devy.jpeg"
             />
-            <b> Devy Agarwal </b>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
+            <Typography variant="h5" component="h2">
+              Samir Jain
+            </Typography>
             <CardMedia
               className={classes.media}
               component="img"
@@ -57,11 +63,13 @@ export const OurTeam = (props) => {
               // height="140"
               image="./img/samir.jpg"
             />
-            <b>Samir Jain</b>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
+            <Typography variant="h5" component="h2">
+              Luisa Zhou
+            </Typography>
             <CardMedia
               className={classes.media}
               component="img"
@@ -69,12 +77,14 @@ export const OurTeam = (props) => {
               // height="140"
               image="./img/luisa.jpeg"
             />
-            <b>Luisa Zhou</b>
           </Card>
         </Grid>
 
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
+            <Typography variant="h5" component="h2">
+              Rommel Demano
+            </Typography>
             <CardMedia
               className={classes.media}
               component="img"
@@ -82,7 +92,6 @@ export const OurTeam = (props) => {
               // height="140"
               image="./img/rommel.png"
             />
-            <b>Rommel Demano</b>
           </Card>
         </Grid>
       </Grid>

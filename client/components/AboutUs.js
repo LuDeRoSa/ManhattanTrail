@@ -48,7 +48,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="react-logo"
-                // height="140"
                 image="./img/react-logo.png"
               />
               <b> React.js </b>
@@ -60,7 +59,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="material-ui-logo"
-                // height="140"
                 image="./img/material-ui-logo.png"
               />
               <b>Material UI</b>
@@ -72,7 +70,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="google-maps-logo"
-                // height="140"
                 image="./img/google-maps-logo.png"
               />
               <b>Google Maps API</b>
@@ -85,7 +82,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="logo"
-                // height="140"
                 image="./img/node-js-logo.svg"
               />
               <b>Node.js</b>
@@ -111,7 +107,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="logo"
-                // height="140"
                 image="./img/postgresql-logo.png"
               />
               <b>PostgreSQL</b>
@@ -124,7 +119,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="logo"
-                // height="140"
                 image="./img/oauth-logo.png"
               />
               <b>OAuth 2.0</b>
@@ -137,7 +131,6 @@ export const AboutUs = (props) => {
                 className={classes.media}
                 component="img"
                 alt="logo"
-                // height="140"
                 image="./img/sequelize-logo.png"
               />
               <b>Sequelize</b>
