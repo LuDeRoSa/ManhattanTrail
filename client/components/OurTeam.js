@@ -1,102 +1,102 @@
-import React, { Component } from 'react';
-import Container from '@material-ui/core/Container';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import './Style/AboutUs.css';
-import { CardMedia } from '@material-ui/core';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {},
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'space-around',
-    alignItems: 'center',
-    height: '90vh',
-  },
   paper: {
-    margin: '5rem',
+    margin: '1rem',
     padding: '1rem',
+    backgroundColor: theme.palette.background.default,
   },
-  card: { margin: '1rem', padding: '1rem' },
+  card: {
+    margin: '1rem',
+    padding: '1rem',
+    backgroundColor: theme.palette.background.default,
+  },
   media: {
     height: 150,
     width: 150,
   },
+}));
+
+export const OurTeam = (props) => {
+  const classes = useStyles();
+  return (
+    <Paper variant="outlined" square className={classes.paper}>
+      <div className="tech-heading">The Team</div>
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        alignItems="center"
+        justify="space-around"
+      >
+        <Grid item xs={12} sm={6} lg={3}>
+          <Card className={classes.card}>
+            <Typography variant="h5" component="h2" align="center">
+              Devy Agarwal
+            </Typography>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/devy.jpeg"
+            />
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
+          <Card className={classes.card}>
+            <Typography variant="h5" component="h2" align="center">
+              Samir Jain
+            </Typography>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/samir.jpg"
+            />
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} lg={3}>
+          <Card className={classes.card}>
+            <Typography variant="h5" component="h2" align="center">
+              Luisa Zhou
+            </Typography>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/luisa.jpeg"
+            />
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={6} lg={3}>
+          <Card className={classes.card}>
+            <Typography variant="h5" component="h2" align="center">
+              Rommel Demano
+            </Typography>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/rommel.png"
+            />
+          </Card>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
 };
-
-class OurTeam extends Component {
-  state = {};
-  render() {
-    return (
-      <Container>
-        <Paper style={styles.paper}>
-          <div className="tech-heading">Our Team</div>
-          <Grid
-            container
-            spacing={1}
-            direction="row"
-            alignItems="center"
-            justify="space-around"
-          >
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/devy.jpeg"
-                />
-                <b> Devy Agarwal </b>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/samir.jpg"
-                />
-                <b>Samir Jain</b>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/luisa.jpeg"
-                />
-                <b>Luisa Zhou</b>
-              </Card>
-            </Grid>
-
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/rommel.png"
-                />
-                <b>Rommel Demano</b>
-              </Card>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
-    );
-  }
-}
 
 export default OurTeam;
