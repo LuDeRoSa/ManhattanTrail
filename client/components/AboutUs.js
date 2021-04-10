@@ -31,134 +31,124 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- export const AboutUs = (props) => {
-
+export const AboutUs = (props) => {
   const classes = useStyles();
 
-    return (
-      <Container>
-        <Paper className={classes.paper}>
-          <div className="tech-heading">Technologies</div>
-          <Grid
-            container
-            spacing={1}
-            direction="row"
-            alignItems="center"
-            justify="space-around"
-          >
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="react-logo"
-                  // height="140"
-                  image="./img/react-logo.png"
-                />
-                <b> React.js </b>
+  return (
+    <Paper className={classes.paper}>
+      <div className="tech-heading">Technologies</div>
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        alignItems="center"
+        justify="space-around"
+      >
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="react-logo"
+              // height="140"
+              image="./img/react-logo.png"
+            />
+            <b> React.js </b>
+          </Card>
+        </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="material-ui-logo"
+              // height="140"
+              image="./img/material-ui-logo.png"
+            />
+            <b>Material UI</b>
+          </Card>
+        </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="google-maps-logo"
+              // height="140"
+              image="./img/google-maps-logo.png"
+            />
+            <b>Google Maps API</b>
+          </Card>
+        </Grid>
 
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="material-ui-logo"
-                  // height="140"
-                  image="./img/material-ui-logo.png"
-                />
-                <b>Material UI</b>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="logo"
+              // height="140"
+              image="./img/node-js-logo.svg"
+            />
+            <b>Node.js</b>
+          </Card>
+        </Grid>
 
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="google-maps-logo"
-                  // height="140"
-                  image="./img/google-maps-logo.png"
-                />
-                <b>Google Maps API</b>
-              </Card>
-            </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="logo"
+              // height="140"
+              image="./img/express-logo.jpeg"
+            />
+            <b>Express</b>
+          </Card>
+        </Grid>
 
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="logo"
+              // height="140"
+              image="./img/postgresql-logo.png"
+            />
+            <b>PostgreSQL</b>
+          </Card>
+        </Grid>
 
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="logo"
-                  // height="140"
-                  image="./img/node-js-logo.svg"
-                />
-                <b>Node.js</b>
-              </Card>
-            </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="logo"
+              // height="140"
+              image="./img/oauth-logo.png"
+            />
+            <b>OAuth 2.0</b>
+          </Card>
+        </Grid>
 
-            <Grid item xs={5} sm={5} lg={3}>
-            <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="logo"
-                  // height="140"
-                  image="./img/express-logo.jpeg"
-                />
-                <b>Express</b>
-              </Card>
-            </Grid>
-
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="logo"
-                  // height="140"
-                  image="./img/postgresql-logo.png"
-                />
-                <b>PostgreSQL</b>
-              </Card>
-            </Grid>
-
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="logo"
-                  // height="140"
-                  image="./img/oauth-logo.png"
-                />
-                <b>OAuth 2.0</b>
-              </Card>
-            </Grid>
-
-
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="logo"
-                  // height="140"
-                  image="./img/sequelize-logo.png"
-                />
-                <b>Sequelize</b>
-              </Card>
-            </Grid>
-
-
-          </Grid>
-          <OurTeam />
-        </Paper>
-      </Container>
-    );
-
-}
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="logo"
+              // height="140"
+              image="./img/sequelize-logo.png"
+            />
+            <b>Sequelize</b>
+          </Card>
+        </Grid>
+      </Grid>
+      <OurTeam />
+    </Paper>
+  );
+};
 
 export default AboutUs;
