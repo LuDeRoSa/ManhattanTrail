@@ -39,7 +39,7 @@ export const OurTeam = (props) => {
       >
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" align="center">
               Devy Agarwal
             </Typography>
             <CardMedia
@@ -53,7 +53,7 @@ export const OurTeam = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" align="center">
               Samir Jain
             </Typography>
             <CardMedia
@@ -67,7 +67,7 @@ export const OurTeam = (props) => {
         </Grid>
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" align="center">
               Luisa Zhou
             </Typography>
             <CardMedia
@@ -82,7 +82,7 @@ export const OurTeam = (props) => {
 
         <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" align="center">
               Rommel Demano
             </Typography>
             <CardMedia
