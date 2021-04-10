@@ -13,16 +13,9 @@ import OurTeam from './OurTeam';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'space-around',
-    alignItems: 'center',
-    height: '90vh',
-  },
   paper: {
-    margin: '5rem',
-    padding: '1rem',
+    margin: '6rem',
+    padding: '2rem',
   },
   card: { margin: '1rem', padding: '1rem' },
   media: {

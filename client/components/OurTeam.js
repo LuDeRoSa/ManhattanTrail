@@ -31,74 +31,70 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export const OurTeam = (props) => {
   const classes = useStyles();
-    return (
-      <Container>
-        <Paper className={classes.paper}>
-          <div className="tech-heading">Our Team</div>
-          <Grid
-            container
-            spacing={1}
-            direction="row"
-            alignItems="center"
-            justify="space-around"
-          >
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/devy.jpeg"
-                />
-                <b> Devy Agarwal </b>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/samir.jpg"
-                />
-                <b>Samir Jain</b>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/luisa.jpeg"
-                />
-                <b>Luisa Zhou</b>
-              </Card>
-            </Grid>
+  return (
+    <Paper className={classes.paper}>
+      <div className="tech-heading">Our Team</div>
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        alignItems="center"
+        justify="space-around"
+      >
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/devy.jpeg"
+            />
+            <b> Devy Agarwal </b>
+          </Card>
+        </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/samir.jpg"
+            />
+            <b>Samir Jain</b>
+          </Card>
+        </Grid>
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/luisa.jpeg"
+            />
+            <b>Luisa Zhou</b>
+          </Card>
+        </Grid>
 
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  component="img"
-                  alt="team-picture"
-                  // height="140"
-                  image="./img/rommel.png"
-                />
-                <b>Rommel Demano</b>
-              </Card>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Container>
-    );
-
-}
+        <Grid item xs={5} sm={5} lg={3}>
+          <Card className={classes.card}>
+            <CardMedia
+              className={classes.media}
+              component="img"
+              alt="team-picture"
+              // height="140"
+              image="./img/rommel.png"
+            />
+            <b>Rommel Demano</b>
+          </Card>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
+};
 
 export default OurTeam;
