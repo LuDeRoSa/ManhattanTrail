@@ -42,10 +42,11 @@ class InfoWindow extends Component {
 
     const restId = this.props.rests[this.state.index].id;
     return (
-      <div className='info' style={{ width: 100, height: 80 }}>
-        {restaurantName}
-        {/* <br /> */}
-        <Button onClick={() => this.addFav(restId)}>
+
+      <div className="info" style={{ width: 50, height: 80 }}>
+        {restaurantName}{' '}
+        <IconButton onClick={() => this.addFav(restId)}>
+
           {!this.state.clicked && (
             <FavoriteBorderOutlinedIcon
               style={{

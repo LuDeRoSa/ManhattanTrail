@@ -6,12 +6,11 @@
   color: black !important;
   font-family: gothambook;
   text-align: center;
-  top: 15px !important;
   width: 150px !important;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: auto;
 }
 

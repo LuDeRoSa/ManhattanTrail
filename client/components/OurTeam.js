@@ -48,7 +48,7 @@ class OurTeam extends Component {
                 <CardMedia
                   style={styles.media}
                   component="img"
-                  alt="Contemplative Reptile"
+                  alt="team-picture"
                   // height="140"
                   image="./img/devy.jpeg"
                 />
@@ -60,7 +60,7 @@ class OurTeam extends Component {
                 <CardMedia
                   style={styles.media}
                   component="img"
-                  alt="Contemplative Reptile"
+                  alt="team-picture"
                   // height="140"
                   image="./img/samir.jpg"
                 />
@@ -72,7 +72,7 @@ class OurTeam extends Component {
                 <CardMedia
                   style={styles.media}
                   component="img"
-                  alt="Contemplative Reptile"
+                  alt="team-picture"
                   // height="140"
                   image="./img/luisa.jpeg"
                 />
@@ -85,7 +85,7 @@ class OurTeam extends Component {
                 <CardMedia
                   style={styles.media}
                   component="img"
-                  alt="Contemplative Reptile"
+                  alt="team-picture"
                   // height="140"
                   image="./img/rommel.png"
                 />
