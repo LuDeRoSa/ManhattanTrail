@@ -50,7 +50,6 @@ export const AboutUs = (props) => {
                 alt="react-logo"
                 image="./img/react-logo.png"
               />
-              <b> React.js </b>
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} lg={3}>
@@ -72,7 +71,6 @@ export const AboutUs = (props) => {
                 alt="google-maps-logo"
                 image="./img/google-maps-logo.png"
               />
-              <b>Google Maps API</b>
             </Card>
           </Grid>
 
@@ -81,10 +79,9 @@ export const AboutUs = (props) => {
               <CardMedia
                 className={classes.media}
                 component="img"
-                alt="logo"
+                alt="node-js-logo"
                 image="./img/node-js-logo.svg"
               />
-              <b>Node.js</b>
             </Card>
           </Grid>
 
@@ -93,11 +90,10 @@ export const AboutUs = (props) => {
               <CardMedia
                 className={classes.media}
                 component="img"
-                alt="logo"
+                alt="express-logo"
                 // height="140"
                 image="./img/express-logo.jpeg"
               />
-              <b>Express</b>
             </Card>
           </Grid>
 
@@ -106,10 +102,9 @@ export const AboutUs = (props) => {
               <CardMedia
                 className={classes.media}
                 component="img"
-                alt="logo"
+                alt="postgres SQL logo"
                 image="./img/postgresql-logo.png"
               />
-              <b>PostgreSQL</b>
             </Card>
           </Grid>
 
@@ -118,10 +113,9 @@ export const AboutUs = (props) => {
               <CardMedia
                 className={classes.media}
                 component="img"
-                alt="logo"
+                alt="OAuth2.0 logo"
                 image="./img/oauth-logo.png"
               />
-              <b>OAuth 2.0</b>
             </Card>
           </Grid>
 
@@ -130,10 +124,9 @@ export const AboutUs = (props) => {
               <CardMedia
                 className={classes.media}
                 component="img"
-                alt="logo"
+                alt="Sequelize Logo"
                 image="./img/sequelize-logo.png"
               />
-              <b>Sequelize</b>
             </Card>
           </Grid>
         </Grid>
