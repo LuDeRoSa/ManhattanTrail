@@ -16,8 +16,13 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: '6rem',
     padding: '2rem',
+    backgroundColor: theme.palette.background.default,
   },
-  card: { margin: '1rem', padding: '1rem' },
+  card: {
+    margin: '1rem',
+    padding: '1rem',
+    backgroundColor: theme.palette.background.default,
+  },
   media: {
     // height: 175,
     // width: 160,
@@ -28,7 +33,7 @@ export const AboutUs = (props) => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
+    <Paper variant="outlined" square className={classes.paper}>
       <div className="tech-heading">Technologies</div>
       <Grid
         container

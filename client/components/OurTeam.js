@@ -8,18 +8,16 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'space-around',
-    alignItems: 'center',
-    height: '90vh',
-  },
   paper: {
-    margin: '5rem',
+    margin: '1rem',
     padding: '1rem',
+    backgroundColor: theme.palette.background.default,
   },
-  card: { margin: '1rem', padding: '1rem' },
+  card: {
+    margin: '1rem',
+    padding: '1rem',
+    backgroundColor: theme.palette.background.default,
+  },
   media: {
     height: 150,
     width: 150,
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export const OurTeam = (props) => {
   const classes = useStyles();
   return (
-    <Paper className={classes.paper}>
+    <Paper variant="outlined" square className={classes.paper}>
       <div className="tech-heading">Our Team</div>
       <Grid
         container
@@ -38,7 +36,7 @@ export const OurTeam = (props) => {
         alignItems="center"
         justify="space-around"
       >
-        <Grid item xs={5} sm={5} lg={3}>
+        <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
@@ -50,7 +48,7 @@ export const OurTeam = (props) => {
             <b> Devy Agarwal </b>
           </Card>
         </Grid>
-        <Grid item xs={5} sm={5} lg={3}>
+        <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
@@ -62,7 +60,7 @@ export const OurTeam = (props) => {
             <b>Samir Jain</b>
           </Card>
         </Grid>
-        <Grid item xs={5} sm={5} lg={3}>
+        <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
@@ -75,7 +73,7 @@ export const OurTeam = (props) => {
           </Card>
         </Grid>
 
-        <Grid item xs={5} sm={5} lg={3}>
+        <Grid item xs={12} sm={6} lg={3}>
           <Card className={classes.card}>
             <CardMedia
               className={classes.media}
