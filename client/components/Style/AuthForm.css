@@ -8,28 +8,28 @@
   padding: 25px;
 }
 #login-grid {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .login-button {
-    width: 100%
+  width: 100%;
 }
 #submit-login-button {
-    width: 300px;
+  width: 300px;
 }
 .login-field {
-    width: 250px;
+  width: 250px;
 }
 
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    #submit-login-button {
-        width: 200px;
-    }
-    .login-field {
-        width: 200px;
-    }
-    .login-button {
-        width: 200px;
-    }
+  /* For mobile phones: */
+  #submit-login-button {
+    width: 200px;
   }
+  .login-field {
+    width: 200px;
+  }
+  .login-button {
+    width: 200px;
+  }
+}
