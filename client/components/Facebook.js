@@ -31,7 +31,7 @@ class Facebook extends Component {
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
-                className='login-button'
+                className="login-button"
                 variant="outlined"
                 color="primary"
                 style={{
@@ -44,7 +44,7 @@ class Facebook extends Component {
                 startIcon={<FacebookIcon />}
                 onClick={renderProps.onClick}
               >
-                Continue with Facebook
+                Facebook
               </Button>
             )}
           />

@@ -43,7 +43,7 @@ const AuthForm = (props) => {
         }
         className="login-background"
       >
-        <Grid item id='login-grid'>
+        <Grid item id="login-grid">
           <form onSubmit={handleSubmit} name={name}>
             <Grid
               container
@@ -54,7 +54,7 @@ const AuthForm = (props) => {
             >
               <Grid item>
                 <TextField
-                  className='login-field'
+                  className="login-field"
                   type="email"
                   placeholder="Email"
                   name="username"
@@ -67,7 +67,7 @@ const AuthForm = (props) => {
               </Grid>
               <Grid item>
                 <TextField
-                  className='login-field'
+                  className="login-field"
                   type="password"
                   name="password"
                   variant="outlined"
@@ -76,19 +76,21 @@ const AuthForm = (props) => {
                 />
               </Grid>
               <Grid item>
-                {<Button
-                  id='submit-login-button'
-                  style={{
-                    maxWidth: '250px',
-                    height: '40px',
-                    textAlign: 'center',
-                  }}
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                >
-                  {displayName}
-                </Button>}
+                {
+                  <Button
+                    id="submit-login-button"
+                    style={{
+                      maxWidth: '250px',
+                      height: '40px',
+                      textAlign: 'center',
+                    }}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    {displayName}
+                  </Button>
+                }
               </Grid>
             </Grid>
           </form>
@@ -100,7 +102,7 @@ const AuthForm = (props) => {
               <Grid item>
                 {window.githubURL && (
                   <Button
-                    className='login-button'
+                    className="login-button"
                     style={{
                       height: '40px',
                       textAlign: 'center',
@@ -110,7 +112,7 @@ const AuthForm = (props) => {
                     startIcon={<GitHubIcon />}
                     href={window.githubURL}
                   >
-                    Continue with GitHub
+                    GitHub
                   </Button>
                 )}
               </Grid>
