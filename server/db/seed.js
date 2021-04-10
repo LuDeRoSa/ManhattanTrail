@@ -156,13 +156,13 @@ const syncAndSeed = async () => {
       path_name: 'chinese',
       restaurantId: restaurants[11].id,
       stage: 1,
-      game_type: 'quiz',
+      game_type: 'hangman',
     }),
     Path.create({
       path_name: 'chinese',
       restaurantId: restaurants[12].id,
       stage: 2,
-      game_type: 'snake',
+      game_type: 'hangman',
     }),
     Path.create({
       path_name: 'chinese',

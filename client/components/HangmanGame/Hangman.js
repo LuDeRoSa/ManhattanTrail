@@ -42,6 +42,7 @@ class Hangman extends Component {
       answer: randomWord(),
       gameOver: false,
       isWinner: false,
+      playing: true,
     };
     this.onKey = this.onKey.bind(this);
   }
@@ -56,14 +57,7 @@ class Hangman extends Component {
       this.handleGuess(e);
     }
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.gameOver && this.state.gameOver) {
-      this.props.updateMiniGameScore(1);
-      this.setState({
-        score: 1,
-      });
-    }
-  }
+
   guessedWord() {
     return this.state.answer
       .split('')
@@ -85,16 +79,21 @@ class Hangman extends Component {
       gameOver: this.state.mistake + 1 == this.props.maxTry ? true : false,
       isWinner:
         this.guessedWord().join('') === this.state.answer ? true : false,
+      score: 1,
     }));
+    if (this.state.isWinner) {
+      this.setState({ playing: false });
+      this.gameover();
+    }
   };
   // maps over the keyboard displaying every single character as a button
   generateButtons() {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
       <Button
-        variant="outlined"
+        variant='outlined'
         key={letter}
         value={letter}
-        size="small"
+        size='small'
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
         color={this.state.guessed.has(letter) ? 'inherit' : 'primary'}
@@ -104,26 +103,32 @@ class Hangman extends Component {
       </Button>
     ));
   }
+
+  gameover() {
+    this.props.updateMiniGameScore(this.state.score);
+  }
+
   render() {
-    let gameStat = this.generateButtons();
-    if (this.state.isWinner) {
-      gameStat = 'Congratus, you saved him!';
+    let keyboard = this.generateButtons();
+    if (!this.state.playing) {
+      return <div> Congatulations! You earned {this.state.score} points</div>;
     }
     if (this.state.gameOver) {
-      gameStat = 'Uh-oh...You failed to save him!';
+      return <div>'Uh-oh...You failed to save him!'</div>;
     }
     return (
       <Paper style={styles.hangmanContainer}>
-        <div id="instructions">Hint: The word is a category of food</div>
+        <div id='instructions'>Hint: The word is a category of food</div>
         <div>
           **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
+          <p>{this.state.answer}</p>
         </div>
         <div>
-          <img src={this.props.images[this.state.mistake]} alt="" />
+          <img src={this.props.images[this.state.mistake]} alt='' />
         </div>
         <div>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
-          <>{gameStat}</>
+          <>{keyboard}</>
         </div>
       </Paper>
     );
