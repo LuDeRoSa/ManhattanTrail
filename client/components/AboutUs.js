@@ -30,9 +30,9 @@ const styles = {
   },
 };
 
-class AboutUs extends Component {
-  state = {};
-  render() {
+ export const AboutUs = (props) => {
+
+
     return (
       <Container>
         <Paper style={styles.paper}>
@@ -156,7 +156,7 @@ class AboutUs extends Component {
         </Paper>
       </Container>
     );
-  }
+
 }
 
 export default AboutUs;

@@ -29,9 +29,9 @@ const styles = {
   },
 };
 
-class OurTeam extends Component {
-  state = {};
-  render() {
+export const OurTeam = (props) => {
+
+
     return (
       <Container>
         <Paper style={styles.paper}>
@@ -96,7 +96,7 @@ class OurTeam extends Component {
         </Paper>
       </Container>
     );
-  }
+
 }
 
 export default OurTeam;
