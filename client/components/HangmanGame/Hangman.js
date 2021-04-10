@@ -82,6 +82,7 @@ class Hangman extends Component {
       score: 1,
     }));
     if (this.state.isWinner) {
+      document.removeEventListener('keydown', this.onKey);
       this.setState({ playing: false });
       this.gameover();
     }
@@ -90,10 +91,10 @@ class Hangman extends Component {
   generateButtons() {
     return 'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => (
       <Button
-        variant='outlined'
+        variant="outlined"
         key={letter}
         value={letter}
-        size='small'
+        size="small"
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(letter)}
         color={this.state.guessed.has(letter) ? 'inherit' : 'primary'}
@@ -118,13 +119,13 @@ class Hangman extends Component {
     }
     return (
       <Paper style={styles.hangmanContainer}>
-        <div id='instructions'>Hint: The word is a category of food</div>
+        <div id="instructions">Hint: The word is a category of food</div>
         <div>
           **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
           <p>{this.state.answer}</p>
         </div>
         <div>
-          <img src={this.props.images[this.state.mistake]} alt='' />
+          <img src={this.props.images[this.state.mistake]} alt="" />
         </div>
         <div>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
