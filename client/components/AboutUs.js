@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem',
     backgroundColor: theme.palette.background.default,
   },
-  media: {
-    // height: 175,
-    // width: 160,
-  },
 }));
 
 export const AboutUs = (props) => {
