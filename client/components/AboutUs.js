@@ -25,8 +25,8 @@ const styles = {
   },
   card: { margin: '1rem', padding: '1rem' },
   media: {
-    height: 175,
-    width: 175,
+    // height: 175,
+    // width: 160,
   },
 };
 
@@ -54,12 +54,7 @@ class AboutUs extends Component {
                   image="./img/react-logo.png"
                 />
                 <b> React.js </b>
-                <li>Builds user interfaces and interactive UI components</li>
-                <li>Rich and dynamic single page and mobile applications</li>
-                <li>
-                  React Hooks allowed state and lifecycle functions without
-                  writing entire classes
-                </li>
+
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
@@ -73,12 +68,6 @@ class AboutUs extends Component {
                 />
                 <b>Material UI</b>
 
-                <li>Provides an optional CssBaseline component. </li>
-                <li>
-                  Fixes some inconsistencies across browsers and devices while
-                  providing slightly more opinionated resets to common HTML
-                  elements
-                </li>
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
@@ -91,13 +80,77 @@ class AboutUs extends Component {
                   image="./img/google-maps-logo.png"
                 />
                 <b>Google Maps API</b>
-
-                <li>
-                  Customize maps with your own content and imagery for display
-                  on web pages and mobile devices{' '}
-                </li>
               </Card>
             </Grid>
+
+
+            <Grid item xs={5} sm={5} lg={3}>
+              <Card style={styles.card}>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="logo"
+                  // height="140"
+                  image="./img/node-js-logo.svg"
+                />
+                <b>Node.js</b>
+              </Card>
+            </Grid>
+
+            <Grid item xs={5} sm={5} lg={3}>
+            <Card style={styles.card}>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="logo"
+                  // height="140"
+                  image="./img/express-logo.jpeg"
+                />
+                <b>Express</b>
+              </Card>
+            </Grid>
+
+            <Grid item xs={5} sm={5} lg={3}>
+              <Card style={styles.card}>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="logo"
+                  // height="140"
+                  image="./img/postgresql-logo.png"
+                />
+                <b>PostgreSQL</b>
+              </Card>
+            </Grid>
+
+            <Grid item xs={5} sm={5} lg={3}>
+              <Card style={styles.card}>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="logo"
+                  // height="140"
+                  image="./img/oauth-logo.png"
+                />
+                <b>OAuth 2.0</b>
+              </Card>
+            </Grid>
+
+
+            <Grid item xs={5} sm={5} lg={3}>
+              <Card style={styles.card}>
+                <CardMedia
+                  style={styles.media}
+                  component="img"
+                  alt="logo"
+                  // height="140"
+                  image="./img/sequelize-logo.png"
+                />
+                <b>Sequelize</b>
+              </Card>
+            </Grid>
+
+
           </Grid>
           <OurTeam />
         </Paper>
