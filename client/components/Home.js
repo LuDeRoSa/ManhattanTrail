@@ -89,7 +89,7 @@ export const Home = (props) => {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {"You've finished the minigame!"}
+            {"You've finished the minigame! Click Continue Your Adventure to Continue!"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
@@ -97,7 +97,7 @@ export const Home = (props) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               endIcon={<NavigateNextIcon />}
@@ -107,7 +107,7 @@ export const Home = (props) => {
               }}
             >
               {props.nextDisplay}
-            </Button>
+            </Button> */}
           </DialogActions>
         </Dialog>
       </center>
