@@ -5,11 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
 import './Style/AboutUs.css';
+import { StylesProvider } from '@material-ui/styles';
 import { CardMedia } from '@material-ui/core';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
     display: 'flex',
@@ -27,14 +29,14 @@ const styles = {
     height: 150,
     width: 150,
   },
-};
+}));
+
 
 export const OurTeam = (props) => {
-
-
+  const classes = useStyles();
     return (
       <Container>
-        <Paper style={styles.paper}>
+        <Paper className={classes.paper}>
           <div className="tech-heading">Our Team</div>
           <Grid
             container
@@ -44,9 +46,9 @@ export const OurTeam = (props) => {
             justify="space-around"
           >
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="team-picture"
                   // height="140"
@@ -56,9 +58,9 @@ export const OurTeam = (props) => {
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="team-picture"
                   // height="140"
@@ -68,9 +70,9 @@ export const OurTeam = (props) => {
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="team-picture"
                   // height="140"
@@ -81,9 +83,9 @@ export const OurTeam = (props) => {
             </Grid>
 
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="team-picture"
                   // height="140"

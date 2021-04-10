@@ -5,12 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import createStyles from '@material-ui/core/styles/createStyles';
 import './Style/AboutUs.css';
 import { CardMedia } from '@material-ui/core';
 import OurTeam from './OurTeam';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
     display: 'flex',
@@ -28,14 +29,15 @@ const styles = {
     // height: 175,
     // width: 160,
   },
-};
+}));
 
  export const AboutUs = (props) => {
 
+  const classes = useStyles();
 
     return (
       <Container>
-        <Paper style={styles.paper}>
+        <Paper className={styles.paper}>
           <div className="tech-heading">Technologies</div>
           <Grid
             container
@@ -45,9 +47,9 @@ const styles = {
             justify="space-around"
           >
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="react-logo"
                   // height="140"
@@ -58,9 +60,9 @@ const styles = {
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="material-ui-logo"
                   // height="140"
@@ -71,9 +73,9 @@ const styles = {
               </Card>
             </Grid>
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="google-maps-logo"
                   // height="140"
@@ -85,9 +87,9 @@ const styles = {
 
 
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="logo"
                   // height="140"
@@ -98,9 +100,9 @@ const styles = {
             </Grid>
 
             <Grid item xs={5} sm={5} lg={3}>
-            <Card style={styles.card}>
+            <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="logo"
                   // height="140"
@@ -111,9 +113,9 @@ const styles = {
             </Grid>
 
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="logo"
                   // height="140"
@@ -124,9 +126,9 @@ const styles = {
             </Grid>
 
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="logo"
                   // height="140"
@@ -138,9 +140,9 @@ const styles = {
 
 
             <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
+              <Card className={classes.card}>
                 <CardMedia
-                  style={styles.media}
+                  className={classes.media}
                   component="img"
                   alt="logo"
                   // height="140"
