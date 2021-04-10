@@ -43,7 +43,7 @@ const AuthForm = (props) => {
         }
         className="login-background"
       >
-        <Grid item>
+        <Grid item id='login-grid'>
           <form onSubmit={handleSubmit} name={name}>
             <Grid
               container
@@ -54,41 +54,41 @@ const AuthForm = (props) => {
             >
               <Grid item>
                 <TextField
+                  className='login-field'
                   type="email"
                   placeholder="Email"
-                  fullWidth
                   name="username"
                   autoComplete="email"
                   variant="outlined"
                   required
                   autoFocus
-                  // style={{ width: 300 }}
+                  // style={{ width: '250px' }}
                 />
               </Grid>
               <Grid item>
                 <TextField
+                  className='login-field'
                   type="password"
-                  placeholder="Password"
-                  fullWidth
                   name="password"
                   variant="outlined"
                   autoComplete={autocomplete_attribute}
                   required
-                  // style={{ width: 300 }}
                 />
               </Grid>
               <Grid item>
-                <Button
+                {<Button
+                  id='submit-login-button'
                   style={{
-                    // width: '300px',
+                    maxWidth: '250px',
                     height: '40px',
+                    textAlign: 'center',
                   }}
                   variant="contained"
                   color="primary"
                   type="submit"
                 >
                   {displayName}
-                </Button>
+                </Button>}
               </Grid>
             </Grid>
           </form>
@@ -100,8 +100,8 @@ const AuthForm = (props) => {
               <Grid item>
                 {window.githubURL && (
                   <Button
+                    className='login-button'
                     style={{
-                      // width: '300px',
                       height: '40px',
                       textAlign: 'center',
                     }}

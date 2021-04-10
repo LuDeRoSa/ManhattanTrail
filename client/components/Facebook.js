@@ -4,6 +4,8 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { fbAuthenticate } from '../store';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+// import './Style/AuthForm.css';
+
 class Facebook extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +31,7 @@ class Facebook extends Component {
             callback={this.responseFacebook}
             render={(renderProps) => (
               <Button
+                className='login-button'
                 variant="outlined"
                 color="primary"
                 style={{

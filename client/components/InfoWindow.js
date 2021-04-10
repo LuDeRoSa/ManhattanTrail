@@ -4,6 +4,8 @@ import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutline
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 
 import './Style/InfoWindow.css';
 
@@ -40,10 +42,10 @@ class InfoWindow extends Component {
 
     const restId = this.props.rests[this.state.index].id;
     return (
-      <div className='info' style={{ width: 50, height: 80 }}>
+      <div className='info' style={{ width: 100, height: 80 }}>
         {restaurantName}
-        <br />
-        <IconButton onClick={() => this.addFav(restId)}>
+        {/* <br /> */}
+        <Button onClick={() => this.addFav(restId)}>
           {!this.state.clicked && (
             <FavoriteBorderOutlinedIcon
               style={{
@@ -58,7 +60,7 @@ class InfoWindow extends Component {
               }}
             />
           )}
-        </IconButton>
+        </Button>
       </div>
     );
   }
