@@ -52,6 +52,14 @@ class Hangman extends Component {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onKey);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.gameOver !== this.state.gameOver &&
+      this.state.gameOver === true
+    ) {
+      document.removeEventListener('keydown', this.onKey);
+    }
+  }
   onKey(e) {
     if (e.code >= 'A' && e.code <= 'z' && !this.gameOver) {
       this.handleGuess(e);
