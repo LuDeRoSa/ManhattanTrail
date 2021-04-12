@@ -13,6 +13,7 @@ class InfoWindow extends Component {
       clicked: false,
       show: false,
     };
+    this.addFav = this.addFav.bind(this);
   }
 
   componentDidUpdate(prevProps) {
