@@ -34,7 +34,7 @@ class Profile extends React.Component {
           alignItems="center"
           justify="space-around"
         >
-          <Grid item>
+          <Grid item xs={12} sm={6} lg={4}>
             <Container id="account_container">
               <Paper variant="elevation" elevation={1}>
                 <TableContainer>
@@ -71,10 +71,10 @@ class Profile extends React.Component {
               </Paper>
             </Container>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={6} lg={4}>
             <Favorites />
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={6} lg={4}>
             <h2>Game History</h2>
             <PastGames />
           </Grid>
