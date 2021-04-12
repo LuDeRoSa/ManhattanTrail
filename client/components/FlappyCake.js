@@ -27,7 +27,7 @@ class FlappyCake extends Component {
         velocity: 0,
         radius: 20,
       },
-      cakes: [{ x: 550, y: 100 }],
+      cakes: [{ x: 325, y: 100 }],
       cakespeed: 1,
       score: 0,
       playing: true,
@@ -115,7 +115,7 @@ class FlappyCake extends Component {
       ) {
         this.setState((state) => {
           const cake = {
-            x: 550,
+            x: 350,
             y: getRandomCoordinates(),
           };
           return {
@@ -160,7 +160,7 @@ class FlappyCake extends Component {
         Use the spacebar or touch/click to fly the penguin so he can catch the
         cakes.
         <div id="game-area">
-          <canvas ref={this.canvasRef} width={400} height={400} />
+          <canvas ref={this.canvasRef} width={350} height={400} />
         </div>
       </div>
     );

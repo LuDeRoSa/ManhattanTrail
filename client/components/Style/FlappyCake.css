@@ -9,7 +9,5 @@
 
 #game-area {
   position: relative;
-  margin-top: 15px;
-  margin-bottom: 25px;
   touch-action: none;
 }
