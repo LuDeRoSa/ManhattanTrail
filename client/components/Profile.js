@@ -15,9 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import Favorites from './Favorites';
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.getFavorites();
   }

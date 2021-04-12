@@ -2,13 +2,11 @@ import React from 'react';
 
 import Navbar from './components/Navbar';
 import Routes from './routes';
-import Footer from './components/Footer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import teal from '@material-ui/core/colors/teal';
 import amber from '@material-ui/core/colors/amber';
-import orange from '@material-ui/core/colors/orange';
 import createPalette from '@material-ui/core/styles/createPalette';
 import createTypography from '@material-ui/core/styles/createTypography';
 

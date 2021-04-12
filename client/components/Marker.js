@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Style/Marker.css';
 
 const Marker = (props) => {
   const { color, name } = props;
-  function onClose() {
-    React.useState({ show: true });
-  }
+
   return (
     <div
       className="marker"
