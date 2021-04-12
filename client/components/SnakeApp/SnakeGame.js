@@ -211,7 +211,7 @@ class SnakeGame extends Component {
     return (
       <div id="instructions">
         Use your arrow keys to move the snake and gobble the cookies. But
-        beware! Don't hit the walls or your own tail.
+        beware! Don't hit the walls or it's game over.
         <div className="game-area">
           <Snake snakeDots={this.state.snakeDots} />
           <Food dot={this.state.food} />

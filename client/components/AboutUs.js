@@ -1,109 +1,131 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import './Style/AboutUs.css';
-import { CardMedia } from '@material-ui/core';
+import CardMedia from '@material-ui/core/CardMedia';
 import OurTeam from './OurTeam';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   root: {},
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'space-around',
-    alignItems: 'center',
-    height: '90vh',
-  },
   paper: {
-    margin: '5rem',
     padding: '1rem',
+    backgroundColor: theme.palette.background.default,
   },
-  card: { margin: '1rem', padding: '1rem' },
-  media: {
-    height: 175,
-    width: 175,
+  card: {
+    margin: '1rem',
+    padding: '1rem',
+    backgroundColor: theme.palette.background.default,
   },
-};
+}));
 
-class AboutUs extends Component {
-  state = {};
-  render() {
-    return (
-      <Container>
-        <Paper style={styles.paper}>
-          <div className="tech-heading">Technologies</div>
-          <Grid
-            container
-            spacing={1}
-            direction="row"
-            alignItems="center"
-            justify="space-around"
-          >
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="react-logo"
-                  // height="140"
-                  image="./img/react-logo.png"
-                />
-                <b> React.js </b>
-                <li>Builds user interfaces and interactive UI components</li>
-                <li>Rich and dynamic single page and mobile applications</li>
-                <li>
-                  React Hooks allowed state and lifecycle functions without
-                  writing entire classes
-                </li>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="material-ui-logo"
-                  // height="140"
-                  image="./img/material-ui-logo.png"
-                />
-                <b>Material UI</b>
+export const AboutUs = (props) => {
+  const classes = useStyles();
 
-                <li>Provides an optional CssBaseline component. </li>
-                <li>
-                  Fixes some inconsistencies across browsers and devices while
-                  providing slightly more opinionated resets to common HTML
-                  elements
-                </li>
-              </Card>
-            </Grid>
-            <Grid item xs={5} sm={5} lg={3}>
-              <Card style={styles.card}>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="google-maps-logo"
-                  // height="140"
-                  image="./img/google-maps-logo.png"
-                />
-                <b>Google Maps API</b>
-
-                <li>
-                  Customize maps with your own content and imagery for display
-                  on web pages and mobile devices{' '}
-                </li>
-              </Card>
-            </Grid>
+  return (
+    <Container>
+      <Paper variant="outlined" square className={classes.paper}>
+        <div className="tech-heading">Technologies</div>
+        <Grid
+          container
+          spacing={1}
+          direction="row"
+          alignItems="center"
+          justify="space-around"
+        >
+          <Grid item xs={5} sm={5} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="react-logo"
+                image="./img/react-logo.png"
+              />
+            </Card>
           </Grid>
-          <OurTeam />
-        </Paper>
-      </Container>
-    );
-  }
-}
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="material-ui-logo"
+                image="./img/material-ui-logo.png"
+              />
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="google-maps-logo"
+                image="./img/google-maps-logo.png"
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="node-js-logo"
+                image="./img/node-js-logo.svg"
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="express-logo"
+                // height="140"
+                image="./img/express-logo.jpeg"
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="postgres SQL logo"
+                image="./img/postgresql-logo.png"
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="OAuth2.0 logo"
+                image="./img/oauth-logo.png"
+              />
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} sm={6} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                alt="Sequelize Logo"
+                image="./img/sequelize-logo.png"
+              />
+            </Card>
+          </Grid>
+        </Grid>
+        <OurTeam />
+      </Paper>
+    </Container>
+  );
+};
 
 export default AboutUs;
