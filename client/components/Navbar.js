@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
 import GlobalScore from './GlobalScore';
 
 import SideMenu from './SideMenu';
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    fontSize: '1.4rem',
   },
   button: {
     textTransform: 'none',
