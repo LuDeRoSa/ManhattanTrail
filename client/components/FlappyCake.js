@@ -33,9 +33,7 @@ class FlappyCake extends Component {
       playing: true,
     };
     this.canvasRef = React.createRef();
-    this.onClick = this.onClick.bind(this);
     this.onKey = this.onKey.bind(this);
-    this.onTouch = this.onTouch.bind(this);
     this.onPoint = this.onPoint.bind(this);
   }
 
