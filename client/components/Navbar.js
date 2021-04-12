@@ -49,7 +49,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
     <div>
       <nav>
         <div className={classes.root}>
-          <AppBar position="static" className={classes.palette}>
+          <AppBar position="static">
             <Hidden smDown>
               <Toolbar>
                 <Typography variant="h4" className={classes.title}>
@@ -57,7 +57,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </Typography>
                 {isLoggedIn ? (
                   <div>
-                    <GlobalScore />
+                    <GlobalScore size={'medium'} />
                     {linksList.map((link) => (
                       <Button
                         key={link.text}
@@ -94,10 +94,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             </Hidden>
             <Hidden mdUp>
               <Toolbar>
-                <Typography variant="h5" className={classes.title}>
+                <Typography variant="h6" className={classes.title}>
                   MANHATTAN TRAIL
                 </Typography>
-                {isLoggedIn && <GlobalScore />}
+                {isLoggedIn && <GlobalScore size={'small'} />}
                 <SideMenu handleClick={handleClick} isLoggedIn={isLoggedIn} />
               </Toolbar>
             </Hidden>
