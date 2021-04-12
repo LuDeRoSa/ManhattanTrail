@@ -35,7 +35,7 @@ class Profile extends React.Component {
           justify="space-around"
         >
           <Grid item>
-            <Container id="account_container" style={{ width: 450 }}>
+            <Container id="account_container">
               <Paper variant="elevation" elevation={1}>
                 <TableContainer>
                   <Table aria-label="simple table">

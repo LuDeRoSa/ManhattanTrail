@@ -11,7 +11,7 @@ import Container from '@material-ui/core/Container';
 export default function GamesTable(props) {
   const styles = {
     Table: {
-      minWidth: 600,
+      minWidth: 340,
       height: 100,
       overflowY: 'auto',
     },
@@ -22,7 +22,7 @@ export default function GamesTable(props) {
   };
   let { data, pastgames } = props;
   return (
-    <Container style={{ width: 700 }}>
+    <Container>
       <Paper variant="elevation" elevation={1}>
         <TableContainer>
           <Table stickyHeader style={styles.Table} aria-label="simple table">
@@ -51,7 +51,6 @@ export default function GamesTable(props) {
                   {!pastgames && (
                     <TableCell align="left">{game.user.username}</TableCell>
                   )}
-
                   <TableCell align="left">{game.updatedAt}</TableCell>
                   <TableCell component="th" scope="row">
                     {game.path_name}
