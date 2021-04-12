@@ -36,6 +36,7 @@ class FlappyCake extends Component {
     this.onClick = this.onClick.bind(this);
     this.onKey = this.onKey.bind(this);
     this.onTouch = this.onTouch.bind(this);
+    this.onPoint = this.onPoint.bind(this);
   }
 
   componentDidMount() {
@@ -46,9 +47,8 @@ class FlappyCake extends Component {
       this.update();
       this.draw();
     }, 1000 / 60);
-    document.addEventListener('click', this.onClick);
     document.addEventListener('keydown', this.onKey);
-    document.addEventListener('touchstart', this.onTouch);
+    document.addEventListener('pointerdown', this.onPoint);
   }
 
   componentDidUpdate() {
@@ -56,17 +56,12 @@ class FlappyCake extends Component {
       return;
     }
   }
-  onClick(e) {
-    if (e.target.tagName === 'CANVAS') {
-      this.bump(e);
-    }
-  }
   onKey(e) {
     if (e.code === 'Space' || e.code === 'ArrowUp') {
       this.bump(e);
     }
   }
-  onTouch(e) {
+  onPoint(e) {
     if (e.target.tagName === 'CANVAS') {
       this.bump(e);
     }
@@ -164,7 +159,7 @@ class FlappyCake extends Component {
     }
     return (
       <div id="instructions">
-        Use the spacebar or mouse-click to fly the penguin so he can catch the
+        Use the spacebar or touch/click to fly the penguin so he can catch the
         cakes.
         <div id="game-area">
           <canvas ref={this.canvasRef} width={400} height={400} />
