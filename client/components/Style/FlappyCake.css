@@ -1,6 +1,7 @@
 #instructions {
   margin-top: -20px;
   margin-bottom: 20px;
+  padding: 1rem;
 }
 
 #game-message {
@@ -8,6 +9,6 @@
 }
 
 #game-area {
-  position: relative;
+  margin: 1rem;
   touch-action: none;
 }
