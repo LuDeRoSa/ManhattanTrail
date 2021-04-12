@@ -8,7 +8,7 @@ const Marker = (props) => {
   }
   return (
     <div
-      className="marker"
+      className='marker'
       style={{
         backgroundColor: color,
       }}

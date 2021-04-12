@@ -138,7 +138,7 @@ const syncAndSeed = async () => {
       path_name: 'indian',
       restaurantId: restaurants[8].id,
       stage: 1,
-      game_type: 'quiz',
+      game_type: 'sortfruits',
     }),
     Path.create({
       path_name: 'indian',
@@ -156,13 +156,13 @@ const syncAndSeed = async () => {
       path_name: 'chinese',
       restaurantId: restaurants[11].id,
       stage: 1,
-      game_type: 'hangman',
+      game_type: 'quiz',
     }),
     Path.create({
       path_name: 'chinese',
       restaurantId: restaurants[12].id,
       stage: 2,
-      game_type: 'hangman',
+      game_type: 'sortfruits',
     }),
     Path.create({
       path_name: 'chinese',
