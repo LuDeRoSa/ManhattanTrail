@@ -3,6 +3,19 @@ import GoogleMapReact from 'google-map-react';
 import { connect } from 'react-redux';
 import Marker from './Marker';
 import InfoWindow from './InfoWindow';
+import Snackbar from '@material-ui/core/Snackbar';
+
+const styles = {
+  snackBar: {
+    color: 'white',
+    width: '20px',
+    height: '20px',
+    display: 'flex',
+    // justifyContent: 'center',
+    // alignContent: 'center',
+    margin: '0 auto',
+  },
+};
 class _Map extends React.Component {
   constructor(props) {
     super(props);
@@ -72,9 +85,7 @@ class _Map extends React.Component {
       ],
     };
   }
-  onChildClick() {
-    this.setState({ show: !this.state.show });
-  }
+
   render() {
     return (
       <React.Fragment>
@@ -87,7 +98,6 @@ class _Map extends React.Component {
             zoom={16}
             center={this.state.center}
             options={this.createMapOptions}
-            onChildClick={() => this.onChildClick()}
           >
             {this.props.rests.map((r, idx) => (
               <Marker

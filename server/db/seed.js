@@ -13,29 +13,29 @@ const syncAndSeed = async () => {
   //hardcoding first five restaurants:
   const restaurants = await Promise.all([
     Restaurant.create({
-      restaurant_name: 'Restaurant One',
+      restaurant_name: 'Hillstone',
       restaurant_longitude: -73.989308,
       restaurant_latitude: 40.741895,
     }),
     Restaurant.create({
-      restaurant_name: 'Restaurant Two',
+      restaurant_name: 'Scarpetta',
       restaurant_longitude: -73.9699967,
       restaurant_latitude: 40.7580445,
     }),
     Restaurant.create({
-      restaurant_name: 'Restaurant Three',
+      restaurant_name: 'The Stumble Inn',
       restaurant_longitude: -73.9561132,
       restaurant_latitude: 40.77152,
     }),
     Restaurant.create({
-      restaurant_name: 'Restaurant Four',
-      restaurant_longitude: -73.3,
-      restaurant_latitude: 40.78,
+      restaurant_name: 'Blue Hill',
+      restaurant_longitude: -73.989308,
+      restaurant_latitude: 40.741895,
     }),
     Restaurant.create({
-      restaurant_name: 'Restaurant Five',
-      restaurant_longitude: -73.3,
-      restaurant_latitude: 40.5,
+      restaurant_name: 'ABC Kitchen',
+      restaurant_longitude: -73.9894885,
+      restaurant_latitude: 40.7379154,
     }),
     Restaurant.create({
       restaurant_name: 'Don Antonio',
@@ -138,7 +138,7 @@ const syncAndSeed = async () => {
       path_name: 'indian',
       restaurantId: restaurants[8].id,
       stage: 1,
-      game_type: 'quiz',
+      game_type: 'sortfruits',
     }),
     Path.create({
       path_name: 'indian',
@@ -162,7 +162,7 @@ const syncAndSeed = async () => {
       path_name: 'chinese',
       restaurantId: restaurants[12].id,
       stage: 2,
-      game_type: 'snake',
+      game_type: 'sortfruits',
     }),
     Path.create({
       path_name: 'chinese',

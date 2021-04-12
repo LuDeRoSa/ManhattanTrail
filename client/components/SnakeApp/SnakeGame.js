@@ -204,7 +204,7 @@ class SnakeGame extends Component {
     if (!this.state.playing) {
       return (
         <div className="game-message">
-          RIP (Hungry Hungry) Snake. Your earned: {this.state.score} points
+          RIP (Hungry Hungry) Snake. You earned: {this.state.score} points
         </div>
       );
     }

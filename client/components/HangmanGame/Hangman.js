@@ -42,6 +42,7 @@ class Hangman extends Component {
       answer: randomWord(),
       gameOver: false,
       isWinner: false,
+      playing: true,
     };
     this.onKey = this.onKey.bind(this);
   }
@@ -51,19 +52,20 @@ class Hangman extends Component {
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onKey);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.gameOver !== this.state.gameOver &&
+      this.state.gameOver === true
+    ) {
+      document.removeEventListener('keydown', this.onKey);
+    }
+  }
   onKey(e) {
     if (e.code >= 'A' && e.code <= 'z' && !this.gameOver) {
       this.handleGuess(e);
     }
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.gameOver && this.state.gameOver) {
-      this.props.updateMiniGameScore(1);
-      this.setState({
-        score: 1,
-      });
-    }
-  }
+
   guessedWord() {
     return this.state.answer
       .split('')
@@ -85,7 +87,18 @@ class Hangman extends Component {
       gameOver: this.state.mistake + 1 == this.props.maxTry ? true : false,
       isWinner:
         this.guessedWord().join('') === this.state.answer ? true : false,
+      score: 1,
     }));
+    if (this.state.gameOver) {
+      document.removeEventListener('keydown', this.onKey);
+      this.setState({ gameOver: true, score: 0 });
+      this.gameover();
+    }
+    if (this.state.isWinner) {
+      document.removeEventListener('keydown', this.onKey);
+      this.setState({ playing: false });
+      this.gameover();
+    }
   };
   // maps over the keyboard displaying every single character as a button
   generateButtons() {
@@ -104,26 +117,35 @@ class Hangman extends Component {
       </Button>
     ));
   }
+
+  gameover() {
+    this.props.updateMiniGameScore(this.state.score);
+  }
+
   render() {
-    let gameStat = this.generateButtons();
-    if (this.state.isWinner) {
-      gameStat = 'Congratus, you saved him!';
+    let keyboard = this.generateButtons();
+    if (!this.state.playing) {
+      return <div> Congatulations! You earned {this.state.score} points</div>;
     }
     if (this.state.gameOver) {
-      gameStat = 'Uh-oh...You failed to save him!';
+      return (
+        <div>
+          'Uh-oh...You failed to save him! You earned {this.state.score} points'
+        </div>
+      );
     }
     return (
       <Paper style={styles.hangmanContainer}>
         <div id="instructions">Hint: The word is a category of food</div>
         <div>
-          **Guesses Remaining: {this.props.maxTry - this.state.mistake}**
+          **Guesses Remaining: {this.props.maxTry - this.state.mistake}**{' '}
         </div>
         <div>
           <img src={this.props.images[this.state.mistake]} alt="" />
         </div>
         <div>
           <p>{!this.state.gameOver ? this.guessedWord() : this.state.answer}</p>
-          <>{gameStat}</>
+          <>{keyboard}</>
         </div>
       </Paper>
     );

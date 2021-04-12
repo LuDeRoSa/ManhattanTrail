@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
-import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-
-import './Style/InfoWindow.css';
+import Chip from '@material-ui/core/Chip';
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -17,6 +13,7 @@ class InfoWindow extends Component {
       clicked: false,
       show: false,
     };
+    this.addFav = this.addFav.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -27,7 +24,6 @@ class InfoWindow extends Component {
     }
   }
 
-  // this.props.gameStage being passedf from infoWindow to grab the right restaurant
   addFav() {
     this.setState({
       show: !this.state.show,
@@ -40,27 +36,31 @@ class InfoWindow extends Component {
     const restaurantName = this.props.rests[this.props.gameStage - 1]
       .restaurant_name;
 
-    const restId = this.props.rests[this.state.index].id;
     return (
-      <div className="info" style={{ width: 50, height: 80 }}>
-        {restaurantName}{' '}
-        <Button onClick={() => this.addFav(restId)}>
-          {!this.state.clicked && (
-            <FavoriteBorderOutlinedIcon
-              style={{
-                fontSize: 20,
-              }}
-            />
-          )}
-          {this.state.clicked && (
-            <FavoriteOutlinedIcon
-              style={{
-                fontSize: 20,
-              }}
-            />
-          )}
-        </Button>
-      </div>
+      <>
+        <Chip
+          label={restaurantName}
+          variant="default"
+          color="secondary"
+          onClick={this.addFav}
+          icon={
+            !this.state.clicked ? (
+              <FavoriteBorderOutlinedIcon
+                style={{
+                  fontSize: 20,
+                }}
+              />
+            ) : (
+              <FavoriteOutlinedIcon
+                label={restaurantName}
+                style={{
+                  fontSize: 20,
+                }}
+              />
+            )
+          }
+        />
+      </>
     );
   }
 }
