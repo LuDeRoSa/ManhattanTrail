@@ -82,10 +82,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </div>
                 ) : (
                   <div>
-                    <Button component={Link} to="/login">
+                    <Button
+                      component={Link}
+                      to="/login"
+                      className={classes.button}
+                    >
                       Login
                     </Button>
-                    <Button component={Link} to="/signup">
+                    <Button
+                      component={Link}
+                      to="/signup"
+                      className={classes.button}
+                    >
                       Sign Up
                     </Button>
                   </div>
