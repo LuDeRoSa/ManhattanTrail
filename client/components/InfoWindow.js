@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
-import IconButton from '@material-ui/core/IconButton';
 import { addFavorite } from '../store/favorites';
 import Chip from '@material-ui/core/Chip';
-
-import './Style/InfoWindow.css';
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -26,7 +23,6 @@ class InfoWindow extends Component {
     }
   }
 
-  // this.props.gameStage being passedf from infoWindow to grab the right restaurant
   addFav() {
     this.setState({
       show: !this.state.show,
@@ -39,14 +35,13 @@ class InfoWindow extends Component {
     const restaurantName = this.props.rests[this.props.gameStage - 1]
       .restaurant_name;
 
-    const restId = this.props.rests[this.state.index].id;
     return (
       <>
         <Chip
           label={restaurantName}
           variant="default"
           color="secondary"
-          onClick={() => this.addFav(restId)}
+          onClick={this.addFav}
           icon={
             !this.state.clicked ? (
               <FavoriteBorderOutlinedIcon
