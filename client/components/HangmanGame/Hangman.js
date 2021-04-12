@@ -89,6 +89,11 @@ class Hangman extends Component {
         this.guessedWord().join('') === this.state.answer ? true : false,
       score: 1,
     }));
+    if (this.state.gameOver) {
+      document.removeEventListener('keydown', this.onKey);
+      this.setState({ gameOver: true, score: 0 });
+      this.gameover();
+    }
     if (this.state.isWinner) {
       document.removeEventListener('keydown', this.onKey);
       this.setState({ playing: false });
