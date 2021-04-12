@@ -35,7 +35,7 @@ export const AboutUs = (props) => {
           alignItems="center"
           justify="space-around"
         >
-          <Grid item xs={5} sm={5} lg={3}>
+          <Grid item xs={12} sm={6} lg={3}>
             <Card className={classes.card}>
               <CardMedia
                 className={classes.media}
