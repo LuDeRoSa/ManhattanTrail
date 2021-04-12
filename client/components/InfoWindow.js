@@ -44,8 +44,8 @@ class InfoWindow extends Component {
       <>
         <Chip
           label={restaurantName}
-          variant='default'
-          color='secondary'
+          variant="default"
+          color="secondary"
           onClick={() => this.addFav(restId)}
           icon={
             !this.state.clicked ? (
