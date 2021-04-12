@@ -30,19 +30,9 @@ const AuthForm = (props) => {
       alignContent="center"
       justify="center"
       className="login-form"
-      style={{ minHeight: '100vh' }}
+      style={{ minHeight: '90vh' }}
     >
-      <Paper
-        variant="elevation"
-        elevation={2}
-        style={
-          {
-            // margin: '3rem',
-            // padding: '3rem',
-          }
-        }
-        className="login-background"
-      >
+      <Paper variant="elevation" elevation={2} className="login-background">
         <Grid item id="login-grid">
           <form onSubmit={handleSubmit} name={name}>
             <Grid

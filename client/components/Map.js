@@ -11,8 +11,6 @@ const styles = {
     width: '20px',
     height: '20px',
     display: 'flex',
-    // justifyContent: 'center',
-    // alignContent: 'center',
     margin: '0 auto',
   },
 };
@@ -90,7 +88,9 @@ class _Map extends React.Component {
     return (
       <React.Fragment>
         <div style={{ height: '90%', width: '100%' }}>
-          <InfoWindow gameStage={this.props.gameStage} />
+          <center>
+            <InfoWindow gameStage={this.props.gameStage} />
+          </center>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',

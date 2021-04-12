@@ -8,39 +8,48 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 
+import makeStyles from '@material-ui/core/styles/makeStyles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  Table: {
+    minWidth: 340,
+    height: 100,
+    overflowY: 'auto',
+  },
+  Cell: {
+    paddingRight: 4,
+    paddingLeft: 5,
+  },
+}));
+
 export default function GamesTable(props) {
-  const styles = {
-    Table: {
-      minWidth: 600,
-      height: 100,
-      overflowY: 'auto',
-    },
-    Row: {},
-    Cell: {
-      width: 100,
-    },
-  };
+  const classes = useStyles();
   let { data, pastgames } = props;
   return (
-    <Container style={{ width: 700 }}>
+    <Container>
       <Paper variant="elevation" elevation={1}>
         <TableContainer>
-          <Table stickyHeader style={styles.Table} aria-label="simple table">
+          <Table
+            stickyHeader
+            className={classes.Table}
+            aria-label="simple table"
+          >
             <TableHead>
               <TableRow>
                 {!pastgames && (
-                  <TableCell align="left">
+                  <TableCell align="left" className={classes.Cell}>
                     <b>Username</b>
                   </TableCell>
                 )}
 
-                <TableCell align="left">
+                <TableCell align="left" className={classes.Cell}>
                   <b>Date Played</b>
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="left" className={classes.Cell}>
                   <b>Path Taken</b>
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="left" className={classes.Cell}>
                   <b>Score</b>
                 </TableCell>
               </TableRow>
@@ -49,14 +58,19 @@ export default function GamesTable(props) {
               {data.map((game) => (
                 <TableRow key={game.id}>
                   {!pastgames && (
-                    <TableCell align="left">{game.user.username}</TableCell>
+                    <TableCell align="left" className={classes.Cell}>
+                      {game.user.username}
+                    </TableCell>
                   )}
-
-                  <TableCell align="left">{game.updatedAt}</TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell align="left" className={classes.Cell}>
+                    {game.updatedAt}
+                  </TableCell>
+                  <TableCell className={classes.Cell}>
                     {game.path_name}
                   </TableCell>
-                  <TableCell align="left">{game.score.total_score}</TableCell>
+                  <TableCell align="left" className={classes.Cell}>
+                    {game.score.total_score}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

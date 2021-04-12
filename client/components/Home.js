@@ -8,7 +8,6 @@ import { setGame } from '../store/game';
 import GameStart from './GameStart';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import createStyles from '@material-ui/core/styles/createStyles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -18,7 +17,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { StylesProvider } from '@material-ui/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -89,7 +87,9 @@ export const Home = (props) => {
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle id="alert-dialog-slide-title">
-            {"You've finished the minigame! Click Continue Your Adventure to Continue!"}
+            {
+              "You've finished the minigame! Click Continue Your Adventure to Continue!"
+            }
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">

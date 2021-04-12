@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import './Style/LandingPage.css';
-import { CardMedia } from '@material-ui/core';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -43,9 +43,6 @@ const styles = {
   },
 };
 
-/**
- * COMPONENT
- */
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);

@@ -6,9 +6,6 @@ import { logout } from '../store';
 import linksList from '../LinksList';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import createStyles from '@material-ui/core/styles/createStyles';
-
-import AboutUs from './AboutUs';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import GroupIcon from '@material-ui/icons/Group';
-
 import GlobalScore from './GlobalScore';
 
 import SideMenu from './SideMenu';
@@ -29,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    fontSize: '1.4rem',
   },
   button: {
     textTransform: 'none',
@@ -55,7 +49,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
     <div>
       <nav>
         <div className={classes.root}>
-          <AppBar position="static" className={classes.palette}>
+          <AppBar position="static">
             <Hidden smDown>
               <Toolbar>
                 <Typography variant="h4" className={classes.title}>
@@ -63,7 +57,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 </Typography>
                 {isLoggedIn ? (
                   <div>
-                    <GlobalScore />
+                    <GlobalScore size={'medium'} />
                     {linksList.map((link) => (
                       <Button
                         key={link.text}
@@ -88,10 +82,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                   </div>
                 ) : (
                   <div>
-                    <Button component={Link} to="/login">
+                    <Button
+                      component={Link}
+                      to="/login"
+                      className={classes.button}
+                    >
                       Login
                     </Button>
-                    <Button component={Link} to="/signup">
+                    <Button
+                      component={Link}
+                      to="/signup"
+                      className={classes.button}
+                    >
                       Sign Up
                     </Button>
                   </div>
@@ -100,10 +102,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             </Hidden>
             <Hidden mdUp>
               <Toolbar>
-                <Typography variant="h5" className={classes.title}>
+                <Typography variant="h6" className={classes.title}>
                   MANHATTAN TRAIL
                 </Typography>
-                {isLoggedIn && <GlobalScore />}
+                {isLoggedIn && <GlobalScore size={'small'} />}
                 <SideMenu handleClick={handleClick} isLoggedIn={isLoggedIn} />
               </Toolbar>
             </Hidden>

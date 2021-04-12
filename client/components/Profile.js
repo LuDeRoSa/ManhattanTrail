@@ -15,9 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import Favorites from './Favorites';
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.getFavorites();
   }
@@ -34,8 +31,8 @@ class Profile extends React.Component {
           alignItems="center"
           justify="space-around"
         >
-          <Grid item>
-            <Container id="account_container" style={{ width: 450 }}>
+          <Grid item xs={12} sm={6} lg={4}>
+            <Container id="account_container">
               <Paper variant="elevation" elevation={1}>
                 <TableContainer>
                   <Table aria-label="simple table">
@@ -71,10 +68,10 @@ class Profile extends React.Component {
               </Paper>
             </Container>
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={6} lg={4}>
             <Favorites />
           </Grid>
-          <Grid item>
+          <Grid item xs={12} sm={6} lg={4}>
             <h2>Game History</h2>
             <PastGames />
           </Grid>

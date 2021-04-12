@@ -18,7 +18,7 @@ const Favorites = (props) => {
 
   return (
     <>
-      <Container id="account_container" style={{ width: 450 }}>
+      <Container id="account_container">
         <Paper variant="elevation" elevation={1}>
           <TableContainer>
             <Table aria-label="simple table">
