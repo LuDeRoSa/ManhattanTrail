@@ -86,11 +86,26 @@ class _Map extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div style={{ height: '90%', width: '100%' }}>
-          <center>
-            <InfoWindow gameStage={this.props.gameStage} />
-          </center>
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignContent: 'space-between',
+        }}
+      >
+        <center>
+          <InfoWindow gameStage={this.props.gameStage} />
+        </center>
+        <div
+          style={{
+            height: '100%',
+            width: '90%',
+            margin: 'auto',
+          }}
+        >
           <GoogleMapReact
             bootstrapURLKeys={{
               key: 'AIzaSyCnNLEaNM_3zfMo0yHe - nINMSUPPfyJwUI',
@@ -110,7 +125,7 @@ class _Map extends React.Component {
             ))}
           </GoogleMapReact>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
