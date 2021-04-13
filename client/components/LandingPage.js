@@ -83,6 +83,8 @@ class LandingPage extends React.Component {
               <br />
               <ButtonGroup>
                 <Button
+                  color="primary"
+                  variant="contained"
                   onClick={() => {
                     this.props.setGame('italian');
                     this.props.setRests('italian');
@@ -91,6 +93,8 @@ class LandingPage extends React.Component {
                   Italian
                 </Button>
                 <Button
+                  color="primary"
+                  variant="contained"
                   onClick={() => {
                     this.props.setGame('chinese');
                     this.props.setRests('chinese');
@@ -99,6 +103,8 @@ class LandingPage extends React.Component {
                   Chinese
                 </Button>
                 <Button
+                  color="primary"
+                  variant="contained"
                   onClick={() => {
                     this.props.setGame('indian');
                     this.props.setRests('indian');
@@ -107,6 +113,8 @@ class LandingPage extends React.Component {
                   Indian
                 </Button>
                 <Button
+                  color="primary"
+                  variant="contained"
                   onClick={() => {
                     this.props.setGame('gluten-free');
                     this.props.setRests('gluten-free');

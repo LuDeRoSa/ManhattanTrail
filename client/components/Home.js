@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
     [theme.breakpoints.up('xs')]: {
-      height: '100vh',
-      alignItems: 'flex-start',
+      height: false,
     },
     [theme.breakpoints.up('md')]: {
       height: '90vh',
@@ -77,46 +76,33 @@ export const Home = (props) => {
         >
           Stage: {props.game.gameStage}. {props.nextDisplay}
         </Button>
-
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          // keepMounted
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">
-            {
-              "You've finished the minigame! Click Continue Your Adventure to Continue!"
-            }
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              Stage: {props.game.gameStage}.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            {/* <Button
-              variant="contained"
-              color="primary"
-              endIcon={<NavigateNextIcon />}
-              onClick={() => {
-                props.nextStage();
-                handleClose();
-              }}
-            >
-              {props.nextDisplay}
-            </Button> */}
-          </DialogActions>
-        </Dialog>
       </center>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        // keepMounted
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {
+            "You've finished the minigame! Click Continue Your Adventure to Continue!"
+          }
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Stage: {props.game.gameStage}.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions></DialogActions>
+      </Dialog>
+
       <Grid
         container
         spacing={2}
         direction="row"
-        alignContent="space-around"
-        justify="space-evenly"
+        justify="center"
         className={classes.container}
       >
         <Grid item lg={1} md={false} sm={false} xs={false} />

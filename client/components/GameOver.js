@@ -59,10 +59,10 @@ class GameOver extends React.Component {
           </p>
         </div>
 
-        <ButtonGroup>
+        <ButtonGroup orientation="vertical">
           <Button
             startIcon={<SportsEsportsIcon />}
-            color="inherit"
+            color="primary"
             component={Link}
             to="/landing"
           >
@@ -70,7 +70,7 @@ class GameOver extends React.Component {
           </Button>
           <Button
             startIcon={<AccountCircleIcon />}
-            color="inherit"
+            color="primary"
             component={Link}
             to="/profile"
           >
@@ -78,7 +78,7 @@ class GameOver extends React.Component {
           </Button>
           <Button
             startIcon={<PublicIcon />}
-            color="inherit"
+            color="primary"
             component={Link}
             to="/leadership"
           >
