@@ -123,6 +123,7 @@ class LandingPage extends React.Component {
                 </Typography>
               </ThemeProvider>
 
+              <Grid item xs={0} sm={10} lg={6}>
               <Card>
                 <CardMedia
                   style={styles.media}
@@ -131,6 +132,7 @@ class LandingPage extends React.Component {
                   image="./img/zero-waste.jpeg"
                 />
               </Card>
+              </Grid>
 
               <Paper style={styles.paper}>
                 <Grid
@@ -188,10 +190,51 @@ class LandingPage extends React.Component {
 
           {game.path_name && (
             <React.Fragment>
-              <p>Path: {game.path_name}</p>
-              <p>Stage: {game.gameStage}</p>
-              <p>Status: {game.status}</p>
-              <p>Score: {game.total_score}</p>
+
+              <ThemeProvider>
+                <Typography variant="h5">
+                Travel through Manhattan restaurants, play games, and collect food
+            at each restaurant that you will donate to a food shelter at the
+            end. The better you do in the games, the more food you can collect!
+                </Typography>
+              </ThemeProvider>
+
+            <br/>
+
+            <ThemeProvider>
+              <Typography variant="subtitle1">
+              Path: <b> {game.path_name} </b>
+              </Typography>
+              </ThemeProvider>
+
+
+              <ThemeProvider>
+              <Typography variant="subtitle1">
+              Stage: <b> {game.gameStage} </b>
+              </Typography>
+              </ThemeProvider>
+
+
+              <ThemeProvider>
+              <Typography variant="subtitle1">
+              Status: <b> {game.path_name} </b>
+              </Typography>
+              </ThemeProvider>
+
+
+
+              <ThemeProvider>
+              <Typography variant="subtitle1">
+              Score: <b> {game.path_name} </b>
+              </Typography>
+              </ThemeProvider>
+
+
+
+
+              <p>Stage:  </p>
+              <p>Status: <b> {game.status} </b> </p>
+              <p>Score:<b> {game.total_score}</b>  </p>
               <Button
                 variant="outlined"
                 style={styles.button}
