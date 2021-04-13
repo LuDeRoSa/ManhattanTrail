@@ -14,12 +14,23 @@ import './Style/LandingPage.css';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+// let inflection = require( 'inflection' );
 
 const theme = createMuiTheme({
-  typography: {
-    body1: {
-      fontWeight: 700,
-      fontSize: 25,
+  props: {
+    MuiTypography: {
+      variantMapping: {
+        h1: 'h2',
+        h2: 'h2',
+        h3: 'h2',
+        h4: 'h2',
+        h5: 'h2',
+        h6: 'h2',
+        subtitle1: 'h2',
+        subtitle2: 'h2',
+        body1: 'span',
+        body2: 'span',
+      },
     },
   },
 });
@@ -43,6 +54,21 @@ const styles = {
   },
 };
 
+function camelCase(string){
+  if (string === "ingame"){
+    return "In-Game"
+  }
+
+  let firstLetter = string[0].toUpperCase();
+  let finalWord = "";
+  finalWord += firstLetter;
+  for (let i =1; i < string.length; i++){
+      let currentLetter = string[i].toLowerCase();
+      finalWord+= currentLetter;
+  }
+  return finalWord;
+}
+
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -58,6 +84,7 @@ class LandingPage extends React.Component {
   render() {
     const { username } = this.props;
     const { game } = this.props;
+
     return (
       <Container style={styles.container}>
         <center>
@@ -117,13 +144,13 @@ class LandingPage extends React.Component {
               </ButtonGroup>
               <br />
 
-              <ThemeProvider theme={theme}>
+
                 <Typography variant="body1">
                   Food Waste: A Massive Crisis
                 </Typography>
-              </ThemeProvider>
 
-              <Grid item xs={0} sm={10} lg={6}>
+
+              <Grid item xs={1} sm={10} lg={6}>
               <Card>
                 <CardMedia
                   style={styles.media}
@@ -191,50 +218,43 @@ class LandingPage extends React.Component {
           {game.path_name && (
             <React.Fragment>
 
-              <ThemeProvider>
+
                 <Typography variant="h5">
                 Travel through Manhattan restaurants, play games, and collect food
             at each restaurant that you will donate to a food shelter at the
             end. The better you do in the games, the more food you can collect!
                 </Typography>
-              </ThemeProvider>
+
 
             <br/>
 
-            <ThemeProvider>
-              <Typography variant="subtitle1">
-              Path: <b> {game.path_name} </b>
+
+              <Typography variant="h6">
+              Path: <b>{camelCase(game.path_name)} </b>
               </Typography>
-              </ThemeProvider>
 
 
-              <ThemeProvider>
-              <Typography variant="subtitle1">
+
+
+              <Typography variant="h6">
               Stage: <b> {game.gameStage} </b>
               </Typography>
-              </ThemeProvider>
 
 
-              <ThemeProvider>
-              <Typography variant="subtitle1">
-              Status: <b> {game.path_name} </b>
+
+
+              <Typography variant="h6">
+              Status: <b> {camelCase(game.status)} </b>
               </Typography>
-              </ThemeProvider>
 
 
 
-              <ThemeProvider>
-              <Typography variant="subtitle1">
-              Score: <b> {game.path_name} </b>
+              <Typography variant="h6">
+              Score: <b> {game.total_score} </b>
               </Typography>
-              </ThemeProvider>
 
 
-
-
-              <p>Stage:  </p>
-              <p>Status: <b> {game.status} </b> </p>
-              <p>Score:<b> {game.total_score}</b>  </p>
+              <br />
               <Button
                 variant="outlined"
                 style={styles.button}
