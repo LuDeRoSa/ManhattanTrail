@@ -15,7 +15,7 @@ const Start = (props) =>
   props.mini_status === 'finished' ? (
     'Mini Game finished - please hit Continue button above!'
   ) : (
-    <Box mb={3}>
+    <Box m={2}>
       <Button
         variant="contained"
         color="primary"

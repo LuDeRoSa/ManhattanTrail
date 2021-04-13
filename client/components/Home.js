@@ -100,7 +100,7 @@ export const Home = (props) => {
 
       <Grid
         container
-        spacing={2}
+        spacing={0}
         direction="row"
         justify="center"
         className={classes.container}
