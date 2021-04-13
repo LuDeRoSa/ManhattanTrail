@@ -44,17 +44,17 @@ const styles = {
   },
 };
 
-function camelCase(string){
-  if (string === "ingame"){
-    return "In-Game"
+function camelCase(string) {
+  if (string === 'ingame') {
+    return 'In-Game';
   }
 
   let firstLetter = string[0].toUpperCase();
-  let finalWord = "";
+  let finalWord = '';
   finalWord += firstLetter;
-  for (let i =1; i < string.length; i++){
-      let currentLetter = string[i].toLowerCase();
-      finalWord+= currentLetter;
+  for (let i = 1; i < string.length; i++) {
+    let currentLetter = string[i].toLowerCase();
+    finalWord += currentLetter;
   }
   return finalWord;
 }
@@ -78,7 +78,7 @@ class LandingPage extends React.Component {
     return (
       <Container style={styles.container}>
         <center>
-          <Typography variant="h2">Welcome to Manhattan Trail!</Typography>
+          <Typography variant="h3">Welcome to Manhattan Trail!</Typography>
 
           <br />
 
@@ -129,25 +129,23 @@ class LandingPage extends React.Component {
 
               <div className="empty" />
 
-
               <ThemeProvider theme={theme}>
                 <Typography variant="body1">
                   Food Waste: A Massive Crisis
                 </Typography>
               </ThemeProvider>
 
-                <div className="empty" />
-
+              <div className="empty" />
 
               <Grid item xs={8} sm={6} lg={5}>
-              <Card>
-                <CardMedia
-                  style={styles.media}
-                  component="img"
-                  alt="zero-waste"
-                  image="./img/zero-waste.jpeg"
-                />
-              </Card>
+                <Card>
+                  <CardMedia
+                    style={styles.media}
+                    component="img"
+                    alt="zero-waste"
+                    image="./img/zero-waste.jpeg"
+                  />
+                </Card>
               </Grid>
 
               <Paper style={styles.paper}>
@@ -206,42 +204,30 @@ class LandingPage extends React.Component {
 
           {game.path_name && (
             <React.Fragment>
-
-
-                <Typography variant="h5">
-                Travel through Manhattan restaurants, play games, and collect food
-            at each restaurant that you will donate to a food shelter at the
-            end. The better you do in the games, the more food you can collect!
-                </Typography>
-
-
-            <br/>
-
-
-              <Typography variant="h6">
-              Path: <b>{camelCase(game.path_name)} </b>
+              <Typography variant="h5">
+                Travel through Manhattan restaurants, play games, and collect
+                food at each restaurant that you will donate to a food shelter
+                at the end. The better you do in the games, the more food you
+                can collect!
               </Typography>
 
-
-
-
-              <Typography variant="h6">
-              Stage: <b> {game.gameStage} </b>
-              </Typography>
-
-
-
+              <br />
 
               <Typography variant="h6">
-              Status: <b> {camelCase(game.status)} </b>
+                Path: <b>{camelCase(game.path_name)} </b>
               </Typography>
-
-
 
               <Typography variant="h6">
-              Score: <b> {game.total_score} </b>
+                Stage: <b> {game.gameStage} </b>
               </Typography>
 
+              <Typography variant="h6">
+                Status: <b> {camelCase(game.status)} </b>
+              </Typography>
+
+              <Typography variant="h6">
+                Score: <b> {game.total_score} </b>
+              </Typography>
 
               <br />
               <Button
