@@ -156,7 +156,7 @@ class FlappyCake extends Component {
       );
     }
     return (
-      <div id="instructions">
+      <div id="flappy-instructions">
         Use the spacebar or touch/click to fly the penguin so he can catch the
         cakes.
         <div id="game-area">

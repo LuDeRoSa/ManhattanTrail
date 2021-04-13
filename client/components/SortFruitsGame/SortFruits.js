@@ -2,7 +2,6 @@ import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { CATEGORIES, FOODS } from './SortFruitsData';
 import SortFruitsDropzone from './SortFruitsDropzone';
-// import SortFruitsDropzone from '../SortFruitsGame/SortFruitsDropzone.js';
 import { connect } from 'react-redux';
 import { updateMiniGameScore } from '../../store/game';
 
@@ -59,9 +58,10 @@ class SortFruits extends React.Component {
     const isDropDisabled = gameState === GAME_STATE.DONE;
     return (
       <>
-      <div id='instructions'>
-        Drag each food into the "good" or "bad" column depending on its effect on the environment.
-      </div>
+        <div id="sort-instructions">
+          Drag each food into the "good" or "bad" column depending on its effect
+          on the environment.
+        </div>
         {(this.state.gameState === GAME_STATE.PLAYING ||
           this.state.gameState === GAME_STATE.DONE) && (
           <DragDropContext onDragEnd={this.onDragEnd}>
@@ -103,11 +103,12 @@ class SortFruits extends React.Component {
           </div>
         ) : (
           <Box mb={3}>
-            <Button 
-            variant="contained"
-            color="primary"
-            id="end-sort-fruit" 
-            onClick={this.endGame}>
+            <Button
+              variant="contained"
+              color="primary"
+              id="end-sort-fruit"
+              onClick={this.endGame}
+            >
               I'm done!
             </Button>
           </Box>

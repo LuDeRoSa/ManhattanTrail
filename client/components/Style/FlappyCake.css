@@ -1,4 +1,4 @@
-#instructions {
+#flappy-instructions {
   margin-top: -20px;
   margin-bottom: 20px;
   padding: 1rem;
@@ -8,7 +8,7 @@
   margin-bottom: 20px;
 }
 
-#game-area {
+#flappy-game-area {
   margin: 1rem;
   touch-action: none;
 }
