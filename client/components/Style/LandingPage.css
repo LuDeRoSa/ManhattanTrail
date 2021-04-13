@@ -13,8 +13,12 @@ img {
   position: relative;
 }
 
-@media (max-width: 600px) {
-  img {
+.empty{
+  height: 2%;
+}
+
+/* @media (max-width: 600px) {
+  /* img {
     height: 30%;
     width: 40%;
     align-items: center;
@@ -22,4 +26,6 @@ img {
     margin-left: auto;
     margin-right: auto;
   }
-}
+} */
+
+

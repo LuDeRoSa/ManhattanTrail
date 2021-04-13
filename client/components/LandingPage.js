@@ -17,20 +17,10 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 // let inflection = require( 'inflection' );
 
 const theme = createMuiTheme({
-  props: {
-    MuiTypography: {
-      variantMapping: {
-        h1: 'h2',
-        h2: 'h2',
-        h3: 'h2',
-        h4: 'h2',
-        h5: 'h2',
-        h6: 'h2',
-        subtitle1: 'h2',
-        subtitle2: 'h2',
-        body1: 'span',
-        body2: 'span',
-      },
+  typography: {
+    body1: {
+      fontWeight: 700,
+      fontSize: 25,
     },
   },
 });
@@ -92,12 +82,6 @@ class LandingPage extends React.Component {
 
           <br />
 
-          {/* <div className="landing-page-body">
-            Travel through Manhattan restaurants, play games, and collect food
-            at each restaurant that you will donate to a food shelter at the
-            end. The better you do in the games, the more food you can collect!{' '}
-          </div> */}
-
           {!game.path_name && (
             <React.Fragment>
               <br />
@@ -142,15 +126,20 @@ class LandingPage extends React.Component {
                   Gluten Free
                 </Button>
               </ButtonGroup>
-              <br />
+
+              <div className="empty" />
 
 
+              <ThemeProvider theme={theme}>
                 <Typography variant="body1">
                   Food Waste: A Massive Crisis
                 </Typography>
+              </ThemeProvider>
+
+                <div className="empty" />
 
 
-              <Grid item xs={1} sm={10} lg={6}>
+              <Grid item xs={8} sm={6} lg={5}>
               <Card>
                 <CardMedia
                   style={styles.media}
