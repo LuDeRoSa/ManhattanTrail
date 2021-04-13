@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up('xs')]: {
       height: false,
-      alignItems: 'flex-start',
     },
     [theme.breakpoints.up('md')]: {
       height: '90vh',
