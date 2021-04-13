@@ -16,7 +16,6 @@ import Favorites from './Favorites';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-
 class Profile extends React.Component {
   componentDidMount() {
     this.props.getFavorites();
@@ -26,9 +25,11 @@ class Profile extends React.Component {
     const { account, favorites } = this.props;
     return (
       <>
-      <center>
-      <Typography variant="h4">Welcome, {account.username}! Here are your account details:</Typography>
-      </center>
+        <center>
+          <Typography variant="h4">
+            Welcome, {account.username}! Here are your account details:
+          </Typography>
+        </center>
 
         <Grid
           container
@@ -82,7 +83,6 @@ class Profile extends React.Component {
             <PastGames />
           </Grid>
         </Grid>
-
       </>
     );
   }
