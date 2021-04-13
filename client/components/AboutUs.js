@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: '5rem',
     padding: '1rem',
+    background:
   },
   card: { margin: '1rem', padding: '1rem' },
   media: {
