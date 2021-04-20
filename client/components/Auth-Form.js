@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Facebook from './Facebook';
+// import Facebook from './Facebook';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Box from '@material-ui/core/Box';
 import './Style/AuthForm.css';
@@ -24,32 +24,32 @@ const AuthForm = (props) => {
     <Grid
       container
       spacing={2}
-      wrap="wrap"
-      direction="column"
-      alignItems="center"
-      alignContent="center"
-      justify="center"
-      className="login-form"
+      wrap='wrap'
+      direction='column'
+      alignItems='center'
+      alignContent='center'
+      justify='center'
+      className='login-form'
       style={{ minHeight: '90vh' }}
     >
-      <Paper variant="elevation" elevation={2} className="login-background">
-        <Grid item id="login-grid">
+      <Paper variant='elevation' elevation={2} className='login-background'>
+        <Grid item id='login-grid'>
           <form onSubmit={handleSubmit} name={name}>
             <Grid
               container
-              direction="column"
+              direction='column'
               spacing={2}
-              alignItems="center"
-              justify="center"
+              alignItems='center'
+              justify='center'
             >
               <Grid item>
                 <TextField
-                  className="login-field"
-                  type="email"
-                  placeholder="Email"
-                  name="username"
-                  autoComplete="email"
-                  variant="outlined"
+                  className='login-field'
+                  type='email'
+                  placeholder='Email'
+                  name='username'
+                  autoComplete='email'
+                  variant='outlined'
                   required
                   autoFocus
                   // style={{ width: '250px' }}
@@ -57,11 +57,11 @@ const AuthForm = (props) => {
               </Grid>
               <Grid item>
                 <TextField
-                  className="login-field"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  variant="outlined"
+                  className='login-field'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                  variant='outlined'
                   autoComplete={autocomplete_attribute}
                   required
                 />
@@ -69,15 +69,15 @@ const AuthForm = (props) => {
               <Grid item>
                 {
                   <Button
-                    id="submit-login-button"
+                    id='submit-login-button'
                     style={{
                       maxWidth: '250px',
                       height: '40px',
                       textAlign: 'center',
                     }}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
+                    variant='contained'
+                    color='primary'
+                    type='submit'
                   >
                     {displayName}
                   </Button>
@@ -86,20 +86,18 @@ const AuthForm = (props) => {
             </Grid>
           </form>
           <Box m={3} pt={10}>
-            <Grid item>
-              <Facebook />
-            </Grid>
+            <Grid item>{/* <Facebook /> */}</Grid>
             <Box pt={2}>
               <Grid item>
                 {window.githubURL && (
                   <Button
-                    className="login-button"
+                    className='login-button'
                     style={{
                       height: '40px',
                       textAlign: 'center',
                     }}
-                    variant="contained"
-                    color="primary"
+                    variant='contained'
+                    color='primary'
                     startIcon={<GitHubIcon />}
                     href={window.githubURL}
                   >
