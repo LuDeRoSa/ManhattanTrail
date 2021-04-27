@@ -86,9 +86,9 @@ const AuthForm = (props) => {
             </Grid>
           </form>
           <Box m={3} pt={10}>
-            <Grid item>
+            {/* <Grid item>
               <Facebook />
-            </Grid>
+            </Grid> */}
             <Box pt={2}>
               <Grid item>
                 {window.githubURL && (
