@@ -30,4 +30,4 @@ https://luderosa.herokuapp.com/home
 
 ### Deployment
 
-- Deployed on Heroku with postgres db and secret keys for OAuth, Stripe, JWT
+- Deployed on Heroku with postgres db and secret keys for OAuth and JWT
